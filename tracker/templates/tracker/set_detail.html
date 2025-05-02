@@ -1,0 +1,56 @@
+{% extends "tracker/base.html" %} {% block content %}
+<div class="container mt-5">
+  <h2>{{ set.name }}</h2>
+  <p>Erscheinungsdatum: {{ set.release_date }}</p>
+
+  <table class="table table-hover mt-4">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Rarity</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for card in cards %}
+      <tr class="clickable-row" data-card-id="{{ card.id }}" data-action="{% if card.collected_quantity > 0 %}uncollect{% else %}collect{% endif %}">
+        <td>{{ card.number }}</td>
+        <td>{{ card.name }}</td>
+        <td>{{ card.rarity.display_name }}</td>
+        <td>{% if card.collected_quantity > 0 %} ✅ {% else %} ❌ {% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="mt-4 text-center">
+    <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zur&uuml;ck</a>
+  </div>
+
+  <form id="toggle-form" method="post" style="display: none">
+    {% csrf_token %}
+    <input type="hidden" name="card_id" id="form-card-id" />
+    <input type="hidden" name="action" id="form-action" />
+  </form>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const rows = document.querySelectorAll(".clickable-row");
+    const form = document.getElementById("toggle-form");
+    const cardIdInput = document.getElementById("form-card-id");
+    const actionInput = document.getElementById("form-action");
+
+    rows.forEach((row) => {
+      row.addEventListener("click", () => {
+        const cardId = row.dataset.cardId;
+        const action = row.dataset.action;
+        cardIdInput.value = cardId;
+        actionInput.value = action;
+        form.submit();
+      });
+    });
+  });
+</script>
+{% endblock %}
