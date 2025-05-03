@@ -33,5 +33,8 @@ RUN python manage.py collectstatic --noinput
 # Expose port
 EXPOSE 8000
 
+# Set environment variable for production settings
+ENV DJANGO_SETTINGS_MODULE=tcgptracker.settings.production
+
 # Start Django app using gunicorn
 CMD ["gunicorn", "tcgptracker.wsgi:application", "--bind", "0.0.0.0:8000"]
