@@ -1,40 +1,51 @@
-FROM python:3.12-alpine
+# ======== STAGE 1: Build dependencies ========
+FROM python:3.13-slim AS builder
 
-# Install system dependencies
-RUN apk update && apk add --no-cache \
-    gcc \
-    musl-dev \
-    libffi-dev \
-    postgresql-dev \
-    build-base \
-    python3-dev \
-    libpq \
-    jpeg-dev \
-    zlib-dev \
-    tzdata \
-    && pip install --upgrade pip
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Set timezone (optional, gut für logging)
-ENV TZ=Europe/Berlin
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Create working directory
+# Set workdir and copy requirements
 WORKDIR /app
-
-# Install Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+
+# Create virtualenv and install dependencies
+RUN python -m venv /opt/venv && \
+    /opt/venv/bin/pip install --upgrade pip && \
+    /opt/venv/bin/pip install -r requirements.txt
+
+# ======== STAGE 2: Runtime image ========
+FROM python:3.13-alpine
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Copy virtualenv from builder
+COPY --from=builder /opt/venv /opt/venv
+
+# Set path to use virtualenv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Set workdir
+WORKDIR /app
 
 # Copy project files
 COPY . .
+
+# Set environment variable for production settings
+ENV DJANGO_SETTINGS_MODULE=tcgptracker.settings.development
 
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
 # Expose port
 EXPOSE 8000
-
-# Set environment variable for production settings
-ENV DJANGO_SETTINGS_MODULE=tcgptracker.settings.production
 
 # Start Django app using gunicorn
 CMD ["gunicorn", "tcgptracker.wsgi:application", "--bind", "0.0.0.0:8000"]
