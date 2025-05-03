@@ -88,3 +88,5 @@ tcgptracker/settings/local.py
 
 .env
 db.dev.sqlite3
+
+docker-compose.override.yml
