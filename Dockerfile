@@ -21,7 +21,7 @@ RUN python -m venv /opt/venv && \
     /opt/venv/bin/pip install -r requirements.txt
 
 # ======== STAGE 2: Runtime image ========
-FROM python:3.13-alpine
+FROM python:3.13-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
