@@ -1,0 +1,11 @@
+name,display_name,order
+common,♢,1
+uncommon,♢♢,2
+rare,♢♢♢,3
+double_rare,♢♢♢♢,4
+illustration_rare,☆,5
+special_art,☆☆,6
+immersive_rare,☆☆☆,7
+shiny_rare,☼,8
+double_shiny_rare,☼☼,9
+crown_rare,♛,10
