@@ -7,7 +7,7 @@ class Version(models.Model):
     display_name = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
-        return self.display_name
+        return str(self.display_name)
 
 class PokemonSet(models.Model):
     number = models.CharField(max_length=10, db_index=True)
@@ -15,7 +15,7 @@ class PokemonSet(models.Model):
     release_date = models.DateField(db_index=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
     
     class Meta:
         ordering = ['release_date']
@@ -29,7 +29,7 @@ class Rarity(models.Model):
     order = models.PositiveSmallIntegerField(unique=True)
 
     def __str__(self):
-        return self.display_name
+        return str(self.display_name)
 
     class Meta:
         ordering = ['order']
@@ -61,7 +61,7 @@ class Pack(models.Model):
     rarity_version = models.ForeignKey(Version, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     class Meta:
         ordering = ['set', 'name']
