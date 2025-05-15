@@ -54,10 +54,14 @@ def set_detail(request, set_number):
         action = request.POST.get('action')
 
         if action == 'collect':
-            UserCard.objects.get_or_create(user=request.user, card_id=card_id, defaults={'quantity': 1})
+            obj, created = UserCard.objects.get_or_create(user=request.user, card_id=card_id, defaults={'quantity': 1})
         elif action == 'uncollect':
             UserCard.objects.filter(user=request.user, card_id=card_id).delete()
 
+        # If AJAX, return JSON
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({'status': 'success', 'collected': action == 'collect'})
+        # Otherwise, fallback to redirect
         return redirect('set_detail', set_number=set_number)
 
     user_cards = {
@@ -72,21 +76,6 @@ def set_detail(request, set_number):
         'set': set_obj,
         'cards': cards,
     })
-
-@login_required
-def toggle_card(request):
-    is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-    if is_ajax and request.method == 'POST':
-        data = json.load(request)
-        card_id = data.get('id')
-        is_checked = data.get('checked')
-        card = get_object_or_404(Card, pk=card_id)
-        if is_checked:
-            UserCard.objects.get_or_create(user=request.user, card=card)
-        else:
-            UserCard.objects.filter(user=request.user, card=card).delete()
-        return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'Invalid request'}, status=400)
 
 @login_required
 def pack_list(request):

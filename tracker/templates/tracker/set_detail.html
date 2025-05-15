@@ -18,7 +18,7 @@
         <td>{{ card.number }}</td>
         <td>{{ card.name }}</td>
         <td>{{ card.rarity.display_name }}</td>
-        <td>{% if card.collected_quantity > 0 %} ✅ {% else %} ❌ {% endif %}</td>
+        <td class="status-cell">{% if card.collected_quantity > 0 %} ✅ {% else %} ❌ {% endif %}</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -27,28 +27,41 @@
   <div class="mt-4 text-center">
     <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zur&uuml;ck</a>
   </div>
-
-  <form id="toggle-form" method="post" style="display: none">
-    {% csrf_token %}
-    <input type="hidden" name="card_id" id="form-card-id" />
-    <input type="hidden" name="action" id="form-action" />
-  </form>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const rows = document.querySelectorAll(".clickable-row");
-    const form = document.getElementById("toggle-form");
-    const cardIdInput = document.getElementById("form-card-id");
-    const actionInput = document.getElementById("form-action");
 
     rows.forEach((row) => {
-      row.addEventListener("click", () => {
+      row.addEventListener("click", function () {
         const cardId = row.dataset.cardId;
         const action = row.dataset.action;
-        cardIdInput.value = cardId;
-        actionInput.value = action;
-        form.submit();
+
+        fetch("", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": "{{ csrf_token }}",
+            "X-Requested-With": "XMLHttpRequest",
+          },
+          body: new URLSearchParams({
+            card_id: cardId,
+            action: action,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Update the row's status cell and action
+            const statusCell = row.querySelector(".status-cell");
+            if (data.collected) {
+              statusCell.textContent = "✅";
+              row.dataset.action = "uncollect";
+            } else {
+              statusCell.textContent = "❌";
+              row.dataset.action = "collect";
+            }
+          });
       });
     });
   });
