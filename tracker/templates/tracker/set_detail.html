@@ -1,4 +1,4 @@
-{% extends "tracker/base.html" %} {% block content %}
+{% extends "tracker/base.html" %} {% load static %} {% block content %}
 <div class="container mt-5">
   <h2>{{ set.name }}</h2>
   <p>Erscheinungsdatum: {{ set.release_date }}</p>
@@ -26,7 +26,11 @@
       >
         <td>{{ card.number }}</td>
         <td>{{ card.name }}</td>
-        <td>{{ card.rarity.display_name }}</td>
+        <td>
+          {% for _ in ""|center:card.rarity.repeat_count %}
+          <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}" alt="{{ card.rarity.display_name }}" width="24" height="24" />
+          {% endfor %}
+        </td>
         <td class="status-cell">{% if card.collected_quantity > 0 %} ✅ {% else %} ❌ {% endif %}</td>
       </tr>
       {% endfor %}

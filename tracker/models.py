@@ -27,6 +27,8 @@ class Rarity(models.Model):
     name = models.CharField(max_length=20, primary_key=True)
     display_name = models.CharField(max_length=4, unique=True)
     order = models.PositiveSmallIntegerField(unique=True)
+    image_name = models.CharField(max_length=100, blank=True, null=True)
+    repeat_count = models.PositiveSmallIntegerField(default=1, validators=[MinValueValidator(1)])
 
     def __str__(self):
         return str(self.display_name)
