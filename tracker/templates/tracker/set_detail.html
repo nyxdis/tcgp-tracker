@@ -3,6 +3,10 @@
   <h2>{{ set.name }}</h2>
   <p>Erscheinungsdatum: {{ set.release_date }}</p>
 
+  <div class="mb-3 text-end">
+    <button id="collect-base-btn" class="btn btn-success">Alle Basiskarten sammeln</button>
+  </div>
+
   <table class="table table-hover mt-4">
     <thead>
       <tr>
@@ -14,7 +18,12 @@
     </thead>
     <tbody>
       {% for card in cards %}
-      <tr class="clickable-row" data-card-id="{{ card.id }}" data-action="{% if card.collected_quantity > 0 %}uncollect{% else %}collect{% endif %}">
+      <tr
+        class="clickable-row"
+        data-card-id="{{ card.id }}"
+        data-action="{% if card.collected_quantity > 0 %}uncollect{% else %}collect{% endif %}"
+        data-rarity="{{ card.rarity.name }}"
+      >
         <td>{{ card.number }}</td>
         <td>{{ card.name }}</td>
         <td>{{ card.rarity.display_name }}</td>
@@ -62,6 +71,38 @@
               row.dataset.action = "collect";
             }
           });
+      });
+    });
+
+    // Collect all common/uncommon/rare/double_rare cards
+    document.getElementById("collect-base-btn").addEventListener("click", function () {
+      const rarities = ["common", "uncommon", "rare", "double_rare"];
+      const csrfToken = "{{ csrf_token }}";
+      rows.forEach((row) => {
+        const rarity = row.dataset.rarity;
+        if (rarities.includes(rarity) && row.dataset.action === "collect") {
+          const cardId = row.dataset.cardId;
+          fetch("", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              "X-CSRFToken": csrfToken,
+              "X-Requested-With": "XMLHttpRequest",
+            },
+            body: new URLSearchParams({
+              card_id: cardId,
+              action: "collect",
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              const statusCell = row.querySelector(".status-cell");
+              if (data.collected) {
+                statusCell.textContent = "✅";
+                row.dataset.action = "uncollect";
+              }
+            });
+        }
       });
     });
   });
