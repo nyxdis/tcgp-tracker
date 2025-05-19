@@ -3,8 +3,14 @@
   <h2>{{ set.name }}</h2>
   <p>Erscheinungsdatum: {{ set.release_date }}</p>
 
-  <div class="mb-3 text-end">
-    <button id="collect-base-btn" class="btn btn-success">Alle Basiskarten sammeln</button>
+  <div class="mb-3 d-flex justify-content-between">
+    <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zur&uuml;ck</a>
+    <div>
+      <button id="collect-base-btn" class="btn btn-success">Alle Basiskarten sammeln</button>
+      <button id="jump-to-illustration-rare-btn" class="btn btn-info">
+        <img src="{% static 'tracker/img/rare.webp' %}" alt="Illustration Rare" width="24" height="24" />
+      </button>
+    </div>
   </div>
 
   <table class="table table-hover mt-4">
@@ -41,6 +47,9 @@
     <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zur&uuml;ck</a>
   </div>
 </div>
+
+<!-- Floating Button -->
+<button id="scroll-to-top-btn" class="btn btn-primary">⬆</button>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -109,6 +118,45 @@
         }
       });
     });
+
+    document.getElementById("jump-to-illustration-rare-btn").addEventListener("click", function () {
+      const illustrationRareRow = Array.from(rows).find((row) => row.dataset.rarity === "illustration_rare");
+      if (illustrationRareRow) {
+        illustrationRareRow.scrollIntoView({ behavior: "smooth", block: "center" });
+        illustrationRareRow.classList.add("highlight");
+        setTimeout(() => illustrationRareRow.classList.remove("highlight"), 2000);
+      }
+    });
+
+    // Scroll to top functionality
+    const scrollToTopBtn = document.getElementById("scroll-to-top-btn");
+    scrollToTopBtn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Show/hide the button based on scroll position
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 200) {
+        scrollToTopBtn.style.display = "block";
+      } else {
+        scrollToTopBtn.style.display = "none";
+      }
+    });
   });
 </script>
+
+<style>
+  .highlight {
+    --bs-table-bg: lightyellow;
+    transition: background-color 0.5s ease;
+  }
+
+  #scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    z-index: 1000;
+  }
+</style>
 {% endblock %}
