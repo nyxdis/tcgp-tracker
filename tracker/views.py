@@ -1,11 +1,12 @@
-import json
 from collections import defaultdict
 
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.db.models import Count
 
+from .forms import RegisterForm
 from .models import PokemonSet, Card, UserCard, Pack
 from .utils import prob_at_least_one_new_card
 
@@ -142,3 +143,14 @@ def pack_list(request):
     return render(request, 'tracker/pack_list.html', {
         'grouped_packs': grouped_packs.items(),  # list of (set, [packs])
     })
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = RegisterForm()
+    return render(request, 'registration/register.html', {'form': form})
