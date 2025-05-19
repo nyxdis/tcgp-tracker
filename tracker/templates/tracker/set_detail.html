@@ -12,6 +12,11 @@
   </div>
 </div>
 
+<!-- Filter Input -->
+<div class="mb-3">
+  <input type="text" id="table-filter" class="form-control" placeholder="Suche nach Name oder Nummer..." />
+</div>
+
 <table class="table table-hover mt-4">
   <thead>
     <tr>
@@ -52,6 +57,21 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const rows = document.querySelectorAll(".clickable-row");
+    const filterInput = document.getElementById("table-filter");
+
+    // Filter table rows based on input
+    filterInput.addEventListener("input", function () {
+      const filterValue = filterInput.value.toLowerCase();
+      rows.forEach((row) => {
+        const cells = Array.from(row.querySelectorAll("td"));
+        const rowText = cells.map((cell) => cell.textContent.toLowerCase()).join(" ");
+        if (rowText.includes(filterValue)) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    });
 
     rows.forEach((row) => {
       row.addEventListener("click", function () {
@@ -72,7 +92,6 @@
         })
           .then((response) => response.json())
           .then((data) => {
-            // Update the row's status cell and action
             const statusCell = row.querySelector(".status-cell");
             if (data.collected) {
               statusCell.textContent = "✅";
@@ -85,7 +104,6 @@
       });
     });
 
-    // Collect all common/uncommon/rare/double_rare cards
     document.getElementById("collect-base-btn").addEventListener("click", function () {
       const rarities = ["common", "uncommon", "rare", "double_rare"];
       const csrfToken = "{{ csrf_token }}";
@@ -126,13 +144,11 @@
       }
     });
 
-    // Scroll to top functionality
     const scrollToTopBtn = document.getElementById("scroll-to-top-btn");
     scrollToTopBtn.addEventListener("click", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Show/hide the button based on scroll position
     window.addEventListener("scroll", function () {
       if (window.scrollY > 200) {
         scrollToTopBtn.style.display = "block";
