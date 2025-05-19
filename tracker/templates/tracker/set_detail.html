@@ -247,5 +247,15 @@
     display: none;
     z-index: 1000;
   }
+
+  .clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .clickable-row:hover,
+  .clickable-row:focus {
+    background-color: #e6f2ff !important;
+    outline: 2px solid #339af0;
+  }
 </style>
 {% endblock %}
