@@ -1,8 +1,10 @@
 from collections import defaultdict
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth import login
+from django.contrib import messages
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.http import JsonResponse
 from django.db.models import Count
 
@@ -154,3 +156,29 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'registration/register.html', {'form': form})
+
+@login_required
+def account(request):
+    if request.method == 'POST':
+        # Passwort ändern
+        if 'password_change' in request.POST:
+            password_form = PasswordChangeForm(request.user, request.POST)
+            if password_form.is_valid():
+                user = password_form.save()
+                update_session_auth_hash(request, user)
+                messages.success(request, 'Ihr Passwort wurde erfolgreich geändert!')
+            else:
+                messages.error(request, 'Bitte korrigieren Sie die Fehler unten.')
+
+        # Account löschen
+        elif 'delete_account' in request.POST:
+            user = request.user
+            logout(request)
+            user.delete()
+            messages.success(request, 'Ihr Account wurde erfolgreich gelöscht.')
+            return redirect('home')
+
+    else:
+        password_form = PasswordChangeForm(request.user)
+
+    return render(request, 'tracker/account.html', {'password_form': password_form})

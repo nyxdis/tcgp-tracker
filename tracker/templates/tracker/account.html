@@ -1,0 +1,38 @@
+{% extends "tracker/base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7 col-lg-6">
+    <div class="card shadow-sm mt-5">
+      <div class="card-body">
+        <h2 class="mb-4 text-center">Account-Einstellungen</h2>
+
+        <!-- Passwort ändern -->
+        <div class="mb-5">
+          <h4 class="mb-3">Passwort ändern</h4>
+          <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %} {{ password_form.as_p }}
+            <div class="d-grid gap-2">
+              <button type="submit" name="password_change" class="btn btn-primary">Passwort ändern</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Account löschen -->
+        <div class="border-top pt-4">
+          <h4 class="mb-3 text-danger">Account löschen</h4>
+          <p class="text-muted">
+            Möchten Sie Ihren Account wirklich löschen?
+            <br />
+            <strong>Diese Aktion kann nicht rückgängig gemacht werden.</strong>
+          </p>
+          <form method="post">
+            {% csrf_token %}
+            <div class="d-grid gap-2">
+              <button type="submit" name="delete_account" class="btn btn-danger">Account löschen</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
