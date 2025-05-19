@@ -20,10 +20,22 @@
 <table class="table table-hover mt-4">
   <thead>
     <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Rarity</th>
-      <th>Status</th>
+      <th class="sortable" data-sort="number" style="cursor: pointer">
+        #
+        <span class="sort-arrow" data-key="number"></span>
+      </th>
+      <th class="sortable" data-sort="name" style="cursor: pointer">
+        Name
+        <span class="sort-arrow" data-key="name"></span>
+      </th>
+      <th class="sortable" data-sort="rarity" style="cursor: pointer">
+        Rarity
+        <span class="sort-arrow" data-key="rarity"></span>
+      </th>
+      <th class="sortable" data-sort="status" style="cursor: pointer">
+        Status
+        <span class="sort-arrow" data-key="status"></span>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -58,6 +70,69 @@
   document.addEventListener("DOMContentLoaded", function () {
     const rows = document.querySelectorAll(".clickable-row");
     const filterInput = document.getElementById("table-filter");
+    const table = document.querySelector("table");
+    const headers = table.querySelectorAll("th.sortable");
+    let sortDirection = {};
+
+    // Initial sort by card number (ascending)
+    (function initialSortByNumber() {
+      const tbody = table.querySelector("tbody");
+      const rowArr = Array.from(tbody.querySelectorAll("tr"));
+      rowArr.sort((a, b) => {
+        const aVal = parseInt(a.children[0].textContent.trim()) || 0;
+        const bVal = parseInt(b.children[0].textContent.trim()) || 0;
+        return aVal - bVal;
+      });
+      rowArr.forEach((row) => tbody.appendChild(row));
+      // Set arrow for number column
+      const numberHeader = Array.from(headers).find((h) => h.dataset.sort === "number");
+      if (numberHeader) {
+        const arrowSpan = numberHeader.querySelector(".sort-arrow");
+        if (arrowSpan) arrowSpan.textContent = "▲";
+        sortDirection["number"] = "asc";
+      }
+    })();
+
+    headers.forEach((header, idx) => {
+      header.addEventListener("click", function () {
+        const sortKey = header.dataset.sort;
+        const tbody = table.querySelector("tbody");
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        const dir = sortDirection[sortKey] === "asc" ? "desc" : "asc";
+        sortDirection[sortKey] = dir;
+
+        // Remove all arrows
+        document.querySelectorAll(".sort-arrow").forEach((span) => {
+          span.textContent = "";
+        });
+
+        // Set arrow for current header
+        const arrowSpan = header.querySelector(".sort-arrow");
+        arrowSpan.textContent = dir === "asc" ? "▲" : "▼";
+
+        rows.sort((a, b) => {
+          let aVal, bVal;
+          if (sortKey === "number") {
+            aVal = parseInt(a.children[0].textContent.trim()) || 0;
+            bVal = parseInt(b.children[0].textContent.trim()) || 0;
+          } else if (sortKey === "name") {
+            aVal = a.children[1].textContent.trim().toLowerCase();
+            bVal = b.children[1].textContent.trim().toLowerCase();
+          } else if (sortKey === "rarity") {
+            aVal = a.dataset.rarity || "";
+            bVal = b.dataset.rarity || "";
+          } else if (sortKey === "status") {
+            aVal = a.querySelector(".status-cell").textContent.trim();
+            bVal = b.querySelector(".status-cell").textContent.trim();
+          }
+          if (aVal < bVal) return dir === "asc" ? -1 : 1;
+          if (aVal > bVal) return dir === "asc" ? 1 : -1;
+          return 0;
+        });
+
+        rows.forEach((row) => tbody.appendChild(row));
+      });
+    });
 
     // Filter table rows based on input
     filterInput.addEventListener("input", function () {
