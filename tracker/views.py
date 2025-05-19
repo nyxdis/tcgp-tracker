@@ -32,7 +32,7 @@ def home(request):
     # Gruppiere Karten nach Seltenheit
     rarity_groups = {
         'common': ['common', 'uncommon', 'rare', 'double_rare'],
-        'rare': ['illustration_rare', 'special_art', 'immersive_art'],
+        'rare': ['illustration_rare', 'special_art', 'immersive_rare'],
         'shiny': ['shiny_rare', 'double_shiny_rare'],
         'crown': ['crown_rare'],
     }
