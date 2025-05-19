@@ -1,55 +1,53 @@
 {% extends "tracker/base.html" %} {% block content %}
-<div class="container mt-4 mb-5">
-  <h1>Deine Packs</h1>
+<h1>Deine Packs</h1>
 
-  <div class="mb-3">
-    <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zur&uuml;ck</a>
-  </div>
+<div class="mb-3">
+  <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zur&uuml;ck</a>
+</div>
 
-  {% for set, packs in grouped_packs %}
-  <h3 class="mt-5">{{ set.name }}</h3>
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    {% for item in packs %}
-    <div class="col">
-      <div class="card h-100 {% if item.is_best %}border-success{% endif %}">
-        <div class="card-body">
-          <h5 class="card-title">{{ item.pack.name }}</h5>
+{% for set, packs in grouped_packs %}
+<h3 class="mt-5">{{ set.name }}</h3>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  {% for item in packs %}
+  <div class="col">
+    <div class="card h-100 {% if item.is_best %}border-success{% endif %}">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.pack.name }}</h5>
 
-          <p class="card-text mb-1">
-            <strong>Chance auf neue Karte:</strong>
-            {{ item.chance }} %
-          </p>
+        <p class="card-text mb-1">
+          <strong>Chance auf neue Karte:</strong>
+          {{ item.chance }} %
+        </p>
 
-          <p class="card-text mb-1">
-            <strong>Fortschritt:</strong>
-            {{ item.owned }} / {{ item.total }}
-          </p>
+        <p class="card-text mb-1">
+          <strong>Fortschritt:</strong>
+          {{ item.owned }} / {{ item.total }}
+        </p>
 
-          <div class="progress mb-2">
-            <div
-              class="progress-bar"
-              role="progressbar"
-              style="width: {{ item.progress_percent }}%;"
-              aria-valuenow="{{ item.progress_percent }}"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              {{ item.progress_percent }}%
-            </div>
+        <div class="progress mb-2">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            style="width: {{ item.progress_percent }}%;"
+            aria-valuenow="{{ item.progress_percent }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            {{ item.progress_percent }}%
           </div>
-
-          {% if item.is_best %}
-          <span class="badge bg-success">Beste Wahl</span>
-          {% endif %}
         </div>
+
+        {% if item.is_best %}
+        <span class="badge bg-success">Beste Wahl</span>
+        {% endif %}
       </div>
     </div>
-    {% endfor %}
   </div>
   {% endfor %}
+</div>
+{% endfor %}
 
-  <div class="mt-4 text-center">
-    <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zur Startseite</a>
-  </div>
+<div class="mt-4 text-center">
+  <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zur Startseite</a>
 </div>
 {% endblock %}
