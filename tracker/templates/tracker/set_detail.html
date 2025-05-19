@@ -2,14 +2,14 @@
 <h2>{{ set.name }}</h2>
 <p>Erscheinungsdatum: {{ set.release_date }}</p>
 
-<div class="mb-3 d-flex justify-content-between">
-  <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zur&uuml;ck</a>
-  <div>
-    <button id="collect-base-btn" class="btn btn-success">Alle Basiskarten sammeln</button>
-    <button id="jump-to-illustration-rare-btn" class="btn btn-info" title="Springe zur ersten Illustration Rare Karte">
+<div class="mb-3 d-flex flex-column flex-sm-row justify-content-between align-items-stretch gap-2">
+  <a href="{% url 'home' %}" class="btn btn-outline-primary w-100 w-sm-auto">← Zur&uuml;ck</a>
+  <div class="d-flex flex-row gap-2 flex-grow-1 flex-sm-grow-0">
+    <button id="collect-base-btn" class="btn btn-success w-100 w-sm-auto flex-sm-shrink-0">Alle Basiskarten sammeln</button>
+    <button id="jump-to-illustration-rare-btn" class="btn btn-info w-100 w-sm-auto flex-sm-shrink-0" title="Springe zur ersten Illustration Rare Karte">
       <span class="me-1">Zu</span>
       <img src="{% static 'tracker/img/rare.webp' %}" alt="Illustration Rare" width="24" height="24" />
-      <span class="ms-1">springen</span>
+      <span>-Karten springen</span>
     </button>
   </div>
 </div>
@@ -258,6 +258,20 @@
   .clickable-row:focus {
     background-color: #e6f2ff !important;
     outline: 2px solid #339af0;
+  }
+
+  @media (min-width: 576px) {
+    .d-flex.flex-sm-row .btn.w-100.w-sm-auto {
+      width: auto !important;
+      min-width: 180px;
+    }
+    .d-flex.flex-sm-row .btn.flex-sm-shrink-0 {
+      flex-shrink: 0 !important;
+    }
+    .d-flex.flex-sm-row .d-flex.flex-sm-row {
+      width: auto !important;
+      flex-grow: 0 !important;
+    }
   }
 </style>
 {% endblock %}
