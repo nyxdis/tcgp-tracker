@@ -29,17 +29,42 @@ def home(request):
     )
     total_dict = {entry['set']: entry['total'] for entry in card_counts}
 
-    # Kombiniere beides
+    # Gruppiere Karten nach Seltenheit
+    rarity_groups = {
+        'common': ['common', 'uncommon', 'rare', 'double_rare'],
+        'rare': ['illustration_rare', 'special_art', 'immersive_art'],
+        'shiny': ['shiny_rare', 'double_shiny_rare'],
+        'crown': ['crown_rare'],
+    }
+
+    rarity_progress = {}
+    for group_name, rarities in rarity_groups.items():
+        group_progress = (
+            user_cards
+            .filter(card__rarity__in=rarities)
+            .values('card__set')
+            .annotate(collected=Count('card'))
+        )
+        rarity_progress[group_name] = {entry['card__set']: entry['collected'] for entry in group_progress}
+
+    # Kombiniere Fortschritt und Seltenheitsgruppen
     sets_with_progress = []
     for s in sets:
         collected = progress_dict.get(s.id, 0)
         total = total_dict.get(s.id, 0)
         progress_percent = round((collected / total) * 100, 2) if total > 0 else 0
+
+        rarity_data = {
+            group_name: rarity_progress[group_name].get(s.id, 0)
+            for group_name in rarity_groups
+        }
+
         sets_with_progress.append({
             'set': s,
             'collected': collected,
             'total': total,
             'progress_percent': progress_percent,
+            'rarity_progress': rarity_data,
         })
 
     return render(request, 'tracker/home.html', {'sets': sets_with_progress})

@@ -1,4 +1,4 @@
-{% extends "tracker/base.html" %} {% block content %}
+{% extends "tracker/base.html" %} {% load static %} {% block content %}
 <div class="container mt-5">
   <h1 class="mb-4">Willkommen beim TCGP Tracker!</h1>
 
@@ -18,6 +18,16 @@
           <p class="card-text">
             <strong>Fortschritt:</strong>
             {{ entry.collected }} / {{ entry.total }}
+          </p>
+          <p class="card-text">
+            <img src="{% static 'tracker/img/common.webp' %}" alt="Common" style="height: 1em; vertical-align: middle" />
+            {{ entry.rarity_progress.common }}
+            <img src="{% static 'tracker/img/rare.webp' %}" alt="Rare" style="height: 1em; vertical-align: middle; margin-left: 10px" />
+            {{ entry.rarity_progress.rare }}
+            <img src="{% static 'tracker/img/shiny.webp' %}" alt="Shiny" style="height: 1em; vertical-align: middle; margin-left: 10px" />
+            {{ entry.rarity_progress.shiny }}
+            <img src="{% static 'tracker/img/crown.webp' %}" alt="Crown" style="height: 1em; vertical-align: middle; margin-left: 10px" />
+            {{ entry.rarity_progress.crown }}
           </p>
           <div class="progress mb-2">
             <div
