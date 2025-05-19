@@ -6,8 +6,10 @@
   <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zur&uuml;ck</a>
   <div>
     <button id="collect-base-btn" class="btn btn-success">Alle Basiskarten sammeln</button>
-    <button id="jump-to-illustration-rare-btn" class="btn btn-info">
+    <button id="jump-to-illustration-rare-btn" class="btn btn-info" title="Springe zur ersten Illustration Rare Karte">
+      <span class="me-1">Zu</span>
       <img src="{% static 'tracker/img/rare.webp' %}" alt="Illustration Rare" width="24" height="24" />
+      <span class="ms-1">springen</span>
     </button>
   </div>
 </div>
