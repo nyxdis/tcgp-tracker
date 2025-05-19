@@ -29,13 +29,11 @@ def home(request):
     )
     total_dict = {entry['set']: entry['total'] for entry in card_counts}
 
-    # Gruppiere Karten nach Seltenheit
-    rarity_groups = {
-        'common': ['common', 'uncommon', 'rare', 'double_rare'],
-        'rare': ['illustration_rare', 'special_art', 'immersive_rare'],
-        'shiny': ['shiny_rare', 'double_shiny_rare'],
-        'crown': ['crown_rare'],
-    }
+    # Gruppiere Karten nach Seltenheit basierend auf dem Bild aus dem Rarity-Modell
+    rarities = Card.objects.values('rarity__image_name', 'rarity__name').distinct()
+    rarity_groups = defaultdict(list)
+    for rarity in rarities:
+        rarity_groups[rarity['rarity__image_name']].append(rarity['rarity__name'])
 
     rarity_progress = {}
     for group_name, rarities in rarity_groups.items():

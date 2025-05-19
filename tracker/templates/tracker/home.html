@@ -20,14 +20,9 @@
             {{ entry.collected }} / {{ entry.total }}
           </p>
           <p class="card-text">
-            <img src="{% static 'tracker/img/common.webp' %}" alt="Common" style="height: 1em; vertical-align: middle" />
-            {{ entry.rarity_progress.common }}
-            <img src="{% static 'tracker/img/rare.webp' %}" alt="Rare" style="height: 1em; vertical-align: middle; margin-left: 10px" />
-            {{ entry.rarity_progress.rare }}
-            <img src="{% static 'tracker/img/shiny.webp' %}" alt="Shiny" style="height: 1em; vertical-align: middle; margin-left: 10px" />
-            {{ entry.rarity_progress.shiny }}
-            <img src="{% static 'tracker/img/crown.webp' %}" alt="Crown" style="height: 1em; vertical-align: middle; margin-left: 10px" />
-            {{ entry.rarity_progress.crown }}
+            {% for rarity, count in entry.rarity_progress.items %} {% if count > 0 %}
+            <img src="{% static 'tracker/img/'|add:rarity %}" alt="{{ rarity|capfirst|slice:':-5' }}" style="height: 1em; vertical-align: middle; margin-left: 10px" />
+            {{ count }} {% endif %} {% endfor %}
           </p>
           <div class="progress mb-2">
             <div
