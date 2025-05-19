@@ -11,7 +11,7 @@ from .utils import prob_at_least_one_new_card
 
 @login_required
 def home(request):
-    sets = PokemonSet.objects.all().order_by('release_date')
+    sets = PokemonSet.objects.all().order_by('-release_date')
     user_cards = UserCard.objects.filter(user=request.user)
 
     # Berechne Sammelfortschritt je Set
