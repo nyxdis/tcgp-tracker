@@ -45,10 +45,12 @@
                    aria-expanded="false">{{ user.get_full_name|default:user.username }}</a>
                 <div class="dropdown-menu dropdown-menu-end"
                      aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'home' %}">Sets</a>
+                  <a class="dropdown-item" href="{% url 'pack_list' %}">Packs</a>
+                  <a class="dropdown-item" href="{% url 'account' %}">Account</a>
                   {% if user.is_superuser %}
                     <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
                   {% endif %}
-                  <a class="dropdown-item" href="{% url 'account' %}">Account</a>
                   <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <button type="submit" class="dropdown-item">Logout</button>
