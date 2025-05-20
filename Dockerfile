@@ -26,6 +26,9 @@ FROM python:3.13-slim
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+RUN apt-get update && apt-get install -y gettext \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy virtualenv from builder
 COPY --from=builder /opt/venv /opt/venv
 
@@ -38,14 +41,11 @@ WORKDIR /app
 # Copy project files
 COPY . .
 
-# Set environment variable for production settings
-ENV DJANGO_SETTINGS_MODULE=tcgptracker.settings.development
-
 # Collect static files
-RUN python manage.py collectstatic --noinput
+RUN python manage.py collectstatic --noinput --settings tcgptracker.settings.development
 
 # Compile translation messages
-RUN django-admin compilemessages
+RUN python manage.py compilemessages --settings tcgptracker.settings.development
 
 # Expose port
 EXPOSE 8000
