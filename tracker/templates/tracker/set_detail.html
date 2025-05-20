@@ -1,74 +1,137 @@
-{% extends "tracker/base.html" %} {% load static %} {% block content %}
-<h2>{{ set.name }}</h2>
-<p>Erscheinungsdatum: {{ set.release_date }}</p>
+{% extends "tracker/base.html" %}
+{% load static %}
+{% block style %}
+  <style>
+  .highlight {
+    --bs-table-bg: lightyellow;
+    transition: background-color 0.5s ease;
+  }
 
-<div class="mb-3 d-flex flex-column flex-sm-row justify-content-between align-items-stretch gap-2">
-  <a href="{% url 'home' %}" class="btn btn-outline-primary w-100 w-sm-auto">← Zur&uuml;ck</a>
-  <div class="d-flex flex-row gap-2 flex-grow-1 flex-sm-grow-0">
-    <button id="collect-base-btn" class="btn btn-success w-100 w-sm-auto flex-sm-shrink-0">Alle Basiskarten sammeln</button>
-    <button id="jump-to-illustration-rare-btn" class="btn btn-info w-100 w-sm-auto flex-sm-shrink-0" title="Springe zur ersten Illustration Rare Karte">
-      <span class="me-1">Zu</span>
-      <img src="{% static 'tracker/img/rare.webp' %}" alt="Illustration Rare" width="24" height="24" />
-      <span>-Karten springen</span>
-    </button>
+  #scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    z-index: 1000;
+  }
+
+  .sortable {
+    cursor: pointer;
+  }
+  .sortable:hover {
+    text-decoration: underline;
+  }
+
+  .clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .clickable-row:hover,
+  .clickable-row:focus {
+    background-color: #e6f2ff !important;
+    outline: 2px solid #339af0;
+  }
+
+  @media (min-width: 576px) {
+    .d-flex.flex-sm-row .btn.w-100.w-sm-auto {
+      width: auto !important;
+      min-width: 180px;
+    }
+    .d-flex.flex-sm-row .btn.flex-sm-shrink-0 {
+      flex-shrink: 0 !important;
+    }
+    .d-flex.flex-sm-row .d-flex.flex-sm-row {
+      width: auto !important;
+      flex-grow: 0 !important;
+    }
+  }
+  </style>
+{% endblock style %}
+{% block title %}
+  {{ set.name }} - Pokémon TCG Pocket Tracker
+{% endblock title %}
+{% block content %}
+  <h2>{{ set.name }}</h2>
+  <p>Erscheinungsdatum: {{ set.release_date }}</p>
+  <div class="mb-3 d-flex flex-column flex-sm-row justify-content-between align-items-stretch gap-2">
+    <a href="{% url 'home' %}"
+       class="btn btn-outline-primary w-100 w-sm-auto">← Zurück</a>
+    <div class="d-flex flex-row gap-2 flex-grow-1 flex-sm-grow-0">
+      <button id="collect-base-btn"
+              class="btn btn-success w-100 w-sm-auto flex-sm-shrink-0">Alle Basiskarten sammeln</button>
+      <button id="jump-to-illustration-rare-btn"
+              class="btn btn-info w-100 w-sm-auto flex-sm-shrink-0"
+              title="Springe zur ersten Illustration Rare Karte">
+        <span class="me-1">Zu</span>
+        <img src="{% static 'tracker/img/rare.webp' %}"
+             alt="Illustration Rare"
+             width="24"
+             height="24" />
+        <span>-Karten springen</span>
+      </button>
+    </div>
   </div>
-</div>
-
-<!-- Filter Input -->
-<div class="mb-3">
-  <input type="text" id="table-filter" class="form-control" placeholder="Suche nach Name oder Nummer..." />
-</div>
-
-<table class="table table-hover mt-4">
-  <thead>
-    <tr>
-      <th class="sortable" data-sort="number" style="cursor: pointer">
-        #
-        <span class="sort-arrow" data-key="number"></span>
-      </th>
-      <th class="sortable" data-sort="name" style="cursor: pointer">
-        Name
-        <span class="sort-arrow" data-key="name"></span>
-      </th>
-      <th class="sortable" data-sort="rarity" style="cursor: pointer">
-        Rarity
-        <span class="sort-arrow" data-key="rarity"></span>
-      </th>
-      <th class="sortable" data-sort="status" style="cursor: pointer">
-        Status
-        <span class="sort-arrow" data-key="status"></span>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for card in cards %}
-    <tr
-      class="clickable-row"
-      data-card-id="{{ card.id }}"
-      data-action="{% if card.collected_quantity > 0 %}uncollect{% else %}collect{% endif %}"
-      data-rarity="{{ card.rarity.name }}"
-    >
-      <td>{{ card.number }}</td>
-      <td>{{ card.name }}</td>
-      <td>
-        {% for _ in ""|center:card.rarity.repeat_count %}
-        <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}" alt="{{ card.rarity.display_name }}" width="24" height="24" />
-        {% endfor %}
-      </td>
-      <td class="status-cell">{% if card.collected_quantity > 0 %} ✅ {% else %} ❌ {% endif %}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-<div class="mt-4 text-center">
-  <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zur&uuml;ck</a>
-</div>
-
-<!-- Floating Button -->
-<button id="scroll-to-top-btn" class="btn btn-primary">⬆</button>
-
-<script>
+  <!-- Filter Input -->
+  <div class="mb-3">
+    <input type="text"
+           id="table-filter"
+           class="form-control"
+           placeholder="Suche nach Name oder Nummer..." />
+  </div>
+  <table class="table table-hover mt-4">
+    <thead>
+      <tr>
+        <th class="sortable" data-sort="number">
+          #
+          <span class="sort-arrow" data-key="number"></span>
+        </th>
+        <th class="sortable" data-sort="name">
+          Name
+          <span class="sort-arrow" data-key="name"></span>
+        </th>
+        <th class="sortable" data-sort="rarity">
+          Rarity
+          <span class="sort-arrow" data-key="rarity"></span>
+        </th>
+        <th class="sortable" data-sort="status">
+          Status
+          <span class="sort-arrow" data-key="status"></span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for card in cards %}
+        <tr class="clickable-row"
+            data-card-id="{{ card.id }}"
+            data-action="{% if card.collected_quantity > 0 %}uncollect{% else %}collect{% endif %}"
+            data-rarity="{{ card.rarity.name }}">
+          <td>{{ card.number }}</td>
+          <td>{{ card.name }}</td>
+          <td>
+            {% for _ in ""|center:card.rarity.repeat_count %}
+              <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}"
+                   alt="{{ card.rarity.display_name }}"
+                   width="24"
+                   height="24" />
+            {% endfor %}
+          </td>
+          <td class="status-cell">
+            {% if card.collected_quantity > 0 %}
+              ✅
+            {% else %}
+              ❌
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="mt-4 text-center">
+    <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zurück</a>
+  </div>
+  <!-- Floating Button -->
+  <button id="scroll-to-top-btn" class="btn btn-primary">⬆</button>
+  <script>
   document.addEventListener("DOMContentLoaded", function () {
     const rows = document.querySelectorAll(".clickable-row");
     const filterInput = document.getElementById("table-filter");
@@ -234,44 +297,5 @@
       }
     });
   });
-</script>
-
-<style>
-  .highlight {
-    --bs-table-bg: lightyellow;
-    transition: background-color 0.5s ease;
-  }
-
-  #scroll-to-top-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
-    z-index: 1000;
-  }
-
-  .clickable-row {
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  .clickable-row:hover,
-  .clickable-row:focus {
-    background-color: #e6f2ff !important;
-    outline: 2px solid #339af0;
-  }
-
-  @media (min-width: 576px) {
-    .d-flex.flex-sm-row .btn.w-100.w-sm-auto {
-      width: auto !important;
-      min-width: 180px;
-    }
-    .d-flex.flex-sm-row .btn.flex-sm-shrink-0 {
-      flex-shrink: 0 !important;
-    }
-    .d-flex.flex-sm-row .d-flex.flex-sm-row {
-      width: auto !important;
-      flex-grow: 0 !important;
-    }
-  }
-</style>
-{% endblock %}
+  </script>
+{% endblock content %}

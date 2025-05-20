@@ -1,43 +1,53 @@
-{% extends "tracker/base.html" %} {% load static %} {% block content %}
-<h1 class="mb-4">Willkommen beim TCGP Tracker!</h1>
-
-<div class="mb-4">
-  <a href="{% url 'pack_list' %}" class="btn btn-success">Zu den Packs</a>
-</div>
-
-<h2>Deine Sets</h2>
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-  {% for entry in sets %}
-  <div class="col">
-    <div class="card h-100">
-      <a href="{% url 'set_detail' entry.set.number %}" class="stretched-link"></a>
-      <div class="card-body">
-        <h5 class="card-title">{{ entry.set.name }}</h5>
-        <p class="card-text">Erscheinungsdatum: {{ entry.set.release_date }}</p>
-        <p class="card-text">
-          <strong>Fortschritt:</strong>
-          {{ entry.collected }} / {{ entry.total }}
-        </p>
-        <p class="card-text">
-          {% for rarity, count in entry.rarity_progress.items %} {% if count > 0 %}
-          <img src="{% static 'tracker/img/'|add:rarity %}" alt="{{ rarity|capfirst|slice:':-5' }}" style="height: 1em; vertical-align: middle; margin-left: 10px" />
-          {{ count }} {% endif %} {% endfor %}
-        </p>
-        <div class="progress mb-2">
-          <div
-            class="progress-bar"
-            role="progressbar"
-            style="width: {{ entry.progress_percent }}%;"
-            aria-valuenow="{{ entry.progress_percent }}"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          >
-            {{ entry.progress_percent }}%
+{% extends "tracker/base.html" %}
+{% load static %}
+{% block style %}
+  <style>
+  .rarity-icon {
+    height: 1em;
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+  </style>
+{% endblock style %}
+{% block content %}
+  <h1 class="mb-4">Willkommen beim TCGP Tracker!</h1>
+  <div class="mb-4">
+    <a href="{% url 'pack_list' %}" class="btn btn-success">Zu den Packs</a>
+  </div>
+  <h2>Deine Sets</h2>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for entry in sets %}
+      <div class="col">
+        <div class="card h-100">
+          <a href="{% url 'set_detail' entry.set.number %}" class="stretched-link"></a>
+          <div class="card-body">
+            <h5 class="card-title">{{ entry.set.name }}</h5>
+            <p class="card-text">Erscheinungsdatum: {{ entry.set.release_date }}</p>
+            <p class="card-text">
+              <strong>Fortschritt:</strong>
+              {{ entry.collected }} / {{ entry.total }}
+            </p>
+            <p class="card-text">
+              {% for rarity, count in entry.rarity_progress.items %}
+                {% if count > 0 %}
+                  <img src="{% static 'tracker/img/'|add:rarity %}"
+                       alt="{{ rarity|capfirst|slice:':-5' }}"
+                       class="rarity-icon" />
+                  {{ count }}
+                {% endif %}
+              {% endfor %}
+            </p>
+            <div class="progress mb-2">
+              <div class="progress-bar"
+                   role="progressbar"
+                   style="width: {{ entry.progress_percent }}%"
+                   aria-valuenow="{{ entry.progress_percent }}"
+                   aria-valuemin="0"
+                   aria-valuemax="100">{{ entry.progress_percent }}%</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
-{% endblock %}
+{% endblock content %}
