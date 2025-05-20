@@ -1,4 +1,5 @@
 {% extends "tracker/base.html" %}
+{% load i18n %}
 {% load static %}
 {% block style %}
   <style>
@@ -52,22 +53,22 @@
 {% endblock title %}
 {% block content %}
   <h2>{{ set.name }}</h2>
-  <p>Erscheinungsdatum: {{ set.release_date }}</p>
+  <p>{% trans "Release Date" %}: {{ set.release_date }}</p>
   <div class="mb-3 d-flex flex-column flex-sm-row justify-content-between align-items-stretch gap-2">
     <a href="{% url 'home' %}"
-       class="btn btn-outline-primary w-100 w-sm-auto">← Zurück</a>
+       class="btn btn-outline-primary w-100 w-sm-auto">← {% trans "Back" %}</a>
     <div class="d-flex flex-row gap-2 flex-grow-1 flex-sm-grow-0">
       <button id="collect-base-btn"
-              class="btn btn-success w-100 w-sm-auto flex-sm-shrink-0">Alle Basiskarten sammeln</button>
+              class="btn btn-success w-100 w-sm-auto flex-sm-shrink-0">{% trans "Collect all base cards" %}</button>
       <button id="jump-to-illustration-rare-btn"
               class="btn btn-info w-100 w-sm-auto flex-sm-shrink-0"
               title="Springe zur ersten Illustration Rare Karte">
-        <span class="me-1">Zu</span>
+        <span class="me-1">{% trans "Jump to" %}</span>
         <img src="{% static 'tracker/img/rare.webp' %}"
              alt="Illustration Rare"
              width="24"
              height="24" />
-        <span>-Karten springen</span>
+        <span>{% trans " cards" %}</span>
       </button>
     </div>
   </div>
@@ -76,7 +77,7 @@
     <input type="text"
            id="table-filter"
            class="form-control"
-           placeholder="Suche nach Name oder Nummer..."
+           placeholder="{% trans "Search for name or number" %}..."
            autocomplete="off"
            inputmode="search"
            autocorrect="off"
@@ -91,15 +92,15 @@
           <span class="sort-arrow" data-key="number"></span>
         </th>
         <th class="sortable" data-sort="name">
-          Name
+          {% trans "Name" %}
           <span class="sort-arrow" data-key="name"></span>
         </th>
         <th class="sortable" data-sort="rarity">
-          Rarity
+          {% trans "Rarity" %}
           <span class="sort-arrow" data-key="rarity"></span>
         </th>
         <th class="sortable" data-sort="status">
-          Status
+          {% trans "Status" %}
           <span class="sort-arrow" data-key="status"></span>
         </th>
       </tr>
@@ -132,7 +133,7 @@
     </tbody>
   </table>
   <div class="mt-4 text-center">
-    <a href="{% url 'home' %}" class="btn btn-outline-primary">← Zurück</a>
+    <a href="{% url 'home' %}" class="btn btn-outline-primary">← {% trans "Back" %}</a>
   </div>
   <!-- Floating Button -->
   <button id="scroll-to-top-btn" class="btn btn-primary">⬆</button>

@@ -44,6 +44,9 @@ ENV DJANGO_SETTINGS_MODULE=tcgptracker.settings.development
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
+# Compile translation messages
+RUN django-admin compilemessages
+
 # Expose port
 EXPOSE 8000
 

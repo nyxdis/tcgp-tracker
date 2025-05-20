@@ -1,12 +1,13 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="de">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description"
-          content="Pokémon TCG Pocket Tracker – Verwalte und verfolge deine Pokémon TCG Pocket Karten online." />
+          content="Pokémon TCG Pocket Tracker – Manage and track your Pokémon TCG Pocket Collection online." />
     <meta name="keywords"
-          content="Pokémon, TCG, Pocket, Tracker, Karten, Sammlung, Trading Card Game" />
+          content="Pokémon, TCG, Pocket, Tracker, Cards, Collection, Trading Card Game" />
     <title>
       {% block title %}
         Pokémon TCG Pocket Tracker
@@ -59,12 +60,40 @@
               </li>
             {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-link" href="{% url 'login' %}">{% trans "Login" %}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Registrieren</a>
+                <a class="nav-link" href="{% url 'register' %}">{% trans "Register" %}</a>
               </li>
             {% endif %}
+            <li class="nav-item dropdown ms-2">
+              <a class="nav-link dropdown-toggle"
+                 href="#"
+                 id="langDropdown"
+                 role="button"
+                 data-bs-toggle="dropdown"
+                 aria-haspopup="true"
+                 aria-expanded="false">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% for lang_code, lang_name in LANGUAGES %}
+                  {% if lang_code == LANGUAGE_CODE %}{{ lang_name }}{% endif %}
+                {% endfor %}
+              </a>
+              <div class="dropdown-menu dropdown-menu-end"
+                   aria-labelledby="langDropdown">
+                <form action="{% url 'set_language' %}" method="post" class="px-3 py-1">
+                  {% csrf_token %}
+                  <input name="next" type="hidden" value="{{ request.path }}">
+                  {% for lang_code, lang_name in LANGUAGES %}
+                    <button class="dropdown-item{% if lang_code == LANGUAGE_CODE %} active{% endif %}"
+                            type="submit"
+                            name="language"
+                            value="{{ lang_code }}">{{ lang_name }}</button>
+                  {% endfor %}
+                </form>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
