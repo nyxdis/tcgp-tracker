@@ -50,6 +50,25 @@ class RarityProbability(models.Model):
     def __str__(self):
         return f"{self.rarity}: {self.probability_first * 100} % / {self.probability_fourth * 100} % / {self.probability_fifth * 100} %"
 
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        epsilon = 1e-5
+        qs = self.__class__.objects.filter(version=self.version)  # type: ignore[attr-defined]
+        if self.pk:
+            qs = qs.exclude(pk=self.pk)
+        prob_first = sum(rp.probability_first for rp in qs) + self.probability_first
+        prob_fourth = sum(rp.probability_fourth for rp in qs) + self.probability_fourth
+        prob_fifth = sum(rp.probability_fifth for rp in qs) + self.probability_fifth
+        errors = {}
+        if abs(prob_first - 1.0) > epsilon:
+            errors['probability_first'] = f"Sum of probability_first for version {self.version} is {prob_first}, should be 1.0"
+        if abs(prob_fourth - 1.0) > epsilon:
+            errors['probability_fourth'] = f"Sum of probability_fourth for version {self.version} is {prob_fourth}, should be 1.0"
+        if abs(prob_fifth - 1.0) > epsilon:
+            errors['probability_fifth'] = f"Sum of probability_fifth for version {self.version} is {prob_fifth}, should be 1.0"
+        if errors:
+            raise ValidationError(errors)
+
     class Meta:
         unique_together = ('version', 'rarity')
         verbose_name_plural = "Rarity Probabilities"
