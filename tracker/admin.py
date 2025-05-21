@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PokemonSet, Pack, Card, UserCard, RarityProbability, Version, Rarity
+from .models import PokemonSet, Pack, Card, UserCard, RarityProbability, Version, Rarity, UserProfile, FriendRequest
 
 @admin.register(PokemonSet)
 class SetAdmin(admin.ModelAdmin):
@@ -44,3 +44,24 @@ class VersionAdmin(admin.ModelAdmin):
 @admin.register(Rarity)
 class RarityAdmin(admin.ModelAdmin):
     list_display = ('name', 'display_name', 'order')
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'public', 'friend_code')
+    search_fields = ('user__username', 'friend_code')
+    autocomplete_fields = ['user']
+    list_filter = ('public',)
+    ordering = ('user__username',)
+    inlines = [
+        type('SentFriendRequestsInline', (admin.TabularInline,), dict(model=FriendRequest, fk_name='from_user', extra=0)),
+        type('ReceivedFriendRequestsInline', (admin.TabularInline,), dict(model=FriendRequest, fk_name='to_user', extra=0)),
+    ]
+
+@admin.register(FriendRequest)
+class FriendRequestAdmin(admin.ModelAdmin):
+    list_display = ('from_user', 'to_user', 'created_at', 'accepted')
+    search_fields = ('from_user__user__username', 'to_user__user__username')
+    autocomplete_fields = ['from_user', 'to_user']
+    list_filter = ('accepted', 'created_at')
+    ordering = ('-created_at',)
+    readonly_fields = ('created_at',)
