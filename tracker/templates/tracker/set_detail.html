@@ -223,7 +223,11 @@
       row.addEventListener("click", function () {
         const cardId = row.dataset.cardId;
         const action = row.dataset.action;
-
+        if (action === "uncollect") {
+          if (!confirm("Are you sure you want to uncollect this card?")) {
+            return;
+          }
+        }
         fetch("", {
           method: "POST",
           headers: {
@@ -251,6 +255,9 @@
     });
 
     document.getElementById("collect-base-btn").addEventListener("click", function () {
+      if (!confirm("Are you sure you want to collect all base cards?")) {
+        return;
+      }
       const rarities = ["common", "uncommon", "rare", "double_rare"];
       const csrfToken = "{{ csrf_token }}";
       rows.forEach((row) => {
