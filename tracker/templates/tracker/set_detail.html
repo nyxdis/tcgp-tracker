@@ -138,6 +138,13 @@
   <!-- Floating Button -->
   <button id="scroll-to-top-btn" class="btn btn-primary">⬆</button>
   <script>
+  // Rarity order mapping injected from Django context
+  const rarityOrderMap = {
+    {% for rarity in rarities %}
+      '{{ rarity.name }}': {{ rarity.order }}{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  };
+
   document.addEventListener("DOMContentLoaded", function () {
     const rows = document.querySelectorAll(".clickable-row");
     const filterInput = document.getElementById("table-filter");
@@ -190,8 +197,8 @@
             aVal = a.children[1].textContent.trim().toLowerCase();
             bVal = b.children[1].textContent.trim().toLowerCase();
           } else if (sortKey === "rarity") {
-            aVal = a.dataset.rarity || "";
-            bVal = b.dataset.rarity || "";
+            aVal = rarityOrderMap[a.dataset.rarity] || 99;
+            bVal = rarityOrderMap[b.dataset.rarity] || 99;
           } else if (sortKey === "status") {
             aVal = a.querySelector(".status-cell").textContent.trim();
             bVal = b.querySelector(".status-cell").textContent.trim();

@@ -98,9 +98,22 @@ def set_detail(request, set_number):
     for card in cards:
         card.collected_quantity = user_cards.get(card.id, 0)
 
+    # Add rarities for JS sorting
+    rarities = list(
+        Card.objects.values('rarity__name', 'rarity__order')
+        .filter(set=set_obj)
+        .distinct()
+        .order_by('rarity__order')
+    )
+    # Rename keys for template clarity
+    rarities = [
+        {'name': r['rarity__name'], 'order': r['rarity__order']} for r in rarities
+    ]
+
     return render(request, 'tracker/set_detail.html', {
         'set': set_obj,
         'cards': cards,
+        'rarities': rarities,
     })
 
 @login_required
