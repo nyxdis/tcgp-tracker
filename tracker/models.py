@@ -121,3 +121,24 @@ class UserCard(models.Model):
 
     def __str__(self):
         return f"{self.user.username} hat {self.quantity}x {self.card.name}"
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    public = models.BooleanField(default=True)
+    friend_code = models.CharField(max_length=10, blank=True, null=True)
+
+    def __str__(self):
+        return f"Profile of {self.user.username}"
+
+class FriendRequest(models.Model):
+    from_user = models.ForeignKey(UserProfile, related_name='sent_friend_requests', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(UserProfile, related_name='received_friend_requests', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    accepted = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ('from_user', 'to_user')
+
+    def __str__(self):
+        status = 'Accepted' if self.accepted else 'Pending'
+        return f"{self.from_user.user.username} → {self.to_user.user.username} ({status})"
