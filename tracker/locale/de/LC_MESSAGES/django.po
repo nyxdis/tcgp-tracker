@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-26 11:41+0000\n"
+"POT-Creation-Date: 2025-05-26 17:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2597,6 +2597,14 @@ msgstr "Seltenheit"
 #: tracker/templates/tracker/set_detail.html:103
 msgid "Status"
 msgstr "Status"
+
+#: tracker/templates/tracker/set_detail.html:234
+msgid "Are you sure you want to uncollect this card?"
+msgstr "Bist du dir sicher, dass du diese Karte als nicht gesammelt markieren möchtest?"
+
+#: tracker/templates/tracker/set_detail.html:265
+msgid "Are you sure you want to collect all base cards?"
+msgstr "Bist du dir sicher, dass du alle Basiskarte als gesammelt markieren möchtest?"
 
 #~ msgid "Amoonguss"
 #~ msgstr "Hutsassa"

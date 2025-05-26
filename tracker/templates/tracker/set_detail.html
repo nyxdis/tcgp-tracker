@@ -49,10 +49,10 @@
   </style>
 {% endblock style %}
 {% block title %}
-  {{ set.name }} - Pokémon TCG Pocket Tracker
+  {% trans set.name %} - Pokémon TCG Pocket Tracker
 {% endblock title %}
 {% block content %}
-  <h2>{{ set.name }}</h2>
+  <h2>{% trans set.name %}</h2>
   <p>{% trans "Release Date" %}: {{ set.release_date }}</p>
   <div class="mb-3 d-flex flex-column flex-sm-row justify-content-between align-items-stretch gap-2">
     <a href="{% url 'home' %}"
@@ -231,7 +231,7 @@
         const cardId = row.dataset.cardId;
         const action = row.dataset.action;
         if (action === "uncollect") {
-          if (!confirm("Are you sure you want to uncollect this card?")) {
+          if (!confirm("{% trans "Are you sure you want to uncollect this card?" %}")) {
             return;
           }
         }
@@ -262,7 +262,7 @@
     });
 
     document.getElementById("collect-base-btn").addEventListener("click", function () {
-      if (!confirm("Are you sure you want to collect all base cards?")) {
+      if (!confirm("{% trans "Are you sure you want to collect all base cards?" %}")) {
         return;
       }
       const rarities = ["common", "uncommon", "rare", "double_rare"];
