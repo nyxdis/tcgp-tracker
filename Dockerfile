@@ -70,5 +70,5 @@ RUN python manage.py compilemessages --settings tcgptracker.settings.development
 # Expose port
 EXPOSE 8000
 
-# Start Django app using gunicorn
-CMD ["/bin/sh", "-c", "export $(cat /app/.git_hash | xargs) && exec gunicorn tcgptracker.wsgi:application --bind 0.0.0.0:8000"]
+# Start Django app using gunicorn, running migrations first
+CMD ["/bin/sh", "-c", "export $(cat /app/.git_hash | xargs) && python manage.py migrate --noinput --settings tcgptracker.settings.development && exec gunicorn tcgptracker.wsgi:application --bind 0.0.0.0:8000"]
