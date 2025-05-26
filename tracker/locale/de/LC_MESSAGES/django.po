@@ -2549,7 +2549,7 @@ msgstr "Hüter des Firmaments"
 
 #: tracker/templates/tracker/i18n/sets.html:9
 msgid "Extradimensional Crisis"
-msgstr ""
+msgstr "Dimensionale Krise"
 
 #: tracker/templates/tracker/pack_list.html:4
 msgid "Packs"
