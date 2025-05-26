@@ -24,9 +24,6 @@ COPY pyproject.toml poetry.lock* ./
 RUN poetry config virtualenvs.create false && \
     poetry install --no-interaction --no-ansi --no-root --only=main
 
-# Copy project files (for git hash)
-COPY . .
-
 # Set GIT_HASH environment variable and write to file using build-arg
 ARG GIT_HASH=unknown
 RUN echo "GIT_HASH=$GIT_HASH" > /app/.git_hash
