@@ -47,6 +47,11 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy project files
 COPY . .
 
+# Set GIT_HASH environment variable
+RUN GIT_HASH=$(git rev-parse --short HEAD) && \
+    echo "GIT_HASH=$GIT_HASH" > /app/.git_hash && \
+    echo "export GIT_HASH=$GIT_HASH" >> /etc/environment
+
 # Collect static files
 RUN python manage.py collectstatic --noinput --settings tcgptracker.settings.development
 
@@ -57,4 +62,4 @@ RUN python manage.py compilemessages --settings tcgptracker.settings.development
 EXPOSE 8000
 
 # Start Django app using gunicorn
-CMD ["gunicorn", "tcgptracker.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["/bin/sh", "-c", "export $(cat /app/.git_hash | xargs) && exec gunicorn tcgptracker.wsgi:application --bind 0.0.0.0:8000"]
