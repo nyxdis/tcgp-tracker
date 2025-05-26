@@ -38,6 +38,16 @@ def home(request):
     for rarity in rarities:
         rarity_groups[rarity['rarity__image_name']].append(rarity['rarity__name'])
 
+    rarity_totals = {}
+    for group_name, rarity_names in rarity_groups.items():
+        group_totals = (
+            Card.objects
+            .filter(rarity__in=rarity_names)
+            .values('set')
+            .annotate(total=Count('id'))
+        )
+        rarity_totals[group_name] = {entry['set']: entry['total'] for entry in group_totals}
+
     rarity_progress = {}
     for group_name, rarities in rarity_groups.items():
         group_progress = (
@@ -56,7 +66,10 @@ def home(request):
         progress_percent = round((collected / total) * 100, 2) if total > 0 else 0
 
         rarity_data = {
-            group_name: rarity_progress[group_name].get(s.id, 0)
+            group_name: {
+                'collected': rarity_progress[group_name].get(s.id, 0),
+                'total': rarity_totals[group_name].get(s.id, 0)
+            }
             for group_name in rarity_groups
         }
 

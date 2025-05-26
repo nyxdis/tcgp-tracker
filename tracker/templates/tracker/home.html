@@ -29,12 +29,16 @@
               {{ entry.collected }} / {{ entry.total }}
             </p>
             <p class="card-text">
-              {% for rarity, count in entry.rarity_progress.items %}
-                {% if count > 0 %}
+              {% for rarity, data in entry.rarity_progress.items %}
+                {% if data.collected > 0 %}
                   <img src="{% static 'tracker/img/'|add:rarity %}"
                        alt="{{ rarity|capfirst|slice:':-5' }}"
                        class="rarity-icon" />
-                  {{ count }}
+                  {% if forloop.first %}
+                    {{ data.collected }} / {{ data.total }}
+                  {% else %}
+                    {{ data.collected }}
+                  {% endif %}
                 {% endif %}
               {% endfor %}
             </p>
