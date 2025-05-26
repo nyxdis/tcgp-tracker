@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
     curl \
-    git \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Poetry
@@ -28,9 +27,9 @@ RUN poetry config virtualenvs.create false && \
 # Copy project files (for git hash)
 COPY . .
 
-# Set GIT_HASH environment variable and write to file
-RUN GIT_HASH=$(git rev-parse --short HEAD) && \
-    echo "GIT_HASH=$GIT_HASH" > /app/.git_hash
+# Set GIT_HASH environment variable and write to file using build-arg
+ARG GIT_HASH=unknown
+RUN echo "GIT_HASH=$GIT_HASH" > /app/.git_hash
 
 # ======== STAGE 2: Runtime image ========
 FROM python:3.13-slim
@@ -62,13 +61,13 @@ COPY --from=builder /app/.git_hash /app/.git_hash
 RUN echo "export $(cat /app/.git_hash | xargs)" >> /etc/environment
 
 # Collect static files
-RUN python manage.py collectstatic --noinput --settings tcgptracker.settings.development
+RUN python manage.py collectstatic --noinput
 
 # Compile translation messages
-RUN python manage.py compilemessages --settings tcgptracker.settings.development
+RUN python manage.py compilemessages
 
 # Expose port
 EXPOSE 8000
 
 # Start Django app using gunicorn, running migrations first
-CMD ["/bin/sh", "-c", "export $(cat /app/.git_hash | xargs) && python manage.py migrate --noinput --settings tcgptracker.settings.development && exec gunicorn tcgptracker.wsgi:application --bind 0.0.0.0:8000"]
+CMD ["/bin/sh", "-c", "export $(cat /app/.git_hash | xargs) && python manage.py migrate --noinput && exec gunicorn tcgptracker.wsgi:application --bind 0.0.0.0:8000"]
