@@ -1,0 +1,25 @@
+[project]
+name = "tcgptracker"
+version = "0.0.1"
+description = "A Django-based tracker for Pokemon TCG Pocket cards."
+authors = [
+    {name = "Freydis Mende", email = "freydis.mende@proton.me"}
+]
+requires-python = ">=3.13"
+dependencies = [
+    "dj-database-url >=2.3.0,<3.0.0",
+    "django >=5.2,<6.0",
+    "django-widget-tweaks >=1.5.0,<2.0.0",
+    "gunicorn >=23.0.0,<24.0.0",
+    "psycopg[binary] >=3.2.7,<4.0.0",
+    "psycopg-pool >=3.2.6,<4.0.0",
+    "whitenoise >=6.9.0,<7.0.0"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+djlint = "^1.36.4"
+
