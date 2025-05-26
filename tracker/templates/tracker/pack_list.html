@@ -6,7 +6,7 @@
     <a href="{% url 'home' %}" class="btn btn-outline-primary">← {% trans "Back" %}</a>
   </div>
   {% for set, packs in grouped_packs %}
-    <h3 class="mt-5">{{ set.name }}</h3>
+    <h3 class="mt-5">{% trans set.name %}</h3>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       {% for item in packs %}
         <div class="col">
