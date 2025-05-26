@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-20 16:48+0000\n"
+"POT-Creation-Date: 2025-05-26 07:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,6 +102,34 @@ msgstr "Erscheinungsdatum"
 #: tracker/templates/tracker/pack_list.html:23
 msgid "Progress"
 msgstr "Fortschritt"
+
+#: tracker/templates/tracker/i18n.html:3
+msgid "Genetic Apex"
+msgstr "Unschlagbare Gene"
+
+#: tracker/templates/tracker/i18n.html:4
+msgid "Mythical Island"
+msgstr "Mysteriöse Insel"
+
+#: tracker/templates/tracker/i18n.html:5
+msgid "Space-Time Smackdown"
+msgstr "Kollision von Raum und Zeit"
+
+#: tracker/templates/tracker/i18n.html:6
+msgid "Triumphant Light"
+msgstr "Licht des Triumphs"
+
+#: tracker/templates/tracker/i18n.html:7
+msgid "Shining Revelry"
+msgstr "Glänzendes Festival"
+
+#: tracker/templates/tracker/i18n.html:8
+msgid "Celestial Guardians"
+msgstr "Hüter des Firmaments"
+
+#: tracker/templates/tracker/i18n.html:9
+msgid "Extradimensional Crisis"
+msgstr ""
 
 #: tracker/templates/tracker/pack_list.html:4
 msgid "Packs"
