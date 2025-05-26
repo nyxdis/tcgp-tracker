@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
     curl \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Poetry
@@ -23,6 +24,13 @@ COPY pyproject.toml poetry.lock* ./
 # Install dependencies (no dev, no root package)
 RUN poetry config virtualenvs.create false && \
     poetry install --no-interaction --no-ansi --no-root --only=main
+
+# Copy project files (for git hash)
+COPY . .
+
+# Set GIT_HASH environment variable and write to file
+RUN GIT_HASH=$(git rev-parse --short HEAD) && \
+    echo "GIT_HASH=$GIT_HASH" > /app/.git_hash
 
 # ======== STAGE 2: Runtime image ========
 FROM python:3.13-slim
@@ -47,10 +55,11 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy project files
 COPY . .
 
+# Copy .git_hash from builder
+COPY --from=builder /app/.git_hash /app/.git_hash
+
 # Set GIT_HASH environment variable
-RUN GIT_HASH=$(git rev-parse --short HEAD) && \
-    echo "GIT_HASH=$GIT_HASH" > /app/.git_hash && \
-    echo "export GIT_HASH=$GIT_HASH" >> /etc/environment
+RUN echo "export $(cat /app/.git_hash | xargs)" >> /etc/environment
 
 # Collect static files
 RUN python manage.py collectstatic --noinput --settings tcgptracker.settings.development
