@@ -26,7 +26,7 @@ RUN poetry config virtualenvs.create false && \
 
 # Set GIT_HASH environment variable and write to file using build-arg
 ARG GIT_HASH=unknown
-RUN echo "GIT_HASH=$GIT_HASH" > /app/.git_hash
+RUN echo "GIT_HASH=${GIT_HASH:0:7}" > /app/.git_hash
 
 # ======== STAGE 2: Runtime image ========
 FROM python:3.13-slim
