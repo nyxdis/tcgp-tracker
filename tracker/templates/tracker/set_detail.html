@@ -112,7 +112,7 @@
             data-action="{% if card.collected_quantity > 0 %}uncollect{% else %}collect{% endif %}"
             data-rarity="{{ card.rarity.name }}">
           <td>{{ card.number }}</td>
-          <td>{{ card.name }}</td>
+          <td>{% trans card.name %}</td>
           <td>
             {% for _ in ""|center:card.rarity.repeat_count %}
               <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}"

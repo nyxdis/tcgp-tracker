@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-26 07:30+0000\n"
+"POT-Creation-Date: 2025-05-26 11:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,31 +103,2451 @@ msgstr "Erscheinungsdatum"
 msgid "Progress"
 msgstr "Fortschritt"
 
-#: tracker/templates/tracker/i18n.html:3
+#: tracker/templates/tracker/i18n/cards.html:3
+msgid "Abomasnow"
+msgstr "Rexblisar"
+
+#: tracker/templates/tracker/i18n/cards.html:4
+msgid "Abra"
+msgstr "Abra"
+
+#: tracker/templates/tracker/i18n/cards.html:5
+msgid "Absol"
+msgstr "Absol"
+
+#: tracker/templates/tracker/i18n/cards.html:6
+msgid "Acerola"
+msgstr "Lola"
+
+#: tracker/templates/tracker/i18n/cards.html:7
+msgid "Adaman"
+msgstr "Diam"
+
+#: tracker/templates/tracker/i18n/cards.html:8
+msgid "Aerodactyl"
+msgstr "Aerodactyl"
+
+#: tracker/templates/tracker/i18n/cards.html:9
+msgid "Aerodactyl ex"
+msgstr "Aerodactyl-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:10
+msgid "Aipom"
+msgstr "Griffel"
+
+#: tracker/templates/tracker/i18n/cards.html:11
+msgid "Alakazam"
+msgstr "Simsala"
+
+#: tracker/templates/tracker/i18n/cards.html:12
+msgid "Alolan Diglett"
+msgstr "Alola-Digda"
+
+#: tracker/templates/tracker/i18n/cards.html:13
+msgid "Alolan Dugtrio"
+msgstr "Alola-Digdri"
+
+#: tracker/templates/tracker/i18n/cards.html:14
+msgid "Alolan Exeggutor"
+msgstr "Alola-Kokowei"
+
+#: tracker/templates/tracker/i18n/cards.html:15
+msgid "Alolan Geodude"
+msgstr "Alola-Kleinstein"
+
+#: tracker/templates/tracker/i18n/cards.html:16
+msgid "Alolan Golem"
+msgstr "Alola-Geowaz"
+
+#: tracker/templates/tracker/i18n/cards.html:17
+msgid "Alolan Graveler"
+msgstr "Alola-Georok"
+
+#: tracker/templates/tracker/i18n/cards.html:18
+msgid "Alolan Grimer"
+msgstr "Alola-Sleima"
+
+#: tracker/templates/tracker/i18n/cards.html:19
+msgid "Alolan Marowak"
+msgstr "Alola-Knogga"
+
+#: tracker/templates/tracker/i18n/cards.html:20
+msgid "Alolan Meowth"
+msgstr "Alola-Mauzi"
+
+#: tracker/templates/tracker/i18n/cards.html:21
+msgid "Alolan Muk ex"
+msgstr "Alola-Sleimok-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:22
+msgid "Alolan Ninetales"
+msgstr "Alola-Vulnona"
+
+#: tracker/templates/tracker/i18n/cards.html:23
+msgid "Alolan Persian"
+msgstr "Alola-Snobilikat"
+
+#: tracker/templates/tracker/i18n/cards.html:24
+msgid "Alolan Raichu ex"
+msgstr "Alola-Raichu-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:25
+msgid "Alolan Raticate"
+msgstr "Alola-Rattikarl"
+
+#: tracker/templates/tracker/i18n/cards.html:26
+msgid "Alolan Rattata"
+msgstr "Alola-Rattfratz"
+
+#: tracker/templates/tracker/i18n/cards.html:27
+msgid "Alolan Sandshrew"
+msgstr "Alola-Sandan"
+
+#: tracker/templates/tracker/i18n/cards.html:28
+msgid "Alolan Sandslash"
+msgstr "Alola-Sandamer"
+
+#: tracker/templates/tracker/i18n/cards.html:29
+msgid "Alolan Vulpix"
+msgstr "Alola-Vulpix"
+
+#: tracker/templates/tracker/i18n/cards.html:30
+msgid "Ambipom"
+msgstr "Ambidiffel"
+
+#: tracker/templates/tracker/i18n/cards.html:31
+msgid "Araquanid"
+msgstr "Aranestro"
+
+#: tracker/templates/tracker/i18n/cards.html:32
+msgid "Arbok"
+msgstr "Arbok"
+
+#: tracker/templates/tracker/i18n/cards.html:33
+msgid "Arcanine"
+msgstr "Arkani"
+
+#: tracker/templates/tracker/i18n/cards.html:34
+msgid "Arcanine ex"
+msgstr "Arkani-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:35
+msgid "Arceus"
+msgstr "Arceus"
+
+#: tracker/templates/tracker/i18n/cards.html:36
+msgid "Arceus ex"
+msgstr "Arceus-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:37
+msgid "Armor Fossil"
+msgstr "Panzerfossil"
+
+#: tracker/templates/tracker/i18n/cards.html:38
+msgid "Articuno"
+msgstr "Arktos"
+
+#: tracker/templates/tracker/i18n/cards.html:39
+msgid "Articuno ex"
+msgstr "Arktos-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:40
+msgid "Azelf"
+msgstr "Tobutz"
+
+#: tracker/templates/tracker/i18n/cards.html:41
+msgid "Azumarill"
+msgstr "Azumarill"
+
+#: tracker/templates/tracker/i18n/cards.html:42
+msgid "Banette"
+msgstr "Banette"
+
+#: tracker/templates/tracker/i18n/cards.html:43
+msgid "Barboach"
+msgstr "Schmerbe"
+
+#: tracker/templates/tracker/i18n/cards.html:44
+msgid "Barry"
+msgstr "Barry"
+
+#: tracker/templates/tracker/i18n/cards.html:45
+msgid "Bastiodon"
+msgstr "Bollterus"
+
+#: tracker/templates/tracker/i18n/cards.html:46
+msgid "Beedrill"
+msgstr "Bibor"
+
+#: tracker/templates/tracker/i18n/cards.html:47
+msgid "Beedrill ex"
+msgstr "Bibor-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:48
+msgid "Beheeyem"
+msgstr "Megalon"
+
+#: tracker/templates/tracker/i18n/cards.html:49
+msgid "Bellossom"
+msgstr "Blubella"
+
+#: tracker/templates/tracker/i18n/cards.html:50
+msgid "Bellsprout"
+msgstr "Knofensa"
+
+#: tracker/templates/tracker/i18n/cards.html:51
+msgid "Bewear"
+msgstr "Kosturso"
+
+#: tracker/templates/tracker/i18n/cards.html:52
+msgid "Bibarel"
+msgstr "Bidifas"
+
+#: tracker/templates/tracker/i18n/cards.html:53
+msgid "Bibarel ex"
+msgstr "Bidifas-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:54
+msgid "Bidoof"
+msgstr "Bidiza"
+
+#: tracker/templates/tracker/i18n/cards.html:55
+msgid "Big Malasada"
+msgstr "Maxi-Malasada"
+
+#: tracker/templates/tracker/i18n/cards.html:56
+msgid "Bisharp"
+msgstr "Caesurio"
+
+#: tracker/templates/tracker/i18n/cards.html:57
+msgid "Blaine"
+msgstr "Pyro"
+
+#: tracker/templates/tracker/i18n/cards.html:58
+msgid "Blastoise"
+msgstr "Turtok"
+
+#: tracker/templates/tracker/i18n/cards.html:59
+msgid "Blastoise ex"
+msgstr "Turtok-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:60
+msgid "Blitzle"
+msgstr "Elezeba"
+
+#: tracker/templates/tracker/i18n/cards.html:61
+msgid "Blue"
+msgstr "Blau"
+
+#: tracker/templates/tracker/i18n/cards.html:62
+msgid "Bounsweet"
+msgstr "Frubberl"
+
+#: tracker/templates/tracker/i18n/cards.html:63
+msgid "Brionne"
+msgstr "Marikeck"
+
+#: tracker/templates/tracker/i18n/cards.html:64
+msgid "Brock"
+msgstr "Rocko"
+
+#: tracker/templates/tracker/i18n/cards.html:65
+msgid "Bronzong"
+msgstr "Bronzong"
+
+#: tracker/templates/tracker/i18n/cards.html:66
+msgid "Bronzor"
+msgstr "Bronzel"
+
+#: tracker/templates/tracker/i18n/cards.html:67
+msgid "Bruxish"
+msgstr "Knirfish"
+
+#: tracker/templates/tracker/i18n/cards.html:68
+msgid "Budding Expeditioner"
+msgstr "Abenteurer-Neuling"
+
+#: tracker/templates/tracker/i18n/cards.html:69
+msgid "Buizel"
+msgstr "Bamelin"
+
+#: tracker/templates/tracker/i18n/cards.html:70
+msgid "Bulbasaur"
+msgstr "Bisasam"
+
+#: tracker/templates/tracker/i18n/cards.html:71
+msgid "Buneary"
+msgstr "Haspiror"
+
+#: tracker/templates/tracker/i18n/cards.html:72
+msgid "Burmy"
+msgstr "Burmy"
+
+#: tracker/templates/tracker/i18n/cards.html:73
+msgid "Butterfree"
+msgstr "Smettbo"
+
+#: tracker/templates/tracker/i18n/cards.html:74
+msgid "Carnivine"
+msgstr "Venuflibis"
+
+#: tracker/templates/tracker/i18n/cards.html:75
+msgid "Caterpie"
+msgstr "Raupy"
+
+#: tracker/templates/tracker/i18n/cards.html:76
+msgid "Celebi ex"
+msgstr "Celebi-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:77
+msgid "Celestic Town Elder"
+msgstr "Älteste von Elyses"
+
+#: tracker/templates/tracker/i18n/cards.html:78
+msgid "Centiskorch"
+msgstr "Infernopod"
+
+#: tracker/templates/tracker/i18n/cards.html:79
+msgid "Chansey"
+msgstr "Chaneira"
+
+#: tracker/templates/tracker/i18n/cards.html:80
+msgid "Charizard"
+msgstr "Glurak"
+
+#: tracker/templates/tracker/i18n/cards.html:81
+msgid "Charizard ex"
+msgstr "Glurak-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:82
+msgid "Charjabug"
+msgstr "Akkup"
+
+#: tracker/templates/tracker/i18n/cards.html:83
+msgid "Charmander"
+msgstr "Glumanda"
+
+#: tracker/templates/tracker/i18n/cards.html:84
+msgid "Charmeleon"
+msgstr "Glutexo"
+
+#: tracker/templates/tracker/i18n/cards.html:85
+msgid "Chatot"
+msgstr "Plaudagei"
+
+#: tracker/templates/tracker/i18n/cards.html:86
+msgid "Cherrim"
+msgstr "Kinoso"
+
+#: tracker/templates/tracker/i18n/cards.html:87
+msgid "Cherubi"
+msgstr "Kikugi"
+
+#: tracker/templates/tracker/i18n/cards.html:88
+msgid "Chewtle"
+msgstr "Kamehaps"
+
+#: tracker/templates/tracker/i18n/cards.html:89
+msgid "Chimchar"
+msgstr "Panflam"
+
+#: tracker/templates/tracker/i18n/cards.html:90
+msgid "Cinccino"
+msgstr "Chillabell"
+
+#: tracker/templates/tracker/i18n/cards.html:91
+msgid "Clefable"
+msgstr "Pixi"
+
+#: tracker/templates/tracker/i18n/cards.html:92
+msgid "Clefairy"
+msgstr "Piepi"
+
+#: tracker/templates/tracker/i18n/cards.html:93
+msgid "Clobbopus"
+msgstr "Klopptopus"
+
+#: tracker/templates/tracker/i18n/cards.html:94
+msgid "Cloyster"
+msgstr "Austos"
+
+#: tracker/templates/tracker/i18n/cards.html:95
+msgid "Combee"
+msgstr "Wadribie"
+
+#: tracker/templates/tracker/i18n/cards.html:96
+msgid "Comfey"
+msgstr "Curelei"
+
+#: tracker/templates/tracker/i18n/cards.html:97
+msgid "Conkeldurr"
+msgstr "Meistagrif"
+
+#: tracker/templates/tracker/i18n/cards.html:98
+msgid "Cosmoem"
+msgstr "Cosmovum"
+
+#: tracker/templates/tracker/i18n/cards.html:99
+msgid "Cosmog"
+msgstr "Cosmog"
+
+#: tracker/templates/tracker/i18n/cards.html:100
+msgid "Cottonee"
+msgstr "Waumboll"
+
+#: tracker/templates/tracker/i18n/cards.html:101
+msgid "Crabominable ex"
+msgstr "Krawell-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:102
+msgid "Crabrawler"
+msgstr "Krabbox"
+
+#: tracker/templates/tracker/i18n/cards.html:103
+msgid "Cramorant"
+msgstr "Urgl"
+
+#: tracker/templates/tracker/i18n/cards.html:104
+msgid "Cranidos"
+msgstr "Koknodon"
+
+#: tracker/templates/tracker/i18n/cards.html:105
+msgid "Cresselia"
+msgstr "Cresselia"
+
+#: tracker/templates/tracker/i18n/cards.html:106
+msgid "Croagunk"
+msgstr "Glibunkel"
+
+#: tracker/templates/tracker/i18n/cards.html:107
+msgid "Crobat"
+msgstr "Iksbat"
+
+#: tracker/templates/tracker/i18n/cards.html:108
+msgid "Cubone"
+msgstr "Tragosso"
+
+#: tracker/templates/tracker/i18n/cards.html:109
+msgid "Cutiefly"
+msgstr "Wommel"
+
+#: tracker/templates/tracker/i18n/cards.html:110
+msgid "Cyclizar"
+msgstr "Mopex"
+
+#: tracker/templates/tracker/i18n/cards.html:111
+msgid "Cynthia"
+msgstr "Cynthia"
+
+#: tracker/templates/tracker/i18n/cards.html:112
+msgid "Cyrus"
+msgstr "Zyrus"
+
+#: tracker/templates/tracker/i18n/cards.html:113
+msgid "Darkrai"
+msgstr "Darkrai"
+
+#: tracker/templates/tracker/i18n/cards.html:114
+msgid "Darkrai ex"
+msgstr "Darkrai-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:115
+msgid "Dartrix"
+msgstr "Arboretoss"
+
+#: tracker/templates/tracker/i18n/cards.html:116
+msgid "Dawn"
+msgstr "Lucia"
+
+#: tracker/templates/tracker/i18n/cards.html:117
+msgid "Decidueye ex"
+msgstr "Silvarro-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:118
+msgid "Dedenne"
+msgstr "Dedenne"
+
+#: tracker/templates/tracker/i18n/cards.html:119
+msgid "Delcatty"
+msgstr "Enekoro"
+
+#: tracker/templates/tracker/i18n/cards.html:120
+msgid "Dewgong"
+msgstr "Jugong"
+
+#: tracker/templates/tracker/i18n/cards.html:121
+msgid "Dewpider"
+msgstr "Araqua"
+
+#: tracker/templates/tracker/i18n/cards.html:122
+msgid "Dhelmise"
+msgstr "Moruda"
+
+#: tracker/templates/tracker/i18n/cards.html:123
+msgid "Dhelmise ex"
+msgstr "Moruda-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:124
+msgid "Dialga ex"
+msgstr "Dialga-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:125
+msgid "Diglett"
+msgstr "Digda"
+
+#: tracker/templates/tracker/i18n/cards.html:126
+msgid "Ditto"
+msgstr "Ditto"
+
+#: tracker/templates/tracker/i18n/cards.html:127
+msgid "Dodrio"
+msgstr "Dodri"
+
+#: tracker/templates/tracker/i18n/cards.html:128
+msgid "Doduo"
+msgstr "Dodu"
+
+#: tracker/templates/tracker/i18n/cards.html:129
+msgid "Dome Fossil"
+msgstr "Domfossil"
+
+#: tracker/templates/tracker/i18n/cards.html:130
+msgid "Dondozo"
+msgstr "Heereshai"
+
+#: tracker/templates/tracker/i18n/cards.html:131
+msgid "Donphan"
+msgstr "Donphan"
+
+#: tracker/templates/tracker/i18n/cards.html:132
+msgid "Dragonair"
+msgstr "Dragonir"
+
+#: tracker/templates/tracker/i18n/cards.html:133
+msgid "Dragonite"
+msgstr "Dragoran"
+
+#: tracker/templates/tracker/i18n/cards.html:134
+msgid "Drampa"
+msgstr "Sen-Long"
+
+#: tracker/templates/tracker/i18n/cards.html:135
+msgid "Drapion"
+msgstr "Piondragi"
+
+#: tracker/templates/tracker/i18n/cards.html:136
+msgid "Dratini"
+msgstr "Dratini"
+
+#: tracker/templates/tracker/i18n/cards.html:137
+msgid "Drednaw"
+msgstr "Kamalm"
+
+#: tracker/templates/tracker/i18n/cards.html:138
+msgid "Drifblim"
+msgstr "Drifzepeli"
+
+#: tracker/templates/tracker/i18n/cards.html:139
+msgid "Drifloon"
+msgstr "Driftlon"
+
+#: tracker/templates/tracker/i18n/cards.html:140
+msgid "Drilbur"
+msgstr "Rotomurf"
+
+#: tracker/templates/tracker/i18n/cards.html:141
+msgid "Drowzee"
+msgstr "Traumato"
+
+#: tracker/templates/tracker/i18n/cards.html:142
+msgid "Druddigon"
+msgstr "Shardrago"
+
+#: tracker/templates/tracker/i18n/cards.html:143
+msgid "Dubwool"
+msgstr "Zwollock"
+
+#: tracker/templates/tracker/i18n/cards.html:144
+msgid "Ducklett"
+msgstr "Piccolente"
+
+#: tracker/templates/tracker/i18n/cards.html:145
+msgid "Dugtrio"
+msgstr "Digdri"
+
+#: tracker/templates/tracker/i18n/cards.html:146
+msgid "Dusclops"
+msgstr "Zwirrklop"
+
+#: tracker/templates/tracker/i18n/cards.html:147
+msgid "Dusknoir"
+msgstr "Zwirrfinst"
+
+#: tracker/templates/tracker/i18n/cards.html:148
+msgid "Duskull"
+msgstr "Zwirrlicht"
+
+#: tracker/templates/tracker/i18n/cards.html:149
+msgid "Eelektrik"
+msgstr "Zapplalek"
+
+#: tracker/templates/tracker/i18n/cards.html:150
+msgid "Eelektross"
+msgstr "Zapplarang"
+
+#: tracker/templates/tracker/i18n/cards.html:151
+msgid "Eevee"
+msgstr "Evoli"
+
+#: tracker/templates/tracker/i18n/cards.html:152
+msgid "Ekans"
+msgstr "Rettan"
+
+#: tracker/templates/tracker/i18n/cards.html:153
+msgid "Electabuzz"
+msgstr "Elektek"
+
+#: tracker/templates/tracker/i18n/cards.html:154
+msgid "Electivire"
+msgstr "Elevoltek"
+
+#: tracker/templates/tracker/i18n/cards.html:155
+msgid "Electrike"
+msgstr "Frizelbliz"
+
+#: tracker/templates/tracker/i18n/cards.html:156
+msgid "Electrode"
+msgstr "Lektrobal"
+
+#: tracker/templates/tracker/i18n/cards.html:157
+msgid "Elgyem"
+msgstr "Pygraulon"
+
+#: tracker/templates/tracker/i18n/cards.html:158
+msgid "Empoleon"
+msgstr "Impoleon"
+
+#: tracker/templates/tracker/i18n/cards.html:159
+msgid "Erika"
+msgstr "Erika"
+
+#: tracker/templates/tracker/i18n/cards.html:160
+msgid "Escavalier"
+msgstr "Cavalanzas"
+
+#: tracker/templates/tracker/i18n/cards.html:161
+msgid "Excadrill"
+msgstr "Stalobor"
+
+#: tracker/templates/tracker/i18n/cards.html:162
+msgid "Exeggcute"
+msgstr "Owei"
+
+#: tracker/templates/tracker/i18n/cards.html:163
+msgid "Exeggutor"
+msgstr "Kokowei"
+
+#: tracker/templates/tracker/i18n/cards.html:164
+msgid "Exeggutor ex"
+msgstr "Kokowei-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:165
+msgid "Fan Rotom"
+msgstr "Wirbel-Rotom"
+
+#: tracker/templates/tracker/i18n/cards.html:166
+msgid "Farfetch'd"
+msgstr "Porenta"
+
+#: tracker/templates/tracker/i18n/cards.html:167
+msgid "Fearow"
+msgstr "Ibitak"
+
+#: tracker/templates/tracker/i18n/cards.html:168
+msgid "Finneon"
+msgstr "Finneon"
+
+#: tracker/templates/tracker/i18n/cards.html:169
+msgid "Fishing Net"
+msgstr "Fischernetz"
+
+#: tracker/templates/tracker/i18n/cards.html:170
+msgid "Flabébé"
+msgstr "Flabébé"
+
+#: tracker/templates/tracker/i18n/cards.html:171
+msgid "Flamigo"
+msgstr "Flaminkno"
+
+#: tracker/templates/tracker/i18n/cards.html:172
+msgid "Flareon"
+msgstr "Flamara"
+
+#: tracker/templates/tracker/i18n/cards.html:173
+msgid "Fletchinder"
+msgstr "Dartignis"
+
+#: tracker/templates/tracker/i18n/cards.html:174
+msgid "Fletchling"
+msgstr "Dartiri"
+
+#: tracker/templates/tracker/i18n/cards.html:175
+msgid "Floatzel"
+msgstr "Bojelin"
+
+#: tracker/templates/tracker/i18n/cards.html:176
+msgid "Floette"
+msgstr "Floette"
+
+#: tracker/templates/tracker/i18n/cards.html:177
+msgid "Floragato"
+msgstr "Feliospa"
+
+#: tracker/templates/tracker/i18n/cards.html:178
+msgid "Florges"
+msgstr "Florges"
+
+#: tracker/templates/tracker/i18n/cards.html:179
+msgid "Fomantis"
+msgstr "Imantis"
+
+#: tracker/templates/tracker/i18n/cards.html:180
+msgid "Froakie"
+msgstr "Froxy"
+
+#: tracker/templates/tracker/i18n/cards.html:181
+msgid "Frogadier"
+msgstr "Amphizel"
+
+#: tracker/templates/tracker/i18n/cards.html:182
+msgid "Froslass"
+msgstr "Frosdedje"
+
+#: tracker/templates/tracker/i18n/cards.html:183
+msgid "Frosmoth"
+msgstr "Mottineva"
+
+#: tracker/templates/tracker/i18n/cards.html:184
+msgid "Frost Rotom"
+msgstr "Frost-Rotom"
+
+#: tracker/templates/tracker/i18n/cards.html:185
+msgid "Gabite"
+msgstr "Knarksel"
+
+#: tracker/templates/tracker/i18n/cards.html:186
+msgid "Gallade ex"
+msgstr "Galagladi-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:187
+msgid "Galvantula"
+msgstr "Voltula"
+
+#: tracker/templates/tracker/i18n/cards.html:188
+msgid "Garbodor"
+msgstr "Deponitox"
+
+#: tracker/templates/tracker/i18n/cards.html:189
+msgid "Garchomp"
+msgstr "Knakrack"
+
+#: tracker/templates/tracker/i18n/cards.html:190
+msgid "Garchomp ex"
+msgstr "Knakrack-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:191
+msgid "Gardevoir"
+msgstr "Guardevoir"
+
+#: tracker/templates/tracker/i18n/cards.html:192
+msgid "Gastly"
+msgstr "Nebulak"
+
+#: tracker/templates/tracker/i18n/cards.html:193
+msgid "Gastrodon"
+msgstr "Gastrodon"
+
+#: tracker/templates/tracker/i18n/cards.html:194
+msgid "Gengar"
+msgstr "Gengar"
+
+#: tracker/templates/tracker/i18n/cards.html:195
+msgid "Gengar ex"
+msgstr "Gengar-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:196
+msgid "Geodude"
+msgstr "Kleinstein"
+
+#: tracker/templates/tracker/i18n/cards.html:197
+msgid "Gholdengo"
+msgstr "Monetigo"
+
+#: tracker/templates/tracker/i18n/cards.html:198
+msgid "Giant Cape"
+msgstr "Riesige Robe"
+
+#: tracker/templates/tracker/i18n/cards.html:199
+msgid "Gible"
+msgstr "Kaumalat"
+
+#: tracker/templates/tracker/i18n/cards.html:200
+msgid "Gimmighoul"
+msgstr "Gierspenst"
+
+#: tracker/templates/tracker/i18n/cards.html:201
+msgid "Giovanni"
+msgstr "Giovanni"
+
+#: tracker/templates/tracker/i18n/cards.html:202
+msgid "Giratina"
+msgstr "Giratina"
+
+#: tracker/templates/tracker/i18n/cards.html:203
+msgid "Giratina ex"
+msgstr "Giratina-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:204
+msgid "Glaceon"
+msgstr "Glaziola"
+
+#: tracker/templates/tracker/i18n/cards.html:205
+msgid "Glaceon ex"
+msgstr "Glaziola-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:206
+msgid "Glameow"
+msgstr "Charmian"
+
+#: tracker/templates/tracker/i18n/cards.html:207
+msgid "Gligar"
+msgstr "Skorgla"
+
+#: tracker/templates/tracker/i18n/cards.html:208
+msgid "Gliscor"
+msgstr "Skorgro"
+
+#: tracker/templates/tracker/i18n/cards.html:209
+msgid "Gloom"
+msgstr "Duflor"
+
+#: tracker/templates/tracker/i18n/cards.html:210
+msgid "Gogoat"
+msgstr "Chevrumm"
+
+#: tracker/templates/tracker/i18n/cards.html:211
+msgid "Golbat"
+msgstr "Golbat"
+
+#: tracker/templates/tracker/i18n/cards.html:212
+msgid "Goldeen"
+msgstr "Goldini"
+
+#: tracker/templates/tracker/i18n/cards.html:213
+msgid "Golduck"
+msgstr "Entoron"
+
+#: tracker/templates/tracker/i18n/cards.html:214
+msgid "Golem"
+msgstr "Geowaz"
+
+#: tracker/templates/tracker/i18n/cards.html:215
+msgid "Golett"
+msgstr "Golbit"
+
+#: tracker/templates/tracker/i18n/cards.html:216
+msgid "Golisopod"
+msgstr "Tectass"
+
+#: tracker/templates/tracker/i18n/cards.html:217
+msgid "Golurk"
+msgstr "Golgantes"
+
+#: tracker/templates/tracker/i18n/cards.html:218
+msgid "Grafaiai"
+msgstr "Affiti"
+
+#: tracker/templates/tracker/i18n/cards.html:219
+msgid "Grapploct"
+msgstr "Kaocto"
+
+#: tracker/templates/tracker/i18n/cards.html:220
+msgid "Graveler"
+msgstr "Georok"
+
+#: tracker/templates/tracker/i18n/cards.html:221
+msgid "Greninja"
+msgstr "Quajutsu"
+
+#: tracker/templates/tracker/i18n/cards.html:222
+msgid "Grimer"
+msgstr "Sleima"
+
+#: tracker/templates/tracker/i18n/cards.html:223
+msgid "Grotle"
+msgstr "Chelcarain"
+
+#: tracker/templates/tracker/i18n/cards.html:224
+msgid "Growlithe"
+msgstr "Fukano"
+
+#: tracker/templates/tracker/i18n/cards.html:225
+msgid "Grubbin"
+msgstr "Mabula"
+
+#: tracker/templates/tracker/i18n/cards.html:226
+msgid "Grumpig"
+msgstr "Groink"
+
+#: tracker/templates/tracker/i18n/cards.html:227
+msgid "Gumshoos"
+msgstr "Manguspektor"
+
+#: tracker/templates/tracker/i18n/cards.html:228
+msgid "Gurdurr"
+msgstr "Strepoli"
+
+#: tracker/templates/tracker/i18n/cards.html:229
+msgid "Guzma"
+msgstr "Bromley"
+
+#: tracker/templates/tracker/i18n/cards.html:230
+msgid "Gyarados"
+msgstr "Garados"
+
+#: tracker/templates/tracker/i18n/cards.html:231
+msgid "Gyarados ex"
+msgstr "Garados-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:232
+msgid "Hakamo-o"
+msgstr "Mediras"
+
+#: tracker/templates/tracker/i18n/cards.html:233
+msgid "Hariyama"
+msgstr "Hariyama"
+
+#: tracker/templates/tracker/i18n/cards.html:234
+msgid "Haunter"
+msgstr "Alpollo"
+
+#: tracker/templates/tracker/i18n/cards.html:235
+msgid "Hawlucha"
+msgstr "Resladero"
+
+#: tracker/templates/tracker/i18n/cards.html:236
+msgid "Heat Rotom"
+msgstr "Hitze-Rotom"
+
+#: tracker/templates/tracker/i18n/cards.html:237
+msgid "Heatmor"
+msgstr "Furnifraß"
+
+#: tracker/templates/tracker/i18n/cards.html:238
+msgid "Heatran"
+msgstr "Heatran"
+
+#: tracker/templates/tracker/i18n/cards.html:239
+msgid "Heliolisk"
+msgstr "Elezard"
+
+#: tracker/templates/tracker/i18n/cards.html:240
+msgid "Helioptile"
+msgstr "Eguana"
+
+#: tracker/templates/tracker/i18n/cards.html:241
+msgid "Helix Fossil"
+msgstr "Helixfossil"
+
+#: tracker/templates/tracker/i18n/cards.html:242
+msgid "Heracross"
+msgstr "Skaraborn"
+
+#: tracker/templates/tracker/i18n/cards.html:243
+msgid "Hippopotas"
+msgstr "Hippopotas"
+
+#: tracker/templates/tracker/i18n/cards.html:244
+msgid "Hippowdon"
+msgstr "Hippoterus"
+
+#: tracker/templates/tracker/i18n/cards.html:245
+msgid "Hitmonchan"
+msgstr "Nockchan"
+
+#: tracker/templates/tracker/i18n/cards.html:246
+msgid "Hitmonlee"
+msgstr "Kicklee"
+
+#: tracker/templates/tracker/i18n/cards.html:247
+msgid "Hitmontop"
+msgstr "Kapoera"
+
+#: tracker/templates/tracker/i18n/cards.html:248
+msgid "Honchkrow"
+msgstr "Kramshef"
+
+#: tracker/templates/tracker/i18n/cards.html:249
+msgid "Hoothoot"
+msgstr "Hoothoot"
+
+#: tracker/templates/tracker/i18n/cards.html:250
+msgid "Horsea"
+msgstr "Seeper"
+
+#: tracker/templates/tracker/i18n/cards.html:251
+msgid "Houndoom"
+msgstr "Hundemon"
+
+#: tracker/templates/tracker/i18n/cards.html:252
+msgid "Houndour"
+msgstr "Hunduster"
+
+#: tracker/templates/tracker/i18n/cards.html:253
+msgid "Hypno"
+msgstr "Hypno"
+
+#: tracker/templates/tracker/i18n/cards.html:254
+msgid "Ilima"
+msgstr "Elima"
+
+#: tracker/templates/tracker/i18n/cards.html:255
+msgid "Incineroar ex"
+msgstr "Fuegro-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:256
+msgid "Infernape ex"
+msgstr "Panferno-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:257
+msgid "Iono"
+msgstr "Enigmara"
+
+#: tracker/templates/tracker/i18n/cards.html:258
+msgid "Irida"
+msgstr "Perla"
+
+#: tracker/templates/tracker/i18n/cards.html:259
+msgid "Ivysaur"
+msgstr "Bisaknosp"
+
+#: tracker/templates/tracker/i18n/cards.html:260
+msgid "Jangmo-o"
+msgstr "Miniras"
+
+#: tracker/templates/tracker/i18n/cards.html:261
+msgid "Jigglypuff"
+msgstr "Pummeluff"
+
+#: tracker/templates/tracker/i18n/cards.html:262
+msgid "Jolteon"
+msgstr "Blitza"
+
+#: tracker/templates/tracker/i18n/cards.html:263
+msgid "Joltik"
+msgstr "Wattzapf"
+
+#: tracker/templates/tracker/i18n/cards.html:264
+msgid "Jynx"
+msgstr "Rossana"
+
+#: tracker/templates/tracker/i18n/cards.html:265
+msgid "Kabuto"
+msgstr "Kabuto"
+
+#: tracker/templates/tracker/i18n/cards.html:266
+msgid "Kabutops"
+msgstr "Kabutops"
+
+#: tracker/templates/tracker/i18n/cards.html:267
+msgid "Kadabra"
+msgstr "Kadabra"
+
+#: tracker/templates/tracker/i18n/cards.html:268
+msgid "Kakuna"
+msgstr "Kokuna"
+
+#: tracker/templates/tracker/i18n/cards.html:269
+msgid "Kangaskhan"
+msgstr "Kangama"
+
+#: tracker/templates/tracker/i18n/cards.html:270
+msgid "Karrablast"
+msgstr "Laukaps"
+
+#: tracker/templates/tracker/i18n/cards.html:271
+msgid "Kiawe"
+msgstr "Kiawe"
+
+#: tracker/templates/tracker/i18n/cards.html:272
+msgid "Kingler"
+msgstr "Kingler"
+
+#: tracker/templates/tracker/i18n/cards.html:273
+msgid "Kirlia"
+msgstr "Kirlia"
+
+#: tracker/templates/tracker/i18n/cards.html:274
+msgid "Klefki"
+msgstr "Clavion"
+
+#: tracker/templates/tracker/i18n/cards.html:275
+msgid "Koffing"
+msgstr "Smogon"
+
+#: tracker/templates/tracker/i18n/cards.html:276
+msgid "Koga"
+msgstr "Koga"
+
+#: tracker/templates/tracker/i18n/cards.html:277
+msgid "Komala"
+msgstr "Koalelu"
+
+#: tracker/templates/tracker/i18n/cards.html:278
+msgid "Kommo-o"
+msgstr "Grandiras"
+
+#: tracker/templates/tracker/i18n/cards.html:279
+msgid "Krabby"
+msgstr "Krabby"
+
+#: tracker/templates/tracker/i18n/cards.html:280
+msgid "Kricketot"
+msgstr "Zirpurze"
+
+#: tracker/templates/tracker/i18n/cards.html:281
+msgid "Kricketune"
+msgstr "Zirpeise"
+
+#: tracker/templates/tracker/i18n/cards.html:282
+msgid "Lana"
+msgstr "Tracy"
+
+#: tracker/templates/tracker/i18n/cards.html:283
+msgid "Lapras"
+msgstr "Lapras"
+
+#: tracker/templates/tracker/i18n/cards.html:284
+msgid "Larvesta"
+msgstr "Ignivor"
+
+#: tracker/templates/tracker/i18n/cards.html:285
+msgid "Larvitar"
+msgstr "Larvitar"
+
+#: tracker/templates/tracker/i18n/cards.html:286
+msgid "Leaf"
+msgstr "Leaf"
+
+#: tracker/templates/tracker/i18n/cards.html:287
+msgid "Leaf Cape"
+msgstr "Blätterumhang"
+
+#: tracker/templates/tracker/i18n/cards.html:288
+msgid "Leafeon"
+msgstr "Folipurba"
+
+#: tracker/templates/tracker/i18n/cards.html:289
+msgid "Leafeon ex"
+msgstr "Folipurba-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:290
+msgid "Lickilicky"
+msgstr "Schlurplek"
+
+#: tracker/templates/tracker/i18n/cards.html:291
+msgid "Lickilicky ex"
+msgstr "Schlurplek-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:292
+msgid "Lickitung"
+msgstr "Schlurp"
+
+#: tracker/templates/tracker/i18n/cards.html:293
+msgid "Liepard"
+msgstr "Kleoparda"
+
+#: tracker/templates/tracker/i18n/cards.html:294
+msgid "Lillie"
+msgstr "Lilly"
+
+#: tracker/templates/tracker/i18n/cards.html:295
+msgid "Lilligant"
+msgstr "Dressela"
+
+#: tracker/templates/tracker/i18n/cards.html:296
+msgid "Litten"
+msgstr "Flamiau"
+
+#: tracker/templates/tracker/i18n/cards.html:297
+msgid "Lopunny"
+msgstr "Schlapor"
+
+#: tracker/templates/tracker/i18n/cards.html:298
+msgid "Lt. Surge"
+msgstr "Major Bob"
+
+#: tracker/templates/tracker/i18n/cards.html:299
+msgid "Lucario"
+msgstr "Lucario"
+
+#: tracker/templates/tracker/i18n/cards.html:300
+msgid "Lucario ex"
+msgstr "Lucario-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:301
+msgid "Lum Berry"
+msgstr "Prunusbeere"
+
+#: tracker/templates/tracker/i18n/cards.html:302
+msgid "Lumineon"
+msgstr "Lumineon"
+
+#: tracker/templates/tracker/i18n/cards.html:303
+msgid "Lunala ex"
+msgstr "Lunala-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:304
+msgid "Lunatone"
+msgstr "Lunastein"
+
+#: tracker/templates/tracker/i18n/cards.html:305
+msgid "Lurantis"
+msgstr "Mantidea"
+
+#: tracker/templates/tracker/i18n/cards.html:306
+msgid "Luxio"
+msgstr "Luxio"
+
+#: tracker/templates/tracker/i18n/cards.html:307
+msgid "Luxray"
+msgstr "Luxtra"
+
+#: tracker/templates/tracker/i18n/cards.html:308
+msgid "Lycanroc"
+msgstr "Wolwerock"
+
+#: tracker/templates/tracker/i18n/cards.html:309
+msgid "Machamp"
+msgstr "Machomei"
+
+#: tracker/templates/tracker/i18n/cards.html:310
+msgid "Machamp ex"
+msgstr "Machomei-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:311
+msgid "Machoke"
+msgstr "Maschock"
+
+#: tracker/templates/tracker/i18n/cards.html:312
+msgid "Machop"
+msgstr "Machollo"
+
+#: tracker/templates/tracker/i18n/cards.html:313
+msgid "Magcargo"
+msgstr "Magcargo"
+
+#: tracker/templates/tracker/i18n/cards.html:314
+msgid "Magearna"
+msgstr "Magearna"
+
+#: tracker/templates/tracker/i18n/cards.html:315
+msgid "Magikarp"
+msgstr "Karpador"
+
+#: tracker/templates/tracker/i18n/cards.html:316
+msgid "Magmar"
+msgstr "Magmar"
+
+#: tracker/templates/tracker/i18n/cards.html:317
+msgid "Magmortar"
+msgstr "Magbrant"
+
+#: tracker/templates/tracker/i18n/cards.html:318
+msgid "Magnemite"
+msgstr "Magnetilo"
+
+#: tracker/templates/tracker/i18n/cards.html:319
+msgid "Magneton"
+msgstr "Magneton"
+
+#: tracker/templates/tracker/i18n/cards.html:320
+msgid "Magnezone"
+msgstr "Magnezone"
+
+#: tracker/templates/tracker/i18n/cards.html:321
+msgid "Makuhita"
+msgstr "Makuhita"
+
+#: tracker/templates/tracker/i18n/cards.html:322
+msgid "Mallow"
+msgstr "Maho"
+
+#: tracker/templates/tracker/i18n/cards.html:323
+msgid "Mamoswine"
+msgstr "Mamutel"
+
+#: tracker/templates/tracker/i18n/cards.html:324
+msgid "Manaphy"
+msgstr "Manaphy"
+
+#: tracker/templates/tracker/i18n/cards.html:325
+msgid "Manectric"
+msgstr "Voltenso"
+
+#: tracker/templates/tracker/i18n/cards.html:326
+msgid "Mankey"
+msgstr "Menki"
+
+#: tracker/templates/tracker/i18n/cards.html:327
+msgid "Maractus"
+msgstr "Maracamba"
+
+#: tracker/templates/tracker/i18n/cards.html:328
+msgid "Mareanie"
+msgstr "Garstella"
+
+#: tracker/templates/tracker/i18n/cards.html:329
+msgid "Marill"
+msgstr "Marill"
+
+#: tracker/templates/tracker/i18n/cards.html:330
+msgid "Marowak"
+msgstr "Knogga"
+
+#: tracker/templates/tracker/i18n/cards.html:331
+msgid "Marowak ex"
+msgstr "Knogga-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:332
+msgid "Mars"
+msgstr "Mars"
+
+#: tracker/templates/tracker/i18n/cards.html:333
+msgid "Marshadow"
+msgstr "Marshadow"
+
+#: tracker/templates/tracker/i18n/cards.html:334
+msgid "Masquerain"
+msgstr "Maskeregen"
+
+#: tracker/templates/tracker/i18n/cards.html:335
+msgid "Mawile"
+msgstr "Flunkifer"
+
+#: tracker/templates/tracker/i18n/cards.html:336
+msgid "Medicham"
+msgstr "Meditalis"
+
+#: tracker/templates/tracker/i18n/cards.html:337
+msgid "Meditite"
+msgstr "Meditite"
+
+#: tracker/templates/tracker/i18n/cards.html:338
+msgid "Melmetal"
+msgstr "Melmetal"
+
+#: tracker/templates/tracker/i18n/cards.html:339
+msgid "Meltan"
+msgstr "Meltan"
+
+#: tracker/templates/tracker/i18n/cards.html:340
+msgid "Meowscarada"
+msgstr "Maskagato"
+
+#: tracker/templates/tracker/i18n/cards.html:341
+msgid "Meowth"
+msgstr "Mauzi"
+
+#: tracker/templates/tracker/i18n/cards.html:342
+msgid "Mesprit"
+msgstr "Vesprit"
+
+#: tracker/templates/tracker/i18n/cards.html:343
+msgid "Metapod"
+msgstr "Safcon"
+
+#: tracker/templates/tracker/i18n/cards.html:344
+msgid "Mew"
+msgstr "Mew"
+
+#: tracker/templates/tracker/i18n/cards.html:345
+msgid "Mew ex"
+msgstr "Mew-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:346
+msgid "Mewtwo"
+msgstr "Mewtu"
+
+#: tracker/templates/tracker/i18n/cards.html:347
+msgid "Mewtwo ex"
+msgstr "Mewtu-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:348
+msgid "Mienfoo"
+msgstr "Lin-Fu"
+
+#: tracker/templates/tracker/i18n/cards.html:349
+msgid "Mienshao"
+msgstr "Wie-Shu"
+
+#: tracker/templates/tracker/i18n/cards.html:350
+msgid "Mightyena"
+msgstr "Magnayen"
+
+#: tracker/templates/tracker/i18n/cards.html:351
+msgid "Mimikyu"
+msgstr "Mimigma"
+
+#: tracker/templates/tracker/i18n/cards.html:352
+msgid "Minccino"
+msgstr "Picochilla"
+
+#: tracker/templates/tracker/i18n/cards.html:353
+msgid "Minior"
+msgstr "Meteno"
+
+#: tracker/templates/tracker/i18n/cards.html:354
+msgid "Misdreavus"
+msgstr "Traunfugil"
+
+#: tracker/templates/tracker/i18n/cards.html:355
+msgid "Mismagius ex"
+msgstr "Traunmagil-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:356
+msgid "Misty"
+msgstr "Misty"
+
+#: tracker/templates/tracker/i18n/cards.html:357
+msgid "Moltres"
+msgstr "Lavados"
+
+#: tracker/templates/tracker/i18n/cards.html:358
+msgid "Moltres ex"
+msgstr "Lavados-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:359
+msgid "Monferno"
+msgstr "Panpyro"
+
+#: tracker/templates/tracker/i18n/cards.html:360
+msgid "Morelull"
+msgstr "Bubungus"
+
+#: tracker/templates/tracker/i18n/cards.html:361
+msgid "Mothim"
+msgstr "Moterpel"
+
+#: tracker/templates/tracker/i18n/cards.html:362
+msgid "Mow Rotom"
+msgstr "Schneid-Rotom"
+
+#: tracker/templates/tracker/i18n/cards.html:363
+msgid "Mr. Mime"
+msgstr "Pantimos"
+
+#: tracker/templates/tracker/i18n/cards.html:364
+msgid "Mudbray"
+msgstr "Pampuli"
+
+#: tracker/templates/tracker/i18n/cards.html:365
+msgid "Mudsdale"
+msgstr "Pampross"
+
+#: tracker/templates/tracker/i18n/cards.html:366
+msgid "Muk"
+msgstr "Sleimok"
+
+#: tracker/templates/tracker/i18n/cards.html:367
+msgid "Murkrow"
+msgstr "Kramurx"
+
+#: tracker/templates/tracker/i18n/cards.html:368
+msgid "Mythical Slab"
+msgstr "Mythische Tafel"
+
+#: tracker/templates/tracker/i18n/cards.html:369
+msgid "Necrozma"
+msgstr "Necrozma"
+
+#: tracker/templates/tracker/i18n/cards.html:370
+msgid "Nidoking"
+msgstr "Nidoking"
+
+#: tracker/templates/tracker/i18n/cards.html:371
+msgid "Nidoqueen"
+msgstr "Nidoqueen"
+
+#: tracker/templates/tracker/i18n/cards.html:372
+msgid "Nidoran♀"
+msgstr "Nidoran♀"
+
+#: tracker/templates/tracker/i18n/cards.html:373
+msgid "Nidoran♂"
+msgstr "Nidoran♂"
+
+#: tracker/templates/tracker/i18n/cards.html:374
+msgid "Nidorina"
+msgstr "Nidorina"
+
+#: tracker/templates/tracker/i18n/cards.html:375
+msgid "Nidorino"
+msgstr "Nidorino"
+
+#: tracker/templates/tracker/i18n/cards.html:376
+msgid "Ninetales"
+msgstr "Vulnona"
+
+#: tracker/templates/tracker/i18n/cards.html:377
+msgid "Noctowl"
+msgstr "Noctuh"
+
+#: tracker/templates/tracker/i18n/cards.html:378
+msgid "Nosepass"
+msgstr "Nasgnet"
+
+#: tracker/templates/tracker/i18n/cards.html:379
+msgid "Oddish"
+msgstr "Myrapla"
+
+#: tracker/templates/tracker/i18n/cards.html:380
+msgid "Old Amber"
+msgstr "Altbernstein"
+
+#: tracker/templates/tracker/i18n/cards.html:381
+msgid "Omanyte"
+msgstr "Amonitas"
+
+#: tracker/templates/tracker/i18n/cards.html:382
+msgid "Omastar"
+msgstr "Amoroso"
+
+#: tracker/templates/tracker/i18n/cards.html:383
+msgid "Onix"
+msgstr "Onix"
+
+#: tracker/templates/tracker/i18n/cards.html:384
+msgid "Oranguru"
+msgstr "Kommandutan"
+
+#: tracker/templates/tracker/i18n/cards.html:385
+msgid "Oricorio"
+msgstr "Choreogel"
+
+#: tracker/templates/tracker/i18n/cards.html:386
+msgid "Origin Forme Dialga"
+msgstr "Ur-Dialga"
+
+#: tracker/templates/tracker/i18n/cards.html:387
+msgid "Origin Forme Palkia"
+msgstr "Ur-Palkia"
+
+#: tracker/templates/tracker/i18n/cards.html:388
+msgid "Pachirisu"
+msgstr "Pachirisu"
+
+#: tracker/templates/tracker/i18n/cards.html:389
+msgid "Pachirisu ex"
+msgstr "Pachirisu-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:390
+msgid "Paldean Clodsire ex"
+msgstr "Paldea-Suelord-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:391
+msgid "Paldean Tauros"
+msgstr "Paldea-Tauros"
+
+#: tracker/templates/tracker/i18n/cards.html:392
+msgid "Paldean Wooper"
+msgstr "Paldea-Felino"
+
+#: tracker/templates/tracker/i18n/cards.html:393
+msgid "Palkia ex"
+msgstr "Palkia-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:394
+msgid "Palossand"
+msgstr "Colossand"
+
+#: tracker/templates/tracker/i18n/cards.html:395
+msgid "Paras"
+msgstr "Paras"
+
+#: tracker/templates/tracker/i18n/cards.html:396
+msgid "Parasect"
+msgstr "Parasek"
+
+#: tracker/templates/tracker/i18n/cards.html:397
+msgid "Passimian ex"
+msgstr "Quartermak-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:398
+msgid "Pawmi"
+msgstr "Pamo"
+
+#: tracker/templates/tracker/i18n/cards.html:399
+msgid "Pawmo"
+msgstr "Pamamo"
+
+#: tracker/templates/tracker/i18n/cards.html:400
+msgid "Pawmot"
+msgstr "Pamomamo"
+
+#: tracker/templates/tracker/i18n/cards.html:401
+msgid "Pawniard"
+msgstr "Gladiantri"
+
+#: tracker/templates/tracker/i18n/cards.html:402
+msgid "Persian"
+msgstr "Snobilikat"
+
+#: tracker/templates/tracker/i18n/cards.html:403
+msgid "Petilil"
+msgstr "Lilminip"
+
+#: tracker/templates/tracker/i18n/cards.html:404
+msgid "Phanpy"
+msgstr "Phanpy"
+
+#: tracker/templates/tracker/i18n/cards.html:405
+msgid "Phantump"
+msgstr "Paragoni"
+
+#: tracker/templates/tracker/i18n/cards.html:406
+msgid "Phione"
+msgstr "Phione"
+
+#: tracker/templates/tracker/i18n/cards.html:407
+msgid "Pidgeot"
+msgstr "Tauboss"
+
+#: tracker/templates/tracker/i18n/cards.html:408
+msgid "Pidgeot ex"
+msgstr "Tauboss-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:409
+msgid "Pidgeotto"
+msgstr "Tauboga"
+
+#: tracker/templates/tracker/i18n/cards.html:410
+msgid "Pidgey"
+msgstr "Taubsi"
+
+#: tracker/templates/tracker/i18n/cards.html:411
+msgid "Pikachu"
+msgstr "Pikachu"
+
+#: tracker/templates/tracker/i18n/cards.html:412
+msgid "Pikachu ex"
+msgstr "Pikachu-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:413
+msgid "Pikipek"
+msgstr "Peppeck"
+
+#: tracker/templates/tracker/i18n/cards.html:414
+msgid "Piloswine"
+msgstr "Keifel"
+
+#: tracker/templates/tracker/i18n/cards.html:415
+msgid "Pincurchin"
+msgstr "Britzigel"
+
+#: tracker/templates/tracker/i18n/cards.html:416
+msgid "Pinsir"
+msgstr "Pinsir"
+
+#: tracker/templates/tracker/i18n/cards.html:417
+msgid "Piplup"
+msgstr "Plinfa"
+
+#: tracker/templates/tracker/i18n/cards.html:418
+msgid "Poison Barb"
+msgstr "Giftstich"
+
+#: tracker/templates/tracker/i18n/cards.html:419
+msgid "Poké Ball"
+msgstr "Pokéball"
+
+#: tracker/templates/tracker/i18n/cards.html:420
+msgid "Pokémon Center Lady"
+msgstr "Pokémon-Center-Dame"
+
+#: tracker/templates/tracker/i18n/cards.html:421
+msgid "Pokémon Communication"
+msgstr "Pokémon-Kommunikation"
+
+#: tracker/templates/tracker/i18n/cards.html:422
+msgid "Pokémon Flute"
+msgstr "Pokémon-Flöte"
+
+#: tracker/templates/tracker/i18n/cards.html:423
+msgid "Poliwag"
+msgstr "Quapsel"
+
+#: tracker/templates/tracker/i18n/cards.html:424
+msgid "Poliwhirl"
+msgstr "Quaputzi"
+
+#: tracker/templates/tracker/i18n/cards.html:425
+msgid "Poliwrath"
+msgstr "Quappo"
+
+#: tracker/templates/tracker/i18n/cards.html:426
+msgid "Ponyta"
+msgstr "Ponita"
+
+#: tracker/templates/tracker/i18n/cards.html:427
+msgid "Poochyena"
+msgstr "Fiffyen"
+
+#: tracker/templates/tracker/i18n/cards.html:428
+msgid "Popplio"
+msgstr "Robball"
+
+#: tracker/templates/tracker/i18n/cards.html:429
+msgid "Porygon"
+msgstr "Porygon"
+
+#: tracker/templates/tracker/i18n/cards.html:430
+msgid "Porygon-Z"
+msgstr "Porygon-Z"
+
+#: tracker/templates/tracker/i18n/cards.html:431
+msgid "Porygon2"
+msgstr "Porygon2"
+
+#: tracker/templates/tracker/i18n/cards.html:432
+msgid "Primarina"
+msgstr "Primarene"
+
+#: tracker/templates/tracker/i18n/cards.html:433
+msgid "Primeape"
+msgstr "Rasaff"
+
+#: tracker/templates/tracker/i18n/cards.html:434
+msgid "Prinplup"
+msgstr "Pliprin"
+
+#: tracker/templates/tracker/i18n/cards.html:435
+msgid "Probopass"
+msgstr "Voluminas"
+
+#: tracker/templates/tracker/i18n/cards.html:436
+msgid "Probopass ex"
+msgstr "Voluminas-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:437
+msgid "Psyduck"
+msgstr "Enton"
+
+#: tracker/templates/tracker/i18n/cards.html:438
+msgid "Pupitar"
+msgstr "Pupitar"
+
+#: tracker/templates/tracker/i18n/cards.html:439
+msgid "Purrloin"
+msgstr "Felilou"
+
+#: tracker/templates/tracker/i18n/cards.html:440
+msgid "Purugly"
+msgstr "Shnurgarst"
+
+#: tracker/templates/tracker/i18n/cards.html:441
+msgid "Pyukumuku"
+msgstr "Gufa"
+
+#: tracker/templates/tracker/i18n/cards.html:442
+msgid "Raichu"
+msgstr "Raichu"
+
+#: tracker/templates/tracker/i18n/cards.html:443
+msgid "Ralts"
+msgstr "Trasla"
+
+#: tracker/templates/tracker/i18n/cards.html:444
+msgid "Rampardos"
+msgstr "Rameidon"
+
+#: tracker/templates/tracker/i18n/cards.html:445
+msgid "Rapidash"
+msgstr "Gallopa"
+
+#: tracker/templates/tracker/i18n/cards.html:446
+msgid "Rare Candy"
+msgstr "Sonderbonbon"
+
+#: tracker/templates/tracker/i18n/cards.html:447
+msgid "Raticate"
+msgstr "Rattikarl"
+
+#: tracker/templates/tracker/i18n/cards.html:448
+msgid "Rattata"
+msgstr "Rattfratz"
+
+#: tracker/templates/tracker/i18n/cards.html:449
+msgid "Red"
+msgstr "Rot"
+
+#: tracker/templates/tracker/i18n/cards.html:450
+msgid "Regice"
+msgstr "Regice"
+
+#: tracker/templates/tracker/i18n/cards.html:451
+msgid "Regigigas"
+msgstr "Regigigas"
+
+#: tracker/templates/tracker/i18n/cards.html:452
+msgid "Regirock"
+msgstr "Regirock"
+
+#: tracker/templates/tracker/i18n/cards.html:453
+msgid "Registeel"
+msgstr "Registeel"
+
+#: tracker/templates/tracker/i18n/cards.html:454
+msgid "Revavroom"
+msgstr "Knattatox"
+
+#: tracker/templates/tracker/i18n/cards.html:455
+msgid "Rhydon"
+msgstr "Rizeros"
+
+#: tracker/templates/tracker/i18n/cards.html:456
+msgid "Rhyhorn"
+msgstr "Rihorn"
+
+#: tracker/templates/tracker/i18n/cards.html:457
+msgid "Rhyperior"
+msgstr "Rihornior"
+
+#: tracker/templates/tracker/i18n/cards.html:458
+msgid "Ribombee"
+msgstr "Bandelby"
+
+#: tracker/templates/tracker/i18n/cards.html:459
+msgid "Riolu"
+msgstr "Riolu"
+
+#: tracker/templates/tracker/i18n/cards.html:460
+msgid "Rockruff"
+msgstr "Wuffels"
+
+#: tracker/templates/tracker/i18n/cards.html:461
+msgid "Rocky Helmet"
+msgstr "Beulenhelm"
+
+#: tracker/templates/tracker/i18n/cards.html:462
+msgid "Roselia"
+msgstr "Roselia"
+
+#: tracker/templates/tracker/i18n/cards.html:463
+msgid "Roserade"
+msgstr "Roserade"
+
+#: tracker/templates/tracker/i18n/cards.html:464
+msgid "Rotom"
+msgstr "Rotom"
+
+#: tracker/templates/tracker/i18n/cards.html:465
+msgid "Rotom Dex"
+msgstr "Rotom-Pokédex"
+
+#: tracker/templates/tracker/i18n/cards.html:466
+msgid "Rowlet"
+msgstr "Bauz"
+
+#: tracker/templates/tracker/i18n/cards.html:467
+msgid "Sableye"
+msgstr "Zobiris"
+
+#: tracker/templates/tracker/i18n/cards.html:468
+msgid "Sabrina"
+msgstr "Sabrina"
+
+#: tracker/templates/tracker/i18n/cards.html:469
+msgid "Salandit"
+msgstr "Molunk"
+
+#: tracker/templates/tracker/i18n/cards.html:470
+msgid "Salazzle"
+msgstr "Amfira"
+
+#: tracker/templates/tracker/i18n/cards.html:471
+msgid "Sandshrew"
+msgstr "Sandan"
+
+#: tracker/templates/tracker/i18n/cards.html:472
+msgid "Sandslash"
+msgstr "Sandamer"
+
+#: tracker/templates/tracker/i18n/cards.html:473
+msgid "Sandygast"
+msgstr "Sankabuh"
+
+#: tracker/templates/tracker/i18n/cards.html:474
+msgid "Scolipede"
+msgstr "Cerapendra"
+
+#: tracker/templates/tracker/i18n/cards.html:475
+msgid "Scyther"
+msgstr "Sichlor"
+
+#: tracker/templates/tracker/i18n/cards.html:476
+msgid "Seadra"
+msgstr "Seemon"
+
+#: tracker/templates/tracker/i18n/cards.html:477
+msgid "Seaking"
+msgstr "Golking"
+
+#: tracker/templates/tracker/i18n/cards.html:478
+msgid "Seel"
+msgstr "Jurob"
+
+#: tracker/templates/tracker/i18n/cards.html:479
+msgid "Serperior"
+msgstr "Serpiroyal"
+
+#: tracker/templates/tracker/i18n/cards.html:480
+msgid "Servine"
+msgstr "Efoserp"
+
+#: tracker/templates/tracker/i18n/cards.html:481
+msgid "Shaymin"
+msgstr "Shaymin"
+
+#: tracker/templates/tracker/i18n/cards.html:482
+msgid "Shellder"
+msgstr "Muschas"
+
+#: tracker/templates/tracker/i18n/cards.html:483
+msgid "Shellos"
+msgstr "Schalellos"
+
+#: tracker/templates/tracker/i18n/cards.html:484
+msgid "Shieldon"
+msgstr "Schilterus"
+
+#: tracker/templates/tracker/i18n/cards.html:485
+msgid "Shiinotic"
+msgstr "Lamellux"
+
+#: tracker/templates/tracker/i18n/cards.html:486
+msgid "Shinx"
+msgstr "Sheinux"
+
+#: tracker/templates/tracker/i18n/cards.html:487
+msgid "Shroodle"
+msgstr "Sproxi"
+
+#: tracker/templates/tracker/i18n/cards.html:488
+msgid "Shuppet"
+msgstr "Shuppet"
+
+#: tracker/templates/tracker/i18n/cards.html:489
+msgid "Sigilyph"
+msgstr "Symvolara"
+
+#: tracker/templates/tracker/i18n/cards.html:490
+msgid "Sizzlipede"
+msgstr "Thermopod"
+
+#: tracker/templates/tracker/i18n/cards.html:491
+msgid "Skarmory"
+msgstr "Panzaeron"
+
+#: tracker/templates/tracker/i18n/cards.html:492
+msgid "Skiddo"
+msgstr "Mähikel"
+
+#: tracker/templates/tracker/i18n/cards.html:493
+msgid "Skitty"
+msgstr "Eneco"
+
+#: tracker/templates/tracker/i18n/cards.html:494
+msgid "Skorupi"
+msgstr "Pionskora"
+
+#: tracker/templates/tracker/i18n/cards.html:495
+msgid "Skull Fossil"
+msgstr "Kopffossil"
+
+#: tracker/templates/tracker/i18n/cards.html:496
+msgid "Skuntank"
+msgstr "Skuntank"
+
+#: tracker/templates/tracker/i18n/cards.html:497
+msgid "Slowbro"
+msgstr "Lahmus"
+
+#: tracker/templates/tracker/i18n/cards.html:498
+msgid "Slowpoke"
+msgstr "Flegmon"
+
+#: tracker/templates/tracker/i18n/cards.html:499
+msgid "Slugma"
+msgstr "Schneckmag"
+
+#: tracker/templates/tracker/i18n/cards.html:500
+msgid "Slurpuff"
+msgstr "Sabbaione"
+
+#: tracker/templates/tracker/i18n/cards.html:501
+msgid "Sneasel"
+msgstr "Sniebel"
+
+#: tracker/templates/tracker/i18n/cards.html:502
+msgid "Snivy"
+msgstr "Serpifeu"
+
+#: tracker/templates/tracker/i18n/cards.html:503
+msgid "Snom"
+msgstr "Snomnom"
+
+#: tracker/templates/tracker/i18n/cards.html:504
+msgid "Snorlax"
+msgstr "Relaxo"
+
+#: tracker/templates/tracker/i18n/cards.html:505
+msgid "Snorunt"
+msgstr "Schneppke"
+
+#: tracker/templates/tracker/i18n/cards.html:506
+msgid "Snover"
+msgstr "Shnebedeck"
+
+#: tracker/templates/tracker/i18n/cards.html:507
+msgid "Solgaleo ex"
+msgstr "Solgaleo-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:508
+msgid "Solrock"
+msgstr "Sonnfel"
+
+#: tracker/templates/tracker/i18n/cards.html:509
+msgid "Sophocles"
+msgstr "Chrys"
+
+#: tracker/templates/tracker/i18n/cards.html:510
+msgid "Spearow"
+msgstr "Habitak"
+
+#: tracker/templates/tracker/i18n/cards.html:511
+msgid "Spiritomb"
+msgstr "Kryppuk"
+
+#: tracker/templates/tracker/i18n/cards.html:512
+msgid "Spoink"
+msgstr "Spoink"
+
+#: tracker/templates/tracker/i18n/cards.html:513
+msgid "Sprigatito"
+msgstr "Felori"
+
+#: tracker/templates/tracker/i18n/cards.html:514
+msgid "Squirtle"
+msgstr "Schiggy"
+
+#: tracker/templates/tracker/i18n/cards.html:515
+msgid "Staraptor"
+msgstr "Staraptor"
+
+#: tracker/templates/tracker/i18n/cards.html:516
+msgid "Staravia"
+msgstr "Staravia"
+
+#: tracker/templates/tracker/i18n/cards.html:517
+msgid "Starly"
+msgstr "Staralili"
+
+#: tracker/templates/tracker/i18n/cards.html:518
+msgid "Starmie"
+msgstr "Starmie"
+
+#: tracker/templates/tracker/i18n/cards.html:519
+msgid "Starmie ex"
+msgstr "Starmie-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:520
+msgid "Staryu"
+msgstr "Sterndu"
+
+#: tracker/templates/tracker/i18n/cards.html:521
+msgid "Steenee"
+msgstr "Frubaila"
+
+#: tracker/templates/tracker/i18n/cards.html:522
+msgid "Stonjourner"
+msgstr "Humanolith"
+
+#: tracker/templates/tracker/i18n/cards.html:523
+msgid "Stufful"
+msgstr "Velursi"
+
+#: tracker/templates/tracker/i18n/cards.html:524
+msgid "Stunky"
+msgstr "Skunkapuh"
+
+#: tracker/templates/tracker/i18n/cards.html:525
+msgid "Sudowoodo"
+msgstr "Mogelbaum"
+
+#: tracker/templates/tracker/i18n/cards.html:526
+msgid "Surskit"
+msgstr "Gehweiher"
+
+#: tracker/templates/tracker/i18n/cards.html:527
+msgid "Swanna"
+msgstr "Swaroness"
+
+#: tracker/templates/tracker/i18n/cards.html:528
+msgid "Swinub"
+msgstr "Quiekel"
+
+#: tracker/templates/tracker/i18n/cards.html:529
+msgid "Swirlix"
+msgstr "Flauschling"
+
+#: tracker/templates/tracker/i18n/cards.html:530
+msgid "Swoobat"
+msgstr "Fletiamo"
+
+#: tracker/templates/tracker/i18n/cards.html:531
+msgid "Talonflame"
+msgstr "Fiaro"
+
+#: tracker/templates/tracker/i18n/cards.html:532
+msgid "Tangela"
+msgstr "Tangela"
+
+#: tracker/templates/tracker/i18n/cards.html:533
+msgid "Tangrowth"
+msgstr "Tangoloss"
+
+#: tracker/templates/tracker/i18n/cards.html:534
+msgid "Tapu Bulu"
+msgstr "Kapu-Toro"
+
+#: tracker/templates/tracker/i18n/cards.html:535
+msgid "Tapu Fini"
+msgstr "Kapu-Kime"
+
+#: tracker/templates/tracker/i18n/cards.html:536
+msgid "Tapu Koko"
+msgstr "Kapu-Riki"
+
+#: tracker/templates/tracker/i18n/cards.html:537
+msgid "Tapu Lele"
+msgstr "Kapu-Fala"
+
+#: tracker/templates/tracker/i18n/cards.html:538
+msgid "Tatsugiri"
+msgstr "Nigiragi"
+
+#: tracker/templates/tracker/i18n/cards.html:539
+msgid "Tauros"
+msgstr "Tauros"
+
+#: tracker/templates/tracker/i18n/cards.html:540
+msgid "Team Galactic Grunt"
+msgstr "Rüpel von Team Galaktik"
+
+#: tracker/templates/tracker/i18n/cards.html:541
+msgid "Team Rocket Grunt"
+msgstr "Rüpel von Team Rocket"
+
+#: tracker/templates/tracker/i18n/cards.html:542
+msgid "Tentacool"
+msgstr "Tentacha"
+
+#: tracker/templates/tracker/i18n/cards.html:543
+msgid "Tentacruel"
+msgstr "Tentoxa"
+
+#: tracker/templates/tracker/i18n/cards.html:544
+msgid "Timburr"
+msgstr "Praktibalk"
+
+#: tracker/templates/tracker/i18n/cards.html:545
+msgid "Tinkatink"
+msgstr "Forgita"
+
+#: tracker/templates/tracker/i18n/cards.html:546
+msgid "Tinkaton ex"
+msgstr "Granforgita-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:547
+msgid "Tinkatuff"
+msgstr "Tafforgita"
+
+#: tracker/templates/tracker/i18n/cards.html:548
+msgid "Togedemaru"
+msgstr "Togedemaru"
+
+#: tracker/templates/tracker/i18n/cards.html:549
+msgid "Togekiss"
+msgstr "Togekiss"
+
+#: tracker/templates/tracker/i18n/cards.html:550
+msgid "Togepi"
+msgstr "Togepi"
+
+#: tracker/templates/tracker/i18n/cards.html:551
+msgid "Togetic"
+msgstr "Togetic"
+
+#: tracker/templates/tracker/i18n/cards.html:552
+msgid "Torracat"
+msgstr "Miezunder"
+
+#: tracker/templates/tracker/i18n/cards.html:553
+msgid "Torterra"
+msgstr "Chelterrar"
+
+#: tracker/templates/tracker/i18n/cards.html:554
+msgid "Toucannon"
+msgstr "Tukanon"
+
+#: tracker/templates/tracker/i18n/cards.html:555
+msgid "Toxapex"
+msgstr "Aggrostella"
+
+#: tracker/templates/tracker/i18n/cards.html:556
+msgid "Toxicroak"
+msgstr "Toxiquak"
+
+#: tracker/templates/tracker/i18n/cards.html:557
+msgid "Trevenant"
+msgstr "Trombork"
+
+#: tracker/templates/tracker/i18n/cards.html:558
+msgid "Trubbish"
+msgstr "Unratütox"
+
+#: tracker/templates/tracker/i18n/cards.html:559
+msgid "Trumbeak"
+msgstr "Trompeck"
+
+#: tracker/templates/tracker/i18n/cards.html:560
+msgid "Tsareena"
+msgstr "Fruyal"
+
+#: tracker/templates/tracker/i18n/cards.html:561
+msgid "Turtonator"
+msgstr "Tortunator"
+
+#: tracker/templates/tracker/i18n/cards.html:562
+msgid "Turtwig"
+msgstr "Chelast"
+
+#: tracker/templates/tracker/i18n/cards.html:563
+msgid "Tynamo"
+msgstr "Zapplardin"
+
+#: tracker/templates/tracker/i18n/cards.html:564
+msgid "Tyranitar"
+msgstr "Despotar"
+
+#: tracker/templates/tracker/i18n/cards.html:565
+msgid "Unown"
+msgstr "Icognito"
+
+#: tracker/templates/tracker/i18n/cards.html:566
+msgid "Uxie"
+msgstr "Selfe"
+
+#: tracker/templates/tracker/i18n/cards.html:567
+msgid "Vaporeon"
+msgstr "Aquana"
+
+#: tracker/templates/tracker/i18n/cards.html:568
+msgid "Varoom"
+msgstr "Knattox"
+
+#: tracker/templates/tracker/i18n/cards.html:569
+msgid "Venipede"
+msgstr "Toxiped"
+
+#: tracker/templates/tracker/i18n/cards.html:570
+msgid "Venomoth"
+msgstr "Omot"
+
+#: tracker/templates/tracker/i18n/cards.html:571
+msgid "Venonat"
+msgstr "Bluzuk"
+
+#: tracker/templates/tracker/i18n/cards.html:572
+msgid "Venusaur"
+msgstr "Bisaflor"
+
+#: tracker/templates/tracker/i18n/cards.html:573
+msgid "Venusaur ex"
+msgstr "Bisaflor-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:574
+msgid "Vespiquen"
+msgstr "Honweisel"
+
+#: tracker/templates/tracker/i18n/cards.html:575
+msgid "Victreebel"
+msgstr "Sarzenia"
+
+#: tracker/templates/tracker/i18n/cards.html:576
+msgid "Vikavolt"
+msgstr "Donarion"
+
+#: tracker/templates/tracker/i18n/cards.html:577
+msgid "Vileplume"
+msgstr "Giflor"
+
+#: tracker/templates/tracker/i18n/cards.html:578
+msgid "Volcarona"
+msgstr "Ramoth"
+
+#: tracker/templates/tracker/i18n/cards.html:579
+msgid "Volkner"
+msgstr "Volkner"
+
+#: tracker/templates/tracker/i18n/cards.html:580
+msgid "Voltorb"
+msgstr "Voltobal"
+
+#: tracker/templates/tracker/i18n/cards.html:581
+msgid "Vulpix"
+msgstr "Vulpix"
+
+#: tracker/templates/tracker/i18n/cards.html:582
+msgid "Wartortle"
+msgstr "Schillok"
+
+#: tracker/templates/tracker/i18n/cards.html:583
+msgid "Wash Rotom"
+msgstr "Wasch-Rotom"
+
+#: tracker/templates/tracker/i18n/cards.html:584
+msgid "Weavile ex"
+msgstr "Snibunna-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:585
+msgid "Weedle"
+msgstr "Hornliu"
+
+#: tracker/templates/tracker/i18n/cards.html:586
+msgid "Weepinbell"
+msgstr "Ultrigaria"
+
+#: tracker/templates/tracker/i18n/cards.html:587
+msgid "Weezing"
+msgstr "Smogmog"
+
+#: tracker/templates/tracker/i18n/cards.html:588
+msgid "Whimsicott"
+msgstr "Elfun"
+
+#: tracker/templates/tracker/i18n/cards.html:589
+msgid "Whirlipede"
+msgstr "Rollum"
+
+#: tracker/templates/tracker/i18n/cards.html:590
+msgid "Whiscash"
+msgstr "Welsar"
+
+#: tracker/templates/tracker/i18n/cards.html:591
+msgid "Wigglytuff"
+msgstr "Knuddeluff"
+
+#: tracker/templates/tracker/i18n/cards.html:592
+msgid "Wigglytuff ex"
+msgstr "Knuddeluff-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:593
+msgid "Wiglett"
+msgstr "Schligda"
+
+#: tracker/templates/tracker/i18n/cards.html:594
+msgid "Wimpod"
+msgstr "Reißlaus"
+
+#: tracker/templates/tracker/i18n/cards.html:595
+msgid "Wishiwashi"
+msgstr "Lusardin"
+
+#: tracker/templates/tracker/i18n/cards.html:596
+msgid "Wishiwashi ex"
+msgstr "Lusardin-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:597
+msgid "Woobat"
+msgstr "Fleknoil"
+
+#: tracker/templates/tracker/i18n/cards.html:598
+msgid "Wooloo"
+msgstr "Wolly"
+
+#: tracker/templates/tracker/i18n/cards.html:599
+msgid "Wormadam"
+msgstr "Burmadame"
+
+#: tracker/templates/tracker/i18n/cards.html:600
+msgid "Wugtrio ex"
+msgstr "Schligdri-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:601
+msgid "Yanma"
+msgstr "Yanma"
+
+#: tracker/templates/tracker/i18n/cards.html:602
+msgid "Yanmega ex"
+msgstr "Yanmega-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:603
+msgid "Yungoos"
+msgstr "Mangunior"
+
+#: tracker/templates/tracker/i18n/cards.html:604
+msgid "Zapdos"
+msgstr "Zapdos"
+
+#: tracker/templates/tracker/i18n/cards.html:605
+msgid "Zapdos ex"
+msgstr "Zapdos-ex"
+
+#: tracker/templates/tracker/i18n/cards.html:606
+msgid "Zebstrika"
+msgstr "Zebritz"
+
+#: tracker/templates/tracker/i18n/cards.html:607
+msgid "Zubat"
+msgstr "Zubat"
+
+#: tracker/templates/tracker/i18n/sets.html:3
 msgid "Genetic Apex"
 msgstr "Unschlagbare Gene"
 
-#: tracker/templates/tracker/i18n.html:4
+#: tracker/templates/tracker/i18n/sets.html:4
 msgid "Mythical Island"
 msgstr "Mysteriöse Insel"
 
-#: tracker/templates/tracker/i18n.html:5
+#: tracker/templates/tracker/i18n/sets.html:5
 msgid "Space-Time Smackdown"
 msgstr "Kollision von Raum und Zeit"
 
-#: tracker/templates/tracker/i18n.html:6
+#: tracker/templates/tracker/i18n/sets.html:6
 msgid "Triumphant Light"
 msgstr "Licht des Triumphs"
 
-#: tracker/templates/tracker/i18n.html:7
+#: tracker/templates/tracker/i18n/sets.html:7
 msgid "Shining Revelry"
 msgstr "Glänzendes Festival"
 
-#: tracker/templates/tracker/i18n.html:8
+#: tracker/templates/tracker/i18n/sets.html:8
 msgid "Celestial Guardians"
 msgstr "Hüter des Firmaments"
 
-#: tracker/templates/tracker/i18n.html:9
+#: tracker/templates/tracker/i18n/sets.html:9
 msgid "Extradimensional Crisis"
 msgstr ""
 
@@ -177,3 +2597,78 @@ msgstr "Seltenheit"
 #: tracker/templates/tracker/set_detail.html:103
 msgid "Status"
 msgstr "Status"
+
+#~ msgid "Amoonguss"
+#~ msgstr "Hutsassa"
+
+#~ msgid "Arboliva-ex"
+#~ msgstr "Olithena-ex"
+
+#~ msgid "Barraskewda"
+#~ msgstr "Barrakiefa"
+
+#~ msgid "Beartic"
+#~ msgstr "Siberio"
+
+#~ msgid "Breloom"
+#~ msgstr "Kapilz"
+
+#~ msgid "Cubchoo"
+#~ msgstr "Petznief"
+
+#~ msgid "Dolliv"
+#~ msgstr "Olivinio"
+
+#~ msgid "Foongus"
+#~ msgstr "Tarnpignon"
+
+#~ msgid "Garganacl"
+#~ msgstr "Saltigant"
+
+#~ msgid "Goomy"
+#~ msgstr "Viscora"
+
+#~ msgid "Greavard"
+#~ msgstr "Gruff"
+
+#~ msgid "Mew-ex"
+#~ msgstr "Mew-ex"
+
+#~ msgid "Nacli"
+#~ msgstr "Geosali"
+
+#~ msgid "Naclstack"
+#~ msgstr "Sedisal"
+
+#~ msgid "Noibat"
+#~ msgstr "eF-eM"
+
+#~ msgid "Noivern"
+#~ msgstr "UHaFnir"
+
+#~ msgid "Roggenrola"
+#~ msgstr "Kiesling"
+
+#~ msgid "Runerigus"
+#~ msgstr "Oghnatoll"
+
+#~ msgid "Scatterbug"
+#~ msgstr "Purmel"
+
+#~ msgid "Shiinotic-ex"
+#~ msgstr "Lamellux-ex"
+
+#~ msgid "Shroomish"
+#~ msgstr "Knilz"
+
+#~ msgid "Smoliv"
+#~ msgstr "Oliva"
+
+#~ msgid "Spewpa"
+#~ msgstr "Puponcho"
+
+#~ msgid "Spidops"
+#~ msgstr "Spinsidias"
+
+#~ msgid "Veluza"
+#~ msgstr "Agizula"

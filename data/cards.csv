@@ -1,1025 +1,1026 @@
 set_number,number,card,pack,rarity
-A1,001,Bisasam,Mewtu,common
-A1,002,Bisaknosp,Mewtu,uncommon
-A1,003,Bisaflor,Mewtu,rare
-A1,004,Bisaflor-ex,Mewtu,double_rare
-A1,005,Raupy,Pikachu,common
-A1,006,Safcon,Pikachu,common
-A1,007,Smettbo,Pikachu,rare
-A1,008,Hornliu,Mewtu,common
-A1,009,Kokuna,Mewtu,common
-A1,010,Bibor,Mewtu,rare
-A1,011,Myrapla,Glurak,common
-A1,012,Duflor,Glurak,uncommon
-A1,013,Giflor,Glurak,rare
+A1,001,Bulbasaur,Mewtwo,common
+A1,002,Ivysaur,Mewtwo,uncommon
+A1,003,Venusaur,Mewtwo,rare
+A1,004,Venusaur ex,Mewtwo,double_rare
+A1,005,Caterpie,Pikachu,common
+A1,006,Metapod,Pikachu,common
+A1,007,Butterfree,Pikachu,rare
+A1,008,Weedle,Mewtwo,common
+A1,009,Kakuna,Mewtwo,common
+A1,010,Beedrill,Mewtwo,rare
+A1,011,Oddish,Charizard,common
+A1,012,Gloom,Charizard,uncommon
+A1,013,Vileplume,Charizard,rare
 A1,014,Paras,Pikachu,common
-A1,015,Parasek,Pikachu,uncommon
-A1,016,Bluzuk,Mewtu,common
-A1,017,Omot,Mewtu,uncommon
-A1,018,Knofensa,Glurak,common
-A1,019,Ultrigaria,Glurak,uncommon
-A1,020,Sarzenia,Glurak,rare
-A1,021,Owei,Glurak,common
-A1,022,Kokowei,Glurak,rare
-A1,023,Kokowei-ex,Glurak,double_rare
-A1,024,Tangela,Glurak,common
-A1,025,Sichlor,Mewtu,common
-A1,026,Pinsir,Pikachu|Glurak|Mewtu,uncommon
-A1,027,Waumboll,Pikachu|Glurak|Mewtu,common
-A1,028,Elfun,Pikachu|Glurak|Mewtu,uncommon
-A1,029,Lilminip,Pikachu|Glurak|Mewtu,common
-A1,030,Dressella,Pikachu|Glurak|Mewtu,uncommon
-A1,031,Mähikel,Glurak,common
-A1,032,Chevrumm,Glurak,common
-A1,033,Glumanda,Glurak,common
-A1,034,Glutexo,Glurak,uncommon
-A1,035,Glurak,Glurak,rare
-A1,036,Glurak-ex,Glurak,double_rare
-A1,037,Vulpix,Glurak,common
-A1,038,Vulnona,Glurak,uncommon
-A1,039,Fukano,Pikachu,common
-A1,040,Arkani,Pikachu,rare
-A1,041,Arkani-ex,Pikachu,double_rare
-A1,042,Ponita,Pikachu|Glurak|Mewtu,common
-A1,043,Gallopa,Pikachu|Glurak|Mewtu,uncommon
-A1,044,Magmar,Glurak,common
-A1,045,Flamara,Glurak,rare
-A1,046,Lavados,Glurak,rare
-A1,047,Lavados-ex,Glurak,double_rare
-A1,048,Furnifraß,Pikachu|Glurak|Mewtu,common
-A1,049,Molunk,Mewtu,common
-A1,050,Amfira,Mewtu,common
-A1,051,Thermopod,Pikachu|Glurak|Mewtu,common
-A1,052,Infernopod,Pikachu|Glurak|Mewtu,uncommon
-A1,053,Schiggy,Pikachu,common
-A1,054,Schillock,Pikachu,uncommon
-A1,055,Turtok,Pikachu,rare
-A1,056,Turtok-ex,Pikachu,double_rare
-A1,057,Enton,Pikachu|Glurak|Mewtu,common
-A1,058,Entoron,Pikachu|Glurak|Mewtu,uncommon
-A1,059,Quapsel,Glurak,common
-A1,060,Quaputzi,Glurak,uncommon
-A1,061,Quappo,Glurak,rare
-A1,062,Tentacha,Mewtu,common
-A1,063,Tentoxa,Mewtu,uncommon
-A1,064,Jurob,Pikachu,common
-A1,065,Jugong,Pikachu,uncommon
-A1,066,Muschas,Mewtu,common
-A1,067,Austos,Mewtu,uncommon
-A1,068,Krabby,Mewtu,common
-A1,069,Kingler,Mewtu,uncommon
-A1,070,Seeper,Pikachu,common
-A1,071,Seemon,Pikachu,uncommon
-A1,072,Goldini,Pikachu,common
-A1,073,Golking,Pikachu,common
-A1,074,Sterndu,Glurak,common
-A1,075,Starmie,Glurak,uncommon
-A1,076,Starmie-ex,Glurak,double_rare
-A1,077,Karpador,Pikachu,common
-A1,078,Garados,Pikachu,rare
-A1,079,Lapras,Glurak,rare
-A1,080,Aquana,Mewtu,rare
-A1,081,Amonitas,Pikachu,uncommon
-A1,082,Amoroso,Pikachu,rare
-A1,083,Arktos,Mewtu,rare
-A1,084,Arktos-ex,Mewtu,double_rare
-A1,085,Piccolente,Glurak,common
-A1,086,Swaroness,Glurak,uncommon
-A1,087,Froxy,Glurak,common
-A1,088,Amphizel,Glurak,uncommon
-A1,089,Quajutsu,Glurak,rare
-A1,090,Gufa,Glurak,common
-A1,091,Knirfish,Pikachu|Glurak|Mewtu,uncommon
-A1,092,Snomnom,Pikachu|Glurak|Mewtu,common
-A1,093,Mottineva,Pikachu|Glurak|Mewtu,uncommon
+A1,015,Parasect,Pikachu,uncommon
+A1,016,Venonat,Mewtwo,common
+A1,017,Venomoth,Mewtwo,uncommon
+A1,018,Bellsprout,Charizard,common
+A1,019,Weepinbell,Charizard,uncommon
+A1,020,Victreebel,Charizard,rare
+A1,021,Exeggcute,Charizard,common
+A1,022,Exeggutor,Charizard,rare
+A1,023,Exeggutor ex,Charizard,double_rare
+A1,024,Tangela,Charizard,common
+A1,025,Scyther,Mewtwo,common
+A1,026,Pinsir,Pikachu|Charizard|Mewtwo,uncommon
+A1,027,Cottonee,Pikachu|Charizard|Mewtwo,common
+A1,028,Whimsicott,Pikachu|Charizard|Mewtwo,uncommon
+A1,029,Petilil,Pikachu|Charizard|Mewtwo,common
+A1,030,Lilligant,Pikachu|Charizard|Mewtwo,uncommon
+A1,031,Skiddo,Charizard,common
+A1,032,Gogoat,Charizard,common
+A1,033,Charmander,Charizard,common
+A1,034,Charmeleon,Charizard,uncommon
+A1,035,Charizard,Charizard,rare
+A1,036,Charizard ex,Charizard,double_rare
+A1,037,Vulpix,Charizard,common
+A1,038,Ninetales,Charizard,uncommon
+A1,039,Growlithe,Pikachu,common
+A1,040,Arcanine,Pikachu,rare
+A1,041,Arcanine ex,Pikachu,double_rare
+A1,042,Ponyta,Pikachu|Charizard|Mewtwo,common
+A1,043,Rapidash,Pikachu|Charizard|Mewtwo,uncommon
+A1,044,Magmar,Charizard,common
+A1,045,Flareon,Charizard,rare
+A1,046,Moltres,Charizard,rare
+A1,047,Moltres ex,Charizard,double_rare
+A1,048,Heatmor,Pikachu|Charizard|Mewtwo,common
+A1,049,Salandit,Mewtwo,common
+A1,050,Salazzle,Mewtwo,common
+A1,051,Sizzlipede,Pikachu|Charizard|Mewtwo,common
+A1,052,Centiskorch,Pikachu|Charizard|Mewtwo,uncommon
+A1,053,Squirtle,Pikachu,common
+A1,054,Wartortle,Pikachu,uncommon
+A1,055,Blastoise,Pikachu,rare
+A1,056,Blastoise ex,Pikachu,double_rare
+A1,057,Psyduck,Pikachu|Charizard|Mewtwo,common
+A1,058,Golduck,Pikachu|Charizard|Mewtwo,uncommon
+A1,059,Poliwag,Charizard,common
+A1,060,Poliwhirl,Charizard,uncommon
+A1,061,Poliwrath,Charizard,rare
+A1,062,Tentacool,Mewtwo,common
+A1,063,Tentacruel,Mewtwo,uncommon
+A1,064,Seel,Pikachu,common
+A1,065,Dewgong,Pikachu,uncommon
+A1,066,Shellder,Mewtwo,common
+A1,067,Cloyster,Mewtwo,uncommon
+A1,068,Krabby,Mewtwo,common
+A1,069,Kingler,Mewtwo,uncommon
+A1,070,Horsea,Pikachu,common
+A1,071,Seadra,Pikachu,uncommon
+A1,072,Goldeen,Pikachu,common
+A1,073,Seaking,Pikachu,common
+A1,074,Staryu,Charizard,common
+A1,075,Starmie,Charizard,uncommon
+A1,076,Starmie ex,Charizard,double_rare
+A1,077,Magikarp,Pikachu,common
+A1,078,Gyarados,Pikachu,rare
+A1,079,Lapras,Charizard,rare
+A1,080,Vaporeon,Mewtwo,rare
+A1,081,Omanyte,Pikachu,uncommon
+A1,082,Omastar,Pikachu,rare
+A1,083,Articuno,Mewtwo,rare
+A1,084,Articuno ex,Mewtwo,double_rare
+A1,085,Ducklett,Charizard,common
+A1,086,Swanna,Charizard,uncommon
+A1,087,Froakie,Charizard,common
+A1,088,Frogadier,Charizard,uncommon
+A1,089,Greninja,Charizard,rare
+A1,090,Pyukumuku,Charizard,common
+A1,091,Bruxish,Pikachu|Charizard|Mewtwo,uncommon
+A1,092,Snom,Pikachu|Charizard|Mewtwo,common
+A1,093,Frosmoth,Pikachu|Charizard|Mewtwo,uncommon
 A1,094,Pikachu,Pikachu,common
 A1,095,Raichu,Pikachu,rare
-A1,096,Pikachu-ex,Pikachu,double_rare
-A1,097,Magnetilo,Pikachu,common
+A1,096,Pikachu ex,Pikachu,double_rare
+A1,097,Magnemite,Pikachu,common
 A1,098,Magneton,Pikachu,rare
-A1,099,Voltobal,Pikachu,common
-A1,100,Lektrobal,Pikachu,uncommon
-A1,101,Elektek,Pikachu,common
-A1,102,Blitza,Pikachu,rare
+A1,099,Voltorb,Pikachu,common
+A1,100,Electrode,Pikachu,uncommon
+A1,101,Electabuzz,Pikachu,common
+A1,102,Jolteon,Pikachu,rare
 A1,103,Zapdos,Pikachu,rare
-A1,104,Zapdos-ex,Pikachu,double_rare
-A1,105,Elezeba,Pikachu|Glurak|Mewtu,common
-A1,106,Zebritz,Pikachu|Glurak|Mewtu,uncommon
-A1,107,Zapplardin,Mewtu,common
-A1,108,Zapplalek,Mewtu,uncommon
-A1,109,Zapplarang,Mewtu,rare
-A1,110,Eguana,Pikachu|Glurak|Mewtu,common
-A1,111,Elezard,Pikachu|Glurak|Mewtu,common
-A1,112,Britzigel,Pikachu|Glurak|Mewtu,uncommon
-A1,113,Piepi,Pikachu,common
-A1,114,Pixi,Pikachu,uncommon
-A1,115,Abra,Glurak,common
-A1,116,Kadabra,Glurak,uncommon
-A1,117,Simsala,Glurak,rare
-A1,118,Flegmon,Pikachu|Glurak|Mewtu,common
-A1,119,Lahmus,Pikachu|Glurak|Mewtu,uncommon
-A1,120,Nebulak,Mewtu,common
-A1,121,Alpollo,Mewtu,uncommon
-A1,122,Gengar,Mewtu,rare
-A1,123,Gengar-ex,Mewtu,double_rare
-A1,124,Traumato,Pikachu,common
+A1,104,Zapdos ex,Pikachu,double_rare
+A1,105,Blitzle,Pikachu|Charizard|Mewtwo,common
+A1,106,Zebstrika,Pikachu|Charizard|Mewtwo,uncommon
+A1,107,Tynamo,Mewtwo,common
+A1,108,Eelektrik,Mewtwo,uncommon
+A1,109,Eelektross,Mewtwo,rare
+A1,110,Helioptile,Pikachu|Charizard|Mewtwo,common
+A1,111,Heliolisk,Pikachu|Charizard|Mewtwo,common
+A1,112,Pincurchin,Pikachu|Charizard|Mewtwo,uncommon
+A1,113,Clefairy,Pikachu,common
+A1,114,Clefable,Pikachu,uncommon
+A1,115,Abra,Charizard,common
+A1,116,Kadabra,Charizard,uncommon
+A1,117,Alakazam,Charizard,rare
+A1,118,Slowpoke,Pikachu|Charizard|Mewtwo,common
+A1,119,Slowbro,Pikachu|Charizard|Mewtwo,uncommon
+A1,120,Gastly,Mewtwo,common
+A1,121,Haunter,Mewtwo,uncommon
+A1,122,Gengar,Mewtwo,rare
+A1,123,Gengar ex,Mewtwo,double_rare
+A1,124,Drowzee,Pikachu,common
 A1,125,Hypno,Pikachu,rare
-A1,126,Pantimos,Mewtu,uncommon
-A1,127,Rossana,Mewtu,common
-A1,128,Mewtu,Mewtu,rare
-A1,129,Mewtu-ex,Mewtu,double_rare
-A1,130,Trasla,Mewtu,common
-A1,131,Kirlia,Mewtu,uncommon
-A1,132,Gardevoir,Mewtu,rare
-A1,133,Fleknoil,Pikachu|Glurak|Mewtu,common
-A1,134,Fletiamo,Pikachu|Glurak|Mewtu,common
-A1,135,Golbit,Pikachu|Glurak|Mewtu,common
-A1,136,Golgantes,Pikachu|Glurak|Mewtu,uncommon
-A1,137,Sandan,Pikachu|Glurak|Mewtu,common
-A1,138,Sandamer,Pikachu|Glurak|Mewtu,uncommon
-A1,139,Digda,Pikachu,common
-A1,140,Digdri,Pikachu,uncommon
-A1,141,Menki,Glurak,common
-A1,142,Rasaff,Glurak,uncommon
-A1,143,Machollo,Glurak,common
-A1,144,Maschock,Glurak,uncommon
-A1,145,Machomei,Glurak,rare
-A1,146,Machomei-ex,Glurak,double_rare
-A1,147,Kleinstein,Pikachu,common
-A1,148,Georok,Pikachu,uncommon
-A1,149,Geowaz,Pikachu,rare
+A1,126,Mr. Mime,Mewtwo,uncommon
+A1,127,Jynx,Mewtwo,common
+A1,128,Mewtwo,Mewtwo,rare
+A1,129,Mewtwo ex,Mewtwo,double_rare
+A1,130,Ralts,Mewtwo,common
+A1,131,Kirlia,Mewtwo,uncommon
+A1,132,Gardevoir,Mewtwo,rare
+A1,133,Woobat,Pikachu|Charizard|Mewtwo,common
+A1,134,Swoobat,Pikachu|Charizard|Mewtwo,common
+A1,135,Golett,Pikachu|Charizard|Mewtwo,common
+A1,136,Golurk,Pikachu|Charizard|Mewtwo,uncommon
+A1,137,Sandshrew,Pikachu|Charizard|Mewtwo,common
+A1,138,Sandslash,Pikachu|Charizard|Mewtwo,uncommon
+A1,139,Diglett,Pikachu,common
+A1,140,Dugtrio,Pikachu,uncommon
+A1,141,Mankey,Charizard,common
+A1,142,Primeape,Charizard,uncommon
+A1,143,Machop,Charizard,common
+A1,144,Machoke,Charizard,uncommon
+A1,145,Machamp,Charizard,rare
+A1,146,Machamp ex,Charizard,double_rare
+A1,147,Geodude,Pikachu,common
+A1,148,Graveler,Pikachu,uncommon
+A1,149,Golem,Pikachu,rare
 A1,150,Onix,Pikachu,uncommon
-A1,151,Tragosso,Mewtu,common
-A1,152,Knogga,Mewtu,uncommon
-A1,153,Knogga-ex,Mewtu,double_rare
-A1,154,Kicklee,Mewtu,common
-A1,155,Nockchan,Glurak,common
-A1,156,Rihorn,Mewtu,common
-A1,157,Rizeros,Mewtu,uncommon
-A1,158,Kabuto,Glurak,uncommon
-A1,159,Kabutops,Glurak,rare
-A1,160,Lin-Fu,Pikachu,common
-A1,161,Wie-Shu,Pikachu,uncommon
-A1,162,Klopptopus,Pikachu|Glurak|Mewtu,common
-A1,163,Kaocto,Pikachu|Glurak|Mewtu,uncommon
-A1,164,Rettan,Pikachu|Glurak|Mewtu,common
-A1,165,Arbok,Pikachu|Glurak|Mewtu,uncommon
+A1,151,Cubone,Mewtwo,common
+A1,152,Marowak,Mewtwo,uncommon
+A1,153,Marowak ex,Mewtwo,double_rare
+A1,154,Hitmonlee,Mewtwo,common
+A1,155,Hitmonchan,Charizard,common
+A1,156,Rhyhorn,Mewtwo,common
+A1,157,Rhydon,Mewtwo,uncommon
+A1,158,Kabuto,Charizard,uncommon
+A1,159,Kabutops,Charizard,rare
+A1,160,Mienfoo,Pikachu,common
+A1,161,Mienshao,Pikachu,uncommon
+A1,162,Clobbopus,Pikachu|Charizard|Mewtwo,common
+A1,163,Grapploct,Pikachu|Charizard|Mewtwo,uncommon
+A1,164,Ekans,Pikachu|Charizard|Mewtwo,common
+A1,165,Arbok,Pikachu|Charizard|Mewtwo,uncommon
 A1,166,Nidoran♀,Pikachu,common
 A1,167,Nidorina,Pikachu,uncommon
 A1,168,Nidoqueen,Pikachu,rare
 A1,169,Nidoran♂,Pikachu,common
 A1,170,Nidorino,Pikachu,uncommon
 A1,171,Nidoking,Pikachu,rare
-A1,172,Zubat,Mewtu,common
-A1,173,Golbat,Mewtu,uncommon
-A1,174,Sleima,Mewtu,common
-A1,175,Sleimok,Mewtu,rare
-A1,176,Smogon,Mewtu,common
-A1,177,Smogmog,Mewtu,rare
-A1,178,Flunkifer,Glurak,common
-A1,179,Gladiantri,Pikachu|Glurak|Mewtu,common
-A1,180,Caesurio,Pikachu|Glurak|Mewtu,uncommon
-A1,181,Meltan,Glurak,common
-A1,182,Melmetal,Glurak,rare
-A1,183,Dratini,Mewtu,common
-A1,184,Dragonir,Mewtu,uncommon
-A1,185,Dragoran,Mewtu,rare
-A1,186,Taubsi,Mewtu,common
-A1,187,Tauboga,Mewtu,common
-A1,188,Tauboss,Mewtu,rare
-A1,189,Rattfratz,Pikachu|Glurak|Mewtu,common
-A1,190,Rattikarl,Pikachu|Glurak|Mewtu,common
-A1,191,Habitak,Glurak,common
-A1,192,Ibitak,Glurak,common
-A1,193,Pummeluff,Pikachu,common
-A1,194,Knuddeluff,Pikachu,common
-A1,195,Knuddeluff-ex,Pikachu,double_rare
-A1,196,Mauzi,Glurak,common
-A1,197,Snobilikat,Glurak,uncommon
-A1,198,Porenta,Pikachu|Glurak|Mewtu,common
-A1,199,Dodu,Pikachu|Glurak|Mewtu,common
-A1,200,Dodri,Pikachu|Glurak|Mewtu,uncommon
-A1,201,Schlurp,Mewtu,uncommon
-A1,202,Chaneira,Pikachu,uncommon
-A1,203,Kangama,Glurak,rare
-A1,204,Tauros,Glurak,uncommon
-A1,205,Ditto,Mewtu,rare
-A1,206,Evoli,Glurak,common
-A1,207,Evoli,Mewtu,common
-A1,208,Evoli,Pikachu,common
-A1,209,Porygon,Mewtu,uncommon
-A1,210,Aerodactyl,Mewtu,rare
-A1,211,Relaxo,Pikachu,rare
-A1,212,Picochilla,Pikachu|Glurak|Mewtu,common
-A1,213,Chillabell,Pikachu|Glurak|Mewtu,uncommon
-A1,214,Wolly,Pikachu|Glurak|Mewtu,common
-A1,215,Zwollock,Pikachu|Glurak|Mewtu,common
-A1,216,Helixfossil,Pikachu,common
-A1,217,Domfossil,Glurak,common
-A1,218,Altbernstein,Mewtu,common
-A1,219,Erika,Glurak,uncommon
+A1,172,Zubat,Mewtwo,common
+A1,173,Golbat,Mewtwo,uncommon
+A1,174,Grimer,Mewtwo,common
+A1,175,Muk,Mewtwo,rare
+A1,176,Koffing,Mewtwo,common
+A1,177,Weezing,Mewtwo,rare
+A1,178,Mawile,Charizard,common
+A1,179,Pawniard,Pikachu|Charizard|Mewtwo,common
+A1,180,Bisharp,Pikachu|Charizard|Mewtwo,uncommon
+A1,181,Meltan,Charizard,common
+A1,182,Melmetal,Charizard,rare
+A1,183,Dratini,Mewtwo,common
+A1,184,Dragonair,Mewtwo,uncommon
+A1,185,Dragonite,Mewtwo,rare
+A1,186,Pidgey,Mewtwo,common
+A1,187,Pidgeotto,Mewtwo,common
+A1,188,Pidgeot,Mewtwo,rare
+A1,189,Rattata,Pikachu|Charizard|Mewtwo,common
+A1,190,Raticate,Pikachu|Charizard|Mewtwo,common
+A1,191,Spearow,Charizard,common
+A1,192,Fearow,Charizard,common
+A1,193,Jigglypuff,Pikachu,common
+A1,194,Wigglytuff,Pikachu,common
+A1,195,Wigglytuff ex,Pikachu,double_rare
+A1,196,Meowth,Charizard,common
+A1,197,Persian,Charizard,uncommon
+A1,198,Farfetch'd,Pikachu|Charizard|Mewtwo,common
+A1,199,Doduo,Pikachu|Charizard|Mewtwo,common
+A1,200,Dodrio,Pikachu|Charizard|Mewtwo,uncommon
+A1,201,Lickitung,Mewtwo,uncommon
+A1,202,Chansey,Pikachu,uncommon
+A1,203,Kangaskhan,Charizard,rare
+A1,204,Tauros,Charizard,uncommon
+A1,205,Ditto,Mewtwo,rare
+A1,206,Eevee,Charizard,common
+A1,207,Eevee,Mewtwo,common
+A1,208,Eevee,Pikachu,common
+A1,209,Porygon,Mewtwo,uncommon
+A1,210,Aerodactyl,Mewtwo,rare
+A1,211,Snorlax,Pikachu,rare
+A1,212,Minccino,Pikachu|Charizard|Mewtwo,common
+A1,213,Cinccino,Pikachu|Charizard|Mewtwo,uncommon
+A1,214,Wooloo,Pikachu|Charizard|Mewtwo,common
+A1,215,Dubwool,Pikachu|Charizard|Mewtwo,common
+A1,216,Helix Fossil,Pikachu,common
+A1,217,Dome Fossil,Charizard,common
+A1,218,Old Amber,Mewtwo,common
+A1,219,Erika,Charizard,uncommon
 A1,220,Misty,Pikachu,uncommon
-A1,221,Pyro,Glurak,uncommon
-A1,222,Koga,Mewtu,uncommon
-A1,223,Giovanni,Mewtu,uncommon
-A1,224,Rocko,Pikachu,uncommon
-A1,225,Sabrina,Glurak,uncommon
-A1,226,Major Bob,Pikachu,uncommon
-A1,227,Bisasam,Mewtu,illustration_rare
-A1,228,Duflor,Glurak,illustration_rare
-A1,229,Pinsir,Glurak,illustration_rare
-A1,230,Glumanda,Glurak,illustration_rare
-A1,231,Gallopa,Glurak,illustration_rare
-A1,232,Schiggy,Pikachu,illustration_rare
-A1,233,Garados,Pikachu,illustration_rare
-A1,234,Lapras,Glurak,illustration_rare
-A1,235,Lektrobal,Pikachu,illustration_rare
-A1,236,Simsala,Glurak,illustration_rare
-A1,237,Flegmon,Glurak,illustration_rare
-A1,238,Digda,Pikachu,illustration_rare
-A1,239,Tragosso,Mewtu,illustration_rare
+A1,221,Blaine,Charizard,uncommon
+A1,222,Koga,Mewtwo,uncommon
+A1,223,Giovanni,Mewtwo,uncommon
+A1,224,Brock,Pikachu,uncommon
+A1,225,Sabrina,Charizard,uncommon
+A1,226,Lt. Surge,Pikachu,uncommon
+A1,227,Bulbasaur,Mewtwo,illustration_rare
+A1,228,Gloom,Charizard,illustration_rare
+A1,229,Pinsir,Charizard,illustration_rare
+A1,230,Charmander,Charizard,illustration_rare
+A1,231,Rapidash,Charizard,illustration_rare
+A1,232,Squirtle,Pikachu,illustration_rare
+A1,233,Gyarados,Pikachu,illustration_rare
+A1,234,Lapras,Charizard,illustration_rare
+A1,235,Electrode,Pikachu,illustration_rare
+A1,236,Alakazam,Charizard,illustration_rare
+A1,237,Slowpoke,Charizard,illustration_rare
+A1,238,Diglett,Pikachu,illustration_rare
+A1,239,Cubone,Mewtwo,illustration_rare
 A1,240,Nidoqueen,Pikachu,illustration_rare
 A1,241,Nidoking,Pikachu,illustration_rare
-A1,242,Golbat,Mewtu,illustration_rare
-A1,243,Smogmog,Mewtu,illustration_rare
-A1,244,Dragoran,Mewtu,illustration_rare
-A1,245,Tauboss,Mewtu,illustration_rare
-A1,246,Mauzi,Glurak,illustration_rare
-A1,247,Ditto,Mewtu,illustration_rare
-A1,248,Evoli,Pikachu,illustration_rare
-A1,249,Porygon,Mewtu,illustration_rare
-A1,250,Relaxo,Pikachu,illustration_rare
-A1,251,Bisaflor-ex,Mewtu,special_art
-A1,252,Kokowei-ex,Glurak,special_art
-A1,253,Glurak-ex,Glurak,special_art
-A1,254,Arkani-ex,Pikachu,special_art
-A1,255,Lavados-ex,Glurak,special_art
-A1,256,Turtok-ex,Pikachu,special_art
-A1,257,Starmie-ex,Glurak,special_art
-A1,258,Arktos-ex,Mewtu,special_art
-A1,259,Pikachu-ex,Pikachu,special_art
-A1,260,Zapdos-ex,Pikachu,special_art
-A1,261,Gengar-ex,Mewtu,special_art
-A1,262,Mewtu-ex,Mewtu,special_art
-A1,263,Machomei-ex,Glurak,special_art
-A1,264,Knogga-ex,Mewtu,special_art
-A1,265,Knuddeluff-ex,Pikachu,special_art
-A1,266,Erika,Glurak,special_art
+A1,242,Golbat,Mewtwo,illustration_rare
+A1,243,Weezing,Mewtwo,illustration_rare
+A1,244,Dragonite,Mewtwo,illustration_rare
+A1,245,Pidgeot,Mewtwo,illustration_rare
+A1,246,Meowth,Charizard,illustration_rare
+A1,247,Ditto,Mewtwo,illustration_rare
+A1,248,Eevee,Pikachu,illustration_rare
+A1,249,Porygon,Mewtwo,illustration_rare
+A1,250,Snorlax,Pikachu,illustration_rare
+A1,251,Venusaur ex,Mewtwo,special_art
+A1,252,Exeggutor ex,Charizard,special_art
+A1,253,Charizard ex,Charizard,special_art
+A1,254,Arcanine ex,Pikachu,special_art
+A1,255,Moltres ex,Charizard,special_art
+A1,256,Blastoise ex,Pikachu,special_art
+A1,257,Starmie ex,Charizard,special_art
+A1,258,Articuno ex,Mewtwo,special_art
+A1,259,Pikachu ex,Pikachu,special_art
+A1,260,Zapdos ex,Pikachu,special_art
+A1,261,Gengar ex,Mewtwo,special_art
+A1,262,Mewtwo ex,Mewtwo,special_art
+A1,263,Machamp ex,Charizard,special_art
+A1,264,Marowak ex,Mewtwo,special_art
+A1,265,Wigglytuff ex,Pikachu,special_art
+A1,266,Erika,Charizard,special_art
 A1,267,Misty,Pikachu,special_art
-A1,268,Pyro,Glurak,special_art
-A1,269,Koga,Mewtu,special_art
-A1,270,Giovanni,Mewtu,special_art
-A1,271,Rocko,Pikachu,special_art
-A1,272,Sabrina,Glurak,special_art
-A1,273,Major Bob,Pikachu,special_art
-A1,274,Lavados-ex,Glurak,special_art
-A1,275,Arktos-ex,Mewtu,special_art
-A1,276,Zapdos-ex,Pikachu,special_art
-A1,277,Gengar-ex,Mewtu,special_art
-A1,278,Machomei-ex,Glurak,special_art
-A1,279,Knuddeluff-ex,Pikachu,special_art
-A1,280,Glurak-ex,Glurak,immersive_rare
-A1,281,Pikachu-ex,Pikachu,immersive_rare
-A1,282,Mewtu-ex,Mewtu,immersive_rare
-A1,284,Glurak-ex,Pikachu|Glurak|Mewtu,crown_rare
-A1,285,Pikachu-ex,Pikachu|Glurak|Mewtu,crown_rare
-A1,286,Mewtu-ex,Pikachu|Glurak|Mewtu,crown_rare
-A1a,001,Owei,Mew,common
-A1a,002,Kokowei,Mew,uncommon
-A1a,003,Celebi-ex,Mew,double_rare
-A1a,004,Serpifeu,Mew,common
-A1a,005,Efoserp,Mew,uncommon
-A1a,006,Serpiroyal,Mew,rare
-A1a,007,Bubungus,Mew,common
-A1a,008,Lamellux,Mew,uncommon
-A1a,009,Moruda,Mew,uncommon
-A1a,010,Ponita,Mew,common
-A1a,011,Gallopa,Mew,uncommon
+A1,268,Blaine,Charizard,special_art
+A1,269,Koga,Mewtwo,special_art
+A1,270,Giovanni,Mewtwo,special_art
+A1,271,Brock,Pikachu,special_art
+A1,272,Sabrina,Charizard,special_art
+A1,273,Lt. Surge,Pikachu,special_art
+A1,274,Moltres ex,Charizard,special_art
+A1,275,Articuno ex,Mewtwo,special_art
+A1,276,Zapdos ex,Pikachu,special_art
+A1,277,Gengar ex,Mewtwo,special_art
+A1,278,Machamp ex,Charizard,special_art
+A1,279,Wigglytuff ex,Pikachu,special_art
+A1,280,Charizard ex,Charizard,immersive_rare
+A1,281,Pikachu ex,Pikachu,immersive_rare
+A1,282,Mewtwo ex,Mewtwo,immersive_rare
+A1,283,Mew,Pikachu|Charizard|Mewtwo,immersive_rare
+A1,284,Charizard ex,Pikachu|Charizard|Mewtwo,crown_rare
+A1,285,Pikachu ex,Pikachu|Charizard|Mewtwo,crown_rare
+A1,286,Mewtwo ex,Pikachu|Charizard|Mewtwo,crown_rare
+A1a,001,Exeggcute,Mew,common
+A1a,002,Exeggutor,Mew,uncommon
+A1a,003,Celebi ex,Mew,double_rare
+A1a,004,Snivy,Mew,common
+A1a,005,Servine,Mew,uncommon
+A1a,006,Serperior,Mew,rare
+A1a,007,Morelull,Mew,common
+A1a,008,Shiinotic,Mew,uncommon
+A1a,009,Dhelmise,Mew,uncommon
+A1a,010,Ponyta,Mew,common
+A1a,011,Rapidash,Mew,uncommon
 A1a,012,Magmar,Mew,uncommon
-A1a,013,Ignivor,Mew,common
-A1a,014,Ramoth,Mew,rare
-A1a,015,Molunk,Mew,common
-A1a,016,Amfira,Mew,common
-A1a,017,Karpador,Mew,common
-A1a,018,Garados-ex,Mew,double_rare
-A1a,019,Aquana,Mew,rare
+A1a,013,Larvesta,Mew,common
+A1a,014,Volcarona,Mew,rare
+A1a,015,Salandit,Mew,common
+A1a,016,Salazzle,Mew,common
+A1a,017,Magikarp,Mew,common
+A1a,018,Gyarados ex,Mew,double_rare
+A1a,019,Vaporeon,Mew,rare
 A1a,020,Finneon,Mew,common
 A1a,021,Lumineon,Mew,uncommon
-A1a,022,Kamehaps,Mew,common
-A1a,023,Kamalm,Mew,uncommon
-A1a,024,Urgl,Mew,common
+A1a,022,Chewtle,Mew,common
+A1a,023,Drednaw,Mew,uncommon
+A1a,024,Cramorant,Mew,common
 A1a,025,Pikachu,Mew,common
 A1a,026,Raichu,Mew,rare
-A1a,027,Elektek,Mew,uncommon
-A1a,028,Wattzapf,Mew,common
-A1a,029,Voltula,Mew,uncommon
+A1a,027,Electabuzz,Mew,uncommon
+A1a,028,Joltik,Mew,common
+A1a,029,Galvantula,Mew,uncommon
 A1a,030,Dedenne,Mew,common
 A1a,031,Mew,Mew,rare
-A1a,032,Mew-ex,Mew,double_rare
-A1a,033,Symvolara,Mew,uncommon
-A1a,034,Pygraulon,Mew,common
-A1a,035,Megalon,Mew,uncommon
+A1a,032,Mew ex,Mew,double_rare
+A1a,033,Sigilyph,Mew,uncommon
+A1a,034,Elgyem,Mew,common
+A1a,035,Beheeyem,Mew,uncommon
 A1a,036,Flabébé,Mew,common
 A1a,037,Floette,Mew,common
 A1a,038,Florges,Mew,uncommon
-A1a,039,Flauschling,Mew,common
-A1a,040,Sabbaione,Mew,common
-A1a,041,Menki,Mew,common
-A1a,042,Rasaff,Mew,common
-A1a,043,Kleinstein,Mew,common
-A1a,044,Georok,Mew,uncommon
-A1a,045,Geowaz,Mew,rare
-A1a,046,Aerodactyl-ex,Mew,double_rare
+A1a,039,Swirlix,Mew,common
+A1a,040,Slurpuff,Mew,common
+A1a,041,Mankey,Mew,common
+A1a,042,Primeape,Mew,common
+A1a,043,Geodude,Mew,common
+A1a,044,Graveler,Mew,uncommon
+A1a,045,Golem,Mew,rare
+A1a,046,Aerodactyl ex,Mew,double_rare
 A1a,047,Marshadow,Mew,rare
-A1a,048,Humanolith,Mew,uncommon
-A1a,049,Smogon,Mew,common
-A1a,050,Smogmog,Mew,uncommon
-A1a,051,Felilou,Mew,common
-A1a,052,Kleoparda,Mew,common
-A1a,053,Toxipede,Mew,common
-A1a,054,Rollum,Mew,common
-A1a,055,Cerapendra,Mew,uncommon
-A1a,056,Shardrago,Mew,uncommon
-A1a,057,Taubsi,Mew,common
-A1a,058,Tauboga,Mew,common
-A1a,059,Tauboss-ex,Mew,double_rare
+A1a,048,Stonjourner,Mew,uncommon
+A1a,049,Koffing,Mew,common
+A1a,050,Weezing,Mew,uncommon
+A1a,051,Purrloin,Mew,common
+A1a,052,Liepard,Mew,common
+A1a,053,Venipede,Mew,common
+A1a,054,Whirlipede,Mew,common
+A1a,055,Scolipede,Mew,uncommon
+A1a,056,Druddigon,Mew,uncommon
+A1a,057,Pidgey,Mew,common
+A1a,058,Pidgeotto,Mew,common
+A1a,059,Pidgeot ex,Mew,double_rare
 A1a,060,Tauros,Mew,rare
-A1a,061,Evoli,Mew,common
-A1a,062,Plaudagei,Mew,common
-A1a,063,Altbernstein,Mew,common
-A1a,064,Pokémon-Flöte,Mew,uncommon
-A1a,065,Mythische Tafel,Mew,uncommon
-A1a,066,Abenteuer-Neuling,Mew,uncommon
-A1a,067,Blau,Mew,uncommon
+A1a,061,Eevee,Mew,common
+A1a,062,Chatot,Mew,common
+A1a,063,Old Amber,Mew,common
+A1a,064,Pokémon Flute,Mew,uncommon
+A1a,065,Mythical Slab,Mew,uncommon
+A1a,066,Budding Expeditioner,Mew,uncommon
+A1a,067,Blue,Mew,uncommon
 A1a,068,Leaf,Mew,uncommon
-A1a,069,Kokowei,Mew,illustration_rare
-A1a,070,Serpiroyal,Mew,illustration_rare
-A1a,071,Molunk,Mew,illustration_rare
-A1a,072,Aquana,Mew,illustration_rare
+A1a,069,Exeggutor,Mew,illustration_rare
+A1a,070,Serperior,Mew,illustration_rare
+A1a,071,Salandit,Mew,illustration_rare
+A1a,072,Vaporeon,Mew,illustration_rare
 A1a,073,Dedenne,Mew,illustration_rare
 A1a,074,Marshadow,Mew,illustration_rare
-A1a,075,Celebi-ex,Mew,special_art
-A1a,076,Garados-ex,Mew,special_art
-A1a,077,Mew-ex,Mew,special_art
-A1a,078,Aerodactyl-ex,Mew,special_art
-A1a,079,Tauboss-ex,Mew,special_art
-A1a,080,Abenteuer-Neuling,Mew,special_art
-A1a,081,Blau,Mew,special_art
+A1a,075,Celebi ex,Mew,special_art
+A1a,076,Gyarados ex,Mew,special_art
+A1a,077,Mew ex,Mew,special_art
+A1a,078,Aerodactyl ex,Mew,special_art
+A1a,079,Pidgeot ex,Mew,special_art
+A1a,080,Budding Expeditioner,Mew,special_art
+A1a,081,Blue,Mew,special_art
 A1a,082,Leaf,Mew,special_art
-A1a,083,Mew-ex,Mew,special_art
-A1a,084,Aerodactyl-ex,Mew,special_art
-A1a,085,Celebi-ex,Mew,immersive_rare
-A1a,086,Mew-ex,Mew,crown_rare
-A2,001,Myrapla,Dialga|Palkia,common
-A2,002,Duflor,Dialga|Palkia,common
-A2,003,Blubella,Dialga|Palkia,uncommon
+A1a,083,Mew ex,Mew,special_art
+A1a,084,Aerodactyl ex,Mew,special_art
+A1a,085,Celebi ex,Mew,immersive_rare
+A1a,086,Mew ex,Mew,crown_rare
+A2,001,Oddish,Dialga|Palkia,common
+A2,002,Gloom,Dialga|Palkia,common
+A2,003,Bellossom,Dialga|Palkia,uncommon
 A2,004,Tangela,Dialga,common
-A2,005,Tangoloss,Dialga,uncommon
+A2,005,Tangrowth,Dialga,uncommon
 A2,006,Yanma,Dialga,common
-A2,007,Yanmega-ex,Dialga,double_rare
+A2,007,Yanmega ex,Dialga,double_rare
 A2,008,Roselia,Dialga|Palkia,common
 A2,009,Roserade,Dialga|Palkia,uncommon
-A2,010,Chelast,Palkia,common
-A2,011,Chelcarain,Palkia,uncommon
-A2,012,Chelterrar,Palkia,rare
-A2,013,Zirpurze,Palkia,common
-A2,014,Zirpeise,Palkia,common
+A2,010,Turtwig,Palkia,common
+A2,011,Grotle,Palkia,uncommon
+A2,012,Torterra,Palkia,rare
+A2,013,Kricketot,Palkia,common
+A2,014,Kricketune,Palkia,common
 A2,015,Burmy,Dialga|Palkia,common
-A2,016,Burmadame,Dialga|Palkia,common
-A2,017,Wadribie,Dialga,common
-A2,018,Honweisel,Dialga,uncommon
-A2,019,Venuflibis,Palkia,uncommon
-A2,020,Folipurba,Dialga,rare
-A2,021,Schneid-Rotom,Dialga|Palkia,common
+A2,016,Wormadam,Dialga|Palkia,common
+A2,017,Combee,Dialga,common
+A2,018,Vespiquen,Dialga,uncommon
+A2,019,Carnivine,Palkia,uncommon
+A2,020,Leafeon,Dialga,rare
+A2,021,Mow Rotom,Dialga|Palkia,common
 A2,022,Shaymin,Dialga,rare
 A2,023,Magmar,Palkia,common
-A2,024,Magbrant,Palkia,rare
-A2,025,Schneckmag,Dialga|Palkia,common
+A2,024,Magmortar,Palkia,rare
+A2,025,Slugma,Dialga|Palkia,common
 A2,026,Magcargo,Dialga|Palkia,uncommon
-A2,027,Panflam,Palkia,common
-A2,028,Panpyro,Palkia,uncommon
-A2,029,Panferno-ex,Palkia,double_rare
-A2,030,Hitze-Rotom,Dialga|Palkia,common
-A2,031,Quiekel,Dialga,common
-A2,032,Keifel,Dialga,uncommon
-A2,033,Mamutel,Dialga,rare
+A2,027,Chimchar,Palkia,common
+A2,028,Monferno,Palkia,uncommon
+A2,029,Infernape ex,Palkia,double_rare
+A2,030,Heat Rotom,Dialga|Palkia,common
+A2,031,Swinub,Dialga,common
+A2,032,Piloswine,Dialga,uncommon
+A2,033,Mamoswine,Dialga,rare
 A2,034,Regice,Palkia,uncommon
-A2,035,Plinfa,Palkia,common
-A2,036,Pliprin,Palkia,uncommon
-A2,037,Impoleon,Palkia,rare
-A2,038,Bamelin,Dialga|Palkia,common
-A2,039,Bojelin,Dialga|Palkia,uncommon
-A2,040,Schalellos,Palkia,common
+A2,035,Piplup,Palkia,common
+A2,036,Prinplup,Palkia,uncommon
+A2,037,Empoleon,Palkia,rare
+A2,038,Buizel,Dialga|Palkia,common
+A2,039,Floatzel,Dialga|Palkia,uncommon
+A2,040,Shellos,Palkia,common
 A2,041,Gastrodon,Palkia,uncommon
 A2,042,Finneon,Dialga|Palkia,common
 A2,043,Lumineon,Dialga|Palkia,uncommon
-A2,044,Shnebedeck,Dialga|Palkia,common
-A2,045,Rexblisar,Dialga|Palkia,uncommon
-A2,046,Glaziola,Palkia,rare
-A2,047,Wasch-Rotom,Dialga|Palkia,common
-A2,048,Frost-Rotom,Dialga|Palkia,common
-A2,049,Palkia-ex,Palkia,double_rare
+A2,044,Snover,Dialga|Palkia,common
+A2,045,Abomasnow,Dialga|Palkia,uncommon
+A2,046,Glaceon,Palkia,rare
+A2,047,Wash Rotom,Dialga|Palkia,common
+A2,048,Frost Rotom,Dialga|Palkia,common
+A2,049,Palkia ex,Palkia,double_rare
 A2,050,Manaphy,Palkia,uncommon
-A2,051,Magnetilo,Dialga|Palkia,common
+A2,051,Magnemite,Dialga|Palkia,common
 A2,052,Magneton,Dialga|Palkia,uncommon
 A2,053,Magnezone,Dialga|Palkia,rare
-A2,054,Voltobal,Dialga|Palkia,common
-A2,055,Lektrobal,Dialga|Palkia,uncommon
-A2,056,Elektek,Dialga,common
-A2,057,Elevoltek,Dialga,rare
-A2,058,Sheinux,Dialga,common
+A2,054,Voltorb,Dialga|Palkia,common
+A2,055,Electrode,Dialga|Palkia,uncommon
+A2,056,Electabuzz,Dialga,common
+A2,057,Electivire,Dialga,rare
+A2,058,Shinx,Dialga,common
 A2,059,Luxio,Dialga,uncommon
-A2,060,Luxtra,Dialga,rare
-A2,061,Pachirisu-ex,Dialga,double_rare
+A2,060,Luxray,Dialga,rare
+A2,061,Pachirisu ex,Dialga,double_rare
 A2,062,Rotom,Palkia,common
 A2,063,Togepi,Dialga|Palkia,common
 A2,064,Togetic,Dialga|Palkia,uncommon
 A2,065,Togekiss,Dialga|Palkia,rare
-A2,066,Traunfugil,Palkia,common
-A2,067,Traunmagil-ex,Palkia,double_rare
-A2,068,Trasla,Dialga,common
+A2,066,Misdreavus,Palkia,common
+A2,067,Mismagius ex,Palkia,double_rare
+A2,068,Ralts,Dialga,common
 A2,069,Kirlia,Dialga,common
-A2,070,Zwirrlicht,Dialga,common
-A2,071,Zwirrklop,Dialga,uncommon
-A2,072,Zwirrfinst,Dialga,rare
-A2,073,Driftlon,Dialga,common
-A2,074,Drifzepeli,Dialga,uncommon
-A2,075,Selfe,Dialga|Palkia,uncommon
-A2,076,Vesprit,Dialga|Palkia,rare
-A2,077,Tobutz,Dialga|Palkia,uncommon
+A2,070,Duskull,Dialga,common
+A2,071,Dusclops,Dialga,uncommon
+A2,072,Dusknoir,Dialga,rare
+A2,073,Drifloon,Dialga,common
+A2,074,Drifblim,Dialga,uncommon
+A2,075,Uxie,Dialga|Palkia,uncommon
+A2,076,Mesprit,Dialga|Palkia,rare
+A2,077,Azelf,Dialga|Palkia,uncommon
 A2,078,Giratina,Palkia,rare
 A2,079,Cresselia,Palkia,rare
-A2,080,Rihorn,Palkia,common
-A2,081,Rizeros,Palkia,uncommon
-A2,082,Rihornior,Palkia,rare
-A2,083,Skorgla,Dialga,common
-A2,084,Skorgro,Dialga,uncommon
-A2,085,Kapoera,Dialga,common
-A2,086,Nasgnet,Dialga|Palkia,common
+A2,080,Rhyhorn,Palkia,common
+A2,081,Rhydon,Palkia,uncommon
+A2,082,Rhyperior,Palkia,rare
+A2,083,Gligar,Dialga,common
+A2,084,Gliscor,Dialga,uncommon
+A2,085,Hitmontop,Dialga,common
+A2,086,Nosepass,Dialga|Palkia,common
 A2,087,Regirock,Dialga|Palkia,uncommon
-A2,088,Koknodon,Dialga,uncommon
-A2,089,Rameidon,Dialga,rare
-A2,090,Burmadame,Dialga,common
+A2,088,Cranidos,Dialga,uncommon
+A2,089,Rampardos,Dialga,rare
+A2,090,Wormadam,Dialga,common
 A2,091,Riolu,Dialga,common
 A2,092,Lucario,Dialga,rare
 A2,093,Hippopotas,Palkia,common
-A2,094,Hippoterus,Palkia,uncommon
-A2,095,Galagladi-ex,Dialga,double_rare
-A2,096,Kramurx,Dialga,common
-A2,097,Kramshef,Dialga,uncommon
-A2,098,Sniebel,Palkia,common
-A2,099,Snibunna-ex,Palkia,double_rare
-A2,100,Fiffyen,Dialga|Palkia,common
-A2,101,Magnayen,Dialga|Palkia,uncommon
-A2,102,Skunkapuh,Dialga,common
+A2,094,Hippowdon,Palkia,uncommon
+A2,095,Gallade ex,Dialga,double_rare
+A2,096,Murkrow,Dialga,common
+A2,097,Honchkrow,Dialga,uncommon
+A2,098,Sneasel,Palkia,common
+A2,099,Weavile ex,Palkia,double_rare
+A2,100,Poochyena,Dialga|Palkia,common
+A2,101,Mightyena,Dialga|Palkia,uncommon
+A2,102,Stunky,Dialga,common
 A2,103,Skuntank,Dialga,uncommon
-A2,104,Kryppuk,Palkia,uncommon
-A2,105,Pionskora,Dialga|Palkia,common
-A2,106,Piondragi,Dialga|Palkia,uncommon
-A2,107,Glibunkel,Dialga,common
-A2,108,Toxiquak,Dialga,uncommon
+A2,104,Spiritomb,Palkia,uncommon
+A2,105,Skorupi,Dialga|Palkia,common
+A2,106,Drapion,Dialga|Palkia,uncommon
+A2,107,Croagunk,Dialga,common
+A2,108,Toxicroak,Dialga,uncommon
 A2,109,Darkrai,Dialga,rare
-A2,110,Darkrai-ex,Dialga,double_rare
-A2,111,Panzaeron,Dialga|Palkia,uncommon
+A2,110,Darkrai ex,Dialga,double_rare
+A2,111,Skarmory,Dialga|Palkia,uncommon
 A2,112,Registeel,Dialga,uncommon
-A2,113,Schilterus,Palkia,uncommon
-A2,114,Bollterus,Palkia,rare
-A2,115,Burmadame,Palkia,common
-A2,116,Bronzel,Dialga,common
+A2,113,Shieldon,Palkia,uncommon
+A2,114,Bastiodon,Palkia,rare
+A2,115,Wormadam,Palkia,common
+A2,116,Bronzor,Dialga,common
 A2,117,Bronzong,Dialga,uncommon
-A2,118,Voluminas,Dialga|Palkia,uncommon
-A2,119,Dialga-ex,Dialga,double_rare
+A2,118,Probopass,Dialga|Palkia,uncommon
+A2,119,Dialga ex,Dialga,double_rare
 A2,120,Heatran,Dialga,rare
-A2,121,Kaumalat,Palkia,common
-A2,122,Knarksel,Palkia,uncommon
-A2,123,Knakrack,Palkia,rare
-A2,124,Schlurp,Palkia,common
-A2,125,Schlurplek-ex,Palkia,double_rare
-A2,126,Evoli,Dialga|Palkia,common
+A2,121,Gible,Palkia,common
+A2,122,Gabite,Palkia,uncommon
+A2,123,Garchomp,Palkia,rare
+A2,124,Lickitung,Palkia,common
+A2,125,Lickilicky ex,Palkia,double_rare
+A2,126,Eevee,Dialga|Palkia,common
 A2,127,Porygon,Palkia,common
 A2,128,Porygon2,Palkia,uncommon
 A2,129,Porygon-Z,Palkia,rare
-A2,130,Griffel,Dialga|Palkia,common
-A2,131,Ambidiffe,Dialga|Palkia,common
-A2,132,Staralili,Palkia,common
+A2,130,Aipom,Dialga|Palkia,common
+A2,131,Ambipom,Dialga|Palkia,common
+A2,132,Starly,Palkia,common
 A2,133,Staravia,Palkia,common
 A2,134,Staraptor,Palkia,uncommon
-A2,135,Bidiza,Dialga,common
-A2,136,Bidifas,Dialga,common
-A2,137,Haspiror,Dialga,common
-A2,138,Schlapor,Dialga,common
-A2,139,Charmian,Palkia,common
-A2,140,Shnurgarst,Palkia,uncommon
-A2,141,Plaudagei,Palkia,common
-A2,142,Wirbel-Rotom,Dialga|Palkia,common
+A2,135,Bidoof,Dialga,common
+A2,136,Bibarel,Dialga,common
+A2,137,Buneary,Dialga,common
+A2,138,Lopunny,Dialga,common
+A2,139,Glameow,Palkia,common
+A2,140,Purugly,Palkia,uncommon
+A2,141,Chatot,Palkia,common
+A2,142,Fan Rotom,Dialga|Palkia,common
 A2,143,Regigigas,Dialga|Palkia,rare
-A2,144,Kopffossil,Dialga,common
-A2,145,Panzerfossil,Palkia,common
-A2,146,Pokémon-Kommunikation,Dialga,uncommon
-A2,147,Riesige Robe,Dialga,uncommon
-A2,148,Beulenhelm,Palkia,uncommon
-A2,149,Prunusbeere,Palkia,uncommon
-A2,150,Zyrus,Palkia,uncommon
-A2,151,Rüpel von Team Galaktik,Dialga,uncommon
+A2,144,Skull Fossil,Dialga,common
+A2,145,Armor Fossil,Palkia,common
+A2,146,Pokémon Communication,Dialga,uncommon
+A2,147,Giant Cape,Dialga,uncommon
+A2,148,Rocky Helmet,Palkia,uncommon
+A2,149,Lum Berry,Palkia,uncommon
+A2,150,Cyrus,Palkia,uncommon
+A2,151,Team Galactic Grunt,Dialga,uncommon
 A2,152,Cynthia,Palkia,uncommon
 A2,153,Volkner,Dialga,uncommon
-A2,154,Lucia,Dialga,uncommon
+A2,154,Dawn,Dialga,uncommon
 A2,155,Mars,Palkia,uncommon
-A2,156,Tangoloss,Dialga,illustration_rare
-A2,157,Wadribie,Dialga,illustration_rare
-A2,158,Venuflibis,Palkia,illustration_rare
+A2,156,Tangrowth,Dialga,illustration_rare
+A2,157,Combee,Dialga,illustration_rare
+A2,158,Carnivine,Palkia,illustration_rare
 A2,159,Shaymin,Dialga,illustration_rare
-A2,160,Mamutel,Dialga,illustration_rare
+A2,160,Mamoswine,Dialga,illustration_rare
 A2,161,Gastrodon,Palkia,illustration_rare
 A2,162,Manaphy,Palkia,illustration_rare
-A2,163,Sheinux,Dialga,illustration_rare
+A2,163,Shinx,Dialga,illustration_rare
 A2,164,Rotom,Palkia,illustration_rare
-A2,165,Driftlon,Dialga,illustration_rare
-A2,166,Vesprit,Dialga,illustration_rare
+A2,165,Drifloon,Dialga,illustration_rare
+A2,166,Mesprit,Dialga,illustration_rare
 A2,167,Giratina,Palkia,illustration_rare
 A2,168,Cresselia,Palkia,illustration_rare
-A2,169,Rihornior,Palkia,illustration_rare
+A2,169,Rhyperior,Palkia,illustration_rare
 A2,170,Lucario,Dialga,illustration_rare
 A2,171,Hippopotas,Palkia,illustration_rare
-A2,172,Kryppuk,Palkia,illustration_rare
-A2,173,Glibunkel,Dialga,illustration_rare
+A2,172,Spiritomb,Palkia,illustration_rare
+A2,173,Croagunk,Dialga,illustration_rare
 A2,174,Heatran,Dialga,illustration_rare
-A2,175,Knakrack,Palkia,illustration_rare
+A2,175,Garchomp,Palkia,illustration_rare
 A2,176,Staraptor,Palkia,illustration_rare
-A2,177,Bidiza,Dialga,illustration_rare
-A2,178,Charmian,Palkia,illustration_rare
+A2,177,Bidoof,Dialga,illustration_rare
+A2,178,Glameow,Palkia,illustration_rare
 A2,179,Regigigas,Dialga,illustration_rare
-A2,180,Yanmega-ex,Dialga,special_art
-A2,181,Panferno-ex,Palkia,special_art
-A2,182,Palkia-ex,Palkia,special_art
-A2,183,Pachirisu-ex,Dialga,special_art
-A2,184,Traunmagil-ex,Palkia,special_art
-A2,185,Galagladi-ex,Dialga,special_art
-A2,186,Snibunna-ex,Palkia,special_art
-A2,187,Darkrai-ex,Dialga,special_art
-A2,188,Dialga-ex,Dialga,special_art
-A2,189,Schlurplek-ex,Palkia,special_art
-A2,190,Zyrus,Palkia,special_art
-A2,191,Rüpel von Team Galaktik,Dialga,special_art
+A2,180,Yanmega ex,Dialga,special_art
+A2,181,Infernape ex,Palkia,special_art
+A2,182,Palkia ex,Palkia,special_art
+A2,183,Pachirisu ex,Dialga,special_art
+A2,184,Mismagius ex,Palkia,special_art
+A2,185,Gallade ex,Dialga,special_art
+A2,186,Weavile ex,Palkia,special_art
+A2,187,Darkrai ex,Dialga,special_art
+A2,188,Dialga ex,Dialga,special_art
+A2,189,Lickilicky ex,Palkia,special_art
+A2,190,Cyrus,Palkia,special_art
+A2,191,Team Galactic Grunt,Dialga,special_art
 A2,192,Cynthia,Palkia,special_art
 A2,193,Volkner,Dialga,special_art
-A2,194,Lucia,Dialga,special_art
+A2,194,Dawn,Dialga,special_art
 A2,195,Mars,Palkia,special_art
-A2,196,Yanmega-ex,Dialga,special_art
-A2,197,Panferno-ex,Palkia,special_art
-A2,198,Pachirisu-ex,Dialga,special_art
-A2,199,Traunmagil-ex,Palkia,special_art
-A2,200,Galagladi-ex,Dialga,special_art
-A2,201,Snibunna-ex,Palkia,special_art
-A2,202,Darkrai-ex,Dialga,special_art
-A2,203,Schlurplek-ex,Palkia,special_art
-A2,204,Palkia-ex,Palkia,immersive_rare
-A2,205,Dialga-ex,Dialga,immersive_rare
-A2,206,Palkia-ex,Dialga|Palkia,crown_rare
-A2,207,Dialga-ex,Dialga|Palkia,crown_rare
-A2a,001,Skaraborn,Arceus,uncommon
+A2,196,Yanmega ex,Dialga,special_art
+A2,197,Infernape ex,Palkia,special_art
+A2,198,Pachirisu ex,Dialga,special_art
+A2,199,Mismagius ex,Palkia,special_art
+A2,200,Gallade ex,Dialga,special_art
+A2,201,Weavile ex,Palkia,special_art
+A2,202,Darkrai ex,Dialga,special_art
+A2,203,Lickilicky ex,Palkia,special_art
+A2,204,Palkia ex,Palkia,immersive_rare
+A2,205,Dialga ex,Dialga,immersive_rare
+A2,206,Palkia ex,Dialga|Palkia,crown_rare
+A2,207,Dialga ex,Dialga|Palkia,crown_rare
+A2a,001,Heracross,Arceus,uncommon
 A2a,002,Burmy,Arceus,common
-A2a,003,Moterpel,Arceus,uncommon
-A2a,004,Wadribie,Arceus,common
-A2a,005,Honweisel,Arceus,uncommon
-A2a,006,Kikugi,Arceus,common
-A2a,007,Kinoso,Arceus,uncommon
-A2a,008,Kinoso,Arceus,uncommon
-A2a,009,Venuflibis,Arceus,rare
-A2a,010,Folipurba-ex,Arceus,double_rare
-A2a,011,Hunduster,Arceus,common
-A2a,012,Hundemon,Arceus,uncommon
+A2a,003,Mothim,Arceus,uncommon
+A2a,004,Combee,Arceus,common
+A2a,005,Vespiquen,Arceus,uncommon
+A2a,006,Cherubi,Arceus,common
+A2a,007,Cherrim,Arceus,uncommon
+A2a,008,Cherrim,Arceus,uncommon
+A2a,009,Carnivine,Arceus,rare
+A2a,010,Leafeon ex,Arceus,double_rare
+A2a,011,Houndour,Arceus,common
+A2a,012,Houndoom,Arceus,uncommon
 A2a,013,Heatran,Arceus,rare
 A2a,014,Marill,Arceus,common
 A2a,015,Azumarill,Arceus,common
-A2a,016,Schmerbe,Arceus,common
-A2a,017,Welsar,Arceus,uncommon
-A2a,018,Schneppke,Arceus,common
-A2a,019,Frosdedje,Arceus,uncommon
-A2a,020,Shnebedeck,Arceus,common
-A2a,021,Rexblisar,Arceus,rare
-A2a,022,Glaziola-ex,Arceus,double_rare
-A2a,023,Ur-Palkia,Arceus,rare
+A2a,016,Barboach,Arceus,common
+A2a,017,Whiscash,Arceus,uncommon
+A2a,018,Snorunt,Arceus,common
+A2a,019,Froslass,Arceus,uncommon
+A2a,020,Snover,Arceus,common
+A2a,021,Abomasnow,Arceus,rare
+A2a,022,Glaceon ex,Arceus,double_rare
+A2a,023,Origin Forme Palkia,Arceus,rare
 A2a,024,Phione,Arceus,uncommon
 A2a,025,Pikachu,Arceus,common
 A2a,026,Raichu,Arceus,rare
-A2a,027,Frizelbliz,Arceus,common
-A2a,028,Voltenso,Arceus,uncommon
-A2a,029,Piepi,Arceus,common
-A2a,030,Pixi,Arceus,uncommon
-A2a,031,Nebulak,Arceus,common
-A2a,032,Alpollo,Arceus,common
+A2a,027,Electrike,Arceus,common
+A2a,028,Manectric,Arceus,uncommon
+A2a,029,Clefairy,Arceus,common
+A2a,030,Clefable,Arceus,uncommon
+A2a,031,Gastly,Arceus,common
+A2a,032,Haunter,Arceus,common
 A2a,033,Gengar,Arceus,uncommon
-A2a,034,Icognito,Arceus,uncommon
+A2a,034,Unown,Arceus,uncommon
 A2a,035,Rotom,Arceus,rare
-A2a,036,Mogelbaum,Arceus,uncommon
+A2a,036,Sudowoodo,Arceus,uncommon
 A2a,037,Phanpy,Arceus,common
 A2a,038,Donphan,Arceus,uncommon
 A2a,039,Larvitar,Arceus,common
 A2a,040,Pupitar,Arceus,uncommon
-A2a,041,Despotar,Arceus,rare
-A2a,042,Nasgnet,Arceus,common
-A2a,043,Meditie,Arceus,common
-A2a,044,Meditalis,Arceus,uncommon
-A2a,045,Kaumalat,Arceus,common
-A2a,046,Knarksel,Arceus,common
-A2a,047,Knakrack-ex,Arceus,double_rare
+A2a,041,Tyranitar,Arceus,rare
+A2a,042,Nosepass,Arceus,common
+A2a,043,Meditite,Arceus,common
+A2a,044,Medicham,Arceus,uncommon
+A2a,045,Gible,Arceus,common
+A2a,046,Gabite,Arceus,common
+A2a,047,Garchomp ex,Arceus,double_rare
 A2a,048,Zubat,Arceus,common
 A2a,049,Golbat,Arceus,common
-A2a,050,Iksbat,Arceus,rare
-A2a,051,Glibunkel,Arceus,common
-A2a,052,Toxiquak,Arceus,uncommon
-A2a,053,Magnetilo,Arceus,common
+A2a,050,Crobat,Arceus,rare
+A2a,051,Croagunk,Arceus,common
+A2a,052,Toxicroak,Arceus,uncommon
+A2a,053,Magnemite,Arceus,common
 A2a,054,Magneton,Arceus,common
 A2a,055,Magnezone,Arceus,rare
-A2a,056,Flunkifer,Arceus,common
-A2a,057,Voluminas-ex,Arceus,double_rare
-A2a,058,Bronzel,Arceus,common
+A2a,056,Mawile,Arceus,common
+A2a,057,Probopass ex,Arceus,double_rare
+A2a,058,Bronzor,Arceus,common
 A2a,059,Bronzong,Arceus,uncommon
-A2a,060,Ur-Dialga,Arceus,rare
+A2a,060,Origin Forme Dialga,Arceus,rare
 A2a,061,Giratina,Arceus,rare
-A2a,062,Evoli,Arceus,common
-A2a,063,Relaxo,Arceus,uncommon
+A2a,062,Eevee,Arceus,common
+A2a,063,Snorlax,Arceus,uncommon
 A2a,064,Hoothoot,Arceus,common
-A2a,065,Noctuh,Arceus,uncommon
-A2a,066,Staralili,Arceus,common
+A2a,065,Noctowl,Arceus,uncommon
+A2a,066,Starly,Arceus,common
 A2a,067,Staravia,Arceus,common
 A2a,068,Staraptor,Arceus,uncommon
 A2a,069,Shaymin,Arceus,rare
 A2a,070,Arceus,Arceus,rare
-A2a,071,Arceus-ex,Arceus,double_rare
-A2a,072,Perla,Arceus,uncommon
-A2a,073,Älteste von Elyses,Arceus,uncommon
+A2a,071,Arceus ex,Arceus,double_rare
+A2a,072,Irida,Arceus,uncommon
+A2a,073,Celestic Town Elder,Arceus,uncommon
 A2a,074,Barry,Arceus,uncommon
-A2a,075,Diam,Arceus,uncommon
-A2a,076,Hundemon,Arceus,illustration_rare
+A2a,075,Adaman,Arceus,uncommon
+A2a,076,Houndoom,Arceus,illustration_rare
 A2a,077,Marill,Arceus,illustration_rare
-A2a,078,Icognito,Arceus,illustration_rare
-A2a,079,Mogelbaum,Arceus,illustration_rare
-A2a,080,Magnetilo,Arceus,illustration_rare
+A2a,078,Unown,Arceus,illustration_rare
+A2a,079,Sudowoodo,Arceus,illustration_rare
+A2a,080,Magnemite,Arceus,illustration_rare
 A2a,081,Shaymin,Arceus,illustration_rare
-A2a,082,Folipurba-ex,Arceus,special_art
-A2a,083,Glaziola-ex,Arceus,special_art
-A2a,084,Knakrack-ex,Arceus,special_art
-A2a,085,Voluminas-ex,Arceus,special_art
-A2a,086,Arceus-ex,Arceus,special_art
-A2a,087,Perla,Arceus,special_art
-A2a,088,Älteste von Elyses,Arceus,special_art
+A2a,082,Leafeon ex,Arceus,special_art
+A2a,083,Glaceon ex,Arceus,special_art
+A2a,084,Garchomp ex,Arceus,special_art
+A2a,085,Probopass ex,Arceus,special_art
+A2a,086,Arceus ex,Arceus,special_art
+A2a,087,Irida,Arceus,special_art
+A2a,088,Celestic Town Elder,Arceus,special_art
 A2a,089,Barry,Arceus,special_art
-A2a,090,Diam,Arceus,special_art
-A2a,091,Folipurba-ex,Arceus,special_art
-A2a,092,Glaziola-ex,Arceus,special_art
-A2a,093,Knakrack-ex,Arceus,special_art
-A2a,094,Voluminas-ex,Arceus,special_art
-A2a,095,Arceus-ex,Arceus,immersive_rare
-A2a,096,Arceus-ex,Arceus,crown_rare
-A2b,001,Hornliu,Glänzendes Festival,common
-A2b,002,Kokuna,Glänzendes Festival,uncommon
-A2b,003,Bibor-ex,Glänzendes Festival,double_rare
-A2b,004,Pinsir,Glänzendes Festival,common
-A2b,005,Felori,Glänzendes Festival,common
-A2b,006,Feliospa,Glänzendes Festival,uncommon
-A2b,007,Maskagato,Glänzendes Festival,rare
-A2b,008,Glumanda,Glänzendes Festival,common
-A2b,009,Glutexo,Glänzendes Festival,uncommon
-A2b,010,Glurak-ex,Glänzendes Festival,double_rare
-A2b,011,Magmar,Glänzendes Festival,common
-A2b,012,Magbrant,Glänzendes Festival,rare
-A2b,013,Paldea-Tauros,Glänzendes Festival,uncommon
-A2b,014,Tentacha,Glänzendes Festival,common
-A2b,015,Tentoxa,Glänzendes Festival,uncommon
-A2b,016,Bamelin,Glänzendes Festival,common
-A2b,017,Bojelin,Glänzendes Festival,uncommon
-A2b,018,Schligda,Glänzendes Festival,common
-A2b,019,Schligdri-ex,Glänzendes Festival,double_rare
-A2b,020,Heereshai,Glänzendes Festival,rare
-A2b,021,Nigiragi,Glänzendes Festival,uncommon
-A2b,022,Pikachu-ex,Glänzendes Festival,double_rare
-A2b,023,Voltobal,Glänzendes Festival,common
-A2b,024,Lektrobal,Glänzendes Festival,uncommon
-A2b,025,Pachirisu,Glänzendes Festival,uncommon
-A2b,026,Pamo,Glänzendes Festival,common
-A2b,027,Pamamo,Glänzendes Festival,uncommon
-A2b,028,Pamomamo,Glänzendes Festival,rare
-A2b,029,Abra,Glänzendes Festival,common
-A2b,030,Kadabra,Glänzendes Festival,uncommon
-A2b,031,Simsala,Glänzendes Festival,rare
-A2b,032,Pantimos,Glänzendes Festival,common
-A2b,033,Driftlon,Glänzendes Festival,common
-A2b,034,Drifzepeli,Glänzendes Festival,uncommon
-A2b,035,Giratina-ex,Glänzendes Festival,double_rare
-A2b,036,Gierspenst,Glänzendes Festival,common
-A2b,037,Machollo,Glänzendes Festival,common
-A2b,038,Maschock,Glänzendes Festival,common
-A2b,039,Machomei,Glänzendes Festival,rare
-A2b,040,Kicklee,Glänzendes Festival,common
-A2b,041,Nockchan,Glänzendes Festival,common
-A2b,042,Riolu,Glänzendes Festival,common
-A2b,043,Lucario-ex,Glänzendes Festival,double_rare
-A2b,044,Flaminkno,Glänzendes Festival,uncommon
-A2b,045,Rettan,Glänzendes Festival,common
-A2b,046,Arbok,Glänzendes Festival,uncommon
-A2b,047,Paldea-Felino,Glänzendes Festival,common
-A2b,048,Paldea-Suelord-ex,Glänzendes Festival,double_rare
-A2b,049,Kryppuk,Glänzendes Festival,uncommon
-A2b,050,Sproxi,Glänzendes Festival,common
-A2b,051,Affiti,Glänzendes Festival,rare
-A2b,052,Forgita,Glänzendes Festival,common
-A2b,053,Tafforgita,Glänzendes Festival,uncommon
-A2b,054,Granforgita-ex,Glänzendes Festival,double_rare
-A2b,055,Knattox,Glänzendes Festival,common
-A2b,056,Knattatox,Glänzendes Festival,uncommon
-A2b,057,Monetigo,Glänzendes Festival,rare
-A2b,058,Rattfratz,Glänzendes Festival,common
-A2b,059,Rattikarl,Glänzendes Festival,common
-A2b,060,Pummeluff,Glänzendes Festival,common
-A2b,061,Knuddeluff,Glänzendes Festival,rare
-A2b,062,Schlurp,Glänzendes Festival,common
-A2b,063,Schlurplek,Glänzendes Festival,common
-A2b,064,Bidiza,Glänzendes Festival,common
-A2b,065,Bidifas-ex,Glänzendes Festival,double_rare
-A2b,066,Haspiror,Glänzendes Festival,common
-A2b,067,Schlapor,Glänzendes Festival,common
-A2b,068,Mopex,Glänzendes Festival,uncommon
-A2b,069,Enigmara,Glänzendes Festival,uncommon
-A2b,070,Pokémon-Center-Dame,Glänzendes Festival,uncommon
-A2b,071,Rot,Glänzendes Festival,uncommon
-A2b,072,Rüpel von Team Rocket,Glänzendes Festival,uncommon
-A2b,073,Maskagato,Glänzendes Festival,illustration_rare
-A2b,074,Bamelin,Glänzendes Festival,illustration_rare
-A2b,075,Nigiragi,Glänzendes Festival,illustration_rare
-A2b,076,Affiti,Glänzendes Festival,illustration_rare
-A2b,077,Monetigo,Glänzendes Festival,illustration_rare
-A2b,078,Knuddeluff,Glänzendes Festival,illustration_rare
-A2b,079,Bibor-ex,Glänzendes Festival,special_art
-A2b,080,Glurak-ex,Glänzendes Festival,special_art
-A2b,081,Schligdri-ex,Glänzendes Festival,special_art
-A2b,082,Pikachu-ex,Glänzendes Festival,special_art
-A2b,083,Giratina-ex,Glänzendes Festival,special_art
-A2b,084,Lucario-ex,Glänzendes Festival,special_art
-A2b,085,Paldea-Suelord-ex,Glänzendes Festival,special_art
-A2b,086,Granforgita-ex,Glänzendes Festival,special_art
-A2b,087,Bidifas-ex,Glänzendes Festival,special_art
-A2b,088,Enigmara,Glänzendes Festival,special_art
-A2b,089,Pokémon-Center-Dame,Glänzendes Festival,special_art
-A2b,090,Rot,Glänzendes Festival,special_art
-A2b,091,Rüpel von Team Rocket,Glänzendes Festival,special_art
-A2b,092,Pikachu-ex,Glänzendes Festival,special_art
-A2b,093,Paldea-Suelord-ex,Glänzendes Festival,special_art
-A2b,094,Granforgita-ex,Glänzendes Festival,special_art
-A2b,095,Bidifas-ex,Glänzendes Festival,special_art
-A2b,096,Giratina-ex,Glänzendes Festival,immersive_rare
-A2b,097,Hornliu,Glänzendes Festival,shiny_rare
-A2b,098,Kokuna,Glänzendes Festival,shiny_rare
-A2b,099,Glumanda,Glänzendes Festival,shiny_rare
-A2b,100,Glutexo,Glänzendes Festival,shiny_rare
-A2b,101,Schligda,Glänzendes Festival,shiny_rare
-A2b,102,Heereshai,Glänzendes Festival,shiny_rare
-A2b,103,Pachirisu,Glänzendes Festival,shiny_rare
-A2b,104,Riolu,Glänzendes Festival,shiny_rare
-A2b,105,Knattox,Glänzendes Festival,shiny_rare
-A2b,106,Knattatox,Glänzendes Festival,shiny_rare
-A2b,107,Bibor-ex,Glänzendes Festival,double_shiny_rare
-A2b,108,Glurak-ex,Glänzendes Festival,double_shiny_rare
-A2b,109,Schligdri-ex,Glänzendes Festival,double_shiny_rare
-A2b,110,Lucario-ex,Glänzendes Festival,double_shiny_rare
-A2b,111,Pokéball,Glänzendes Festival,crown_rare
-A3,001,Owei,Lunala,common
-A3,002,Alola-Kokowei,Lunala,rare
-A3,003,Gehweiher,Lunala|Solgaleo,common
-A3,004,Maskeregen,Lunala|Solgaleo,uncommon
-A3,005,Maracamba,Lunala,common
-A3,006,Laukaps,Lunala|Solgaleo,common
-A3,007,Paragoni,Solgaleo,common
-A3,008,Trombork,Solgaleo,uncommon
-A3,009,Bauz,Solgaleo,common
-A3,010,Bauz,Lunala,common
-A3,011,Arboretoss,Lunala,uncommon
-A3,012,Silvarro-ex,Lunala,double_rare
-A3,013,Mabula,Lunala,common
-A3,014,Imantis,Lunala|Solgaleo,common
-A3,015,Mantidae,Lunala|Solgaleo,uncommon
-A3,016,Bubungus,Lunala,common
-A3,017,Lamellux,Lunala,uncommon
-A3,018,Frubberl,Solgaleo,common
-A3,019,Frubaila,Solgaleo,uncommon
-A3,020,Fruyal,Solgaleo,rare
-A3,021,Reißlaus,Solgaleo,common
-A3,022,Tectass,Solgaleo,rare
-A3,023,Moruda-ex,Solgaleo,double_rare
-A3,024,Kapu-Toro,Solgaleo,rare
-A3,025,Fukano,Lunala|Solgaleo,common
-A3,026,Arkani,Lunala|Solgaleo,uncommon
-A3,027,Alola-Knogga,Lunala,uncommon
-A3,028,Dartignis,Solgaleo,common
-A3,029,Fiaro,Solgaleo,rare
-A3,030,Flamiau,Solgaleo,common
-A3,031,Flamiau,Lunala,common
-A3,032,Miezunder,Solgaleo,uncommon
-A3,033,Fuegro-ex,Solgaleo,double_rare
-A3,034,Choreogel,Lunala,uncommon
-A3,035,Molunk,Lunala|Solgaleo,common
-A3,036,Amfira,Lunala|Solgaleo,common
-A3,037,Tortunator,Lunala,rare
-A3,038,Alola-Sandan,Lunala|Solgaleo,common
-A3,039,Alola-Sandamer,Lunala|Solgaleo,uncommon
-A3,040,Alola-Vulpix,Lunala,common
-A3,041,Alola-Vulnona,Lunala,rare
-A3,042,Muschas,Solgaleo,common
-A3,043,Austos,Solgaleo,uncommon
+A2a,090,Adaman,Arceus,special_art
+A2a,091,Leafeon ex,Arceus,special_art
+A2a,092,Glaceon ex,Arceus,special_art
+A2a,093,Garchomp ex,Arceus,special_art
+A2a,094,Probopass ex,Arceus,special_art
+A2a,095,Arceus ex,Arceus,immersive_rare
+A2a,096,Arceus ex,Arceus,crown_rare
+A2b,001,Weedle,Shining Revelry,common
+A2b,002,Kakuna,Shining Revelry,uncommon
+A2b,003,Beedrill ex,Shining Revelry,double_rare
+A2b,004,Pinsir,Shining Revelry,common
+A2b,005,Sprigatito,Shining Revelry,common
+A2b,006,Floragato,Shining Revelry,uncommon
+A2b,007,Meowscarada,Shining Revelry,rare
+A2b,008,Charmander,Shining Revelry,common
+A2b,009,Charmeleon,Shining Revelry,uncommon
+A2b,010,Charizard ex,Shining Revelry,double_rare
+A2b,011,Magmar,Shining Revelry,common
+A2b,012,Magmortar,Shining Revelry,rare
+A2b,013,Paldean Tauros,Shining Revelry,uncommon
+A2b,014,Tentacool,Shining Revelry,common
+A2b,015,Tentacruel,Shining Revelry,uncommon
+A2b,016,Buizel,Shining Revelry,common
+A2b,017,Floatzel,Shining Revelry,uncommon
+A2b,018,Wiglett,Shining Revelry,common
+A2b,019,Wugtrio ex,Shining Revelry,double_rare
+A2b,020,Dondozo,Shining Revelry,rare
+A2b,021,Tatsugiri,Shining Revelry,uncommon
+A2b,022,Pikachu ex,Shining Revelry,double_rare
+A2b,023,Voltorb,Shining Revelry,common
+A2b,024,Electrode,Shining Revelry,uncommon
+A2b,025,Pachirisu,Shining Revelry,uncommon
+A2b,026,Pawmi,Shining Revelry,common
+A2b,027,Pawmo,Shining Revelry,uncommon
+A2b,028,Pawmot,Shining Revelry,rare
+A2b,029,Abra,Shining Revelry,common
+A2b,030,Kadabra,Shining Revelry,uncommon
+A2b,031,Alakazam,Shining Revelry,rare
+A2b,032,Mr. Mime,Shining Revelry,common
+A2b,033,Drifloon,Shining Revelry,common
+A2b,034,Drifblim,Shining Revelry,uncommon
+A2b,035,Giratina ex,Shining Revelry,double_rare
+A2b,036,Gimmighoul,Shining Revelry,common
+A2b,037,Machop,Shining Revelry,common
+A2b,038,Machoke,Shining Revelry,common
+A2b,039,Machamp,Shining Revelry,rare
+A2b,040,Hitmonlee,Shining Revelry,common
+A2b,041,Hitmonchan,Shining Revelry,common
+A2b,042,Riolu,Shining Revelry,common
+A2b,043,Lucario ex,Shining Revelry,double_rare
+A2b,044,Flamigo,Shining Revelry,uncommon
+A2b,045,Ekans,Shining Revelry,common
+A2b,046,Arbok,Shining Revelry,uncommon
+A2b,047,Paldean Wooper,Shining Revelry,common
+A2b,048,Paldean Clodsire ex,Shining Revelry,double_rare
+A2b,049,Spiritomb,Shining Revelry,uncommon
+A2b,050,Shroodle,Shining Revelry,common
+A2b,051,Grafaiai,Shining Revelry,rare
+A2b,052,Tinkatink,Shining Revelry,common
+A2b,053,Tinkatuff,Shining Revelry,uncommon
+A2b,054,Tinkaton ex,Shining Revelry,double_rare
+A2b,055,Varoom,Shining Revelry,common
+A2b,056,Revavroom,Shining Revelry,uncommon
+A2b,057,Gholdengo,Shining Revelry,rare
+A2b,058,Rattata,Shining Revelry,common
+A2b,059,Raticate,Shining Revelry,common
+A2b,060,Jigglypuff,Shining Revelry,common
+A2b,061,Wigglytuff,Shining Revelry,rare
+A2b,062,Lickitung,Shining Revelry,common
+A2b,063,Lickilicky,Shining Revelry,common
+A2b,064,Bidoof,Shining Revelry,common
+A2b,065,Bibarel ex,Shining Revelry,double_rare
+A2b,066,Buneary,Shining Revelry,common
+A2b,067,Lopunny,Shining Revelry,common
+A2b,068,Cyclizar,Shining Revelry,uncommon
+A2b,069,Iono,Shining Revelry,uncommon
+A2b,070,Pokémon Center Lady,Shining Revelry,uncommon
+A2b,071,Red,Shining Revelry,uncommon
+A2b,072,Team Rocket Grunt,Shining Revelry,uncommon
+A2b,073,Meowscarada,Shining Revelry,illustration_rare
+A2b,074,Buizel,Shining Revelry,illustration_rare
+A2b,075,Tatsugiri,Shining Revelry,illustration_rare
+A2b,076,Grafaiai,Shining Revelry,illustration_rare
+A2b,077,Gholdengo,Shining Revelry,illustration_rare
+A2b,078,Wigglytuff,Shining Revelry,illustration_rare
+A2b,079,Beedrill ex,Shining Revelry,special_art
+A2b,080,Charizard ex,Shining Revelry,special_art
+A2b,081,Wugtrio ex,Shining Revelry,special_art
+A2b,082,Pikachu ex,Shining Revelry,special_art
+A2b,083,Giratina ex,Shining Revelry,special_art
+A2b,084,Lucario ex,Shining Revelry,special_art
+A2b,085,Paldean Clodsire ex,Shining Revelry,special_art
+A2b,086,Tinkaton ex,Shining Revelry,special_art
+A2b,087,Bibarel ex,Shining Revelry,special_art
+A2b,088,Iono,Shining Revelry,special_art
+A2b,089,Pokémon Center Lady,Shining Revelry,special_art
+A2b,090,Red,Shining Revelry,special_art
+A2b,091,Team Rocket Grunt,Shining Revelry,special_art
+A2b,092,Pikachu ex,Shining Revelry,special_art
+A2b,093,Paldean Clodsire ex,Shining Revelry,special_art
+A2b,094,Tinkaton ex,Shining Revelry,special_art
+A2b,095,Bibarel ex,Shining Revelry,special_art
+A2b,096,Giratina ex,Shining Revelry,immersive_rare
+A2b,097,Weedle,Shining Revelry,shiny_rare
+A2b,098,Kakuna,Shining Revelry,shiny_rare
+A2b,099,Charmander,Shining Revelry,shiny_rare
+A2b,100,Charmeleon,Shining Revelry,shiny_rare
+A2b,101,Wiglett,Shining Revelry,shiny_rare
+A2b,102,Dondozo,Shining Revelry,shiny_rare
+A2b,103,Pachirisu,Shining Revelry,shiny_rare
+A2b,104,Riolu,Shining Revelry,shiny_rare
+A2b,105,Varoom,Shining Revelry,shiny_rare
+A2b,106,Revavroom,Shining Revelry,shiny_rare
+A2b,107,Beedrill ex,Shining Revelry,double_shiny_rare
+A2b,108,Charizard ex,Shining Revelry,double_shiny_rare
+A2b,109,Wugtrio ex,Shining Revelry,double_shiny_rare
+A2b,110,Lucario ex,Shining Revelry,double_shiny_rare
+A2b,111,Poké Ball,Shining Revelry,crown_rare
+A3,001,Exeggcute,Lunala,common
+A3,002,Alolan Exeggutor,Lunala,rare
+A3,003,Surskit,Lunala|Solgaleo,common
+A3,004,Masquerain,Lunala|Solgaleo,uncommon
+A3,005,Maractus,Lunala,common
+A3,006,Karrablast,Lunala|Solgaleo,common
+A3,007,Phantump,Solgaleo,common
+A3,008,Trevenant,Solgaleo,uncommon
+A3,009,Rowlet,Solgaleo,common
+A3,010,Rowlet,Lunala,common
+A3,011,Dartrix,Lunala,uncommon
+A3,012,Decidueye ex,Lunala,double_rare
+A3,013,Grubbin,Lunala,common
+A3,014,Fomantis,Lunala|Solgaleo,common
+A3,015,Lurantis,Lunala|Solgaleo,uncommon
+A3,016,Morelull,Lunala,common
+A3,017,Shiinotic,Lunala,uncommon
+A3,018,Bounsweet,Solgaleo,common
+A3,019,Steenee,Solgaleo,uncommon
+A3,020,Tsareena,Solgaleo,rare
+A3,021,Wimpod,Solgaleo,common
+A3,022,Golisopod,Solgaleo,rare
+A3,023,Dhelmise ex,Solgaleo,double_rare
+A3,024,Tapu Bulu,Solgaleo,rare
+A3,025,Growlithe,Lunala|Solgaleo,common
+A3,026,Arcanine,Lunala|Solgaleo,uncommon
+A3,027,Alolan Marowak,Lunala,uncommon
+A3,028,Fletchinder,Solgaleo,common
+A3,029,Talonflame,Solgaleo,rare
+A3,030,Litten,Solgaleo,common
+A3,031,Litten,Lunala,common
+A3,032,Torracat,Solgaleo,uncommon
+A3,033,Incineroar ex,Solgaleo,double_rare
+A3,034,Oricorio,Lunala,uncommon
+A3,035,Salandit,Lunala|Solgaleo,common
+A3,036,Salazzle,Lunala|Solgaleo,common
+A3,037,Turtonator,Lunala,rare
+A3,038,Alolan Sandshrew,Lunala|Solgaleo,common
+A3,039,Alolan Sandslash,Lunala|Solgaleo,uncommon
+A3,040,Alolan Vulpix,Lunala,common
+A3,041,Alolan Ninetales,Lunala,rare
+A3,042,Shellder,Solgaleo,common
+A3,043,Cloyster,Solgaleo,uncommon
 A3,044,Lapras,Lunala|Solgaleo,uncommon
-A3,045,Robball,Lunala,common
-A3,046,Robball,Solgaleo,common
-A3,047,Marikeck,Lunala,uncommon
-A3,048,Primarene,Lunala,rare
-A3,049,Krawell-ex,Solgaleo,double_rare
-A3,050,Lusardin,Lunala,common
-A3,051,Lusardin-ex,Lunala,double_rare
-A3,052,Araqua,Solgaleo,common
-A3,053,Arcanestro,Solgaleo,uncommon
-A3,054,Gufa,Lunala,common
-A3,055,Knirfish,Lunala|Solgaleo,common
-A3,056,Kapu-Kime,Lunala,rare
+A3,045,Popplio,Lunala,common
+A3,046,Popplio,Solgaleo,common
+A3,047,Brionne,Lunala,uncommon
+A3,048,Primarina,Lunala,rare
+A3,049,Crabominable ex,Solgaleo,double_rare
+A3,050,Wishiwashi,Lunala,common
+A3,051,Wishiwashi ex,Lunala,double_rare
+A3,052,Dewpider,Solgaleo,common
+A3,053,Araquanid,Solgaleo,uncommon
+A3,054,Pyukumuku,Lunala,common
+A3,055,Bruxish,Lunala|Solgaleo,common
+A3,056,Tapu Fini,Lunala,rare
 A3,057,Pikachu,Solgaleo,common
-A3,058,Alola-Raichu-ex,Solgaleo,double_rare
-A3,059,Alola-Kleinstein,Solgaleo,common
-A3,060,Alola-Georok,Solgaleo,uncommon
-A3,061,Alola-Geowaz,Solgaleo,rare
-A3,062,Eguana,Lunala|Solgaleo,common
-A3,063,Elezard,Lunala|Solgaleo,common
-A3,064,Akkup,Lunala,uncommon
-A3,065,Donarion,Lunala,rare
-A3,066,Choreogel,Solgaleo,rare
+A3,058,Alolan Raichu ex,Solgaleo,double_rare
+A3,059,Alolan Geodude,Solgaleo,common
+A3,060,Alolan Graveler,Solgaleo,uncommon
+A3,061,Alolan Golem,Solgaleo,rare
+A3,062,Helioptile,Lunala|Solgaleo,common
+A3,063,Heliolisk,Lunala|Solgaleo,common
+A3,064,Charjabug,Lunala,uncommon
+A3,065,Vikavolt,Lunala,rare
+A3,066,Oricorio,Solgaleo,rare
 A3,067,Togedemaru,Lunala,common
-A3,068,Kapu-Riki,Solgaleo,rare
-A3,069,Pantimos,Solgaleo,uncommon
-A3,070,Zobiris,Lunala|Solgaleo,uncommon
+A3,068,Tapu Koko,Solgaleo,rare
+A3,069,Mr. Mime,Solgaleo,uncommon
+A3,070,Sableye,Lunala|Solgaleo,uncommon
 A3,071,Spoink,Lunala|Solgaleo,common
-A3,072,Groink,Lunala|Solgaleo,uncommon
-A3,073,Lunastein,Lunala,common
+A3,072,Grumpig,Lunala|Solgaleo,uncommon
+A3,073,Lunatone,Lunala,common
 A3,074,Shuppet,Lunala|Solgaleo,common
 A3,075,Banette,Lunala|Solgaleo,common
-A3,076,Choreogel,Solgaleo,uncommon
-A3,077,Choreogel,Lunala,uncommon
-A3,078,Wommel,Solgaleo,common
-A3,079,Bandelby,Solgaleo,common
-A3,080,Curelei,Solgaleo,rare
-A3,081,Sankabuh,Solgaleo,common
-A3,082,Colossand,Solgaleo,rare
-A3,083,Mimigma,Lunala,common
-A3,084,Kapu-Fala,Lunala,rare
+A3,076,Oricorio,Solgaleo,uncommon
+A3,077,Oricorio,Lunala,uncommon
+A3,078,Cutiefly,Solgaleo,common
+A3,079,Ribombee,Solgaleo,common
+A3,080,Comfey,Solgaleo,rare
+A3,081,Sandygast,Solgaleo,common
+A3,082,Palossand,Solgaleo,rare
+A3,083,Mimikyu,Lunala,common
+A3,084,Tapu Lele,Lunala,rare
 A3,085,Cosmog,Lunala|Solgaleo,common
-A3,086,Cosmovum,Lunala|Solgaleo,uncommon
-A3,087,Lunala-ex,Lunala,double_rare
+A3,086,Cosmoem,Lunala|Solgaleo,uncommon
+A3,087,Lunala ex,Lunala,double_rare
 A3,088,Necrozma,Lunala,rare
-A3,089,Tragosso,Lunala,common
+A3,089,Cubone,Lunala,common
 A3,090,Makuhita,Lunala|Solgaleo,common
 A3,091,Hariyama,Lunala|Solgaleo,uncommon
-A3,092,Sonnfel,Solgaleo,common
-A3,093,Rotomurf,Lunala|Solgaleo,common
-A3,094,Praktibalk,Lunala,common
-A3,095,Strepoli,Lunala,uncommon
-A3,096,Meistagrif,Lunala,rare
-A3,097,Krabbox,Solgaleo,common
-A3,098,Wuffels,Lunala,common
-A3,099,Wuffels,Solgaleo,common
-A3,100,Wolwerock,Solgaleo,rare
-A3,101,Wolwerock,Lunala,rare
-A3,102,Pampuli,Solgaleo,common
-A3,103,Pampross,Solgaleo,uncommon
-A3,104,Quartermak-ex,Lunala,double_rare
-A3,105,Meteno,Lunala,uncommon
-A3,106,Alola-Rattfratz,Lunala,common
-A3,107,Alola-Rattikarl,Lunala,uncommon
-A3,108,Alola-Mauzi,Solgaleo,common
-A3,109,Alola-Snobilikat,Solgaleo,rare
-A3,110,Alola-Sleima,Lunala,common
-A3,111,Alola-Sleimok-ex,Lunala,double_rare
+A3,092,Solrock,Solgaleo,common
+A3,093,Drilbur,Lunala|Solgaleo,common
+A3,094,Timburr,Lunala,common
+A3,095,Gurdurr,Lunala,uncommon
+A3,096,Conkeldurr,Lunala,rare
+A3,097,Crabrawler,Solgaleo,common
+A3,098,Rockruff,Lunala,common
+A3,099,Rockruff,Solgaleo,common
+A3,100,Lycanroc,Solgaleo,rare
+A3,101,Lycanroc,Lunala,rare
+A3,102,Mudbray,Solgaleo,common
+A3,103,Mudsdale,Solgaleo,uncommon
+A3,104,Passimian ex,Lunala,double_rare
+A3,105,Minior,Lunala,uncommon
+A3,106,Alolan Rattata,Lunala,common
+A3,107,Alolan Raticate,Lunala,uncommon
+A3,108,Alolan Meowth,Solgaleo,common
+A3,109,Alolan Persian,Solgaleo,rare
+A3,110,Alolan Grimer,Lunala,common
+A3,111,Alolan Muk ex,Lunala,double_rare
 A3,112,Absol,Lunala,rare
-A3,113,Unratütox,Lunala|Solgaleo,common
-A3,114,Deponitox,Lunala|Solgaleo,uncommon
-A3,115,Garstella,Lunala,common
-A3,116,Aggrostella,Lunala,common
-A3,117,Alola-Digda,Lunala|Solgaleo,common
-A3,118,Alola-Digdri,Lunala|Solgaleo,common
-A3,119,Stalobor,Lunala|Solgaleo,uncommon
-A3,120,Cavalanzas,Lunala|Solgaleo,uncommon
-A3,121,Clavion,Solgaleo,rare
-A3,122,Solgaleo-ex,Solgaleo,double_rare
+A3,113,Trubbish,Lunala|Solgaleo,common
+A3,114,Garbodor,Lunala|Solgaleo,uncommon
+A3,115,Mareanie,Lunala,common
+A3,116,Toxapex,Lunala,common
+A3,117,Alolan Diglett,Lunala|Solgaleo,common
+A3,118,Alolan Dugtrio,Lunala|Solgaleo,common
+A3,119,Excadrill,Lunala|Solgaleo,uncommon
+A3,120,Escavalier,Lunala|Solgaleo,uncommon
+A3,121,Klefki,Solgaleo,rare
+A3,122,Solgaleo ex,Solgaleo,double_rare
 A3,123,Magearna,Solgaleo,rare
-A3,124,Sen-Long,Solgaleo,rare
-A3,125,Miniras,Lunala,common
-A3,126,Mediras,Lunala,uncommon
-A3,127,Grandiras,Lunala,rare
+A3,124,Drampa,Solgaleo,rare
+A3,125,Jangmo-o,Lunala,common
+A3,126,Hakamo-o,Lunala,uncommon
+A3,127,Kommo-o,Lunala,rare
 A3,128,Tauros,Lunala|Solgaleo,uncommon
-A3,129,Eneco,Lunala|Solgaleo,common
-A3,130,Enekoro,Lunala|Solgaleo,uncommon
-A3,131,Dartiri,Solgaleo,common
-A3,132,Resladero,Solgaleo,uncommon
-A3,133,Peppeck,Lunala|Solgaleo,common
-A3,134,Trompeck,Lunala|Solgaleo,common
-A3,135,Tukanon,Lunala|Solgaleo,uncommon
-A3,136,Mangunior,Solgaleo,common
-A3,137,Manguspektor,Solgaleo,common
-A3,138,Velursi,Lunala,common
-A3,139,Kosturso,Lunala,rare
-A3,140,Kommandutan,Lunala,rare
-A3,141,Koalelu,Solgaleo,uncommon
-A3,142,Maxi-Malasada,Lunala|Solgaleo,uncommon
-A3,143,Fischernetz,Lunala,uncommon
-A3,144,Sonderbonbon,Lunala|Solgaleo,uncommon
-A3,145,Rotom-Pokédex,Solgaleo,uncommon
-A3,146,Giftstich,Lunala,uncommon
-A3,147,Blätterumhang,Solgaleo,uncommon
-A3,148,Lola,Lunala,uncommon
-A3,149,Elima,Lunala,uncommon
+A3,129,Skitty,Lunala|Solgaleo,common
+A3,130,Delcatty,Lunala|Solgaleo,uncommon
+A3,131,Fletchling,Solgaleo,common
+A3,132,Hawlucha,Solgaleo,uncommon
+A3,133,Pikipek,Lunala|Solgaleo,common
+A3,134,Trumbeak,Lunala|Solgaleo,common
+A3,135,Toucannon,Lunala|Solgaleo,uncommon
+A3,136,Yungoos,Solgaleo,common
+A3,137,Gumshoos,Solgaleo,common
+A3,138,Stufful,Lunala,common
+A3,139,Bewear,Lunala,rare
+A3,140,Oranguru,Lunala,rare
+A3,141,Komala,Solgaleo,uncommon
+A3,142,Big Malasada,Lunala|Solgaleo,uncommon
+A3,143,Fishing Net,Lunala,uncommon
+A3,144,Rare Candy,Lunala|Solgaleo,uncommon
+A3,145,Rotom Dex,Solgaleo,uncommon
+A3,146,Poison Barb,Lunala,uncommon
+A3,147,Leaf Cape,Solgaleo,uncommon
+A3,148,Acerola,Lunala,uncommon
+A3,149,Ilima,Lunala,uncommon
 A3,150,Kiawe,Lunala,uncommon
-A3,151,Bromley,Lunala,uncommon
-A3,152,Tracy,Solgaleo,uncommon
-A3,153,Chrys,Solgaleo,uncommon
-A3,154,Maho,Solgaleo,uncommon
-A3,155,Lilly,Solgaleo,uncommon
-A3,156,Alola-Kokowei,Lunala,illustration_rare
-A3,157,Bubungus,Lunala,illustration_rare
-A3,158,Fruyal,Solgaleo,illustration_rare
-A3,159,Kapu-Toro,Solgaleo,illustration_rare
-A3,160,Alola-Knogga,Lunala,illustration_rare
-A3,161,Tortunator,Lunala,illustration_rare
-A3,162,Alola-Vulpix,Lunala,illustration_rare
-A3,163,Gufa,Lunala,illustration_rare
-A3,164,Kapu-Kime,Lunala,illustration_rare
-A3,165,Choreogel,Solgaleo,illustration_rare
-A3,166,Kapu-Riki,Solgaleo,illustration_rare
-A3,167,Wommel,Solgaleo,illustration_rare
-A3,168,Curelei,Solgaleo,illustration_rare
-A3,169,Sankabuh,Solgaleo,illustration_rare
-A3,170,Kapu-Fala,Lunala,illustration_rare
+A3,151,Guzma,Lunala,uncommon
+A3,152,Lana,Solgaleo,uncommon
+A3,153,Sophocles,Solgaleo,uncommon
+A3,154,Mallow,Solgaleo,uncommon
+A3,155,Lillie,Solgaleo,uncommon
+A3,156,Alolan Exeggutor,Lunala,illustration_rare
+A3,157,Morelull,Lunala,illustration_rare
+A3,158,Tsareena,Solgaleo,illustration_rare
+A3,159,Tapu Bulu,Solgaleo,illustration_rare
+A3,160,Alolan Marowak,Lunala,illustration_rare
+A3,161,Turtonator,Lunala,illustration_rare
+A3,162,Alolan Vulpix,Lunala,illustration_rare
+A3,163,Pyukumuku,Lunala,illustration_rare
+A3,164,Tapu Fini,Lunala,illustration_rare
+A3,165,Oricorio,Solgaleo,illustration_rare
+A3,166,Tapu Koko,Solgaleo,illustration_rare
+A3,167,Cutiefly,Solgaleo,illustration_rare
+A3,168,Comfey,Solgaleo,illustration_rare
+A3,169,Sandygast,Solgaleo,illustration_rare
+A3,170,Tapu Lele,Lunala,illustration_rare
 A3,171,Cosmog,Lunala,illustration_rare
-A3,172,Wuffels,Solgaleo,illustration_rare
-A3,173,Pampross,Solgaleo,illustration_rare
-A3,174,Meteno,Lunala,illustration_rare
+A3,172,Rockruff,Solgaleo,illustration_rare
+A3,173,Mudsdale,Solgaleo,illustration_rare
+A3,174,Minior,Lunala,illustration_rare
 A3,175,Magearna,Solgaleo,illustration_rare
-A3,176,Sen-Long,Solgaleo,illustration_rare
-A3,177,Peppeck,Lunala,illustration_rare
-A3,178,Kosturso,Lunala,illustration_rare
-A3,179,Koalelu,Solgaleo,illustration_rare
-A3,180,Silvarro-ex,Lunala,special_art
-A3,181,Moruda-ex,Solgaleo,special_art
-A3,182,Fuegro-ex,Solgaleo,special_art
-A3,183,Krawell-ex,Solgaleo,special_art
-A3,184,Lusardin-ex,Lunala,special_art
-A3,185,Alola-Raichu-ex,Solgaleo,special_art
-A3,186,Lunala-ex,Lunala,special_art
-A3,187,Quartermak-ex,Lunala,special_art
-A3,188,Alola-Sleimok-ex,Lunala,special_art
-A3,189,Solgaleo-ex,Solgaleo,special_art
-A3,190,Lola,Lunala,special_art
-A3,191,Elima,Lunala,special_art
+A3,176,Drampa,Solgaleo,illustration_rare
+A3,177,Pikipek,Lunala,illustration_rare
+A3,178,Bewear,Lunala,illustration_rare
+A3,179,Komala,Solgaleo,illustration_rare
+A3,180,Decidueye ex,Lunala,special_art
+A3,181,Dhelmise ex,Solgaleo,special_art
+A3,182,Incineroar ex,Solgaleo,special_art
+A3,183,Crabominable ex,Solgaleo,special_art
+A3,184,Wishiwashi ex,Lunala,special_art
+A3,185,Alolan Raichu ex,Solgaleo,special_art
+A3,186,Lunala ex,Lunala,special_art
+A3,187,Passimian ex,Lunala,special_art
+A3,188,Alolan Muk ex,Lunala,special_art
+A3,189,Solgaleo ex,Solgaleo,special_art
+A3,190,Acerola,Lunala,special_art
+A3,191,Ilima,Lunala,special_art
 A3,192,Kiawe,Lunala,special_art
-A3,193,Bromley,Lunala,special_art
-A3,194,Tracy,Solgaleo,special_art
-A3,195,Chrys,Solgaleo,special_art
-A3,196,Maho,Solgaleo,special_art
-A3,197,Lilly,Solgaleo,special_art
-A3,198,Silvarro-ex,Lunala,special_art
-A3,199,Moruda-ex,Solgaleo,special_art
-A3,200,Fuegro-ex,Solgaleo,special_art
-A3,201,Krawell-ex,Solgaleo,special_art
-A3,202,Lusardin-ex,Lunala,special_art
-A3,203,Alola-Raichu-ex,Solgaleo,special_art
-A3,204,Lunala-ex,Lunala,special_art
-A3,205,Quartermak-ex,Lunala,special_art
-A3,206,Alola-Sleimok-ex,Lunala,special_art
-A3,207,Solgaleo-ex,Solgaleo,special_art
-A3,208,Bromley,Lunala,immersive_rare
-A3,209,Lilly,Solgaleo,immersive_rare
-A3,210,Bisasam,Solgaleo,shiny_rare
-A3,211,Bisaknosp,Solgaleo,shiny_rare
-A3,212,Bisaflor,Solgaleo,shiny_rare
-A3,213,Owei,Lunala,shiny_rare
-A3,214,Kokowei,Lunala,shiny_rare
-A3,215,Schiggy,Lunala,shiny_rare
-A3,216,Schillok,Lunala,shiny_rare
-A3,217,Turtok,Lunala,shiny_rare
-A3,218,Sterndu,Solgaleo,shiny_rare
+A3,193,Guzma,Lunala,special_art
+A3,194,Lana,Solgaleo,special_art
+A3,195,Sophocles,Solgaleo,special_art
+A3,196,Mallow,Solgaleo,special_art
+A3,197,Lillie,Solgaleo,special_art
+A3,198,Decidueye ex,Lunala,special_art
+A3,199,Dhelmise ex,Solgaleo,special_art
+A3,200,Incineroar ex,Solgaleo,special_art
+A3,201,Crabominable ex,Solgaleo,special_art
+A3,202,Wishiwashi ex,Lunala,special_art
+A3,203,Alolan Raichu ex,Solgaleo,special_art
+A3,204,Lunala ex,Lunala,special_art
+A3,205,Passimian ex,Lunala,special_art
+A3,206,Alolan Muk ex,Lunala,special_art
+A3,207,Solgaleo ex,Solgaleo,special_art
+A3,208,Guzma,Lunala,immersive_rare
+A3,209,Lillie,Solgaleo,immersive_rare
+A3,210,Bulbasaur,Solgaleo,shiny_rare
+A3,211,Ivysaur,Solgaleo,shiny_rare
+A3,212,Venusaur,Solgaleo,shiny_rare
+A3,213,Exeggcute,Lunala,shiny_rare
+A3,214,Exeggutor,Lunala,shiny_rare
+A3,215,Squirtle,Lunala,shiny_rare
+A3,216,Wartortle,Lunala,shiny_rare
+A3,217,Blastoise,Lunala,shiny_rare
+A3,218,Staryu,Solgaleo,shiny_rare
 A3,219,Starmie,Solgaleo,shiny_rare
-A3,220,Nebulak,Lunala,shiny_rare
-A3,221,Alpollo,Lunala,shiny_rare
+A3,220,Gastly,Lunala,shiny_rare
+A3,221,Haunter,Lunala,shiny_rare
 A3,222,Gengar,Lunala,shiny_rare
-A3,223,Machollo,Solgaleo,shiny_rare
-A3,224,Maschock,Solgaleo,shiny_rare
-A3,225,Machomei,Solgaleo,shiny_rare
-A3,226,Tragosso,Lunala,shiny_rare
-A3,227,Knogga,Lunala,shiny_rare
-A3,228,Pummeluff,Solgaleo,shiny_rare
-A3,229,Knuddeluff,Solgaleo,shiny_rare
-A3,230,Bisaflor-ex,Solgaleo,double_shiny_rare
-A3,231,Kokowei-ex,Lunala,double_shiny_rare
-A3,232,Turtok-ex,Lunala,double_shiny_rare
-A3,233,Starmie-ex,Solgaleo,double_shiny_rare
-A3,234,Gengar-ex,Lunala,double_shiny_rare
-A3,235,Machomei-ex,Solgaleo,double_shiny_rare
-A3,236,Knogga-ex,Lunala,double_shiny_rare
-A3,237,Knuddeluff-ex,Solgaleo,double_shiny_rare
-A3,238,Lunala-ex,Lunala|Solgaleo,crown_rare
-A3,239,Solgaleo-ex,Lunala|Solgaleo,crown_rare
+A3,223,Machop,Solgaleo,shiny_rare
+A3,224,Machoke,Solgaleo,shiny_rare
+A3,225,Machamp,Solgaleo,shiny_rare
+A3,226,Cubone,Lunala,shiny_rare
+A3,227,Marowak,Lunala,shiny_rare
+A3,228,Jigglypuff,Solgaleo,shiny_rare
+A3,229,Wigglytuff,Solgaleo,shiny_rare
+A3,230,Venusaur ex,Solgaleo,double_shiny_rare
+A3,231,Exeggutor ex,Lunala,double_shiny_rare
+A3,232,Blastoise ex,Lunala,double_shiny_rare
+A3,233,Starmie ex,Solgaleo,double_shiny_rare
+A3,234,Gengar ex,Lunala,double_shiny_rare
+A3,235,Machamp ex,Solgaleo,double_shiny_rare
+A3,236,Marowak ex,Lunala,double_shiny_rare
+A3,237,Wigglytuff ex,Solgaleo,double_shiny_rare
+A3,238,Lunala ex,Lunala|Solgaleo,crown_rare
+A3,239,Solgaleo ex,Lunala|Solgaleo,crown_rare
