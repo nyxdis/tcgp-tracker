@@ -28,3 +28,5 @@ MIDDLEWARE = [
     *MIDDLEWARE,
 ]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+PWA_APP_DEBUG_MODE = False

@@ -134,3 +134,10 @@ LOGOUT_REDIRECT_URL = "/"
 # PWA settings
 PWA_APP_NAME = "Pokémon TCG Pocket Tracker"
 PWA_APP_DESCRIPTION = "A web application to track your Pokémon TCG Pocket cards."
+PWA_APP_ICONS = [
+    {
+        "src": "/static/icon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+    },
+]
