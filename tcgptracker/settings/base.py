@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+    'pwa'
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+# PWA settings
+PWA_APP_NAME = "Pokémon TCG Pocket Tracker"
+PWA_APP_DESCRIPTION = "A web application to track your Pokémon TCG Pocket cards."

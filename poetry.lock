@@ -97,6 +97,21 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-pwa"
+version = "2.0.1"
+description = "A Django app to include a manifest.json and Service Worker instance to enable progressive web app behavior"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "django_pwa-2.0.1-py3-none-any.whl", hash = "sha256:41dc931c645c6125c556bd753205ca051aa48e5d46edbf281003594f3d76d4a3"},
+    {file = "django_pwa-2.0.1.tar.gz", hash = "sha256:5539fabb41fe189cc2a82cb1f0f889b45671a8144d7b5bb5206a9ddd0fddb3c2"},
+]
+
+[package.dependencies]
+django = ">=3.2"
+
+[[package]]
 name = "django-widget-tweaks"
 version = "1.5.0"
 description = "Tweak the form field rendering in templates, not in python-level form definitions."
@@ -615,4 +630,4 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "628a7ce112376030241a20f4880ba09b8576923f74e83b50546f9fdb54ff7e0e"
+content-hash = "ef394ab7fb6de80e7794f3b6e813fcd776a597b50502bbc3bb54a7b35a290891"

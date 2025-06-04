@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load pwa %}
 <!DOCTYPE html>
 <html lang="de">
   <head>
@@ -8,6 +9,7 @@
           content="Pokémon TCG Pocket Tracker – Manage and track your Pokémon TCG Pocket Collection online." />
     <meta name="keywords"
           content="Pokémon, TCG, Pocket, Tracker, Cards, Collection, Trading Card Game" />
+    {% progressive_web_app_meta %}
     <title>
       {% block title %}
         Pokémon TCG Pocket Tracker
