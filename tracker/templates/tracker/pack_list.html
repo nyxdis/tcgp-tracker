@@ -14,7 +14,7 @@
              class="text-decoration-none text-reset">
             <div class="card h-100 {% if item.is_best %}border-success{% endif %}">
               <div class="card-body">
-                <h5 class="card-title">{{ item.pack.name }}</h5>
+                <h5 class="card-title">{% trans item.pack.name %}</h5>
                 <p class="card-text mb-1">
                   <strong>{% trans "Chance to get a new card" %}:</strong>
                   {{ item.chance }} %
