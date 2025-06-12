@@ -14,11 +14,11 @@
              class="text-decoration-none text-reset">
             <div class="card h-100 {% if item.is_best %}border-success{% endif %}">
               <div class="card-body">
-                <h5 class="card-title">{% trans item.pack.name %}</h5>
-                <p class="card-text mb-1">
-                  <strong>{% trans "Chance to get a new card" %}:</strong>
-                  {{ item.chance }} %
-                </p>
+                <div class="d-flex align-items-center mb-2">
+                  <span class="badge bg-primary fs-5 me-2 px-3 py-2">{{ item.chance }} %</span>
+                  <span class="fw-bold">{% trans "Chance to get a new card" %}</span>
+                </div>
+                <h5 class="card-title mt-2">{% trans item.pack.name %}</h5>
                 <p class="card-text mb-1">
                   <strong>{% trans "Progress" %}:</strong>
                   {{ item.owned }} / {{ item.total }}
