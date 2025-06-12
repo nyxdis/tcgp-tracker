@@ -8,7 +8,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.http import JsonResponse
 from django.db.models import Count
 
-from .forms import RegisterForm
+from .forms import RegisterForm, UserProfileForm
 from .models import PokemonSet, Card, UserCard, Pack
 from .utils import prob_at_least_one_new_card
 
@@ -237,3 +237,14 @@ def account(request):
         password_form = PasswordChangeForm(request.user)
 
     return render(request, 'tracker/account.html', {'password_form': password_form})
+
+@login_required
+def profile(request):
+    profile = request.user.profile
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+    else:
+        form = UserProfileForm(instance=profile)
+    return render(request, 'tracker/profile.html', {'profile': profile, 'form': form})

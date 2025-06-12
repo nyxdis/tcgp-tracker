@@ -48,6 +48,7 @@
                    aria-expanded="false">{{ user.get_full_name|default:user.username }}</a>
                 <div class="dropdown-menu dropdown-menu-end"
                      aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'profile' %}">Profil</a>
                   <a class="dropdown-item" href="{% url 'home' %}">Sets</a>
                   <a class="dropdown-item" href="{% url 'pack_list' %}">Packs</a>
                   <a class="dropdown-item" href="{% url 'account' %}">Account</a>
