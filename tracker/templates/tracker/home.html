@@ -13,14 +13,66 @@
 {% block content %}
   <h1 class="mb-4">{% trans "Welcome to TCGP Tracker!" %}</h1>
   <div class="mb-4">
-    <a href="{% url 'pack_list' %}" class="btn btn-success">{% trans "Which pack should I open?" %}</a>
+    <a href="{% url "pack_list" %}" class="btn btn-success">{% trans "Which pack should I open?" %}</a>
   </div>
+  <form method="get" class="mb-4" action="">
+    <div class="input-group">
+      <input type="text"
+             name="q"
+             class="form-control"
+             placeholder="{% trans "Search for a card..." %}"
+             value="{{ search_query|default:'' }}">
+      <button class="btn btn-primary" type="submit">{% trans "Search" %}</button>
+    </div>
+  </form>
+  {% if search_query %}
+    <h2>{% trans "Search Results" %}</h2>
+    {% if search_results %}
+      <ul class="list-group mb-4">
+        {% for card in search_results %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+              <strong>{% trans card.name %}</strong>
+              <span class="text-muted">#{{ card.number }}</span>
+              ({% trans card.set.name %})
+              <span class="ms-2">
+                {% for _ in ""|center:card.rarity.repeat_count %}
+                  <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}"
+                       alt="{{ card.rarity.display_name }}"
+                       width="24"
+                       height="24" />
+                {% endfor %}
+              </span>
+            </span>
+            <div class="btn-group ms-2" role="group">
+              <a href="{% url "set_detail" card.set.number %}"
+                 class="btn btn-secondary btn-sm">{% trans "View Set" %}</a>
+              <form method="post" action="" class="mb-0 ms-2 d-inline">
+                {% csrf_token %}
+                <input type="hidden" name="card_id" value="{{ card.id }}">
+                {% if search_query %}<input type="hidden" name="q" value="{{ search_query }}">{% endif %}
+                {% if card.id in user_card_ids %}
+                  <input type="hidden" name="action" value="uncollect">
+                  <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Uncollect" %}</button>
+                {% else %}
+                  <input type="hidden" name="action" value="collect">
+                  <button type="submit" class="btn btn-outline-primary btn-sm">{% trans "Collect" %}</button>
+                {% endif %}
+              </form>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="alert alert-warning">{% trans "No cards found matching your search." %}</div>
+    {% endif %}
+  {% endif %}
   <h2>{% trans "Your Set Progress" %}</h2>
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     {% for entry in sets %}
       <div class="col">
         <div class="card h-100">
-          <a href="{% url 'set_detail' entry.set.number %}" class="stretched-link"></a>
+          <a href="{% url "set_detail" entry.set.number %}" class="stretched-link"></a>
           <div class="card-body">
             <h5 class="card-title">{% trans entry.set.name %}</h5>
             <p class="card-text">{% trans "Release Date" %}: {{ entry.set.release_date }}</p>
@@ -33,7 +85,9 @@
                 {% if data.collected > 0 %}
                   <img src="{% static 'tracker/img/'|add:rarity %}"
                        alt="{{ rarity|capfirst|slice:':-5' }}"
-                       class="rarity-icon" />
+                       class="rarity-icon"
+                       height="16"
+                       width="16" />
                   {% if forloop.first %}
                     {{ data.collected }} / {{ data.total }}
                   {% else %}

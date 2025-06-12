@@ -17,6 +17,20 @@ def home(request):
     sets = PokemonSet.objects.all().order_by('-release_date')
     user_cards = UserCard.objects.filter(user=request.user)
 
+    # Handle collect/uncollect POST from search results
+    if request.method == 'POST':
+        card_id = int(request.POST.get('card_id'))
+        action = request.POST.get('action')
+        if action == 'collect':
+            UserCard.objects.get_or_create(user=request.user, card_id=card_id, defaults={'quantity': 1})
+        elif action == 'uncollect':
+            UserCard.objects.filter(user=request.user, card_id=card_id).delete()
+        # Redirect to home with search query preserved
+        q = request.POST.get('q', '')
+        if q:
+            return redirect(f'/?q={q}')
+        return redirect('home')
+
     # Berechne Sammelfortschritt je Set
     progress_by_set = (
         user_cards
@@ -81,7 +95,22 @@ def home(request):
             'rarity_progress': rarity_data,
         })
 
-    return render(request, 'tracker/home.html', {'sets': sets_with_progress})
+    # Card search logic
+    search_query = request.GET.get('q', '').strip()
+    search_results = []
+    if search_query:
+        search_results = Card.objects.filter(
+            name__icontains=search_query
+        ).select_related('set').order_by('set__release_date', 'set__name', 'number')
+
+    user_card_ids = set(user_cards.values_list('card_id', flat=True))
+
+    return render(request, 'tracker/home.html', {
+        'sets': sets_with_progress,
+        'search_query': search_query,
+        'search_results': search_results,
+        'user_card_ids': user_card_ids,
+    })
 
 @login_required
 def set_detail(request, set_number):
