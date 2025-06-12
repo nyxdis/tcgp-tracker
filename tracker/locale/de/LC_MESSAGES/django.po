@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-12 20:56+0200\n"
+"POT-Creation-Date: 2025-06-12 22:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr "Einloggen"
 #: tracker/templates/registration/login.html:23
 #: tracker/templates/registration/register.html:5
 #: tracker/templates/registration/register.html:35
-#: tracker/templates/tracker/base.html:68
+#: tracker/templates/tracker/base.html:69
 msgid "Register"
 msgstr "Registrieren"
 
@@ -77,7 +77,7 @@ msgstr "Möchtest du dein Konto wirklich löschen?"
 msgid "This action cannot be undone."
 msgstr "Diese Aktion kann nicht rückgängig gemacht werden."
 
-#: tracker/templates/tracker/base.html:65
+#: tracker/templates/tracker/base.html:66
 msgid "Login"
 msgstr "Einloggen"
 
@@ -94,6 +94,7 @@ msgid "Search for a card..."
 msgstr "Suche nach einer Karte..."
 
 #: tracker/templates/tracker/home.html:25
+#: tracker/templates/tracker/user_search.html:16
 msgid "Search"
 msgstr "Suchen"
 
@@ -2598,6 +2599,63 @@ msgstr "Chance auf eine neue Karte"
 msgid "Best choice"
 msgstr "Beste Wahl"
 
+#: tracker/templates/tracker/profile.html:35
+msgid "Your Profile"
+msgstr "Dein Profil"
+
+#: tracker/templates/tracker/profile.html:39
+msgid "Public Profile:"
+msgstr "Öffentliches Profil:"
+
+#: tracker/templates/tracker/profile.html:51
+msgid "Public"
+msgstr "Öffentlich"
+
+#: tracker/templates/tracker/profile.html:53
+msgid "Private"
+msgstr "Privat"
+
+#: tracker/templates/tracker/profile.html:60
+#: tracker/templates/tracker/public_profile.html:36
+#: tracker/templates/tracker/user_search.html:36
+msgid "Friend Code:"
+msgstr "Freundescode:"
+
+#: tracker/templates/tracker/profile.html:77
+msgid "Find Friends"
+msgstr "Freunde finden"
+
+#: tracker/templates/tracker/profile.html:80
+msgid "Your Friends"
+msgstr "Deine Freunde"
+
+#: tracker/templates/tracker/profile.html:93
+msgid "You have no friends yet."
+msgstr "Du hast noch keine Freunde."
+
+#: tracker/templates/tracker/profile.html:95
+msgid "Friend Requests"
+msgstr "Freundschaftsanfragen"
+
+#: tracker/templates/tracker/profile.html:111
+#: tracker/templates/tracker/user_search.html:52
+msgid "Accept"
+msgstr "Annehmen"
+
+#: tracker/templates/tracker/profile.html:117
+msgid "No pending friend requests."
+msgstr "Keine ausstehenden Freundschaftsanfragen."
+
+#: tracker/templates/tracker/public_profile.html:44
+#: tracker/templates/tracker/user_search.html:45
+msgid "Friend request sent"
+msgstr "Freundschaftsanfrage gesendet"
+
+#: tracker/templates/tracker/public_profile.html:51
+#: tracker/templates/tracker/user_search.html:60
+msgid "Send Friend Request"
+msgstr "Freundschaftsanfrage senden"
+
 #: tracker/templates/tracker/set_detail.html:62
 msgid "Collect all base cards"
 msgstr "Alle Basiskarten sammeln"
@@ -2636,6 +2694,27 @@ msgstr ""
 msgid "Are you sure you want to collect all base cards?"
 msgstr ""
 "Bist du dir sicher, dass du alle Basiskarte als gesammelt markieren möchtest?"
+
+#: tracker/templates/tracker/user_search.html:6
+msgid "User Search"
+msgstr "Benutzersuche"
+
+#: tracker/templates/tracker/user_search.html:13
+msgid "Search users by username..."
+msgstr "Suche Benutzer nach Benutzernamen..."
+
+#: tracker/templates/tracker/user_search.html:20
+#, python-format
+msgid "Results for \"%(query)s\""
+msgstr "Ergebnisse für \"%(query)s\""
+
+#: tracker/templates/tracker/user_search.html:43
+msgid "Already friends"
+msgstr "Bereits befreundet"
+
+#: tracker/templates/tracker/user_search.html:70
+msgid "No public users found."
+msgstr "Keine öffentlichen Benutzer gefunden."
 
 #~ msgid "Amoonguss"
 #~ msgstr "Hutsassa"

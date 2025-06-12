@@ -6,10 +6,11 @@ from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.http import JsonResponse
-from django.db.models import Count
+from django.db.models import Count, Q
+from django.db import models
 
 from .forms import RegisterForm, UserProfileForm
-from .models import PokemonSet, Card, UserCard, Pack
+from .models import PokemonSet, Card, UserCard, Pack, UserProfile, FriendRequest
 from .utils import prob_at_least_one_new_card
 
 @login_required
@@ -247,4 +248,80 @@ def profile(request):
             form.save()
     else:
         form = UserProfileForm(instance=profile)
-    return render(request, 'tracker/profile.html', {'profile': profile, 'form': form})
+
+    # Friends logic
+    friends = UserProfile.objects.filter(
+        Q(sent_friend_requests__to_user=profile, sent_friend_requests__accepted=True) |
+        Q(received_friend_requests__from_user=profile, received_friend_requests__accepted=True)
+    ).distinct()
+    friend_requests = FriendRequest.objects.filter(to_user=profile, accepted=False)
+    return render(request, 'tracker/profile.html', {
+        'profile': profile,
+        'form': form,
+        'friends': friends,
+        'friend_requests': friend_requests,
+    })
+
+@login_required
+def user_search(request):
+    query = request.GET.get('q', '').strip()
+    results = []
+    if query:
+        results = UserProfile.objects.filter(
+            public=True
+        ).filter(
+            models.Q(user__username__icontains=query) |
+            models.Q(friend_code__icontains=query)
+        ).exclude(user=request.user)
+    # Get friend requests sent by current user
+    sent_requests = FriendRequest.objects.filter(from_user=request.user.profile)
+    sent_to_ids = set(fr.to_user_id for fr in sent_requests)
+    # Get friend requests received by current user (pending)
+    received_requests = list(FriendRequest.objects.filter(to_user=request.user.profile, accepted=False))
+    received_from_ids = set(fr.from_user_id for fr in received_requests)
+    # Get all accepted friends
+    friends = UserProfile.objects.filter(
+        Q(sent_friend_requests__to_user=request.user.profile, sent_friend_requests__accepted=True) |
+        Q(received_friend_requests__from_user=request.user.profile, received_friend_requests__accepted=True)
+    ).values_list('id', flat=True)
+    return render(request, 'tracker/user_search.html', {
+        'query': query,
+        'results': results,
+        'sent_to_ids': sent_to_ids,
+        'received_from_ids': received_from_ids,
+        'friends': friends,
+        'received_requests': received_requests,
+    })
+
+@login_required
+def send_friend_request(request, user_id):
+    to_profile = get_object_or_404(UserProfile, id=user_id, public=True)
+    from_profile = request.user.profile
+    if to_profile != from_profile:
+        FriendRequest.objects.get_or_create(from_user=from_profile, to_user=to_profile)
+        messages.success(request, f'Friend request sent to {to_profile.user.username}!')
+    # Redirect back to the referring page, or user_search as fallback
+    next_url = request.POST.get('next') or request.META.get('HTTP_REFERER') or 'user_search'
+    return redirect(next_url)
+
+@login_required
+def accept_friend_request(request, request_id):
+    friend_request = get_object_or_404(FriendRequest, id=request_id, to_user=request.user.profile, accepted=False)
+    friend_request.accepted = True
+    friend_request.save()
+    messages.success(request, f"{friend_request.from_user.user.username} is now your friend!")
+    next_url = request.POST.get('next') or request.META.get('HTTP_REFERER') or 'profile'
+    return redirect(next_url)
+
+def public_profile(request, username):
+    profile = get_object_or_404(UserProfile, user__username=username, public=True)
+    can_send_request = False
+    already_sent = False
+    if request.user.is_authenticated and request.user.profile != profile:
+        can_send_request = True
+        already_sent = FriendRequest.objects.filter(from_user=request.user.profile, to_user=profile).exists()
+    return render(request, 'tracker/public_profile.html', {
+        'profile': profile,
+        'can_send_request': can_send_request,
+        'already_sent': already_sent,
+    })

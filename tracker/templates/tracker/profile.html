@@ -32,9 +32,7 @@
                         <div class="profile-avatar">
                             <i class="bi bi-person-circle"></i>
                         </div>
-                        <h1 class="card-title fw-bold mb-0 text-center">
-                            {% blocktrans with username=user.username %}{{ username }}'s Profile{% endblocktrans %}
-                        </h1>
+                        <h1 class="card-title fw-bold mb-0 text-center">{% trans "Your Profile" %}</h1>
                     </div>
                     <ul class="list-group list-group-flush mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center border-0 pb-3">
@@ -73,6 +71,51 @@
                             </span>
                         </li>
                     </ul>
+                    <hr>
+                    <div class="d-flex justify-content-end mb-3">
+                        <a href="{% url 'user_search' %}" class="btn btn-primary">
+                            <i class="bi bi-search me-1"></i> {% trans "Find Friends" %}
+                        </a>
+                    </div>
+                    <h5 class="fw-bold mt-4 mb-2">{% trans "Your Friends" %}</h5>
+                    {% if friends %}
+                        <ul class="list-group mb-3">
+                            {% for friend in friends %}
+                                <li class="list-group-item d-flex align-items-center">
+                                    <div class="profile-avatar me-3">
+                                        <i class="bi bi-person-circle"></i>
+                                    </div>
+                                    <span class="fw-semibold">{{ friend.user.username }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <div class="text-muted mb-3">{% trans "You have no friends yet." %}</div>
+                    {% endif %}
+                    <h5 class="fw-bold mt-4 mb-2">{% trans "Friend Requests" %}</h5>
+                    {% if friend_requests %}
+                        <ul class="list-group">
+                            {% for req in friend_requests %}
+                                <li class="list-group-item d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <div class="profile-avatar me-3">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <span class="fw-semibold">{{ req.from_user.user.username }}</span>
+                                    </div>
+                                    <form method="post"
+                                          action="{% url 'accept_friend_request' req.id %}"
+                                          class="d-inline">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                        <button type="submit" class="btn btn-success btn-sm">{% trans "Accept" %}</button>
+                                    </form>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <div class="text-muted">{% trans "No pending friend requests." %}</div>
+                    {% endif %}
                 </div>
             </div>
         </div>

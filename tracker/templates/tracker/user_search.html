@@ -1,0 +1,92 @@
+{% extends "tracker/base.html" %}
+{% load i18n %}
+{% load friend_extras %}
+{% block content %}
+    <div class="container mt-4">
+        <h2>{% trans "User Search" %}</h2>
+        <form method="get" action="" class="row g-3 mb-4">
+            <div class="col-auto">
+                <input type="text"
+                       class="form-control"
+                       name="q"
+                       value="{{ query }}"
+                       placeholder="{% trans "Search users by username..." %}">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">{% trans "Search" %}</button>
+            </div>
+        </form>
+        {% if query %}
+            <h3>{% blocktrans %}Results for "{{ query }}"{% endblocktrans %}</h3>
+            {% if results %}
+                <div class="row row-cols-1 row-cols-md-2 g-3">
+                    {% for profile in results %}
+                        <div class="col">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <div class="profile-avatar me-3">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div>
+                                            <a href="{% url 'public_profile' profile.user.username %}"
+                                               class="fw-bold fs-5 text-decoration-none">{{ profile.user.username }}</a>
+                                            {% if profile.friend_code %}
+                                                <div class="text-muted small">
+                                                    {% trans "Friend Code:" %} <span class="text-monospace">{{ profile.friend_code }}</span>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {% if profile.id in friends %}
+                                            <span class="badge bg-success">{% trans "Already friends" %}</span>
+                                        {% elif profile.id in sent_to_ids %}
+                                            <span class="badge bg-secondary">{% trans "Friend request sent" %}</span>
+                                        {% elif profile.id in received_from_ids %}
+                                            <form method="post"
+                                                  action="{% url 'accept_friend_request' received_requests|get_request_id:profile.id %}"
+                                                  class="d-inline">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                                <button type="submit" class="btn btn-success btn-sm">{% trans "Accept" %}</button>
+                                            </form>
+                                        {% else %}
+                                            <form method="post"
+                                                  action="{% url 'send_friend_request' profile.id %}"
+                                                  class="d-inline">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                                <button type="submit" class="btn btn-outline-success btn-sm">{% trans "Send Friend Request" %}</button>
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-warning mt-3">{% trans "No public users found." %}</div>
+            {% endif %}
+        {% endif %}
+    </div>
+    {% block style %}
+        <style>
+.profile-avatar {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bs-primary);
+    background: linear-gradient(135deg, var(--bs-primary), var(--bs-primary-bg-subtle));
+    border-radius: 50%;
+}
+.profile-avatar i {
+    color: #fff;
+    font-size: 2rem;
+}
+        </style>
+    {% endblock style %}
+{% endblock content %}

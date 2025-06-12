@@ -1,0 +1,60 @@
+{% extends "tracker/base.html" %}
+{% block style %}
+    <style>
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    background: var(--bs-primary);
+    background: linear-gradient(135deg, var(--bs-primary), var(--bs-primary-bg-subtle));
+    border-radius: 50%;
+}
+.profile-avatar i {
+    color: #fff;
+    font-size: 2.5rem;
+}
+    </style>
+{% endblock style %}
+{% load i18n %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4">
+                    <div class="d-flex flex-column align-items-center mb-4">
+                        <div class="profile-avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <h1 class="card-title fw-bold mb-0 text-center">{{ profile.user.username }}</h1>
+                    </div>
+                    <ul class="list-group list-group-flush mb-3">
+                        {% if profile.friend_code %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 pb-3">
+                                <span class="fw-semibold">{% trans "Friend Code:" %}</span>
+                                <span class="text-monospace">{{ profile.friend_code }}</span>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    {% if can_send_request %}
+                        <div class="d-flex justify-content-end">
+                            {% if already_sent %}
+                                <span class="badge bg-secondary">{% trans "Friend request sent" %}</span>
+                            {% else %}
+                                <form method="post"
+                                      action="{% url 'send_friend_request' profile.id %}"
+                                      class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                    <button type="submit" class="btn btn-outline-success btn-sm">{% trans "Send Friend Request" %}</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
