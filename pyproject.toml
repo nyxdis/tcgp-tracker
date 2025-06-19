@@ -5,7 +5,7 @@ description = "A Django-based tracker for Pokemon TCG Pocket cards."
 authors = [
     {name = "Freydis Mende", email = "freydis.mende@proton.me"}
 ]
-requires-python = ">=3.13"
+requires-python = ">=3.13,<4.0"
 dependencies = [
     "dj-database-url >=2.3.0,<3.0.0",
     "django >=5.2,<6.0",
@@ -23,4 +23,11 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.group.dev.dependencies]
 djlint = "^1.36.4"
+pylint = "^3.3.7"
+pre-commit = "^4.2.0"
+pylint-django = "^2.6.1"
+black = "^25.1.0"
+isort = "^6.0.1"
 
+[tool.poetry.group.test.dependencies]
+pytest = "^8.4.1"

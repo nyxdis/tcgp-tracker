@@ -1,0 +1,47 @@
+{% extends "tracker/base.html" %}
+{% load i18n %}
+{% block content %}
+    <h1>{% trans "Packs" %}</h1>
+    <div class="mb-3">
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">← {% trans "Back" %}</a>
+    </div>
+    {% for set, packs in grouped_packs %}
+        <h3 class="mt-5">{% trans set.name %}</h3>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for item in packs %}
+                <div class="col">
+                    <a href="{% url 'set_detail' item.pack.set.number %}"
+                       class="text-decoration-none text-reset">
+                        <div class="card h-100 {% if item.is_best %}border-success{% endif %}">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="badge bg-primary fs-5 me-2 px-3 py-2">{{ item.chance }} %</span>
+                                    <span class="fw-bold">{% trans "Chance to get a new card" %}</span>
+                                </div>
+                                <h5 class="card-title mt-2">{% trans item.pack.name %}</h5>
+                                <p class="card-text mb-1">
+                                    <strong>{% trans "Progress" %}:</strong>
+                                    {{ item.owned }} / {{ item.total }}
+                                </p>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar"
+                                         role="progressbar"
+                                         style="width: {{ item.progress_percent|floatformat:"2u" }}%"
+                                         aria-valuenow="{{ item.progress_percent }}"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100">{{ item.progress_percent }}%</div>
+                                </div>
+                                {% if item.is_best %}
+                                    <span class="badge bg-success">{% trans "Best choice" %}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <div class="mt-4 text-center">
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">← {% trans "Back" %}</a>
+    </div>
+{% endblock content %}
