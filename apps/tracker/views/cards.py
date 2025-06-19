@@ -133,9 +133,6 @@ def set_detail(request, set_number):
         .order_by("number")
         .prefetch_related("translations")
     )
-    language_code = get_language() or "en"
-    for card in cards:
-        card.localized_name = card.get_localized_name(language_code)
     if request.method == "POST":
         card_id = int(request.POST.get("card_id"))
         action = request.POST.get("action")

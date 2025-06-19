@@ -32,9 +32,9 @@
                 {% for card in search_results %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span>
-                            <strong>{{ card.localized_name|default:card.name }}</strong>
+                            <strong>{{ card.localized_name }}</strong>
                             <span class="text-muted">#{{ card.number }}</span>
-                            ({% trans card.set.name %})
+                            ({{ card.set.localized_name }})
                             <span class="ms-2">
                                 {% for _ in ""|center:card.rarity.repeat_count %}
                                     <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}"
@@ -74,7 +74,7 @@
                 <div class="card h-100">
                     <a href="{% url "set_detail" entry.set.number %}" class="stretched-link"></a>
                     <div class="card-body">
-                        <h5 class="card-title">{% trans entry.set.name %}</h5>
+                        <h5 class="card-title">{{ entry.set.localized_name }}</h5>
                         <p class="card-text">{% trans "Release Date" %}: {{ entry.set.release_date }}</p>
                         <p class="card-text">
                             <strong>{% trans "Progress" %}:</strong>

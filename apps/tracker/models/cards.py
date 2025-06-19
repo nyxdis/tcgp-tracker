@@ -2,6 +2,7 @@
 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.utils.translation import get_language
 
 
 class Version(models.Model):
@@ -50,11 +51,41 @@ class PokemonSet(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    def get_localized_name(self, language_code):
+        translation = self.translations.filter(language_code=language_code).first()
+        if translation:
+            return translation.localized_name
+        return self.name
+
+    @property
+    def localized_name(self):
+        language_code = get_language() or "en"
+        return self.get_localized_name(language_code)
+
     class Meta:
         ordering = ("release_date",)
         indexes = [models.Index(fields=["release_date"])]
         verbose_name = "Pokémon Set"
         verbose_name_plural = "Pokémon Sets"
+
+
+class PokemonSetNameTranslation(models.Model):
+    """Stores localized names for Pokémon sets."""
+
+    set = models.ForeignKey(
+        PokemonSet, related_name="translations", on_delete=models.CASCADE
+    )
+    language_code = models.CharField(max_length=10, db_index=True)
+    localized_name = models.CharField(max_length=100, db_index=True)
+
+    class Meta:
+        unique_together = ("set", "language_code")
+        indexes = [models.Index(fields=["language_code", "localized_name"])]
+        verbose_name = "Set Name Translation"
+        verbose_name_plural = "Set Name Translations"
+
+    def __str__(self):
+        return f"{self.localized_name} ({self.language_code}) for {self.set}"
 
 
 class Rarity(models.Model):
@@ -169,12 +200,42 @@ class Pack(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    def get_localized_name(self, language_code):
+        translation = self.translations.filter(language_code=language_code).first()
+        if translation:
+            return translation.localized_name
+        return self.name
+
+    @property
+    def localized_name(self):
+        language_code = get_language() or "en"
+        return self.get_localized_name(language_code)
+
     class Meta:
         ordering = ("set", "name")
         unique_together = ("set", "name")
         indexes = [models.Index(fields=["set", "name"])]
         verbose_name = "Pack"
         verbose_name_plural = "Packs"
+
+
+class PackNameTranslation(models.Model):
+    """Stores localized names for Packs."""
+
+    pack = models.ForeignKey(
+        Pack, related_name="translations", on_delete=models.CASCADE
+    )
+    language_code = models.CharField(max_length=10, db_index=True)
+    localized_name = models.CharField(max_length=100, db_index=True)
+
+    class Meta:
+        unique_together = ("pack", "language_code")
+        indexes = [models.Index(fields=["language_code", "localized_name"])]
+        verbose_name = "Pack Name Translation"
+        verbose_name_plural = "Pack Name Translations"
+
+    def __str__(self):
+        return f"{self.localized_name} ({self.language_code}) for {self.pack}"
 
 
 class Card(models.Model):
@@ -194,6 +255,11 @@ class Card(models.Model):
         if translation:
             return translation.localized_name
         return self.name
+
+    @property
+    def localized_name(self):
+        language_code = get_language() or "en"
+        return self.get_localized_name(language_code)
 
     class Meta:
         ordering = ("set", "number")

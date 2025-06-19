@@ -6,7 +6,9 @@ from apps.tracker.models.cards import (
     Card,
     CardNameTranslation,
     Pack,
+    PackNameTranslation,
     PokemonSet,
+    PokemonSetNameTranslation,
     Rarity,
     RarityProbability,
     Version,
@@ -65,12 +67,28 @@ class CardNameTranslationInline(admin.TabularInline):
     show_change_link = True
 
 
+class PokemonSetNameTranslationInline(admin.TabularInline):
+    """Inline admin for PokemonSetNameTranslation."""
+
+    model = PokemonSetNameTranslation
+    extra = 1
+    show_change_link = True
+
+
+class PackNameTranslationInline(admin.TabularInline):
+    """Inline admin for PackNameTranslation."""
+
+    model = PackNameTranslation
+    extra = 1
+    show_change_link = True
+
+
 @admin.register(PokemonSet)
 class SetAdmin(admin.ModelAdmin):
     """Admin for PokemonSet."""
 
     list_display = ("name", "release_date", "view_cards_link")
-    inlines = [PacksInline]
+    inlines = [PacksInline, PokemonSetNameTranslationInline]
     search_fields = ("name",)
     list_per_page = 25
     ordering = ("release_date",)
@@ -97,6 +115,7 @@ class PackAdmin(admin.ModelAdmin):
     list_select_related = ("set", "rarity_version")
     list_per_page = 25
     ordering = ("set", "name")
+    inlines = [PackNameTranslationInline]
 
 
 @admin.register(Card)

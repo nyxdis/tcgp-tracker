@@ -6,7 +6,7 @@
         <a href="{% url 'home' %}" class="btn btn-outline-primary">← {% trans "Back" %}</a>
     </div>
     {% for set, packs in grouped_packs %}
-        <h3 class="mt-5">{% trans set.name %}</h3>
+        <h3 class="mt-5">{{ set.localized_name }}</h3>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             {% for item in packs %}
                 <div class="col">
@@ -18,7 +18,7 @@
                                     <span class="badge bg-primary fs-5 me-2 px-3 py-2">{{ item.chance }} %</span>
                                     <span class="fw-bold">{% trans "Chance to get a new card" %}</span>
                                 </div>
-                                <h5 class="card-title mt-2">{% trans item.pack.name %}</h5>
+                                <h5 class="card-title mt-2">{{ item.pack.localized_name }}</h5>
                                 <p class="card-text mb-1">
                                     <strong>{% trans "Progress" %}:</strong>
                                     {{ item.owned }} / {{ item.total }}

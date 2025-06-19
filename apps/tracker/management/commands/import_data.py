@@ -30,16 +30,58 @@ class Command(BaseCommand):
             type=str,
             help="Path to CSV file with rarity probability data",
         )
+        parser.add_argument(
+            "--settranslations",
+            type=str,
+            help="Path to CSV file with set name translations",
+        )
+        parser.add_argument(
+            "--packtranslations",
+            type=str,
+            help="Path to CSV file with pack name translations",
+        )
+        parser.add_argument(
+            "--cardtranslations",
+            type=str,
+            help="Path to CSV file with card name translations",
+        )
 
     def handle(self, *args, **options):
-        if options["sets"]:
-            self.import_sets(options["sets"])
-        if options["cards"]:
-            self.import_cards(options["cards"])
+        # If no arguments are supplied, import everything from the data directory
+        if not any(
+            [
+                options["rarities"],
+                options["rarityprob"],
+                options["sets"],
+                options["cards"],
+                options["settranslations"],
+                options["packtranslations"],
+                options["cardtranslations"],
+            ]
+        ):
+            base = "data/"
+            options["rarities"] = base + "rarities.csv"
+            options["rarityprob"] = base + "rarity_probabilities.csv"
+            options["sets"] = base + "sets.csv"
+            options["cards"] = base + "cards.csv"
+            options["settranslations"] = base + "set_translations.csv"
+            options["packtranslations"] = base + "pack_translations.csv"
+            options["cardtranslations"] = base + "card_translations.csv"
+
         if options["rarities"]:
             self.import_rarities(options["rarities"])
         if options["rarityprob"]:
             self.import_rarity_probabilities(options["rarityprob"])
+        if options["sets"]:
+            self.import_sets(options["sets"])
+        if options["cards"]:
+            self.import_cards(options["cards"])
+        if options["settranslations"]:
+            self.import_set_translations(options["settranslations"])
+        if options["packtranslations"]:
+            self.import_pack_translations(options["packtranslations"])
+        if options["cardtranslations"]:
+            self.import_card_translations(options["cardtranslations"])
 
     def import_sets(self, filepath):
         with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
@@ -142,3 +184,79 @@ class Command(BaseCommand):
                 self.stdout.write(
                     f"{action} RarityProbability: {rarity.name} / {version.name}"
                 )
+
+    def import_set_translations(self, filepath):
+        from apps.tracker.models.cards import PokemonSet, PokemonSetNameTranslation
+
+        with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                set_obj = PokemonSet.objects.filter(name=row["english_name"]).first()
+                if not set_obj:
+                    self.stderr.write(f"Set not found: {row['english_name']}")
+                    continue
+                obj, created = PokemonSetNameTranslation.objects.update_or_create(
+                    set=set_obj,
+                    language_code="de",
+                    defaults={"localized_name": row["german_name"]},
+                )
+                action = "Created" if created else "Updated"
+                self.stdout.write(
+                    f"{action} translation for set '{set_obj.name}': {row['german_name']}"
+                )
+
+    def import_pack_translations(self, filepath):
+        from apps.tracker.models.cards import Pack, PackNameTranslation, PokemonSet
+
+        with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                set_obj = PokemonSet.objects.filter(
+                    name=row["set_english_name"]
+                ).first()
+                if not set_obj:
+                    self.stderr.write(f"Set not found: {row['set_english_name']}")
+                    continue
+                pack_obj = Pack.objects.filter(
+                    set=set_obj, name=row["pack_english_name"]
+                ).first()
+                if not pack_obj:
+                    self.stderr.write(
+                        f"Pack not found: {row['pack_english_name']} in set {set_obj.name}"
+                    )
+                    continue
+                _, created = PackNameTranslation.objects.update_or_create(
+                    pack=pack_obj,
+                    language_code="de",
+                    defaults={"localized_name": row["pack_german_name"]},
+                )
+                action = "Created" if created else "Updated"
+                self.stdout.write(
+                    f"{action} translation for pack '{pack_obj.name}' in set '{set_obj.name}': {row['pack_german_name']}"
+                )
+
+    def import_card_translations(self, filepath):
+        from apps.tracker.models.cards import Card, CardNameTranslation
+
+        with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                english_name = row["card_english_name"].strip()
+                german_name = row["card_german_name"].strip()
+                if not english_name or not german_name:
+                    continue
+                # Find all cards with this English name
+                cards = Card.objects.filter(name=english_name)
+                if not cards.exists():
+                    self.stderr.write(f"Card not found: {english_name}")
+                    continue
+                for card in cards:
+                    obj, created = CardNameTranslation.objects.update_or_create(
+                        card=card,
+                        language_code="de",
+                        defaults={"localized_name": german_name},
+                    )
+                    action = "Created" if created else "Updated"
+                    self.stdout.write(
+                        f"{action} translation for card '{card.name}' ({card.set.name} {card.number}): {german_name}"
+                    )

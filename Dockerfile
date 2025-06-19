@@ -67,4 +67,4 @@ RUN python manage.py compilemessages
 EXPOSE 8000
 
 # Start Django app using gunicorn, running migrations first
-CMD ["/bin/sh", "-c", "export $(cat /app/.git_hash | xargs) && python manage.py migrate --noinput && exec gunicorn tcgptracker.wsgi:application --bind 0.0.0.0:8000"]
+CMD ["/bin/sh", "-c", "export $(cat /app/.git_hash | xargs) && python manage.py migrate --noinput && python manage.py import_data && exec gunicorn tcgptracker.wsgi:application --bind 0.0.0.0:8000"]
