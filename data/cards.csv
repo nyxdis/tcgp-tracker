@@ -1127,3 +1127,110 @@ A3a,100,Arcanine ex,Extradimensional Crisis,double_shiny_rare
 A3a,101,Aerodactyl ex,Extradimensional Crisis,double_shiny_rare
 A3a,102,Pidgeot ex,Extradimensional Crisis,double_shiny_rare
 A3a,103,Nihilego,Extradimensional Crisis,crown_rare
+A3b,001,Tropius,Eevee,uncommon
+A3b,002,Leafeon,Eevee,rare
+A3b,003,Bounsweet,Eevee,common
+A3b,004,Steenee,Eevee,common
+A3b,005,Tsareena,Eevee,uncommon
+A3b,006,Applin,Eevee,common
+A3b,007,Appletun,Eevee,uncommon
+A3b,008,Flareon,Eevee,rare
+A3b,009,Flareon ex,Eevee,double_rare
+A3b,010,Torkoal,Eevee,common
+A3b,011,Litten,Eevee,common
+A3b,012,Torracat,Eevee,common
+A3b,013,Incineroar,Eevee,uncommon
+A3b,014,Salandit,Eevee,common
+A3b,015,Salazzle,Eevee,uncommon
+A3b,016,Vaporeon,Eevee,rare
+A3b,017,Glaceon,Eevee,rare
+A3b,018,Vanillite,Eevee,common
+A3b,019,Vanillish,Eevee,common
+A3b,020,Vanilluxe,Eevee,uncommon
+A3b,021,Alomomola,Eevee,common
+A3b,022,Popplio,Eevee,common
+A3b,023,Brionne,Eevee,common
+A3b,024,Primarina ex,Eevee,double_rare
+A3b,025,Jolteon,Eevee,rare
+A3b,026,Joltik,Eevee,common
+A3b,027,Galvantula,Eevee,uncommon
+A3b,028,Espeon,Eevee,rare
+A3b,029,Woobat,Eevee,common
+A3b,030,Swoobat,Eevee,uncommon
+A3b,031,Swirlix,Eevee,common
+A3b,032,Slurpuff,Eevee,uncommon
+A3b,033,Sylveon,Eevee,rare
+A3b,034,Sylveon ex,Eevee,double_rare
+A3b,035,Mimikyu,Eevee,uncommon
+A3b,036,Milcery,Eevee,common
+A3b,037,Alcremie,Eevee,uncommon
+A3b,038,Barboach,Eevee,common
+A3b,039,Whiscash,Eevee,uncommon
+A3b,040,Mienfoo,Eevee,common
+A3b,041,Mienshao,Eevee,uncommon
+A3b,042,Carbink,Eevee,common
+A3b,043,Umbreon,Eevee,rare
+A3b,044,Sableye,Eevee,common
+A3b,045,Purrloin,Eevee,common
+A3b,046,Liepard,Eevee,uncommon
+A3b,047,Mawile,Eevee,common
+A3b,048,Togedemaru,Eevee,common
+A3b,049,Meltan,Eevee,common
+A3b,050,Melmetal,Eevee,uncommon
+A3b,051,Dratini,Eevee,common
+A3b,052,Dragonair,Eevee,common
+A3b,053,Dragonite ex,Eevee,double_rare
+A3b,054,Drampa,Eevee,uncommon
+A3b,055,Eevee,Eevee,common
+A3b,056,Eevee ex,Eevee,double_rare
+A3b,057,Snorlax ex,Eevee,double_rare
+A3b,058,Aipom,Eevee,common
+A3b,059,Ambipom,Eevee,uncommon
+A3b,060,Chatot,Eevee,common
+A3b,061,Audino,Eevee,common
+A3b,062,Minccino,Eevee,common
+A3b,063,Cinccino,Eevee,uncommon
+A3b,064,Skwovet,Eevee,common
+A3b,065,Greedent,Eevee,uncommon
+A3b,066,Eevee Bag,Eevee,uncommon
+A3b,067,Leftovers,Eevee,uncommon
+A3b,068,Hau,Eevee,uncommon
+A3b,069,Penny,Eevee,uncommon
+A3b,070,Leafeon,Eevee,illustration_rare
+A3b,071,Flareon,Eevee,illustration_rare
+A3b,072,Vaporeon,Eevee,illustration_rare
+A3b,073,Glaceon,Eevee,illustration_rare
+A3b,074,Jolteon,Eevee,illustration_rare
+A3b,075,Espeon,Eevee,illustration_rare
+A3b,076,Sylveon,Eevee,illustration_rare
+A3b,077,Umbreon,Eevee,illustration_rare
+A3b,078,Eevee,Eevee,illustration_rare
+A3b,079,Flareon ex,Eevee,special_art
+A3b,080,Primarina ex,Eevee,special_art
+A3b,081,Sylveon ex,Eevee,special_art
+A3b,082,Dragonite ex,Eevee,special_art
+A3b,083,Eevee ex,Eevee,special_art
+A3b,084,Snorlax ex,Eevee,special_art
+A3b,085,Hau,Eevee,special_art
+A3b,086,Penny,Eevee,special_art
+A3b,087,Flareon ex,Eevee,special_art
+A3b,088,Primarina ex,Eevee,special_art
+A3b,089,Sylveon ex,Eevee,special_art
+A3b,090,Dragonite ex,Eevee,special_art
+A3b,091,Snorlax ex,Eevee,special_art
+A3b,092,Eevee ex,Eevee,immersive_rare
+A3b,093,Pinsir,Eevee,shiny_rare
+A3b,094,Lapras,Eevee,shiny_rare
+A3b,095,Voltorb,Eevee,shiny_rare
+A3b,096,Electrode,Eevee,shiny_rare
+A3b,097,Ralts,Eevee,shiny_rare
+A3b,098,Kirlia,Eevee,shiny_rare
+A3b,099,Gardevoir,Eevee,shiny_rare
+A3b,100,Ekans,Eevee,shiny_rare
+A3b,101,Arbok,Eevee,shiny_rare
+A3b,102,Farfetch'd,Eevee,shiny_rare
+A3b,103,Moltres ex,Eevee,double_shiny_rare
+A3b,104,Articuno ex,Eevee,double_shiny_rare
+A3b,105,Zapdos ex,Eevee,double_shiny_rare
+A3b,106,Gallade ex,Eevee,double_shiny_rare
+A3b,107,Eevee Bag,Eevee,crown_rare
