@@ -145,28 +145,24 @@ def set_detail(request, set_number):
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return JsonResponse({"status": "success", "collected": action == "collect"})
         return redirect("set_detail", set_number=set_number)
-    user_cards = {
-        uc.card_id: uc.quantity
-        for uc in UserCard.objects.filter(user=request.user, card__set=set_obj)
-    }
+    user_cards = UserCard.objects.filter(user=request.user, card__set=set_obj)
+    user_cards_dict = {uc.card_id: uc.quantity for uc in user_cards}
     for card in cards:
-        card.collected_quantity = user_cards.get(card.id, 0)
-    rarities = list(
-        Card.objects.values("rarity__name", "rarity__order")
-        .filter(set=set_obj)
-        .distinct()
-        .order_by("rarity__order")
-    )
-    rarities = [
-        {"name": r["rarity__name"], "order": r["rarity__order"]} for r in rarities
-    ]
+        card.collected_quantity = user_cards_dict.get(card.id, 0)
+    # Use _get_sets_with_progress for consistency
+    sets_with_progress = _get_sets_with_progress([set_obj], user_cards, {}, {})
+    set_progress = sets_with_progress[0] if sets_with_progress else {}
     return render(
         request,
         "tracker/set_detail.html",
         {
             "set": set_obj,
             "cards": cards,
-            "rarities": rarities,
+            "rarities": set_progress.get("rarity_progress", {}).keys(),
+            "rarity_progress": set_progress.get("rarity_progress", {}),
+            "collected": set_progress.get("collected", 0),
+            "total": set_progress.get("total", 0),
+            "progress_percent": set_progress.get("progress_percent", 0),
         },
     )
 
