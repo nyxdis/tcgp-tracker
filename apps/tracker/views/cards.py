@@ -149,16 +149,24 @@ def set_detail(request, set_number):
     user_cards_dict = {uc.card_id: uc.quantity for uc in user_cards}
     for card in cards:
         card.collected_quantity = user_cards_dict.get(card.id, 0)
-    # Use _get_sets_with_progress for consistency
     sets_with_progress = _get_sets_with_progress([set_obj], user_cards, {}, {})
     set_progress = sets_with_progress[0] if sets_with_progress else {}
+    rarities = list(
+        Card.objects.filter(set=set_obj)
+        .values("rarity__name", "rarity__order")
+        .distinct()
+        .order_by("rarity__order")
+    )
+    rarities = [
+        {"name": r["rarity__name"], "order": r["rarity__order"]} for r in rarities
+    ]
     return render(
         request,
         "tracker/set_detail.html",
         {
             "set": set_obj,
             "cards": cards,
-            "rarities": set_progress.get("rarity_progress", {}).keys(),
+            "rarities": rarities,
             "rarity_progress": set_progress.get("rarity_progress", {}),
             "collected": set_progress.get("collected", 0),
             "total": set_progress.get("total", 0),
