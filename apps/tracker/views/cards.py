@@ -213,7 +213,15 @@ def pack_list(request):
         best_pack = max(pack_data, key=lambda p: p["chance"])
         best_pack["is_best"] = True
     grouped_packs = defaultdict(list)
-    for entry in sorted(pack_data, key=lambda p: (-p["chance"], p["pack"].name)):
+    # Sort: packs with missing base cards first, then by chance desc, then name
+    for entry in sorted(
+        pack_data,
+        key=lambda p: (
+            not p["incomplete_base"],  # False (missing) sorts before True (complete)
+            -p["chance"],
+            p["pack"].name,
+        ),
+    ):
         grouped_packs[entry["pack"].set].append(entry)
     return render(
         request,
