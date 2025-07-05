@@ -54,19 +54,22 @@
 {% block content %}
   <h2>{{ set.localized_name }}</h2>
   <p>{% trans "Release Date" %}: {{ set.release_date }}</p>
-  <p class="card-text" id="rarity-progress">
+  <p class="card-text d-flex flex-wrap gap-3 align-items-center"
+     id="rarity-progress">
     {% for rarity, data in rarity_progress.items %}
       {% if data.collected > 0 %}
-        <img src="{% static 'tracker/img/'|add:rarity %}"
-             alt="{{ rarity|capfirst|slice:':-5' }}"
-             class="rarity-icon"
-             height="16"
-             width="16" />
-        {% if forloop.first %}
-          {{ data.collected }} / {{ data.total }}
-        {% else %}
-          {{ data.collected }}
-        {% endif %}
+        <span class="d-inline-flex align-items-center gap-1">
+          <img src="{% static 'tracker/img/'|add:rarity %}"
+               alt="{{ rarity|capfirst|slice:':-5' }}"
+               class="rarity-icon"
+               height="16"
+               width="16" />
+          {% if forloop.first %}
+            {{ data.collected }} / {{ data.total }}
+          {% else %}
+            {{ data.collected }}
+          {% endif %}
+        </span>
       {% endif %}
     {% endfor %}
   </p>
