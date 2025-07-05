@@ -54,7 +54,7 @@
 {% block content %}
   <h2>{{ set.localized_name }}</h2>
   <p>{% trans "Release Date" %}: {{ set.release_date }}</p>
-  <p class="card-text">
+  <p class="card-text" id="rarity-progress">
     {% for rarity, data in rarity_progress.items %}
       {% if data.collected > 0 %}
         <img src="{% static 'tracker/img/'|add:rarity %}"
@@ -273,6 +273,17 @@
               statusCell.textContent = "❌";
               row.dataset.action = "collect";
             }
+            // Live update rarity progress
+            fetch(window.location.pathname + "?fragment=rarity_progress")
+              .then(r => r.text())
+              .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, "text/html");
+                const newProgress = doc.getElementById("rarity-progress");
+                if (newProgress) {
+                  document.getElementById("rarity-progress").innerHTML = newProgress.innerHTML;
+                }
+              });
           });
       });
     });
