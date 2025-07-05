@@ -13,6 +13,14 @@
     z-index: 1000;
 }
 
+#floating-back-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 80px;
+    display: none;
+    z-index: 1000;
+}
+
 .sortable {
     cursor: pointer;
 }
@@ -60,4 +68,27 @@
         width: auto !important;
         flex-grow: 0 !important;
     }
+}
+
+.floating-btns {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: none;
+    flex-direction: row;
+    gap: 8px;
+}
+
+@media (max-width: 575.98px) {
+    .floating-btns {
+        right: 10px;
+        bottom: 10px;
+        gap: 4px;
+    }
+}
+
+#scroll-to-top-btn,
+#floating-back-btn {
+    display: inline-block;
 }

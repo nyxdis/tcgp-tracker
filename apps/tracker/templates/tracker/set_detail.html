@@ -110,10 +110,17 @@
   <div class="mt-4 text-center">
     <a href="{% url 'home' %}" class="btn btn-outline-primary">← {% trans "Back" %}</a>
   </div>
-  <!-- Floating Button -->
-  <button id="scroll-to-top-btn" class="btn btn-primary">⬆</button>
+  <!-- Floating Buttons -->
+  <div id="floating-btns" class="floating-btns">
+    <button id="scroll-to-top-btn"
+            class="btn btn-primary"
+            title="{% trans "Scroll to top" %}">⬆</button>
+    <a href="{% url "home" %}"
+       id="floating-back-btn"
+       class="btn btn-outline-primary"
+       title="{% trans "Back" %}">←</a>
+  </div>
   <script>
-    // Rarity order mapping injected from Django context
     window.rarityOrderMap = {
       {% for rarity in rarities %}
         '{{ rarity.name }}': {{ rarity.order }}{% if not forloop.last %},{% endif %}

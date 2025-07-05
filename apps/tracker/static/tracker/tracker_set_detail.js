@@ -170,16 +170,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // Floating button show/hide logic
+  const floatingBtns = document.getElementById("floating-btns");
   const scrollToTopBtn = document.getElementById("scroll-to-top-btn");
-  scrollToTopBtn.addEventListener("click", function () {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+  const floatingBackBtn = document.getElementById("floating-back-btn");
 
-  window.addEventListener("scroll", function () {
+  function updateFloatingBtns() {
     if (window.scrollY > 200) {
-      scrollToTopBtn.style.display = "block";
+      floatingBtns.style.display = "flex";
+      if (scrollToTopBtn) scrollToTopBtn.style.display = "inline-block";
+      if (floatingBackBtn) floatingBackBtn.style.display = "inline-block";
     } else {
-      scrollToTopBtn.style.display = "none";
+      floatingBtns.style.display = "none";
+      if (scrollToTopBtn) scrollToTopBtn.style.display = "none";
+      if (floatingBackBtn) floatingBackBtn.style.display = "none";
     }
-  });
+  }
+  window.addEventListener("scroll", updateFloatingBtns);
+  updateFloatingBtns(); // Initial state
+
+  // Fix: Scroll to top button click handler
+  if (scrollToTopBtn) {
+    scrollToTopBtn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 });
