@@ -12,7 +12,7 @@
                 <div class="col">
                     <a href="{% url 'set_detail' item.pack.set.number %}"
                        class="text-decoration-none text-reset">
-                        <div class="card h-100 {% if item.is_best %}border-success{% endif %}">
+                        <div class="card h-100 {% if item.is_best %}border-success{% endif %}{% if item.incomplete_base %} border-warning border-3{% endif %}">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-2">
                                     <span class="badge bg-primary fs-5 me-2 px-3 py-2">{{ item.chance }} %</span>
@@ -33,6 +33,9 @@
                                 </div>
                                 {% if item.is_best %}
                                     <span class="badge bg-success">{% trans "Best choice" %}</span>
+                                {% endif %}
+                                {% if item.incomplete_base %}
+                                    <span class="badge bg-warning text-dark">{% trans "Base cards missing" %}</span>
                                 {% endif %}
                             </div>
                         </div>

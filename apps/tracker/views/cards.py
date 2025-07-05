@@ -188,12 +188,17 @@ def pack_list(request):
     owned_card_ids = set(
         UserCard.objects.filter(user=request.user).values_list("card_id", flat=True)
     )
+    BASE_RARITIES = {"common", "uncommon", "rare", "double_rare"}
     pack_data = []
     for pack in packs:
         cards = list(pack.cards.all())
         total = len(cards)
         owned = sum(1 for c in cards if c.id in owned_card_ids)
         chance = prob_at_least_one_new_card(pack, request.user) * 100
+        # Find base cards in this pack
+        base_cards = [c for c in cards if c.rarity.name in BASE_RARITIES]
+        owned_base = sum(1 for c in base_cards if c.id in owned_card_ids)
+        incomplete_base = owned_base < len(base_cards)
         pack_data.append(
             {
                 "pack": pack,
@@ -201,6 +206,7 @@ def pack_list(request):
                 "total": total,
                 "owned": owned,
                 "progress_percent": round((owned / total) * 100 if total > 0 else 0, 2),
+                "incomplete_base": incomplete_base,
             }
         )
     if pack_data:

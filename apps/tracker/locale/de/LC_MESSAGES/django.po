@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-19 21:45+0200\n"
+"POT-Creation-Date: 2025-07-05 22:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,45 +89,45 @@ msgstr "Willkommen beim TCGP Tracker!"
 msgid "Which pack should I open?"
 msgstr "Welches Pack sollte ich öffnen?"
 
-#: apps/tracker/templates/tracker/home.html:23
+#: apps/tracker/templates/tracker/home.html:27
 msgid "Search for a card..."
 msgstr "Suche nach einer Karte..."
 
-#: apps/tracker/templates/tracker/home.html:25
+#: apps/tracker/templates/tracker/home.html:31
 #: apps/tracker/templates/tracker/user_search.html:16
 msgid "Search"
 msgstr "Suchen"
 
-#: apps/tracker/templates/tracker/home.html:29
+#: apps/tracker/templates/tracker/home.html:36
 msgid "Search Results"
 msgstr "Suchergebnisse"
 
-#: apps/tracker/templates/tracker/home.html:49
+#: apps/tracker/templates/tracker/home.html:56
 msgid "View Set"
 msgstr "Set ansehen"
 
-#: apps/tracker/templates/tracker/home.html:56
+#: apps/tracker/templates/tracker/home.html:63
 msgid "Uncollect"
 msgstr "Entfernen"
 
-#: apps/tracker/templates/tracker/home.html:59
+#: apps/tracker/templates/tracker/home.html:66
 msgid "Collect"
 msgstr "Sammeln"
 
-#: apps/tracker/templates/tracker/home.html:67
+#: apps/tracker/templates/tracker/home.html:74
 msgid "No cards found matching your search."
 msgstr "Keine Karten gefunden, die deiner Suche entsprechen."
 
-#: apps/tracker/templates/tracker/home.html:70
+#: apps/tracker/templates/tracker/home.html:78
 msgid "Your Set Progress"
 msgstr "Dein Set-Fortschritt"
 
-#: apps/tracker/templates/tracker/home.html:78
+#: apps/tracker/templates/tracker/home.html:86
 #: apps/tracker/templates/tracker/set_detail.html:56
 msgid "Release Date"
 msgstr "Erscheinungsdatum"
 
-#: apps/tracker/templates/tracker/home.html:80
+#: apps/tracker/templates/tracker/home.html:88
 #: apps/tracker/templates/tracker/pack_list.html:23
 msgid "Progress"
 msgstr "Fortschritt"
@@ -137,9 +137,9 @@ msgid "Packs"
 msgstr "Packs"
 
 #: apps/tracker/templates/tracker/pack_list.html:6
-#: apps/tracker/templates/tracker/pack_list.html:45
-#: apps/tracker/templates/tracker/set_detail.html:59
-#: apps/tracker/templates/tracker/set_detail.html:136
+#: apps/tracker/templates/tracker/pack_list.html:48
+#: apps/tracker/templates/tracker/set_detail.html:78
+#: apps/tracker/templates/tracker/set_detail.html:155
 msgid "Back"
 msgstr "Zurück"
 
@@ -150,6 +150,10 @@ msgstr "Chance auf eine neue Karte"
 #: apps/tracker/templates/tracker/pack_list.html:35
 msgid "Best choice"
 msgstr "Beste Wahl"
+
+#: apps/tracker/templates/tracker/pack_list.html:38
+msgid "Base cards missing"
+msgstr "Basiskarten fehlen"
 
 #: apps/tracker/templates/tracker/profile.html:35
 msgid "Your Profile"
@@ -208,41 +212,41 @@ msgstr "Freundschaftsanfrage gesendet"
 msgid "Send Friend Request"
 msgstr "Freundschaftsanfrage senden"
 
-#: apps/tracker/templates/tracker/set_detail.html:62
+#: apps/tracker/templates/tracker/set_detail.html:81
 msgid "Collect all base cards"
 msgstr "Alle Basiskarten sammeln"
 
-#: apps/tracker/templates/tracker/set_detail.html:66
+#: apps/tracker/templates/tracker/set_detail.html:85
 msgid "Jump to"
 msgstr "Zu"
 
-#: apps/tracker/templates/tracker/set_detail.html:71
+#: apps/tracker/templates/tracker/set_detail.html:90
 msgid " cards"
 msgstr "-Karten springen"
 
-#: apps/tracker/templates/tracker/set_detail.html:80
+#: apps/tracker/templates/tracker/set_detail.html:99
 msgid "Search for name or number"
 msgstr "Nach Name oder Nummer suchen"
 
-#: apps/tracker/templates/tracker/set_detail.html:95
+#: apps/tracker/templates/tracker/set_detail.html:114
 msgid "Name"
 msgstr "Name"
 
-#: apps/tracker/templates/tracker/set_detail.html:99
+#: apps/tracker/templates/tracker/set_detail.html:118
 msgid "Rarity"
 msgstr "Seltenheit"
 
-#: apps/tracker/templates/tracker/set_detail.html:103
+#: apps/tracker/templates/tracker/set_detail.html:122
 msgid "Status"
 msgstr "Status"
 
-#: apps/tracker/templates/tracker/set_detail.html:234
+#: apps/tracker/templates/tracker/set_detail.html:253
 msgid "Are you sure you want to uncollect this card?"
 msgstr ""
 "Bist du dir sicher, dass du diese Karte als nicht gesammelt markieren "
 "möchtest?"
 
-#: apps/tracker/templates/tracker/set_detail.html:265
+#: apps/tracker/templates/tracker/set_detail.html:295
 msgid "Are you sure you want to collect all base cards?"
 msgstr ""
 "Bist du dir sicher, dass du alle Basiskarte als gesammelt markieren möchtest?"
