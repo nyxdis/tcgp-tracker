@@ -1,0 +1,63 @@
+/* tracker_set_detail.css: Styles for set_detail.html */
+
+.highlight {
+    --bs-table-bg: lightyellow;
+    transition: background-color 0.5s ease;
+}
+
+#scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    z-index: 1000;
+}
+
+.sortable {
+    cursor: pointer;
+}
+
+.sortable:hover {
+    text-decoration: underline;
+}
+
+.clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.clickable-row:hover,
+.clickable-row:focus {
+    background-color: #e6f2ff !important;
+    outline: 2px solid #339af0;
+}
+
+/* Sticky rarity progress bar styles */
+#rarity-progress.sticky-top {
+    box-shadow: 0 2px 8px -4px rgba(0, 0, 0, 0.08);
+    z-index: 1020;
+    top: 56px;
+    border-bottom: 1px solid #eee;
+}
+
+@media (max-width: 575.98px) {
+    #rarity-progress.sticky-top {
+        top: 0 !important;
+    }
+}
+
+@media (min-width: 576px) {
+    .d-flex.flex-sm-row .btn.w-100.w-sm-auto {
+        width: auto !important;
+        min-width: 180px;
+    }
+
+    .d-flex.flex-sm-row .btn.flex-sm-shrink-0 {
+        flex-shrink: 0 !important;
+    }
+
+    .d-flex.flex-sm-row .d-flex.flex-sm-row {
+        width: auto !important;
+        flex-grow: 0 !important;
+    }
+}
