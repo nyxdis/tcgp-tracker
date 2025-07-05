@@ -15,58 +15,66 @@
     <div class="mb-4">
         <a href="{% url "pack_list" %}" class="btn btn-success">{% trans "Which pack should I open?" %}</a>
     </div>
-    <form method="get" class="mb-4" action="">
+    <form method="get"
+          class="mb-4"
+          action=""
+          id="live-search-form"
+          autocomplete="off">
         <div class="input-group">
             <input type="text"
                    name="q"
                    class="form-control"
                    placeholder="{% trans "Search for a card..." %}"
-                   value="{{ search_query|default:'' }}">
+                   value="{{ search_query|default:'' }}"
+                   id="live-search-input"
+                   autocomplete="off">
             <button class="btn btn-primary" type="submit">{% trans "Search" %}</button>
         </div>
     </form>
-    {% if search_query %}
-        <h2>{% trans "Search Results" %}</h2>
-        {% if search_results %}
-            <ul class="list-group mb-4">
-                {% for card in search_results %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>
-                            <strong>{{ card.localized_name }}</strong>
-                            <span class="text-muted">#{{ card.number }}</span>
-                            ({{ card.set.localized_name }})
-                            <span class="ms-2">
-                                {% for _ in ""|center:card.rarity.repeat_count %}
-                                    <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}"
-                                         alt="{{ card.rarity.display_name }}"
-                                         width="24"
-                                         height="24" />
-                                {% endfor %}
+    <div id="search-results-section">
+        {% if search_query %}
+            <h2>{% trans "Search Results" %}</h2>
+            {% if search_results %}
+                <ul class="list-group mb-4">
+                    {% for card in search_results %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>
+                                <strong>{{ card.localized_name }}</strong>
+                                <span class="text-muted">#{{ card.number }}</span>
+                                ({{ card.set.localized_name }})
+                                <span class="ms-2">
+                                    {% for _ in ""|center:card.rarity.repeat_count %}
+                                        <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}"
+                                             alt="{{ card.rarity.display_name }}"
+                                             width="24"
+                                             height="24" />
+                                    {% endfor %}
+                                </span>
                             </span>
-                        </span>
-                        <div class="btn-group ms-2" role="group">
-                            <a href="{% url "set_detail" card.set.number %}"
-                               class="btn btn-secondary btn-sm">{% trans "View Set" %}</a>
-                            <form method="post" action="" class="mb-0 ms-2 d-inline">
-                                {% csrf_token %}
-                                <input type="hidden" name="card_id" value="{{ card.id }}">
-                                {% if search_query %}<input type="hidden" name="q" value="{{ search_query }}">{% endif %}
-                                {% if card.id in user_card_ids %}
-                                    <input type="hidden" name="action" value="uncollect">
-                                    <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Uncollect" %}</button>
-                                {% else %}
-                                    <input type="hidden" name="action" value="collect">
-                                    <button type="submit" class="btn btn-outline-primary btn-sm">{% trans "Collect" %}</button>
-                                {% endif %}
-                            </form>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <div class="alert alert-warning">{% trans "No cards found matching your search." %}</div>
+                            <div class="btn-group ms-2" role="group">
+                                <a href="{% url "set_detail" card.set.number %}"
+                                   class="btn btn-secondary btn-sm">{% trans "View Set" %}</a>
+                                <form method="post" action="" class="mb-0 ms-2 d-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="card_id" value="{{ card.id }}">
+                                    {% if search_query %}<input type="hidden" name="q" value="{{ search_query }}">{% endif %}
+                                    {% if card.id in user_card_ids %}
+                                        <input type="hidden" name="action" value="uncollect">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Uncollect" %}</button>
+                                    {% else %}
+                                        <input type="hidden" name="action" value="collect">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">{% trans "Collect" %}</button>
+                                    {% endif %}
+                                </form>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="alert alert-warning">{% trans "No cards found matching your search." %}</div>
+            {% endif %}
         {% endif %}
-    {% endif %}
+    </div>
     <h2>{% trans "Your Set Progress" %}</h2>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for entry in sets %}
@@ -109,4 +117,35 @@
             </div>
         {% endfor %}
     </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const input = document.getElementById("live-search-input");
+      const form = document.getElementById("live-search-form");
+      const searchSection = document.getElementById("search-results-section");
+      let timeout = null;
+      let lastQuery = input.value;
+      input.addEventListener("input", function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          const query = input.value.trim();
+          if (query === lastQuery) return;
+          lastQuery = query;
+          const params = new URLSearchParams(form.action.split('?')[1] || '');
+          params.set('q', query);
+          fetch(window.location.pathname + '?' + params.toString(), {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+          })
+            .then(r => r.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, "text/html");
+              const newSection = doc.getElementById("search-results-section");
+              if (newSection && searchSection) {
+                searchSection.innerHTML = newSection.innerHTML;
+              }
+            });
+        }, 300);
+      });
+    });
+    </script>
 {% endblock content %}
