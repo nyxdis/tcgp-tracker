@@ -1234,3 +1234,244 @@ A3b,104,Articuno ex,Eevee,double_shiny_rare
 A3b,105,Zapdos ex,Eevee,double_shiny_rare
 A3b,106,Gallade ex,Eevee,double_shiny_rare
 A3b,107,Eevee Bag,Eevee,crown_rare
+A4,001,Oddish,Lugia,common
+A4,002,Gloom,Lugia,uncommon
+A4,003,Bellossom,Lugia,rare
+A4,004,Tangela,Ho-Oh,common
+A4,005,Tangrowth,Ho-Oh,rare
+A4,006,Scyther,Lugia,common
+A4,007,Pinsir,Lugia,common
+A4,008,Chikorita,Lugia,common
+A4,009,Bayleef,Lugia,uncommon
+A4,010,Meganium,Lugia,rare
+A4,011,Ledyba,Lugia,common
+A4,012,Ledian,Lugia,common
+A4,013,Hoppip,Ho-Oh,common
+A4,014,Skiploom,Ho-Oh,uncommon
+A4,015,Jumpluff,Ho-Oh,rare
+A4,016,Sunkern,Ho-Oh|Lugia,common
+A4,017,Sunflora,Ho-Oh|Lugia,uncommon
+A4,018,Yanma,Ho-Oh|Lugia,common
+A4,019,Yanmega,Ho-Oh|Lugia,uncommon
+A4,020,Pineco,Ho-Oh|Lugia,common
+A4,021,Shuckle ex,Lugia,double_rare
+A4,022,Heracross,Ho-Oh,rare
+A4,023,Cherubi,Ho-Oh|Lugia,common
+A4,024,Cherrim,Ho-Oh|Lugia,uncommon
+A4,025,Vulpix,Lugia,common
+A4,026,Ninetales,Lugia,rare
+A4,027,Cyndaquil,Lugia,common
+A4,028,Quilava,Lugia,uncommon
+A4,029,Typhlosion,Lugia,rare
+A4,030,Slugma,Ho-Oh,common
+A4,031,Magcargo,Ho-Oh,uncommon
+A4,032,Magby,Ho-Oh,rare
+A4,033,Entei,Ho-Oh,rare
+A4,034,Ho-Oh ex,Ho-Oh,double_rare
+A4,035,Darumaka,Ho-Oh|Lugia,common
+A4,036,Darmanitan,Ho-Oh|Lugia,uncommon
+A4,037,Heatmor,Ho-Oh|Lugia,common
+A4,038,Poliwag,Lugia,common
+A4,039,Poliwhirl,Lugia,uncommon
+A4,040,Politoed,Lugia,rare
+A4,041,Horsea,Lugia,common
+A4,042,Seadra,Lugia,uncommon
+A4,043,Kingdra ex,Lugia,double_rare
+A4,044,Magikarp,Lugia,common
+A4,045,Gyarados,Lugia,rare
+A4,046,Totodile,Ho-Oh,common
+A4,047,Croconaw,Ho-Oh,uncommon
+A4,048,Feraligatr,Ho-Oh,rare
+A4,049,Marill,Ho-Oh,common
+A4,050,Azumarill,Ho-Oh,uncommon
+A4,051,Wooper,Lugia,common
+A4,052,Quagsire,Lugia,uncommon
+A4,053,Qwilfish,Lugia,uncommon
+A4,054,Corsola,Lugia,common
+A4,055,Remoraid,Lugia,common
+A4,056,Octillery,Lugia,rare
+A4,057,Delibird,Ho-Oh,uncommon
+A4,058,Mantine,Lugia,uncommon
+A4,059,Suicune,Lugia,rare
+A4,060,Corphish,Lugia,common
+A4,061,Crawdaunt,Lugia,rare
+A4,062,Ducklett,Ho-Oh,common
+A4,063,Swanna,Ho-Oh,uncommon
+A4,064,Chinchou,Lugia,common
+A4,065,Lanturn ex,Lugia,double_rare
+A4,066,Pichu,Lugia,rare
+A4,067,Mareep,Lugia,common
+A4,068,Flaaffy,Lugia,uncommon
+A4,069,Ampharos,Lugia,rare
+A4,070,Elekid,Lugia,rare
+A4,071,Raikou,Ho-Oh,rare
+A4,072,Emolga,Ho-Oh|Lugia,common
+A4,073,Slowpoke,Lugia,common
+A4,074,Slowking,Lugia,uncommon
+A4,075,Smoochum,Ho-Oh,rare
+A4,076,Jynx,Ho-Oh|Lugia,common
+A4,077,Cleffa,Lugia,rare
+A4,078,Togepi,Ho-Oh,common
+A4,079,Togetic,Ho-Oh,uncommon
+A4,080,Togekiss,Ho-Oh,rare
+A4,081,Natu,Lugia,common
+A4,082,Xatu,Lugia,rare
+A4,083,Espeon ex,Lugia,double_rare
+A4,084,Unown,Ho-Oh,rare
+A4,085,Unown,Lugia,rare
+A4,086,Wobbuffet,Lugia,common
+A4,087,Girafarig,Ho-Oh,common
+A4,088,Snubbull,Ho-Oh|Lugia,common
+A4,089,Granbull,Ho-Oh|Lugia,uncommon
+A4,090,Munna,Ho-Oh|Lugia,common
+A4,091,Musharna,Ho-Oh|Lugia,uncommon
+A4,092,Onix,Ho-Oh,common
+A4,093,Sudowoodo,Ho-Oh|Lugia,common
+A4,094,Gligar,Ho-Oh,common
+A4,095,Gliscor,Ho-Oh,uncommon
+A4,096,Swinub,Ho-Oh,common
+A4,097,Piloswine,Ho-Oh,uncommon
+A4,098,Mamoswine,Ho-Oh,rare
+A4,099,Phanpy,Ho-Oh,common
+A4,100,Donphan ex,Ho-Oh,double_rare
+A4,101,Tyrogue,Ho-Oh,rare
+A4,102,Hitmontop,Ho-Oh|Lugia,common
+A4,103,Larvitar,Ho-Oh,common
+A4,104,Pupitar,Ho-Oh,uncommon
+A4,105,Binacle,Lugia,common
+A4,106,Barbaracle,Lugia,uncommon
+A4,107,Zubat,Ho-Oh,common
+A4,108,Golbat,Ho-Oh,uncommon
+A4,109,Crobat ex,Ho-Oh,double_rare
+A4,110,Spinarak,Ho-Oh,common
+A4,111,Ariados,Ho-Oh,uncommon
+A4,112,Umbreon ex,Ho-Oh,double_rare
+A4,113,Murkrow,Lugia,common
+A4,114,Honchkrow,Lugia,uncommon
+A4,115,Sneasel,Lugia,common
+A4,116,Weavile,Lugia,uncommon
+A4,117,Houndour,Ho-Oh|Lugia,common
+A4,118,Houndoom,Ho-Oh|Lugia,uncommon
+A4,119,Tyranitar,Ho-Oh,rare
+A4,120,Absol,Ho-Oh|Lugia,uncommon
+A4,121,Forretress,Ho-Oh|Lugia,uncommon
+A4,122,Steelix,Ho-Oh,rare
+A4,123,Scizor,Lugia,rare
+A4,124,Skarmory ex,Ho-Oh,double_rare
+A4,125,Mawile,Ho-Oh|Lugia,common
+A4,126,Klink,Ho-Oh,common
+A4,127,Klang,Ho-Oh,uncommon
+A4,128,Klinklang,Ho-Oh,rare
+A4,129,Spearow,Ho-Oh,common
+A4,130,Fearow,Ho-Oh,common
+A4,131,Chansey,Ho-Oh,common
+A4,132,Blissey,Ho-Oh,rare
+A4,133,Kangaskhan,Ho-Oh,rare
+A4,134,Eevee,Ho-Oh|Lugia,common
+A4,135,Porygon,Lugia,common
+A4,136,Porygon2,Lugia,uncommon
+A4,137,Porygon-Z,Lugia,rare
+A4,138,Sentret,Ho-Oh,common
+A4,139,Furret,Ho-Oh,common
+A4,140,Hoothoot,Ho-Oh,common
+A4,141,Noctowl,Ho-Oh,common
+A4,142,Aipom,Ho-Oh|Lugia,common
+A4,143,Ambipom,Ho-Oh|Lugia,common
+A4,144,Dunsparce,Ho-Oh|Lugia,common
+A4,145,Teddiursa,Ho-Oh,common
+A4,146,Ursaring,Ho-Oh,uncommon
+A4,147,Stantler,Ho-Oh,uncommon
+A4,148,Smeargle,Lugia,uncommon
+A4,149,Lugia ex,Lugia,double_rare
+A4,150,Bouffalant,Ho-Oh|Lugia,uncommon
+A4,151,Elemental Switch,Lugia,uncommon
+A4,152,Squirt Bottle,Lugia,uncommon
+A4,153,Steel Apron,Ho-Oh,uncommon
+A4,154,Dark Pendant,Ho-Oh,uncommon
+A4,155,Rescue Scarf,Ho-Oh|Lugia,uncommon
+A4,156,Will,Lugia,uncommon
+A4,157,Lyra,Lugia,uncommon
+A4,158,Silver,Ho-Oh,uncommon
+A4,159,Fisher,Lugia,uncommon
+A4,160,Jasmine,Ho-Oh,uncommon
+A4,161,Hiker,Ho-Oh,uncommon
+A4,162,Chikorita,Lugia,illustration_rare
+A4,163,Bellossom,Lugia,illustration_rare
+A4,164,Heracross,Ho-Oh,illustration_rare
+A4,165,Cyndaquil,Lugia,illustration_rare
+A4,166,Magby,Ho-Oh,illustration_rare
+A4,167,Totodile,Ho-Oh,illustration_rare
+A4,168,Qwilfish,Lugia,illustration_rare
+A4,169,Octillery,Lugia,illustration_rare
+A4,170,Delibird,Ho-Oh,illustration_rare
+A4,171,Pichu,Lugia,illustration_rare
+A4,172,Ampharos,Lugia,illustration_rare
+A4,173,Togepi,Ho-Oh,illustration_rare
+A4,174,Xatu,Lugia,illustration_rare
+A4,175,Wobbuffet,Lugia,illustration_rare
+A4,176,Gligar,Ho-Oh,illustration_rare
+A4,177,Spinarak,Ho-Oh,illustration_rare
+A4,178,Murkrow,Lugia,illustration_rare
+A4,179,Tyranitar,Ho-Oh,illustration_rare
+A4,180,Scizor,Lugia,illustration_rare
+A4,181,Sentret,Ho-Oh,illustration_rare
+A4,182,Hoothoot,Ho-Oh,illustration_rare
+A4,183,Stantler,Ho-Oh,illustration_rare
+A4,184,Smeargle,Lugia,illustration_rare
+A4,185,Blissey,Ho-Oh,illustration_rare
+A4,186,Shuckle ex,Lugia,special_art
+A4,187,Ho-Oh ex,Ho-Oh,special_art
+A4,188,Kingdra ex,Lugia,special_art
+A4,189,Lanturn ex,Lugia,special_art
+A4,190,Espeon ex,Lugia,special_art
+A4,191,Donphan ex,Ho-Oh,special_art
+A4,192,Crobat ex,Ho-Oh,special_art
+A4,193,Umbreon ex,Ho-Oh,special_art
+A4,194,Skarmory ex,Ho-Oh,special_art
+A4,195,Lugia ex,Lugia,special_art
+A4,196,Will,Lugia,special_art
+A4,197,Lyra,Lugia,special_art
+A4,198,Silver,Ho-Oh,special_art
+A4,199,Fisher,Lugia,special_art
+A4,200,Jasmine,Ho-Oh,special_art
+A4,201,Hiker,Ho-Oh,special_art
+A4,202,Shuckle ex,Lugia,special_art
+A4,203,Kingdra ex,Lugia,special_art
+A4,204,Lanturn ex,Lugia,special_art
+A4,205,Espeon ex,Lugia,special_art
+A4,206,Donphan ex,Ho-Oh,special_art
+A4,207,Crobat ex,Ho-Oh,special_art
+A4,208,Umbreon ex,Ho-Oh,special_art
+A4,209,Skarmory ex,Ho-Oh,special_art
+A4,210,Ho-Oh ex,Ho-Oh,immersive_rare
+A4,211,Lugia ex,Lugia,immersive_rare
+A4,212,Yanma,Ho-Oh,shiny_rare
+A4,213,Flareon,Ho-Oh,shiny_rare
+A4,214,Magikarp,Lugia,shiny_rare
+A4,215,Gyarados,Lugia,shiny_rare
+A4,216,Vaporeon,Lugia,shiny_rare
+A4,217,Magnemite,Lugia,shiny_rare
+A4,218,Magneton,Lugia,shiny_rare
+A4,219,Jolteon,Lugia,shiny_rare
+A4,220,Misdreavus,Ho-Oh,shiny_rare
+A4,221,Mankey,Ho-Oh,shiny_rare
+A4,222,Primeape,Ho-Oh,shiny_rare
+A4,223,Nidoran♀,Lugia,shiny_rare
+A4,224,Nidorina,Lugia,shiny_rare
+A4,225,Nidoqueen,Lugia,shiny_rare
+A4,226,Nidoran♂,Ho-Oh,shiny_rare
+A4,227,Nidorino,Ho-Oh,shiny_rare
+A4,228,Nidoking,Ho-Oh,shiny_rare
+A4,229,Sneasel,Lugia,shiny_rare
+A4,230,Lickitung,Ho-Oh,shiny_rare
+A4,231,Eevee,Ho-Oh,shiny_rare
+A4,232,Yanmega ex,Ho-Oh,double_shiny_rare
+A4,233,Leafon ex,Ho-Oh,double_shiny_rare
+A4,234,Gyarados ex,Lugia,double_shiny_rare
+A4,235,Glaceon ex,Lugia,double_shiny_rare
+A4,236,Pachirisu ex,Lugia,double_shiny_rare
+A4,237,Mismagius ex,Ho-Oh,double_shiny_rare
+A4,238,Weavile ex,Lugia,double_shiny_rare
+A4,239,Lickilicky ex,Ho-Oh,double_shiny_rare
+A4,240,Ho-Oh ex,Ho-Oh|Lugia,crown_rare
+A4,241,Lugia ex,Ho-Oh|Lugia,crown_rare
