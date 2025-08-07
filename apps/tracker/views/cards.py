@@ -76,10 +76,25 @@ def home(request):
 def _get_sets_with_progress(sets, user_cards, progress_dict, total_dict):
     """Helper to calculate set progress and rarity stats."""
     sets_with_progress = []
-    rarities = Card.objects.values("rarity__image_name", "rarity__name").distinct()
-    rarity_groups = defaultdict(list)
+    rarities = Card.objects.values(
+        "rarity__image_name", "rarity__name", "rarity__order"
+    ).distinct()
+    # Build a mapping from image_name to (order, [names])
+    rarity_groups = defaultdict(lambda: {"order": 999, "names": []})
     for rarity in rarities:
-        rarity_groups[rarity["rarity__image_name"]].append(rarity["rarity__name"])
+        group = rarity_groups[rarity["rarity__image_name"]]
+        group["names"].append(rarity["rarity__name"])
+        # Use the lowest order found for the group
+        if "rarity__order" in rarity and rarity["rarity__order"] is not None:
+            group["order"] = min(group["order"], rarity["rarity__order"])
+    # Now sort rarity_groups by order
+    sorted_rarity_groups = dict(
+        sorted(
+            ((k, v["names"]) for k, v in rarity_groups.items()),
+            key=lambda item: rarity_groups[item[0]]["order"],
+        )
+    )
+    rarity_groups = sorted_rarity_groups
     rarity_totals = {}
     for group_name, rarity_names in rarity_groups.items():
         group_totals = (
