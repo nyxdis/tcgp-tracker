@@ -1475,3 +1475,108 @@ A4,238,Weavile ex,Lugia,double_shiny_rare
 A4,239,Lickilicky ex,Ho-Oh,double_shiny_rare
 A4,240,Ho-Oh ex,Ho-Oh|Lugia,crown_rare
 A4,241,Lugia ex,Ho-Oh|Lugia,crown_rare
+A4a,001,Hoppip,Suicune,common
+A4a,002,Skiploom,Suicune,uncommon
+A4a,003,Jumpluff ex,Suicune,double_rare
+A4a,004,Sunkern,Suicune,common
+A4a,005,Sunflora,Suicune,uncommon
+A4a,006,Celebi,Suicune,rare
+A4a,007,Durant,Suicune,common
+A4a,008,Slugma,Suicune,common
+A4a,009,Magcargo,Suicune,uncommon
+A4a,010,Entei ex,Suicune,double_rare
+A4a,011,Fletchinder,Suicune,common
+A4a,012,Talonflame,Suicune,uncommon
+A4a,013,Poliwag,Suicune,common
+A4a,014,Poliwhirl,Suicune,uncommon
+A4a,015,Tentacool,Suicune,common
+A4a,016,Tentacruel,Suicune,uncommon
+A4a,017,Slowpoke,Suicune,common
+A4a,018,Slowking,Suicune,uncommon
+A4a,019,Jynx,Suicune,common
+A4a,020,Suicune ex,Suicune,double_rare
+A4a,021,Feebas,Suicune,common
+A4a,022,Milotic,Suicune,rare
+A4a,023,Mantyke,Suicune,rare
+A4a,024,Cryogonal,Suicune,common
+A4a,025,Raikou ex,Suicune,double_rare
+A4a,026,Tynamo,Suicune,common
+A4a,027,Eelektrik,Suicune,common
+A4a,028,Eelektross,Suicune,uncommon
+A4a,029,Stunfisk,Suicune,common
+A4a,030,Yamper,Suicune,common
+A4a,031,Boltund,Suicune,rare
+A4a,032,Misdreavus,Suicune,common
+A4a,033,Mismagius,Suicune,uncommon
+A4a,034,Galarian Corsola,Suicune,common
+A4a,035,Galarian Cursola,Suicune,rare
+A4a,036,Latias,Suicune,rare
+A4a,037,Latios,Suicune,rare
+A4a,038,Frillish,Suicune,common
+A4a,039,Jellicent,Suicune,uncommon
+A4a,040,Diglett,Suicune,common
+A4a,041,Dugtrio,Suicune,uncommon
+A4a,042,Poliwrath ex,Suicune,double_rare
+A4a,043,Phanpy,Suicune,common
+A4a,044,Donphan,Suicune,uncommon
+A4a,045,Relicanth,Suicune,common
+A4a,046,Dwebble,Suicune,common
+A4a,047,Crustle,Suicune,uncommon
+A4a,048,Seviper,Suicune,common
+A4a,049,Zorua,Suicune,common
+A4a,050,Zoroark,Suicune,rare
+A4a,051,Inkay,Suicune,common
+A4a,052,Malamar,Suicune,uncommon
+A4a,053,Skrelp,Suicune,common
+A4a,054,Dragalge,Suicune,common
+A4a,055,Altaria,Suicune,rare
+A4a,056,Farfetch'd,Suicune,common
+A4a,057,Lickitung,Suicune,common
+A4a,058,Lickilicky,Suicune,uncommon
+A4a,059,Igglybuff,Suicune,rare
+A4a,060,Teddiursa,Suicune,common
+A4a,061,Ursaring,Suicune,uncommon
+A4a,062,Miltank,Suicune,uncommon
+A4a,063,Azurill,Suicune,rare
+A4a,064,Swablu,Suicune,common
+A4a,065,Zangoose,Suicune,uncommon
+A4a,066,Fletchling,Suicune,common
+A4a,067,Inflatable Boat,Suicune,uncommon
+A4a,068,Memory Light,Suicune,uncommon
+A4a,069,Whitney,Suicune,uncommon
+A4a,070,Traveling Merchant,Suicune,uncommon
+A4a,071,Morty,Suicune,uncommon
+A4a,072,Milotic,Suicune,illustration_rare
+A4a,073,Stunfisk,Suicune,illustration_rare
+A4a,074,Yamper,Suicune,illustration_rare
+A4a,075,Phanpy,Suicune,illustration_rare
+A4a,076,Latias,Suicune,illustration_rare
+A4a,077,Azurill,Suicune,illustration_rare
+A4a,078,Jumpluff ex,Suicune,special_art
+A4a,079,Entei ex,Suicune,special_art
+A4a,080,Suicune ex,Suicune,special_art
+A4a,081,Raikou ex,Suicune,special_art
+A4a,082,Poliwrath ex,Suicune,special_art
+A4a,083,Whitney,Suicune,special_art
+A4a,084,Traveling Merchant,Suicune,special_art
+A4a,085,Morty,Suicune,special_art
+A4a,086,Jumpluff ex,Suicune,special_art
+A4a,087,Entei ex,Suicune,special_art
+A4a,088,Suicune ex,Suicune,special_art
+A4a,089,Poliwrath ex,Suicune,special_art
+A4a,090,Suicune ex,Suicune,immersive_rare
+A4a,091,Chimchar,Suicune,shiny_rare
+A4a,092,Monferno,Suicune,shiny_rare
+A4a,093,Psyduck,Suicune,shiny_rare
+A4a,094,Golduck,Suicune,shiny_rare
+A4a,095,Krabby,Suicune,shiny_rare
+A4a,096,Kingler,Suicune,shiny_rare
+A4a,097,Pyukumuku,Suicune,shiny_rare
+A4a,098,Gible,Suicune,shiny_rare
+A4a,099,Gabite,Suicune,shiny_rare
+A4a,100,Paldean Wooper,Suicune,shiny_rare
+A4a,101,Infernape ex,Suicune,double_shiny_rare
+A4a,102,Garchomp ex,Suicune,double_shiny_rare
+A4a,103,Mew ex,Suicune,double_shiny_rare
+A4a,104,Paldean Clodsire ex,Suicune,double_shiny_rare
+A4a,105,Mantyke,Suicune,crown_rare
