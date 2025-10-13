@@ -1580,3 +1580,382 @@ A4a,103,Mew ex,Suicune,double_shiny_rare
 A4a,102,Garchomp ex,Suicune,double_shiny_rare
 A4a,104,Paldean Clodsire ex,Suicune,double_shiny_rare
 A4a,105,Mantyke,Suicune,crown_rare
+A4b,001,Bulbasaur,Deluxepack,common
+A4b,002,Bulbasaur,Deluxepack,common
+A4b,003,Ivysaur,Deluxepack,uncommon
+A4b,004,Ivysaur,Deluxepack,uncommon
+A4b,005,Venusaur ex,Deluxepack,double_rare
+A4b,006,Weedle,Deluxepack,common
+A4b,007,Weedle,Deluxepack,common
+A4b,008,Kakuna,Deluxepack,uncommon
+A4b,009,Kakuna,Deluxepack,uncommon
+A4b,010,Beedrill ex,Deluxepack,double_rare
+A4b,011,Exeggcute,Deluxepack,common
+A4b,012,Exeggcute,Deluxepack,common
+A4b,013,Exeggutor ex,Deluxepack,double_rare
+A4b,014,Hoppip,Deluxepack,common
+A4b,015,Hoppip,Deluxepack,common
+A4b,016,Skiploom,Deluxepack,uncommon
+A4b,017,Skiploom,Deluxepack,uncommon
+A4b,018,Jumpluff,Deluxepack,rare
+A4b,019,Jumpluff,Deluxepack,rare
+A4b,020,Yanma,Deluxepack,common
+A4b,021,Yanma,Deluxepack,common
+A4b,022,Yanmega ex,Deluxepack,double_rare
+A4b,023,Shuckle ex,Deluxepack,double_rare
+A4b,024,Celebi ex,Deluxepack,double_rare
+A4b,025,Cherubi,Deluxepack,common
+A4b,026,Cherubi,Deluxepack,common
+A4b,027,Cherrim,Deluxepack,uncommon
+A4b,028,Cherrim,Deluxepack,uncommon
+A4b,029,Leafeon ex,Deluxepack,double_rare
+A4b,030,Shaymin,Deluxepack,rare
+A4b,031,Shaymin,Deluxepack,rare
+A4b,032,Snivy,Deluxepack,common
+A4b,033,Snivy,Deluxepack,common
+A4b,034,Servine,Deluxepack,uncommon
+A4b,035,Servine,Deluxepack,uncommon
+A4b,036,Serperior,Deluxepack,rare
+A4b,037,Serperior,Deluxepack,rare
+A4b,038,Rowlet,Deluxepack,common
+A4b,039,Rowlet,Deluxepack,common
+A4b,040,Dartrix,Deluxepack,uncommon
+A4b,041,Dartrix,Deluxepack,uncommon
+A4b,042,Decidueye ex,Deluxepack,double_rare
+A4b,043,Dhelmise ex,Deluxepack,double_rare
+A4b,044,Buzzwole ex,Deluxepack,double_rare
+A4b,045,Pheromosa,Deluxepack,uncommon
+A4b,046,Pheromosa,Deluxepack,uncommon
+A4b,047,Kartana,Deluxepack,common
+A4b,048,Kartana,Deluxepack,common
+A4b,049,Sprigatito,Deluxepack,common
+A4b,050,Sprigatito,Deluxepack,common
+A4b,051,Floragato,Deluxepack,uncommon
+A4b,052,Floragato,Deluxepack,uncommon
+A4b,053,Meowscarada,Deluxepack,rare
+A4b,054,Meowscarada,Deluxepack,rare
+A4b,055,Charmander,Deluxepack,common
+A4b,056,Charmander,Deluxepack,common
+A4b,057,Charmeleon,Deluxepack,uncommon
+A4b,058,Charmeleon,Deluxepack,uncommon
+A4b,059,Charizard ex,Deluxepack,double_rare
+A4b,060,Charizard ex,Deluxepack,double_rare
+A4b,061,Growlithe,Deluxepack,common
+A4b,062,Growlithe,Deluxepack,uncommon
+A4b,063,Arcanine ex,Deluxepack,double_rare
+A4b,064,Flareon,Deluxepack,rare
+A4b,065,Flareon,Deluxepack,rare
+A4b,066,Flareon ex,Deluxepack,double_rare
+A4b,067,Moltres ex,Deluxepack,double_rare
+A4b,068,Ho-Oh ex,Deluxepack,double_rare
+A4b,069,Torkoal,Deluxepack,common
+A4b,070,Torkoal,Deluxepack,common
+A4b,071,Chimchar,Deluxepack,common
+A4b,072,Chimchar,Deluxepack,common
+A4b,073,Monferno,Deluxepack,uncommon
+A4b,074,Monferno,Deluxepack,uncommon
+A4b,075,Infernape ex,Deluxepack,double_rare
+A4b,076,Heatran,Deluxepack,rare
+A4b,077,Heatran,Deluxepack,rare
+A4b,078,Litten,Deluxepack,common
+A4b,079,Litten,Deluxepack,common
+A4b,080,Torracat,Deluxepack,uncommon
+A4b,081,Torracat,Deluxepack,uncommon
+A4b,082,Incineroar ex,Deluxepack,double_rare
+A4b,083,Squirtle,Deluxepack,common
+A4b,084,Squirtle,Deluxepack,common
+A4b,085,Wartortle,Deluxepack,uncommon
+A4b,086,Wartortle,Deluxepack,uncommon
+A4b,087,Blastoise ex,Deluxepack,double_rare
+A4b,088,Horsea,Deluxepack,common
+A4b,089,Horsea,Deluxepack,common
+A4b,090,Seadra,Deluxepack,uncommon
+A4b,091,Seadra,Deluxepack,uncommon
+A4b,092,Kingdra ex,Deluxepack,double_rare
+A4b,093,Staryu,Deluxepack,common
+A4b,094,Staryu,Deluxepack,common
+A4b,095,Starmie ex,Deluxepack,double_rare
+A4b,096,Magikarp,Deluxepack,common
+A4b,097,Magikarp,Deluxepack,common
+A4b,098,Gyarados ex,Deluxepack,double_rare
+A4b,099,Vaporeon,Deluxepack,rare
+A4b,100,Vaporeon,Deluxepack,rare
+A4b,101,Articuno ex,Deluxepack,double_rare
+A4b,102,Corphish,Deluxepack,common
+A4b,103,Corphish,Deluxepack,common
+A4b,104,Crawdaunt,Deluxepack,rare
+A4b,105,Crawdaunt,Deluxepack,rare
+A4b,106,Glaceon ex,Deluxepack,double_rare
+A4b,107,Palkia ex,Deluxepack,double_rare
+A4b,108,Manaphy,Deluxepack,uncommon
+A4b,109,Manaphy,Deluxepack,uncommon
+A4b,110,Froakie,Deluxepack,common
+A4b,111,Froakie,Deluxepack,common
+A4b,112,Frogadier,Deluxepack,uncommon
+A4b,113,Frogadier,Deluxepack,uncommon
+A4b,114,Greninja,Deluxepack,rare
+A4b,115,Greninja,Deluxepack,rare
+A4b,116,Popplio,Deluxepack,common
+A4b,117,Popplio,Deluxepack,common
+A4b,118,Brionne,Deluxepack,common
+A4b,119,Brionne,Deluxepack,common
+A4b,120,Primarina ex,Deluxepack,double_rare
+A4b,121,Crabominable ex,Deluxepack,double_rare
+A4b,122,Wishiwashi,Deluxepack,common
+A4b,123,Wishiwashi,Deluxepack,common
+A4b,124,Wishiwashi ex,Deluxepack,double_rare
+A4b,125,Wiglett,Deluxepack,common
+A4b,126,Wiglett,Deluxepack,common
+A4b,127,Wugtrio ex,Deluxepack,double_rare
+A4b,128,Pikachu,Deluxepack,common
+A4b,129,Pikachu,Deluxepack,common
+A4b,130,Alolan Raichu ex,Deluxepack,double_rare
+A4b,131,Pikachu ex,Deluxepack,double_rare
+A4b,132,Pikachu ex,Deluxepack,double_rare
+A4b,133,Magnemite,Deluxepack,common
+A4b,134,Magnemite,Deluxepack,common
+A4b,135,Magneton,Deluxepack,rare
+A4b,136,Magneton,Deluxepack,rare
+A4b,137,Magnezone,Deluxepack,rare
+A4b,138,Magnezone,Deluxepack,rare
+A4b,139,Zapdos ex,Deluxepack,double_rare
+A4b,140,Chinchou,Deluxepack,common
+A4b,141,Chinchou,Deluxepack,common
+A4b,142,Lanturn ex,Deluxepack,double_rare
+A4b,143,Pachirisu,Deluxepack,uncommon
+A4b,144,Pachirisu,Deluxepack,uncommon
+A4b,145,Pachirisu ex,Deluxepack,double_rare
+A4b,146,Oricorio,Deluxepack,rare
+A4b,147,Oricorio,Deluxepack,rare
+A4b,148,Tapu Koko ex,Deluxepack,double_rare
+A4b,149,Zeraora,Deluxepack,rare
+A4b,150,Zeraora,Deluxepack,rare
+A4b,151,Gastly,Deluxepack,common
+A4b,152,Gastly,Deluxepack,common
+A4b,153,Haunter,Deluxepack,uncommon
+A4b,154,Haunter,Deluxepack,uncommon
+A4b,155,Gengar ex,Deluxepack,double_rare
+A4b,156,Jynx,Deluxepack,common
+A4b,157,Jynx,Deluxepack,common
+A4b,158,Mewtwo ex,Deluxepack,double_rare
+A4b,159,Mew ex,Deluxepack,double_rare
+A4b,160,Espeon ex,Deluxepack,double_rare
+A4b,161,Misdreavus,Deluxepack,common
+A4b,162,Misdreavus,Deluxepack,common
+A4b,163,Mismagius ex,Deluxepack,double_rare
+A4b,164,Ralts,Deluxepack,common
+A4b,165,Ralts,Deluxepack,common
+A4b,166,Kirlia,Deluxepack,uncommon
+A4b,167,Kirlia,Deluxepack,uncommon
+A4b,168,Gardevoir,Deluxepack,rare
+A4b,169,Gardevoir,Deluxepack,rare
+A4b,170,Giratina,Deluxepack,rare
+A4b,171,Giratina,Deluxepack,rare
+A4b,172,Giratina ex,Deluxepack,double_rare
+A4b,173,Swirlix,Deluxepack,common
+A4b,174,Swirlix,Deluxepack,common
+A4b,175,Slurpuff,Deluxepack,uncommon
+A4b,176,Slurpuff,Deluxepack,uncommon
+A4b,177,Sylveon ex,Deluxepack,double_rare
+A4b,178,Oricorio,Deluxepack,uncommon
+A4b,179,Oricorio,Deluxepack,uncommon
+A4b,180,Cosmog,Deluxepack,common
+A4b,181,Cosmog,Deluxepack,common
+A4b,182,Cosmoem,Deluxepack,uncommon
+A4b,183,Cosmoem,Deluxepack,uncommon
+A4b,184,Lunala ex,Deluxepack,double_rare
+A4b,185,Milcery,Deluxepack,common
+A4b,186,Milcery,Deluxepack,common
+A4b,187,Alcremie,Deluxepack,uncommon
+A4b,188,Alcremie,Deluxepack,uncommon
+A4b,189,Machop,Deluxepack,common
+A4b,190,Machop,Deluxepack,common
+A4b,191,Machoke,Deluxepack,uncommon
+A4b,192,Machoke,Deluxepack,uncommon
+A4b,193,Machamp ex,Deluxepack,double_rare
+A4b,194,Cubone,Deluxepack,common
+A4b,195,Cubone,Deluxepack,uncommon
+A4b,196,Marowak ex,Deluxepack,double_rare
+A4b,197,Aerodactyl ex,Deluxepack,double_rare
+A4b,198,Sudowoodo,Deluxepack,uncommon
+A4b,199,Sudowoodo,Deluxepack,uncommon
+A4b,200,Phanpy,Deluxepack,common
+A4b,201,Phanpy,Deluxepack,common
+A4b,202,Donphan ex,Deluxepack,double_rare
+A4b,203,Nosepass,Deluxepack,common
+A4b,204,Nosepass,Deluxepack,common
+A4b,205,Gible,Deluxepack,common
+A4b,206,Gible,Deluxepack,common
+A4b,207,Gabite,Deluxepack,common
+A4b,208,Gabite,Deluxepack,common
+A4b,209,Garchomp ex,Deluxepack,double_rare
+A4b,210,Riolu,Deluxepack,common
+A4b,211,Riolu,Deluxepack,common
+A4b,212,Lucario,Deluxepack,rare
+A4b,213,Lucario,Deluxepack,rare
+A4b,214,Lucario ex,Deluxepack,double_rare
+A4b,215,Gallade ex,Deluxepack,double_rare
+A4b,216,Drilbur,Deluxepack,common
+A4b,217,Drilbur,Deluxepack,common
+A4b,218,Crabrawler,Deluxepack,common
+A4b,219,Crabrawler,Deluxepack,common
+A4b,220,Rockruff,Deluxepack,common
+A4b,221,Rockruff,Deluxepack,common
+A4b,222,Lycanroc ex,Deluxepack,double_rare
+A4b,223,Passimian ex,Deluxepack,double_rare
+A4b,224,Marshadow,Deluxepack,rare
+A4b,225,Marshadow,Deluxepack,rare
+A4b,226,Zubat,Deluxepack,common
+A4b,227,Zubat,Deluxepack,common
+A4b,228,Golbat,Deluxepack,common
+A4b,229,Golbat,Deluxepack,common
+A4b,230,Crobat,Deluxepack,rare
+A4b,231,Crobat,Deluxepack,rare
+A4b,232,Crobat ex,Deluxepack,double_rare
+A4b,233,Alolan Grimer,Deluxepack,common
+A4b,234,Alolan Grimer,Deluxepack,common
+A4b,235,Alolan Muk ex,Deluxepack,double_rare
+A4b,236,Paldean Wooper,Deluxepack,common
+A4b,237,Paldean Wooper,Deluxepack,common
+A4b,238,Paldean Clodsire ex,Deluxepack,double_rare
+A4b,239,Umbreon,Deluxepack,rare
+A4b,240,Umbreon,Deluxepack,rare
+A4b,241,Umbreon ex,Deluxepack,double_rare
+A4b,242,Sneasel,Deluxepack,common
+A4b,243,Sneasel,Deluxepack,common
+A4b,244,Weavile ex,Deluxepack,double_rare
+A4b,245,Darkrai ex,Deluxepack,double_rare
+A4b,246,Nihilego,Deluxepack,rare
+A4b,247,Nihilego,Deluxepack,rare
+A4b,248,Guzzlord ex,Deluxepack,double_rare
+A4b,249,Alolan Diglett,Deluxepack,common
+A4b,250,Alolan Diglett,Deluxepack,common
+A4b,251,Alolan Dugtrio ex,Deluxepack,double_rare
+A4b,252,Skarmory ex,Deluxepack,double_rare
+A4b,253,Probopass ex,Deluxepack,double_rare
+A4b,254,Dialga ex,Deluxepack,double_rare
+A4b,255,Excadrill,Deluxepack,uncommon
+A4b,256,Excadrill,Deluxepack,uncommon
+A4b,257,Klefki,Deluxepack,rare
+A4b,258,Klefki,Deluxepack,rare
+A4b,259,Solgaleo ex,Deluxepack,double_rare
+A4b,260,Magearna,Deluxepack,rare
+A4b,261,Magearna,Deluxepack,rare
+A4b,262,Tinkatink,Deluxepack,common
+A4b,263,Tinkatink,Deluxepack,common
+A4b,264,Tinkatuff,Deluxepack,uncommon
+A4b,265,Tinkatuff,Deluxepack,uncommon
+A4b,266,Tinkaton ex,Deluxepack,double_rare
+A4b,267,Dratini,Deluxepack,common
+A4b,268,Dratini,Deluxepack,common
+A4b,269,Dragonair,Deluxepack,common
+A4b,270,Dragonair,Deluxepack,common
+A4b,271,Dragonite ex,Deluxepack,double_rare
+A4b,272,Pidgey,Deluxepack,common
+A4b,273,Pidgey,Deluxepack,common
+A4b,274,Pidgeotto,Deluxepack,common
+A4b,275,Pidgeotto,Deluxepack,common
+A4b,276,Pidgeot ex,Deluxepack,double_rare
+A4b,277,Jigglypuff,Deluxepack,common
+A4b,278,Jigglypuff,Deluxepack,common
+A4b,279,Wigglytuff ex,Deluxepack,double_rare
+A4b,280,Farfetch'd,Deluxepack,common
+A4b,281,Farfetch'd,Deluxepack,common
+A4b,282,Lickitung,Deluxepack,common
+A4b,283,Lickitung,Deluxepack,common
+A4b,284,Lickilicky ex,Deluxepack,double_rare
+A4b,285,Eevee,Deluxepack,common
+A4b,286,Eevee,Deluxepack,common
+A4b,287,Eevee ex,Deluxepack,double_rare
+A4b,288,Snorlax ex,Deluxepack,double_rare
+A4b,289,Lugia ex,Deluxepack,double_rare
+A4b,290,Skitty,Deluxepack,common
+A4b,291,Skitty,Deluxepack,common
+A4b,292,Delcatty,Deluxepack,uncommon
+A4b,293,Delcatty,Deluxepack,uncommon
+A4b,294,Bidoof,Deluxepack,common
+A4b,295,Bidoof,Deluxepack,common
+A4b,296,Bibarel ex,Deluxepack,double_rare
+A4b,297,Shaymin,Deluxepack,rare
+A4b,298,Shaymin,Deluxepack,rare
+A4b,299,Arceus ex,Deluxepack,double_rare
+A4b,300,Type: Null,Deluxepack,uncommon
+A4b,301,Type: Null,Deluxepack,uncommon
+A4b,302,Silvally,Deluxepack,rare
+A4b,303,Silvally,Deluxepack,rare
+A4b,304,Celesteela,Deluxepack,rare
+A4b,305,Celesteela,Deluxepack,rare
+A4b,306,Cyclizar,Deluxepack,uncommon
+A4b,307,Cyclizar,Deluxepack,uncommon
+A4b,308,Eevee Bag,Deluxepack,uncommon
+A4b,309,Eevee Bag,Deluxepack,uncommon
+A4b,310,Elemental Switch,Deluxepack,uncommon
+A4b,311,Elemental Switch,Deluxepack,uncommon
+A4b,312,Old Amber,Deluxepack,common
+A4b,313,Old Amber,Deluxepack,common
+A4b,314,Rare Candy,Deluxepack,uncommon
+A4b,315,Rare Candy,Deluxepack,uncommon
+A4b,316,Pokémon Communication,Deluxepack,uncommon
+A4b,317,Pokémon Communication,Deluxepack,uncommon
+A4b,318,Electrical Cord,Deluxepack,uncommon
+A4b,319,Electrical Cord,Deluxepack,uncommon
+A4b,320,Giant Cape,Deluxepack,uncommon
+A4b,321,Giant Cape,Deluxepack,uncommon
+A4b,322,Rocky Helmet,Deluxepack,uncommon
+A4b,323,Rocky Helmet,Deluxepack,uncommon
+A4b,324,Leaf Cape,Deluxepack,uncommon
+A4b,325,Leaf Cape,Deluxepack,uncommon
+A4b,326,Cyrus,Deluxepack,uncommon
+A4b,327,Cyrus,Deluxepack,uncommon
+A4b,328,Erika,Deluxepack,uncommon
+A4b,329,Erika,Deluxepack,uncommon
+A4b,330,Irida,Deluxepack,uncommon
+A4b,331,Irida,Deluxepack,uncommon
+A4b,332,Lyra,Deluxepack,uncommon
+A4b,333,Lyra,Deluxepack,uncommon
+A4b,334,Giovanni,Deluxepack,uncommon
+A4b,335,Giovanni,Deluxepack,uncommon
+A4b,336,Silver,Deluxepack,uncommon
+A4b,337,Silver,Deluxepack,uncommon
+A4b,338,Sabrina,Deluxepack,uncommon
+A4b,339,Sabrina,Deluxepack,uncommon
+A4b,340,Iono,Deluxepack,uncommon
+A4b,341,Iono,Deluxepack,uncommon
+A4b,342,Dawn,Deluxepack,uncommon
+A4b,343,Dawn,Deluxepack,uncommon
+A4b,344,Mars,Deluxepack,uncommon
+A4b,345,Mars,Deluxepack,uncommon
+A4b,346,Leaf,Deluxepack,uncommon
+A4b,347,Leaf,Deluxepack,uncommon
+A4b,348,Lillie,Deluxepack,uncommon
+A4b,349,Lillie,Deluxepack,uncommon
+A4b,350,Lusamine,Deluxepack,uncommon
+A4b,351,Lusamine,Deluxepack,uncommon
+A4b,352,Red,Deluxepack,uncommon
+A4b,353,Red,Deluxepack,uncommon
+A4b,354,Floragato,Deluxepack,illustration_rare
+A4b,355,Crawdaunt,Deluxepack,illustration_rare
+A4b,356,Greninja,Deluxepack,illustration_rare
+A4b,357,Gardevoir,Deluxepack,illustration_rare
+A4b,358,Slurpuff,Deluxepack,illustration_rare
+A4b,359,Farfetch'd,Deluxepack,illustration_rare
+A4b,360,Buzzwole ex,Deluxepack,special_art
+A4b,361,Charizard ex,Deluxepack,special_art
+A4b,362,Ho-Oh ex,Deluxepack,special_art
+A4b,363,Palkia ex,Deluxepack,special_art
+A4b,364,Pikachu ex,Deluxepack,special_art
+A4b,365,Mewtwo ex,Deluxepack,special_art
+A4b,366,Mew ex,Deluxepack,special_art
+A4b,367,Lunala ex,Deluxepack,special_art
+A4b,368,Dialga ex,Deluxepack,special_art
+A4b,369,Solgaleo ex,Deluxepack,special_art
+A4b,370,Eevee ex,Deluxepack,special_art
+A4b,371,Lugia ex,Deluxepack,special_art
+A4b,372,Arceus ex,Deluxepack,special_art
+A4b,373,Professor's Research,Deluxepack,special_art
+A4b,374,Lillie,Deluxepack,special_art
+A4b,375,Lusamine,Deluxepack,special_art
+A4b,376,Pikachu ex,Deluxepack,immersive_rare
+A4b,377,Giratina ex,Deluxepack,double_shiny_rare
+A4b,378,Darkrai ex,Deluxepack,double_shiny_rare
+A4b,379,Rare Candy,Deluxepack,crown_rare
