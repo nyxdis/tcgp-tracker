@@ -50,13 +50,13 @@ class Command(BaseCommand):
         # If no arguments are supplied, import everything from the data directory
         if not any(
             [
-                options["rarities"],
-                options["rarityprob"],
-                options["sets"],
-                options["cards"],
-                options["settranslations"],
-                options["packtranslations"],
-                options["cardtranslations"],
+                options.get("rarities"),
+                options.get("rarityprob"),
+                options.get("sets"),
+                options.get("cards"),
+                options.get("settranslations"),
+                options.get("packtranslations"),
+                options.get("cardtranslations"),
             ]
         ):
             base = "data/"
@@ -171,13 +171,40 @@ class Command(BaseCommand):
                     continue
                 version, created = Version.objects.get_or_create(name=row["version"])
 
+                # Normalized naming: probability_slot1..probability_slot5
+                # Legacy fallback names: probability_first/fourth/fifth
+                prob_slot1 = row.get("probability_slot1") or row.get(
+                    "probability_first"
+                )
+                prob_slot2 = row.get("probability_slot2") or prob_slot1
+                prob_slot3 = row.get("probability_slot3") or prob_slot1
+                prob_slot4 = (
+                    row.get("probability_slot4") or row.get("probability_fourth") or 0.0
+                )
+                prob_slot5 = (
+                    row.get("probability_slot5") or row.get("probability_fifth") or 0.0
+                )
+
+                if "slot_count" in row and row["slot_count"]:
+                    try:
+                        sc_int = int(row["slot_count"])
+                        if version.slot_count != sc_int:
+                            version.slot_count = sc_int
+                            version.save(update_fields=["slot_count"])
+                    except ValueError:
+                        self.stderr.write(
+                            f"Invalid slot_count '{row['slot_count']}' for version {version.name}"
+                        )
+
                 _obj, created = RarityProbability.objects.update_or_create(
                     rarity=rarity,
                     version=version,
                     defaults={
-                        "probability_first": row["probability_first"],
-                        "probability_fourth": row["probability_fourth"],
-                        "probability_fifth": row["probability_fifth"],
+                        "probability_slot1": prob_slot1,
+                        "probability_slot2": prob_slot2,
+                        "probability_slot3": prob_slot3,
+                        "probability_slot4": prob_slot4,
+                        "probability_slot5": prob_slot5,
                     },
                 )
                 action = "Created" if created else "Updated"

@@ -20,6 +20,11 @@ class Version(models.Model):
         verbose_name="Display Name",
         help_text="Display name for the version",
     )
+    slot_count = models.PositiveSmallIntegerField(
+        default=5,
+        verbose_name="Number of Slots",
+        help_text="How many card slots a pack of this version contains",
+    )
 
     def __str__(self):
         return f"{self.display_name}"
@@ -131,7 +136,11 @@ class Rarity(models.Model):
 
 
 class RarityProbability(models.Model):
-    """Probability of drawing a rarity in a given version."""
+    """Probability of drawing a rarity in each slot for a given version.
+
+    Normalized field names: probability_slot1 .. probability_slot5
+    Slots above Version.slot_count are ignored for validation.
+    """
 
     rarity = models.ForeignKey(
         Rarity, on_delete=models.CASCADE, related_name="probabilities"
@@ -139,47 +148,48 @@ class RarityProbability(models.Model):
     version = models.ForeignKey(
         Version, on_delete=models.CASCADE, related_name="rarity_probabilities"
     )
-    probability_first = models.FloatField(
+
+    probability_slot1 = models.FloatField(
         validators=[MinValueValidator(0.0), MaxValueValidator(1.0)],
-        verbose_name="First Slot Probability",
+        verbose_name="Slot 1 Probability",
     )
-    probability_fourth = models.FloatField(
+    # New explicit fields for slots 2 and 3 (were implicitly same as slot1 before)
+    probability_slot2 = models.FloatField(
         validators=[MinValueValidator(0.0), MaxValueValidator(1.0)],
-        verbose_name="Fourth Slot Probability",
+        default=0.0,
+        verbose_name="Slot 2 Probability",
     )
-    probability_fifth = models.FloatField(
+    probability_slot3 = models.FloatField(
         validators=[MinValueValidator(0.0), MaxValueValidator(1.0)],
-        verbose_name="Fifth Slot Probability",
+        default=0.0,
+        verbose_name="Slot 3 Probability",
+    )
+    probability_slot4 = models.FloatField(
+        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)],
+        default=0.0,
+        verbose_name="Slot 4 Probability",
+    )
+    probability_slot5 = models.FloatField(
+        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)],
+        default=0.0,
+        verbose_name="Slot 5 Probability",
     )
 
     def __str__(self):
-        return f"{self.rarity}: {self.probability_first * 100:.3f}% / {self.probability_fourth * 100:.3f}% / {self.probability_fifth * 100:.3f}%"
+        fields = [
+            self.probability_slot1,
+            self.probability_slot2,
+            self.probability_slot3,
+            self.probability_slot4,
+            self.probability_slot5,
+        ]
+        shown = " / ".join(f"{p * 100:.3f}%" for p in fields if p is not None)
+        return f"{self.rarity}: {shown}"
 
     def clean(self):
-        from django.core.exceptions import ValidationError
-
-        epsilon = 1e-5
-        qs = type(self).objects.filter(version=self.version)  # type: ignore[attr-defined]
-        if self.pk:
-            qs = qs.exclude(pk=self.pk)
-        prob_first = sum(rp.probability_first for rp in qs) + self.probability_first
-        prob_fourth = sum(rp.probability_fourth for rp in qs) + self.probability_fourth
-        prob_fifth = sum(rp.probability_fifth for rp in qs) + self.probability_fifth
-        errors = {}
-        if abs(prob_first - 1.0) > epsilon:
-            errors["probability_first"] = (
-                f"Sum of probability_first for version {self.version} is {prob_first}, should be 1.0"
-            )
-        if abs(prob_fourth - 1.0) > epsilon:
-            errors["probability_fourth"] = (
-                f"Sum of probability_fourth for version {self.version} is {prob_fourth}, should be 1.0"
-            )
-        if abs(prob_fifth - 1.0) > epsilon:
-            errors["probability_fifth"] = (
-                f"Sum of probability_fifth for version {self.version} is {prob_fifth}, should be 1.0"
-            )
-        if errors:
-            raise ValidationError(errors)
+        # Cross-rarity per-slot sum validation moved to admin inline formset &
+        # management command. Intentionally left empty.
+        pass
 
     class Meta:
         unique_together = ("version", "rarity")

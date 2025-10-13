@@ -33,9 +33,11 @@ def test_no_new_cards_returns_zero_probability():
         RarityProbability.objects.create(
             rarity=r,
             version=version,
-            probability_first=0.25,
-            probability_fourth=0.25,
-            probability_fifth=0.25,
+            probability_slot1=0.25,
+            probability_slot2=0.25,
+            probability_slot3=0.25,
+            probability_slot4=0.25,
+            probability_slot5=0.25,
         )
         rarities.append(r)
 

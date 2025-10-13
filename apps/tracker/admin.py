@@ -1,5 +1,6 @@
 """Admin configuration for tracker app."""
 
+from django import forms
 from django.contrib import admin
 
 from apps.tracker.models.cards import (
@@ -34,11 +35,63 @@ class CardsInline(admin.TabularInline):
 
 
 class RarityProbabilitiesInline(admin.TabularInline):
-    """Inline admin for RarityProbabilities."""
+    """Inline admin for RarityProbabilities with soft sum warnings."""
 
     model = RarityProbability
     extra = 0
     show_change_link = True
+
+    def get_formset(self, request, obj=None, **kwargs):  # type: ignore[override]
+        from django.contrib import messages
+
+        ParentFormSet = super().get_formset(request, obj, **kwargs)
+        version_obj = obj  # capture for closure
+
+        # If no parent object (e.g. add form), just return original
+        if not version_obj:
+            return ParentFormSet
+
+        orig_clean = getattr(ParentFormSet, "clean", None)
+
+        def clean(self):  # type: ignore[override]
+            if orig_clean:
+                orig_clean(self)
+            # Only warn if no per-form errors
+            if any(f.errors for f in self.forms):
+                return
+            version = getattr(self, "instance", None) or version_obj
+            slot_fields = [
+                "probability_slot1",
+                "probability_slot2",
+                "probability_slot3",
+                "probability_slot4",
+                "probability_slot5",
+            ][: getattr(version, "slot_count", 5)]
+            sums = {sf: 0.0 for sf in slot_fields}
+            count = 0
+            for form in self.forms:
+                if not getattr(form, "cleaned_data", None):
+                    continue
+                if form.cleaned_data.get("DELETE"):
+                    continue
+                count += 1
+                for sf in slot_fields:
+                    sums[sf] += form.cleaned_data.get(sf, 0.0) or 0.0
+            if not count:
+                return
+            epsilon = 1e-5
+            drift = {
+                sf: total for sf, total in sums.items() if abs(total - 1.0) > epsilon
+            }
+            if drift:
+                msg = ", ".join(f"{sf}={total:.6f}" for sf, total in drift.items())
+                messages.warning(
+                    request,
+                    f"Rarity probability sums for version {version.name} are off (expected 1.0): {msg}",
+                )
+
+        ParentFormSet.clean = clean  # type: ignore[assignment]
+        return ParentFormSet
 
 
 class SentFriendRequestsInline(admin.TabularInline):
@@ -48,6 +101,9 @@ class SentFriendRequestsInline(admin.TabularInline):
     fk_name = "from_user"
     extra = 0
     show_change_link = True
+    fields = ("to_user", "accepted", "created_at")
+    readonly_fields = ("created_at",)
+    ordering = ("-created_at",)
 
 
 class ReceivedFriendRequestsInline(admin.TabularInline):
@@ -57,6 +113,9 @@ class ReceivedFriendRequestsInline(admin.TabularInline):
     fk_name = "to_user"
     extra = 0
     show_change_link = True
+    fields = ("from_user", "accepted", "created_at")
+    readonly_fields = ("created_at",)
+    ordering = ("-created_at",)
 
 
 class CardNameTranslationInline(admin.TabularInline):
@@ -151,9 +210,11 @@ class RarityProbabilityAdmin(admin.ModelAdmin):
     list_display = (
         "version",
         "rarity",
-        "probability_first_percent",
-        "probability_fourth_percent",
-        "probability_fifth_percent",
+        "probability_slot1_percent",
+        "probability_slot2_percent",
+        "probability_slot3_percent",
+        "probability_slot4_percent",
+        "probability_slot5_percent",
     )
     search_fields = ("rarity__name", "version__name")
     autocomplete_fields = ["version", "rarity"]
@@ -161,24 +222,74 @@ class RarityProbabilityAdmin(admin.ModelAdmin):
     list_per_page = 25
     ordering = ("version", "rarity")
 
+    class Form(forms.ModelForm):
+        class Meta:
+            model = RarityProbability
+            fields = [
+                "version",
+                "rarity",
+                "probability_slot1",
+                "probability_slot2",
+                "probability_slot3",
+                "probability_slot4",
+                "probability_slot5",
+            ]
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            # If a version is already selected, hide fields above slot_count
+            version = None
+            if self.instance and self.instance.version_id:
+                version = self.instance.version
+            else:
+                # Try to get version from submitted data
+                vid = self.data.get("version") if self.data else None
+                if vid:
+                    version = Version.objects.filter(pk=vid).first()
+            if version:
+                for idx, field_name in enumerate(
+                    [
+                        "probability_slot1",
+                        "probability_slot2",
+                        "probability_slot3",
+                        "probability_slot4",
+                        "probability_slot5",
+                    ],
+                    start=1,
+                ):
+                    if idx > version.slot_count:
+                        self.fields[field_name].widget = forms.HiddenInput()
+
+    form = Form
+
     def _probability_percent(self, obj, field):
         value = getattr(obj, field, None)
         return f"{value * 100:.3f}%" if value is not None else "-"
 
-    def probability_first_percent(self, obj):
-        return self._probability_percent(obj, "probability_first")
+    def probability_slot1_percent(self, obj):
+        return self._probability_percent(obj, "probability_slot1")
 
-    probability_first_percent.short_description = "Probability First"
+    probability_slot1_percent.short_description = "Probability Slot1"
 
-    def probability_fourth_percent(self, obj):
-        return self._probability_percent(obj, "probability_fourth")
+    def probability_slot4_percent(self, obj):
+        return self._probability_percent(obj, "probability_slot4")
 
-    probability_fourth_percent.short_description = "Probability Fourth"
+    probability_slot4_percent.short_description = "Probability Slot4"
 
-    def probability_fifth_percent(self, obj):
-        return self._probability_percent(obj, "probability_fifth")
+    def probability_slot5_percent(self, obj):
+        return self._probability_percent(obj, "probability_slot5")
 
-    probability_fifth_percent.short_description = "Probability Fifth"
+    probability_slot5_percent.short_description = "Probability Slot5"
+
+    def probability_slot2_percent(self, obj):
+        return self._probability_percent(obj, "probability_slot2")
+
+    probability_slot2_percent.short_description = "Probability Slot2"
+
+    def probability_slot3_percent(self, obj):
+        return self._probability_percent(obj, "probability_slot3")
+
+    probability_slot3_percent.short_description = "Probability Slot3"
 
 
 @admin.register(Version)

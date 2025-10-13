@@ -36,9 +36,16 @@ def prob_at_least_one_new_card(pack, user):
         if card.id in owned_card_ids:
             owned_by_rarity.setdefault(card.rarity, set()).add(card.id)
 
-    # Define the slots and their corresponding probability fields
-    slot_names = ["first", "first", "first", "fourth", "fifth"]
-    slot_fields = [f"probability_{name}" for name in slot_names]
+    # Build slot field list dynamically based on the version slot_count
+    version = pack.rarity_version
+    base_fields = [
+        "probability_slot1",  # slot 1
+        "probability_slot2",  # slot 2
+        "probability_slot3",  # slot 3
+        "probability_slot4",  # slot 4
+        "probability_slot5",  # slot 5
+    ]
+    slot_fields = base_fields[: int(version.slot_count)]
 
     # For each slot, calculate the probability that the drawn card is already owned
     prob_no_new = 1.0
