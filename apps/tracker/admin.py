@@ -146,11 +146,18 @@ class PackNameTranslationInline(admin.TabularInline):
 class SetAdmin(admin.ModelAdmin):
     """Admin for PokemonSet."""
 
-    list_display = ("name", "release_date", "view_cards_link")
+    list_display = (
+        "name",
+        "release_date",
+        "available_until",
+        "is_available_status",
+        "view_cards_link",
+    )
     inlines = [PacksInline, PokemonSetNameTranslationInline]
     search_fields = ("name",)
     list_per_page = 25
     ordering = ("release_date",)
+    list_filter = ("available_until",)
 
     @staticmethod
     def view_cards_link(obj):
@@ -160,7 +167,17 @@ class SetAdmin(admin.ModelAdmin):
         url = reverse("admin:tracker_card_changelist") + f"?set__id__exact={obj.id}"
         return format_html('<a href="{}">View Cards</a>', url)
 
+    @staticmethod
+    def is_available_status(obj):
+        from django.utils.html import format_html
+
+        if obj.is_available:
+            return format_html('<span style="color: green;">✓ Available</span>')
+        else:
+            return format_html('<span style="color: red;">✗ Expired</span>')
+
     view_cards_link.short_description = "Cards"
+    is_available_status.short_description = "Status"
 
 
 @admin.register(Pack)

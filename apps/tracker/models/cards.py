@@ -52,6 +52,13 @@ class PokemonSet(models.Model):
     release_date = models.DateField(
         db_index=True, verbose_name="Release Date", help_text="Release date of the set"
     )
+    available_until = models.DateField(
+        blank=True,
+        null=True,
+        db_index=True,
+        verbose_name="Available Until",
+        help_text="Date when this set's packs are no longer available (leave empty if still available)",
+    )
 
     def __str__(self):
         return f"{self.name}"
@@ -66,6 +73,15 @@ class PokemonSet(models.Model):
     def localized_name(self):
         language_code = get_language() or "en"
         return self.get_localized_name(language_code)
+
+    @property
+    def is_available(self):
+        """Check if this set is currently available (not expired)."""
+        from django.utils import timezone
+
+        if self.available_until is None:
+            return True
+        return timezone.now().date() <= self.available_until
 
     class Meta:
         ordering = ("release_date",)

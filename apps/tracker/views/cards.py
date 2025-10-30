@@ -3,7 +3,7 @@
 from collections import defaultdict
 
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import get_language
@@ -193,10 +193,15 @@ def set_detail(request, set_number):
 @login_required
 def pack_list(request):
     """Show a list of all packs with stats about owned cards and chance for new cards."""
-    from collections import defaultdict
+    # Filter out packs from expired sets
+    from django.utils import timezone
+
+    today = timezone.now().date()
 
     packs = list(
-        Pack.objects.all()
+        Pack.objects.filter(
+            Q(set__available_until__isnull=True) | Q(set__available_until__gte=today)
+        )
         .select_related("set", "rarity_version")
         .prefetch_related("cards__rarity")
     )
