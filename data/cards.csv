@@ -1959,3 +1959,334 @@ A4b,376,Pikachu ex,Deluxepack,immersive_rare
 A4b,377,Giratina ex,Deluxepack,double_shiny_rare
 A4b,378,Darkrai ex,Deluxepack,double_shiny_rare
 A4b,379,Rare Candy,Deluxepack,crown_rare
+B1,001,Pinsir,Blaziken,common
+B1,002,Mega Pinsir ex,Blaziken,double_rare
+B1,003,Wurmple,Blaziken,common
+B1,004,Silcoon,Blaziken,common
+B1,005,Beautifly,Blaziken,rare
+B1,006,Cascoon,Blaziken,common
+B1,007,Dustox,Blaziken,rare
+B1,008,Seedot,Blaziken,common
+B1,009,Nuzleaf,Blaziken,uncommon
+B1,010,Shiftry,Blaziken,rare
+B1,011,Shroomish,Blaziken|Gyarados|Altaria,common
+B1,012,Breloom,Blaziken|Gyarados|Altaria,uncommon
+B1,013,Pansage,Gyarados,common
+B1,014,Simisage,Gyarados,common
+B1,015,Cottonee,Altaria,common
+B1,016,Whimsicott ex,Altaria,double_rare
+B1,017,Petilil,Altaria,common
+B1,018,Lilligant,Altaria,rare
+B1,019,Maractus,Blaziken|Gyarados|Altaria,common
+B1,020,Virizion,Altaria,rare
+B1,021,Skiddo,Altaria,common
+B1,022,Gogoat,Altaria,common
+B1,023,Phantump,Blaziken|Gyarados|Altaria,common
+B1,024,Trevenant,Blaziken|Gyarados|Altaria,uncommon
+B1,025,Grookey,Altaria,common
+B1,026,Thwackey,Altaria,uncommon
+B1,027,Rillaboom,Altaria,rare
+B1,028,Growlithe,Blaziken,common
+B1,029,Arcanine,Blaziken,uncommon
+B1,030,Ponyta,Blaziken,common
+B1,031,Rapidash ex,Blaziken,double_rare
+B1,032,Ho-Oh,Blaziken,rare
+B1,033,Torchic,Blaziken,common
+B1,034,Combusken,Blaziken,uncommon
+B1,035,Blaziken,Blaziken,rare
+B1,036,Mega Blaziken ex,Blaziken,double_rare
+B1,037,Pansear,Blaziken,common
+B1,038,Simisear,Blaziken,common
+B1,039,Darumaka,Gyarados,common
+B1,040,Darmanitan,Gyarados,uncommon
+B1,041,Litwick,Altaria,common
+B1,042,Lampent,Altaria,uncommon
+B1,043,Chandelure,Altaria,rare
+B1,044,Heatmor,Blaziken|Gyarados|Altaria,common
+B1,045,Litleo,Blaziken,common
+B1,046,Pyroar,Blaziken,uncommon
+B1,047,Turtonator,Gyarados,uncommon
+B1,048,Psyduck,Blaziken,common
+B1,049,Golduck,Blaziken,common
+B1,050,Magikarp,Gyarados,common
+B1,051,Gyarados,Gyarados,rare
+B1,052,Mega Gyarados ex,Gyarados,double_rare
+B1,053,Lotad,Altaria,common
+B1,054,Lombre,Altaria,uncommon
+B1,055,Ludicolo,Altaria,rare
+B1,056,Wailmer,Gyarados,common
+B1,057,Wailord,Gyarados,rare
+B1,058,Corphish,Blaziken|Gyarados|Altaria,common
+B1,059,Crawdaunt,Blaziken|Gyarados|Altaria,uncommon
+B1,060,Luvdisc,Altaria,common
+B1,061,Panpour,Altaria,common
+B1,062,Simipour,Altaria,common
+B1,063,Tympole,Blaziken|Gyarados|Altaria,common
+B1,064,Palpitoad,Blaziken|Gyarados|Altaria,common
+B1,065,Seismitoad,Blaziken|Gyarados|Altaria,uncommon
+B1,066,Tirtouga,Gyarados,uncommon
+B1,067,Carracosta,Gyarados,rare
+B1,068,Frillish,Gyarados,common
+B1,069,Jellicent,Gyarados,rare
+B1,070,Keldeo,Blaziken,rare
+B1,071,Froakie,Gyarados,common
+B1,072,Frogadier,Gyarados,uncommon
+B1,073,Greninja ex,Gyarados,double_rare
+B1,074,Bergmite,Gyarados,common
+B1,075,Avalugg,Gyarados,uncommon
+B1,076,Chewtle,Gyarados,common
+B1,077,Drednaw,Gyarados,uncommon
+B1,078,Arrokuda,Gyarados,common
+B1,079,Barraskewda,Gyarados,uncommon
+B1,080,Eiscue,Altaria,rare
+B1,081,Jolteon ex,Gyarados,double_rare
+B1,082,Mareep,Altaria,common
+B1,083,Flaaffy,Altaria,uncommon
+B1,084,Ampharos,Altaria,rare
+B1,085,Mega Ampharos ex,Altaria,double_rare
+B1,086,Shinx,Blaziken,common
+B1,087,Luxio,Blaziken,uncommon
+B1,088,Luxray,Blaziken,rare
+B1,089,Pachirisu,Blaziken|Gyarados|Altaria,common
+B1,090,Blitzle,Blaziken,common
+B1,091,Zebstrika,Blaziken,uncommon
+B1,092,Joltik,Blaziken|Gyarados|Altaria,common
+B1,093,Galvantula,Blaziken|Gyarados|Altaria,uncommon
+B1,094,Dedenne,Altaria,common
+B1,095,Yamper,Altaria,common
+B1,096,Boltund,Altaria,uncommon
+B1,097,Natu,Blaziken|Gyarados|Altaria,common
+B1,098,Xatu,Blaziken|Gyarados|Altaria,uncommon
+B1,099,Misdreavus,Blaziken|Gyarados|Altaria,common
+B1,100,Mismagius,Blaziken|Gyarados|Altaria,uncommon
+B1,101,Sableye,Altaria,common
+B1,102,Mega Altaria ex,Altaria,double_rare
+B1,103,Duskull,Blaziken,common
+B1,104,Dusclops,Blaziken,uncommon
+B1,105,Dusknoir,Blaziken,rare
+B1,106,Jirachi,Altaria,rare
+B1,107,Drifloon,Altaria,common
+B1,108,Drifblim,Altaria,uncommon
+B1,109,Chingling,Blaziken|Gyarados|Altaria,rare
+B1,110,Yamask,Gyarados,common
+B1,111,Cofagrigus,Gyarados,rare
+B1,112,Gothita,Altaria,common
+B1,113,Gothorita,Altaria,uncommon
+B1,114,Gothitelle,Altaria,rare
+B1,115,Spritzee,Blaziken|Gyarados|Altaria,common
+B1,116,Aromatisse,Blaziken|Gyarados|Altaria,uncommon
+B1,117,Swirlix,Altaria,common
+B1,118,Slurpuff,Altaria,uncommon
+B1,119,Carbink,Altaria,common
+B1,120,Klefki,Gyarados,rare
+B1,121,Indeedee ex,Altaria,double_rare
+B1,122,Sandshrew,Blaziken|Gyarados|Altaria,common
+B1,123,Sandslash,Blaziken|Gyarados|Altaria,uncommon
+B1,124,Hitmonchan ex,Blaziken,double_rare
+B1,125,Sudowoodo,Blaziken|Gyarados|Altaria,common
+B1,126,Makuhita,Blaziken,common
+B1,127,Hariyama,Blaziken,uncommon
+B1,128,Hippopotas,Gyarados,common
+B1,129,Hippowdon,Gyarados,uncommon
+B1,130,Sandile,Gyarados,common
+B1,131,Krokorok,Gyarados,uncommon
+B1,132,Krookodile,Gyarados,rare
+B1,133,Archen,Blaziken,uncommon
+B1,134,Archeops,Blaziken,rare
+B1,135,Golett,Blaziken,common
+B1,136,Golurk,Blaziken,rare
+B1,137,Terrakion,Gyarados,rare
+B1,138,Pancham,Gyarados,common
+B1,139,Crabrawler,Blaziken,common
+B1,140,Crabominable,Blaziken,uncommon
+B1,141,Stufful,Blaziken,common
+B1,142,Bewear,Blaziken,uncommon
+B1,143,Sandygast,Blaziken|Gyarados|Altaria,common
+B1,144,Palossand,Blaziken|Gyarados|Altaria,uncommon
+B1,145,Rolycoly,Gyarados,common
+B1,146,Carkol,Gyarados,uncommon
+B1,147,Coalossal,Gyarados,rare
+B1,148,Murkrow,Gyarados,common
+B1,149,Honchkrow,Gyarados,rare
+B1,150,Absol,Gyarados,uncommon
+B1,151,Mega Absol ex,Gyarados,double_rare
+B1,152,Skorupi,Gyarados,common
+B1,153,Drapion,Gyarados,uncommon
+B1,154,Darkrai,Altaria,rare
+B1,155,Deino,Gyarados,common
+B1,156,Zweilous,Gyarados,uncommon
+B1,157,Hydreigon,Gyarados,rare
+B1,158,Pangoro,Gyarados,rare
+B1,159,Skrelp,Blaziken,common
+B1,160,Dragalge ex,Blaziken,double_rare
+B1,161,Mareanie,Blaziken|Gyarados|Altaria,common
+B1,162,Toxapex,Blaziken|Gyarados|Altaria,uncommon
+B1,163,Impidimp,Altaria,common
+B1,164,Morgrem,Altaria,uncommon
+B1,165,Grimmsnarl,Altaria,rare
+B1,166,Ferroseed,Blaziken|Gyarados|Altaria,common
+B1,167,Ferrothorn,Blaziken|Gyarados|Altaria,uncommon
+B1,168,Durant,Blaziken|Gyarados|Altaria,common
+B1,169,Cobalion,Blaziken,rare
+B1,170,Honedge,Blaziken,common
+B1,171,Doublade,Blaziken,uncommon
+B1,172,Aegislash,Blaziken,rare
+B1,173,Meltan,Gyarados,common
+B1,174,Melmetal ex,Gyarados,double_rare
+B1,175,Corviknight,Blaziken,rare
+B1,176,Druddigon,Gyarados,common
+B1,177,Goomy,Altaria,common
+B1,178,Sliggoo,Altaria,uncommon
+B1,179,Goodra,Altaria,rare
+B1,180,Pidgey,Blaziken|Gyarados|Altaria,common
+B1,181,Pidgeotto,Blaziken|Gyarados|Altaria,common
+B1,182,Pidgeot,Blaziken|Gyarados|Altaria,uncommon
+B1,183,Tauros ex,Altaria,double_rare
+B1,184,Eevee,Gyarados,common
+B1,185,Aipom,Altaria,common
+B1,186,Ambipom,Altaria,uncommon
+B1,187,Miltank,Blaziken|Gyarados|Altaria,common
+B1,188,Zigzagoon,Blaziken|Gyarados|Altaria,common
+B1,189,Linoone,Blaziken|Gyarados|Altaria,uncommon
+B1,190,Whismur,Gyarados,common
+B1,191,Loudred,Gyarados,common
+B1,192,Exploud,Gyarados,rare
+B1,193,Skitty,Gyarados,common
+B1,194,Delcatty,Gyarados,rare
+B1,195,Spinda,Altaria,common
+B1,196,Swablu,Altaria,common
+B1,197,Altaria,Altaria,rare
+B1,198,Chatot,Blaziken|Gyarados|Altaria,common
+B1,199,Patrat,Blaziken|Gyarados|Altaria,common
+B1,200,Watchog,Blaziken|Gyarados|Altaria,uncommon
+B1,201,Lillipup,Altaria,common
+B1,202,Herdier,Altaria,uncommon
+B1,203,Stoutland,Altaria,rare
+B1,204,Rufflet,Blaziken,common
+B1,205,Braviary,Blaziken,uncommon
+B1,206,Furfrou,Blaziken,uncommon
+B1,207,Furfrou,Altaria,uncommon
+B1,208,Furfrou,Gyarados,uncommon
+B1,209,Rookidee,Blaziken,common
+B1,210,Corvisquire,Blaziken,uncommon
+B1,211,Wooloo,Altaria,common
+B1,212,Dubwool,Altaria,uncommon
+B1,213,Prank Spinner,Blaziken,uncommon
+B1,214,Plume Fossil,Blaziken,common
+B1,215,Hitting Hammer,Gyarados,uncommon
+B1,216,Cover Fossil,Gyarados,common
+B1,217,Flame Patch,Blaziken,uncommon
+B1,218,Sitrus Berry,Altaria,uncommon
+B1,219,Heavy Helmet,Gyarados,uncommon
+B1,220,Lucky Mittens,Altaria,uncommon
+B1,221,Marlon,Gyarados,uncommon
+B1,222,Hala,Blaziken,uncommon
+B1,223,May,Blaziken,uncommon
+B1,224,Fantina,Altaria,uncommon
+B1,225,Copycat,Gyarados,uncommon
+B1,226,Lisia,Altaria,uncommon
+B1,227,Beautifly,Blaziken,illustration_rare
+B1,228,Skiddo,Altaria,illustration_rare
+B1,229,Rillaboom,Altaria,illustration_rare
+B1,230,Growlithe,Blaziken,illustration_rare
+B1,231,Chandelure,Altaria,illustration_rare
+B1,232,Magikarp,Gyarados,illustration_rare
+B1,233,Ludicolo,Altaria,illustration_rare
+B1,234,Jellicent,Gyarados,illustration_rare
+B1,235,Keldeo,Blaziken,illustration_rare
+B1,236,Eiscue,Altaria,illustration_rare
+B1,237,Luxray,Blaziken,illustration_rare
+B1,238,Cofagrigus,Gyarados,illustration_rare
+B1,239,Gothita,Altaria,illustration_rare
+B1,240,Makuhita,Blaziken,illustration_rare
+B1,241,Hippowdon,Gyarados,illustration_rare
+B1,242,Archeops,Blaziken,illustration_rare
+B1,243,Pancham,Gyarados,illustration_rare
+B1,244,Honchkrow,Gyarados,illustration_rare
+B1,245,Hydreigon,Gyarados,illustration_rare
+B1,246,Corviknight,Blaziken,illustration_rare
+B1,247,Goomy,Altaria,illustration_rare
+B1,248,Delcatty,Gyarados,illustration_rare
+B1,249,Stoutland,Altaria,illustration_rare
+B1,250,Rufflet,Blaziken,illustration_rare
+B1,251,Mega Pinsir ex,Blaziken,special_art
+B1,252,Whimsicott ex,Altaria,special_art
+B1,253,Rapidash ex,Blaziken,special_art
+B1,254,Mega Blaziken ex,Blaziken,special_art
+B1,255,Mega Gyarados ex,Gyarados,special_art
+B1,256,Greninja ex,Gyarados,special_art
+B1,257,Jolteon ex,Gyarados,special_art
+B1,258,Mega Ampharos ex,Altaria,special_art
+B1,259,Mega Altaria ex,Altaria,special_art
+B1,260,Indeedee ex,Altaria,special_art
+B1,261,Hitmonchan ex,Blaziken,special_art
+B1,262,Mega Absol ex,Gyarados,special_art
+B1,263,Dragalge ex,Blaziken,special_art
+B1,264,Melmetal ex,Gyarados,special_art
+B1,265,Tauros ex,Altaria,special_art
+B1,266,Marlon,Gyarados,special_art
+B1,267,Hala,Blaziken,special_art
+B1,268,May,Blaziken,special_art
+B1,269,Fantina,Altaria,special_art
+B1,270,Copycat,Gyarados,special_art
+B1,271,Lisia,Altaria,special_art
+B1,272,Mega Pinsir ex,Blaziken,special_art
+B1,273,Whimsicott ex,Altaria,special_art
+B1,274,Rapidash ex,Blaziken,special_art
+B1,275,Greninja ex,Gyarados,special_art
+B1,276,Jolteon ex,Gyarados,special_art
+B1,277,Mega Ampharos ex,Altaria,special_art
+B1,278,Indeedee ex,Altaria,special_art
+B1,279,Hitmonchan ex,Blaziken,special_art
+B1,280,Mega Absol ex,Gyarados,special_art
+B1,281,Dragalge ex,Blaziken,special_art
+B1,282,Melmetal ex,Gyarados,special_art
+B1,283,Tauros ex,Altaria,special_art
+B1,284,Mega Blaziken ex,Blaziken,immersive_rare
+B1,285,Mega Gyarados ex,Gyarados,immersive_rare
+B1,286,Mega Altaria ex,Altaria,immersive_rare
+B1,287,Bellsprout,Altaria,shiny_rare
+B1,288,Weepinbell,Altaria,shiny_rare
+B1,289,Victreebel,Altaria,shiny_rare
+B1,290,Rowlet,Blaziken,shiny_rare
+B1,291,Dartrix,Blaziken,shiny_rare
+B1,292,Moltres,Blaziken,shiny_rare
+B1,293,Litten,Gyarados,shiny_rare
+B1,294,Torracat,Gyarados,shiny_rare
+B1,295,Poliwag,Gyarados,shiny_rare
+B1,296,Poliwhirl,Gyarados,shiny_rare
+B1,297,Poliwrath,Gyarados,shiny_rare
+B1,298,Articuno,Altaria,shiny_rare
+B1,299,Manaphy,Blaziken,shiny_rare
+B1,300,Popplio,Altaria,shiny_rare
+B1,301,Brionne,Altaria,shiny_rare
+B1,302,Zapdos,Gyarados,shiny_rare
+B1,303,Oricorio,Gyarados,shiny_rare
+B1,304,Zeraora,Altaria,shiny_rare
+B1,305,Drowzee,Gyarados,shiny_rare
+B1,306,Hypno,Gyarados,shiny_rare
+B1,307,Geodude,Blaziken,shiny_rare
+B1,308,Graveler,Blaziken,shiny_rare
+B1,309,Golem,Blaziken,shiny_rare
+B1,310,Rockruff,Gyarados,shiny_rare
+B1,311,Alolan Diglett,Blaziken,shiny_rare
+B1,312,Meowth,Altaria,shiny_rare
+B1,313,Persian,Altaria,shiny_rare
+B1,314,Doduo,Blaziken,shiny_rare
+B1,315,Dodrio,Blaziken,shiny_rare
+B1,316,Bidoof,Altaria,shiny_rare
+B1,317,Decidueye ex,Blaziken,double_shiny_rare
+B1,318,Incineroar ex,Gyarados,double_shiny_rare
+B1,319,Palkia ex,Blaziken,double_shiny_rare
+B1,320,Primarina ex,Altaria,double_shiny_rare
+B1,321,Pikachu ex,Gyarados,double_shiny_rare
+B1,322,Tapu Koko ex,Blaziken,double_shiny_rare
+B1,323,Lycanroc ex,Gyarados,double_shiny_rare
+B1,324,Passimian ex,Altaria,double_shiny_rare
+B1,325,Alolan Dugtrio ex,Blaziken,double_shiny_rare
+B1,326,Dialga ex,Altaria,double_shiny_rare
+B1,327,Bibarel ex,Altaria,double_shiny_rare
+B1,328,Arceus ex,Gyarados,double_shiny_rare
+B1,329,Lilligant,Blaziken|Gyarados|Altaria,crown_rare
+B1,330,Klefki,Blaziken|Gyarados|Altaria,crown_rare
+B1,331,Flame Patch,Blaziken|Gyarados|Altaria,crown_rare
