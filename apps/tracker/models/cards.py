@@ -66,7 +66,7 @@ class Generation(models.Model):
         help_text="Short code for the generation, e.g. G1",
     )
     display_name = models.CharField(
-        max_length=10,
+        max_length=20,
         unique=True,
         verbose_name="Display Name",
         help_text="Display name for the generation",
