@@ -7,10 +7,11 @@ from django.core.management.base import BaseCommand
 
 from apps.tracker.models.cards import (
     Card,
+    Generation,
+    PackType,
     PokemonSet,
     Rarity,
     RarityProbability,
-    Version,
 )
 
 
@@ -24,6 +25,12 @@ class Command(BaseCommand):
         parser.add_argument("--cards", type=str, help="Path to CSV file with card data")
         parser.add_argument(
             "--rarities", type=str, help="Path to CSV file with rarity data"
+        )
+        parser.add_argument(
+            "--packtypes", type=str, help="Path to CSV file with pack type data"
+        )
+        parser.add_argument(
+            "--generations", type=str, help="Path to CSV file with generation data"
         )
         parser.add_argument(
             "--rarityprob",
@@ -51,6 +58,8 @@ class Command(BaseCommand):
         if not any(
             [
                 options.get("rarities"),
+                options.get("generations"),
+                options.get("packtypes"),
                 options.get("rarityprob"),
                 options.get("sets"),
                 options.get("cards"),
@@ -61,6 +70,8 @@ class Command(BaseCommand):
         ):
             base = "data/"
             options["rarities"] = base + "rarities.csv"
+            options["generations"] = base + "generations.csv"
+            options["packtypes"] = base + "pack_types.csv"
             options["rarityprob"] = base + "rarity_probabilities.csv"
             options["sets"] = base + "sets.csv"
             options["cards"] = base + "cards.csv"
@@ -70,6 +81,10 @@ class Command(BaseCommand):
 
         if options["rarities"]:
             self.import_rarities(options["rarities"])
+        if options["generations"]:
+            self.import_generations(options["generations"])
+        if options["packtypes"]:
+            self.import_pack_types(options["packtypes"])
         if options["rarityprob"]:
             self.import_rarity_probabilities(options["rarityprob"])
         if options["sets"]:
@@ -87,12 +102,73 @@ class Command(BaseCommand):
         with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
+                defaults = {"name": row["name"], "release_date": row["release_date"]}
+
+                # Handle generation field
+                if "generation" in row and row["generation"]:
+                    try:
+                        generation = Generation.objects.get(name=row["generation"])
+                        defaults["generation"] = generation
+                    except ObjectDoesNotExist:
+                        self.stderr.write(
+                            f"Skipping set {row['number']}: Generation {row['generation']} not found"
+                        )
+                        continue
+
                 obj, created = PokemonSet.objects.update_or_create(
                     number=row["number"],
-                    defaults={"name": row["name"], "release_date": row["release_date"]},
+                    defaults=defaults,
                 )
                 action = "Created" if created else "Updated"
-                self.stdout.write(f"{action} Set: {obj.name}")
+                generation_info = (
+                    f" (generation: {obj.generation})" if obj.generation else ""
+                )
+                self.stdout.write(f"{action} Set: {obj.name}{generation_info}")
+
+    def import_generations(self, filepath):
+        """Import generations from CSV file."""
+        with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                obj, created = Generation.objects.update_or_create(
+                    name=row["name"],
+                    defaults={
+                        "display_name": row["display_name"],
+                        "description": row.get("description", ""),
+                    },
+                )
+                action = "Created" if created else "Updated"
+                self.stdout.write(
+                    f"{action} Generation: {obj.name} - {obj.display_name}"
+                )
+
+    def import_pack_types(self, filepath):
+        """Import pack types from CSV file."""
+        with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                try:
+                    generation = Generation.objects.get(name=row["generation"])
+                except ObjectDoesNotExist:
+                    self.stderr.write(
+                        f"Skipping pack type {row['pack_type']}: Generation {row['generation']} not found"
+                    )
+                    continue
+
+                obj, created = PackType.objects.update_or_create(
+                    generation=generation,
+                    name=row["pack_type"],
+                    defaults={
+                        "display_name": row["display_name"],
+                        "slot_count": int(row["slot_count"]),
+                        "occurrence_probability": float(row["occurrence_probability"]),
+                        "description": row["description"],
+                    },
+                )
+                action = "Created" if created else "Updated"
+                self.stdout.write(
+                    f"{action} PackType: {obj.generation.name} - {obj.display_name}"
+                )
 
     def import_cards(self, filepath):
         with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
@@ -125,19 +201,19 @@ class Command(BaseCommand):
                         # Versuche Pack zu finden
                         pack_obj = pset.packs.filter(name=pack_name).first()
                         if not pack_obj:
-                            # Neueste Version ermitteln
-                            version = Version.objects.order_by("-name").first()
-                            if not version:
+                            # Neueste Generation ermitteln
+                            generation = Generation.objects.order_by("-name").first()
+                            if not generation:
                                 self.stderr.write(
-                                    f"No Version found, cannot create pack '{pack_name}' for card '{card_obj.name}'"
+                                    f"No Generation found, cannot create pack '{pack_name}' for card '{card_obj.name}'"
                                 )
                                 continue
                             # Pack neu anlegen
                             pack_obj = pset.packs.create(
-                                name=pack_name, rarity_version=version
+                                name=pack_name, rarity_version=generation
                             )
                             self.stdout.write(
-                                f"→ Created new pack '{pack_name}' with version '{version.name}'"
+                                f"→ Created new pack '{pack_name}' with generation '{generation.name}'"
                             )
 
                         # Karte zu Pack hinzufügen
@@ -164,56 +240,66 @@ class Command(BaseCommand):
             for row in reader:
                 try:
                     rarity = Rarity.objects.get(name=row["rarity"])
+                    generation = Generation.objects.get(name=row["generation"])
+                    pack_type = PackType.objects.get(
+                        name=row["pack_type"], generation=generation
+                    )
                 except ObjectDoesNotExist as e:
                     self.stderr.write(
-                        f"Skipping probability for rarity={row['rarity']} version={row['version']}: {e}"
+                        f"Skipping probability for rarity={row['rarity']} generation={row['generation']} pack_type={row['pack_type']}: {e}"
                     )
                     continue
-                version, created = Version.objects.get_or_create(name=row["version"])
 
-                # Normalized naming: probability_slot1..probability_slot5
-                # Legacy fallback names: probability_first/fourth/fifth
-                prob_slot1 = row.get("probability_slot1") or row.get(
-                    "probability_first"
-                )
-                prob_slot2 = row.get("probability_slot2") or prob_slot1
-                prob_slot3 = row.get("probability_slot3") or prob_slot1
-                prob_slot4 = (
-                    row.get("probability_slot4") or row.get("probability_fourth") or 0.0
-                )
-                prob_slot5 = (
-                    row.get("probability_slot5") or row.get("probability_fifth") or 0.0
-                )
+                # Skip god pack probabilities - they are calculated dynamically
+                if pack_type.is_god_pack:
+                    self.stdout.write(
+                        f"Skipping god pack probability: {generation.name} - {pack_type.name} - {rarity.name} (calculated dynamically)"
+                    )
+                    continue
 
-                if "slot_count" in row and row["slot_count"]:
-                    try:
-                        sc_int = int(row["slot_count"])
-                        if version.slot_count != sc_int:
-                            version.slot_count = sc_int
-                            version.save(update_fields=["slot_count"])
-                    except ValueError:
-                        self.stderr.write(
-                            f"Invalid slot_count '{row['slot_count']}' for version {version.name}"
-                        )
+                try:
+                    # Normalized naming: probability_slot1..probability_slot6
+                    prob_slot1 = float(row.get("probability_slot1", 0))
+                    prob_slot2 = float(row.get("probability_slot2", 0))
+                    prob_slot3 = float(row.get("probability_slot3", 0))
+                    prob_slot4 = float(row.get("probability_slot4", 0))
+                    prob_slot5 = float(row.get("probability_slot5", 0))
+                    prob_slot6 = float(row.get("probability_slot6", 0))
 
-                _obj, created = RarityProbability.objects.update_or_create(
-                    rarity=rarity,
-                    version=version,
-                    defaults={
-                        "probability_slot1": prob_slot1,
-                        "probability_slot2": prob_slot2,
-                        "probability_slot3": prob_slot3,
-                        "probability_slot4": prob_slot4,
-                        "probability_slot5": prob_slot5,
-                    },
-                )
-                action = "Created" if created else "Updated"
-                self.stdout.write(
-                    f"{action} RarityProbability: {rarity.name} / {version.name}"
-                )
+                    # First, delete any conflicting records to prevent unique constraint violations
+                    # Remove records that would conflict with the new unique constraint
+                    RarityProbability.objects.filter(
+                        rarity=rarity, generation=generation, pack_type=pack_type
+                    ).delete()
+
+                    # Also clean up any orphaned records with null generation/pack_type for this rarity
+                    RarityProbability.objects.filter(
+                        rarity=rarity, generation__isnull=True, pack_type__isnull=True
+                    ).delete()
+
+                    # Create the new record with proper values
+                    _obj = RarityProbability.objects.create(
+                        rarity=rarity,
+                        generation=generation,
+                        pack_type=pack_type,
+                        probability_slot1=prob_slot1,
+                        probability_slot2=prob_slot2,
+                        probability_slot3=prob_slot3,
+                        probability_slot4=prob_slot4,
+                        probability_slot5=prob_slot5,
+                        probability_slot6=prob_slot6,
+                    )
+                    action = "Created"
+
+                    self.stdout.write(
+                        f"{action} RarityProbability: {generation.name} - {pack_type.name} - {rarity.name}"
+                    )
+
+                except ValueError as e:
+                    self.stderr.write(f"Invalid probability value: {e}")
 
     def import_set_translations(self, filepath):
-        from apps.tracker.models.cards import PokemonSet, PokemonSetNameTranslation
+        from apps.tracker.models.cards import PokemonSetNameTranslation
 
         with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
             reader = csv.DictReader(csvfile)
@@ -222,7 +308,7 @@ class Command(BaseCommand):
                 if not set_obj:
                     self.stderr.write(f"Set not found: {row['english_name']}")
                     continue
-                obj, created = PokemonSetNameTranslation.objects.update_or_create(
+                _obj, created = PokemonSetNameTranslation.objects.update_or_create(
                     set=set_obj,
                     language_code="de",
                     defaults={"localized_name": row["german_name"]},
@@ -233,7 +319,7 @@ class Command(BaseCommand):
                 )
 
     def import_pack_translations(self, filepath):
-        from apps.tracker.models.cards import Pack, PackNameTranslation, PokemonSet
+        from apps.tracker.models.cards import Pack, PackNameTranslation
 
         with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
             reader = csv.DictReader(csvfile)
@@ -263,7 +349,7 @@ class Command(BaseCommand):
                 )
 
     def import_card_translations(self, filepath):
-        from apps.tracker.models.cards import Card, CardNameTranslation
+        from apps.tracker.models.cards import CardNameTranslation
 
         with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
             reader = csv.DictReader(csvfile)
@@ -278,7 +364,7 @@ class Command(BaseCommand):
                     self.stderr.write(f"Card not found: {english_name}")
                     continue
                 for card in cards:
-                    obj, created = CardNameTranslation.objects.update_or_create(
+                    _obj, created = CardNameTranslation.objects.update_or_create(
                         card=card,
                         language_code="de",
                         defaults={"localized_name": german_name},

@@ -1,14 +1,14 @@
-number,name,release_date
-A1,Genetic Apex,2024-10-30
-A1a,Mythical Island,2024-12-17
-A2,Space-Time Smackdown,2025-01-29
-A2a,Triumphant Light,2025-02-28
-A2b,Shining Revelry,2025-03-26
-A3,Celestial Guardians,2025-04-30
-A3a,Extradimensional Crisis,2025-05-29
-A3b,Eevee Grove,2025-06-26
-A4,Wisdom of Sea and Sky,2025-07-30
-A4a,Secluded Springs,2025-08-28
-A4b,Deluxe Pack ex,2025-09-30
-B1,Mega Rising,2025-10-30
-B1a,Crimson Blaze,2025-12-17
+number,name,release_date,generation
+A1,Genetic Apex,2024-10-30,G1
+A1a,Mythical Island,2024-12-17,G1
+A2,Space-Time Smackdown,2025-01-29,G1
+A2a,Triumphant Light,2025-02-28,G1
+A2b,Shining Revelry,2025-03-26,G2
+A3,Celestial Guardians,2025-04-30,G2
+A3a,Extradimensional Crisis,2025-05-29,G2
+A3b,Eevee Grove,2025-06-26,G2
+A4,Wisdom of Sea and Sky,2025-07-30,G2
+A4a,Secluded Springs,2025-08-28,G2
+A4b,Deluxe Pack ex,2025-09-30,G3
+B1,Mega Rising,2025-10-30,G4
+B1a,Crimson Blaze,2025-12-17,G4

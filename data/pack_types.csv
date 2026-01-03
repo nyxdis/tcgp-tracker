@@ -1,0 +1,10 @@
+generation,pack_type,display_name,slot_count,occurrence_probability,description
+G1,normal,Normal Pack,5,0.9995,Standard booster pack (no shinies exist yet)
+G1,god,God Pack,5,0.0005,Extremely rare pack containing only rare cards
+G2,normal,Normal Pack,5,0.9995,Standard booster pack with shinies added to normal packs
+G2,god,God Pack,5,0.0005,Extremely rare pack containing only rare cards
+G3,normal,Deluxe Pack,4,0.9995,Special 4-card pack with unique probabilities
+G3,god,God Deluxe Pack,4,0.0005,Extremely rare 4-card pack
+G4,normal,Normal Pack,5,0.94762,Standard booster pack (shinies moved to separate packs)
+G4,shiny,Shiny Pack,5,0.05238,Special pack with guaranteed shiny card
+G4,god,God Pack,5,0.0005,Extremely rare pack containing only rare cards

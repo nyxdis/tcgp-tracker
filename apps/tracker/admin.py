@@ -6,13 +6,14 @@ from django.contrib import admin
 from apps.tracker.models.cards import (
     Card,
     CardNameTranslation,
+    Generation,
     Pack,
     PackNameTranslation,
+    PackType,
     PokemonSet,
     PokemonSetNameTranslation,
     Rarity,
     RarityProbability,
-    Version,
 )
 from apps.tracker.models.users import FriendRequest, UserCard, UserProfile
 
@@ -35,20 +36,28 @@ class CardsInline(admin.TabularInline):
 
 
 class RarityProbabilitiesInline(admin.TabularInline):
-    """Inline admin for RarityProbabilities with soft sum warnings."""
+    """Inline admin for RarityProbabilities with soft sum warnings.
+
+    Note: God pack probabilities are calculated dynamically and not stored in database.
+    """
 
     model = RarityProbability
     extra = 0
     show_change_link = True
 
+    def get_queryset(self, request):
+        """Exclude god pack probability entries since they're calculated dynamically."""
+        qs = super().get_queryset(request)
+        return qs.exclude(pack_type__name__icontains="god")
+
     def get_formset(self, request, obj=None, **kwargs):  # type: ignore[override]
         from django.contrib import messages
 
         ParentFormSet = super().get_formset(request, obj, **kwargs)
-        version_obj = obj  # capture for closure
+        generation_obj = obj  # capture for closure
 
         # If no parent object (e.g. add form), just return original
-        if not version_obj:
+        if not generation_obj:
             return ParentFormSet
 
         orig_clean = getattr(ParentFormSet, "clean", None)
@@ -59,36 +68,51 @@ class RarityProbabilitiesInline(admin.TabularInline):
             # Only warn if no per-form errors
             if any(f.errors for f in self.forms):
                 return
-            version = getattr(self, "instance", None) or version_obj
-            slot_fields = [
-                "probability_slot1",
-                "probability_slot2",
-                "probability_slot3",
-                "probability_slot4",
-                "probability_slot5",
-            ][: getattr(version, "slot_count", 5)]
-            sums = {sf: 0.0 for sf in slot_fields}
-            count = 0
-            for form in self.forms:
-                if not getattr(form, "cleaned_data", None):
+            generation = getattr(self, "instance", None) or generation_obj
+
+            # Get pack types for validation (excluding god packs)
+            pack_types = generation.pack_types.exclude(name__icontains="god")
+
+            # Validate probabilities for each pack type separately
+            for pack_type in pack_types:
+                slot_fields = [
+                    "probability_slot1",
+                    "probability_slot2",
+                    "probability_slot3",
+                    "probability_slot4",
+                    "probability_slot5",
+                ][: pack_type.slot_count]
+
+                sums = {sf: 0.0 for sf in slot_fields}
+                count = 0
+
+                for form in self.forms:
+                    if not getattr(form, "cleaned_data", None):
+                        continue
+                    if form.cleaned_data.get("DELETE"):
+                        continue
+                    # Only check forms for this pack type
+                    if form.cleaned_data.get("pack_type") != pack_type:
+                        continue
+                    count += 1
+                    for sf in slot_fields:
+                        sums[sf] += form.cleaned_data.get(sf, 0.0) or 0.0
+
+                if not count:
                     continue
-                if form.cleaned_data.get("DELETE"):
-                    continue
-                count += 1
-                for sf in slot_fields:
-                    sums[sf] += form.cleaned_data.get(sf, 0.0) or 0.0
-            if not count:
-                return
-            epsilon = 1e-5
-            drift = {
-                sf: total for sf, total in sums.items() if abs(total - 1.0) > epsilon
-            }
-            if drift:
-                msg = ", ".join(f"{sf}={total:.6f}" for sf, total in drift.items())
-                messages.warning(
-                    request,
-                    f"Rarity probability sums for version {version.name} are off (expected 1.0): {msg}",
-                )
+
+                epsilon = 1e-5
+                drift = {
+                    sf: total
+                    for sf, total in sums.items()
+                    if abs(total - 1.0) > epsilon
+                }
+                if drift:
+                    msg = ", ".join(f"{sf}={total:.6f}" for sf, total in drift.items())
+                    messages.warning(
+                        request,
+                        f"Rarity probability sums for {generation.name} - {pack_type.name} are off (expected 1.0): {msg}",
+                    )
 
         ParentFormSet.clean = clean  # type: ignore[assignment]
         return ParentFormSet
@@ -149,15 +173,16 @@ class SetAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "release_date",
+        "generation",
         "available_until",
         "is_available_status",
         "view_cards_link",
     )
     inlines = [PacksInline, PokemonSetNameTranslationInline]
-    search_fields = ("name",)
+    search_fields = ("name", "generation__name")
     list_per_page = 25
     ordering = ("release_date",)
-    list_filter = ("available_until",)
+    list_filter = ("available_until", "generation")
 
     @staticmethod
     def view_cards_link(obj):
@@ -193,6 +218,9 @@ class PackAdmin(admin.ModelAdmin):
     ordering = ("set", "name")
     inlines = [PackNameTranslationInline]
 
+    # Note: rarity_version field still references Generation model
+    # Consider renaming this field in a future migration
+
 
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
@@ -225,57 +253,41 @@ class RarityProbabilityAdmin(admin.ModelAdmin):
     """Admin for RarityProbability."""
 
     list_display = (
-        "version",
+        "generation",
+        "pack_type",
         "rarity",
         "probability_slot1_percent",
         "probability_slot2_percent",
         "probability_slot3_percent",
         "probability_slot4_percent",
         "probability_slot5_percent",
+        "probability_slot6_percent",
     )
-    search_fields = ("rarity__name", "version__name")
-    autocomplete_fields = ["version", "rarity"]
-    list_select_related = ("version", "rarity")
+    search_fields = ("rarity__name", "generation__name", "pack_type__name")
+    autocomplete_fields = ["generation", "pack_type", "rarity"]
+    list_select_related = ("generation", "pack_type", "rarity")
+    list_filter = ("generation", "pack_type", "rarity")
     list_per_page = 25
-    ordering = ("version", "rarity")
+    ordering = ("generation", "pack_type", "rarity")
 
     class Form(forms.ModelForm):
         class Meta:
             model = RarityProbability
             fields = [
-                "version",
+                "generation",
+                "pack_type",
                 "rarity",
                 "probability_slot1",
                 "probability_slot2",
                 "probability_slot3",
                 "probability_slot4",
                 "probability_slot5",
+                "probability_slot6",
             ]
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
-            # If a version is already selected, hide fields above slot_count
-            version = None
-            if self.instance and self.instance.version_id:
-                version = self.instance.version
-            else:
-                # Try to get version from submitted data
-                vid = self.data.get("version") if self.data else None
-                if vid:
-                    version = Version.objects.filter(pk=vid).first()
-            if version:
-                for idx, field_name in enumerate(
-                    [
-                        "probability_slot1",
-                        "probability_slot2",
-                        "probability_slot3",
-                        "probability_slot4",
-                        "probability_slot5",
-                    ],
-                    start=1,
-                ):
-                    if idx > version.slot_count:
-                        self.fields[field_name].widget = forms.HiddenInput()
+            # Pack type validation could be added here if needed
 
     form = Form
 
@@ -308,16 +320,71 @@ class RarityProbabilityAdmin(admin.ModelAdmin):
 
     probability_slot3_percent.short_description = "Probability Slot3"
 
+    def probability_slot6_percent(self, obj):
+        return self._probability_percent(obj, "probability_slot6")
 
-@admin.register(Version)
-class VersionAdmin(admin.ModelAdmin):
-    """Admin for Version."""
+    probability_slot6_percent.short_description = "Probability Slot6"
 
-    list_display = ("name", "display_name")
-    inlines = [RarityProbabilitiesInline]
+
+class PackTypesInline(admin.TabularInline):
+    """Inline admin for PackTypes."""
+
+    model = PackType
+    extra = 0
+    show_change_link = True
+    readonly_fields = ("is_god_pack_display",)
+
+    def is_god_pack_display(self, obj):
+        """Show if this is a god pack type."""
+        if obj.is_god_pack:
+            return "✓ God Pack (probabilities calculated dynamically)"
+        return "Normal Pack (probabilities stored in database)"
+
+    is_god_pack_display.short_description = "Pack Type"
+
+
+@admin.register(Generation)
+class GenerationAdmin(admin.ModelAdmin):
+    """Admin for Generation."""
+
+    list_display = ("name", "display_name", "total_pack_types")
+    inlines = [PackTypesInline, RarityProbabilitiesInline]
     search_fields = ("name", "display_name")
     list_per_page = 25
     ordering = ("name",)
+
+    def get_readonly_fields(self, request, obj=None):
+        """Add helpful information about god pack calculations."""
+        return ("god_pack_info",) if obj else ()
+
+    def god_pack_info(self, obj):
+        """Display information about god pack probability calculations."""
+        god_packs = obj.pack_types.filter(name__icontains="god")
+        if not god_packs.exists():
+            return "No god packs configured for this generation."
+
+        info = [
+            "God pack probabilities are calculated dynamically based on card counts:"
+        ]
+
+        eligible_rarities = obj.get_god_pack_eligible_rarities()
+        rarity_names = list(eligible_rarities.values_list("name", flat=True))
+
+        if obj.name in ["G2", "G3"]:
+            info.append(
+                f"• Eligible rarities: {', '.join(rarity_names)} (includes shinies)"
+            )
+        else:
+            info.append(f"• Eligible rarities: {', '.join(rarity_names)} (no shinies)")
+
+        info.append("• Each individual rare card has equal probability")
+        info.append(
+            "• Rarity probability = (cards of that rarity) / (total rare cards)"
+        )
+
+        return "\n".join(info)
+
+    god_pack_info.short_description = "God Pack Calculation Info"
 
 
 @admin.register(Rarity)
@@ -357,6 +424,39 @@ class FriendRequestAdmin(admin.ModelAdmin):
     list_select_related = ("from_user", "to_user")
     date_hierarchy = "created_at"
     list_per_page = 25
+
+
+@admin.register(PackType)
+class PackTypeAdmin(admin.ModelAdmin):
+    """Admin for PackType."""
+
+    list_display = (
+        "generation",
+        "name",
+        "display_name",
+        "slot_count",
+        "occurrence_probability_percent",
+        "is_god_pack_display",
+        "description",
+    )
+    search_fields = ("name", "display_name", "description", "generation__name")
+    list_filter = ("generation", "name")
+    autocomplete_fields = ["generation"]
+    ordering = ("generation", "-occurrence_probability")
+    readonly_fields = ("occurrence_probability_percent", "is_god_pack_display")
+
+    def occurrence_probability_percent(self, obj):
+        """Display occurrence probability as percentage."""
+        return f"{obj.occurrence_probability * 100:.3f}%"
+
+    occurrence_probability_percent.short_description = "Occurrence %"
+
+    def is_god_pack_display(self, obj):
+        """Display if this is a god pack."""
+        return obj.is_god_pack
+
+    is_god_pack_display.short_description = "Is God Pack"
+    is_god_pack_display.boolean = True
 
 
 @admin.register(CardNameTranslation)
