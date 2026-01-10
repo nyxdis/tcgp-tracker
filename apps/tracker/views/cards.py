@@ -214,7 +214,24 @@ def pack_list(request):
         cards = list(pack.cards.all())
         total = len(cards)
         owned = sum(1 for c in cards if c.id in owned_card_ids)
-        chance = prob_at_least_one_new_card(pack, request.user) * 100
+
+        # Calculate weighted chance considering all pack types for this generation
+        generation = pack.rarity_version
+        available_pack_types = generation.pack_types.all()
+
+        if available_pack_types.exists():
+            # Calculate expected probability across all pack types
+            expected_chance = 0.0
+            for pack_type in available_pack_types:
+                pack_type_chance = prob_at_least_one_new_card(
+                    pack, request.user, pack_type
+                )
+                expected_chance += pack_type_chance * pack_type.occurrence_probability
+            chance = expected_chance * 100
+        else:
+            # Fallback to default calculation if no pack types defined
+            chance = prob_at_least_one_new_card(pack, request.user) * 100
+
         # Find base cards in this pack
         base_cards = [c for c in cards if c.rarity.name in BASE_RARITIES]
         owned_base = sum(1 for c in base_cards if c.id in owned_card_ids)
