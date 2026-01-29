@@ -2303,7 +2303,7 @@ B1a,010,Mothim,Crimson Blaze,common
 B1a,011,Charmander,Crimson Blaze,common
 B1a,012,Charmeleon,Crimson Blaze,uncommon
 B1a,013,Charizard,Crimson Blaze,rare
-B1a,014,Mega Charizard ex,Crimson Blaze,double_rare
+B1a,014,Mega Charizard Y ex,Crimson Blaze,double_rare
 B1a,015,Houndour,Crimson Blaze,common
 B1a,016,Houndoom,Crimson Blaze,common
 B1a,017,Squirtle,Crimson Blaze,common
@@ -2366,7 +2366,7 @@ B1a,073,Xerneas,Crimson Blaze,illustration_rare
 B1a,074,Trubbish,Crimson Blaze,illustration_rare
 B1a,075,Buneary,Crimson Blaze,illustration_rare
 B1a,076,Mega Venusaur ex,Crimson Blaze,special_art
-B1a,077,Mega Charizard ex,Crimson Blaze,special_art
+B1a,077,Mega Charizard Y ex,Crimson Blaze,special_art
 B1a,078,Mega Blastoise ex,Crimson Blaze,special_art
 B1a,079,Mega Lopunny ex,Crimson Blaze,special_art
 B1a,080,Mega Steelix ex,Crimson Blaze,special_art
@@ -2376,7 +2376,7 @@ B1a,083,Mega Venusaur ex,Crimson Blaze,special_art
 B1a,084,Mega Blastoise ex,Crimson Blaze,special_art
 B1a,085,Mega Lopunny ex,Crimson Blaze,special_art
 B1a,086,Mega Steelix ex,Crimson Blaze,special_art
-B1a,087,Mega Charizard ex,Crimson Blaze,immersive_rare
+B1a,087,Mega Charizard Y ex,Crimson Blaze,immersive_rare
 B1a,088,Oddish,Crimson Blaze,shiny_rare
 B1a,089,Gloom,Crimson Blaze,shiny_rare
 B1a,090,Vileplume,Crimson Blaze,shiny_rare
@@ -2393,3 +2393,237 @@ B1a,100,Guzzlord ex,Crimson Blaze,double_shiny_rare
 B1a,101,Solgaleo ex,Crimson Blaze,double_shiny_rare
 B1a,102,Aegislash,Crimson Blaze,crown_rare
 B1a,103,Quick-Grow Extract,Crimson Blaze,crown_rare
+B2,001,Ledyba,Gardevoir,common
+B2,002,Ledian,Gardevoir,common
+B2,003,Shuckle,Gardevoir,common
+B2,004,Roselia,Gardevoir,common
+B2,005,Roserade,Gardevoir,rare
+B2,006,Cacnea,Gardevoir,common
+B2,007,Cacturne,Gardevoir,uncommon
+B2,008,Chespin,Gardevoir,common
+B2,009,Quilladin,Gardevoir,uncommon
+B2,010,Chesnaught,Gardevoir,rare
+B2,011,Scatterbug,Gardevoir,common
+B2,012,Spewpa,Gardevoir,common
+B2,013,Vivillon,Gardevoir,uncommon
+B2,014,Buzzwole,Gardevoir,rare
+B2,015,Gossifleur,Gardevoir,common
+B2,016,Eldegoss,Gardevoir,uncommon
+B2,017,Teal Mask Ogerpon ex,Gardevoir,double_rare
+B2,018,Alolan Marowak,Gardevoir,uncommon
+B2,019,Reshiram,Gardevoir,rare
+B2,020,Litleo,Gardevoir,common
+B2,021,Pyroar,Gardevoir,uncommon
+B2,022,Oricorio,Gardevoir,uncommon
+B2,023,Blacephalon ex,Gardevoir,double_rare
+B2,024,Scorbunny,Gardevoir,common
+B2,025,Raboot,Gardevoir,uncommon
+B2,026,Cinderace,Gardevoir,rare
+B2,027,Hearthflame Mask Ogerpon,Gardevoir,rare
+B2,028,Alolan Vulpix,Gardevoir,common
+B2,029,Alolan Ninetales ex,Gardevoir,double_rare
+B2,030,Galarian Mr. Mime,Gardevoir,common
+B2,031,Galarian Mr. Rime,Gardevoir,uncommon
+B2,032,Delibird,Gardevoir,common
+B2,033,Mudkip,Gardevoir,common
+B2,034,Marshtomp,Gardevoir,uncommon
+B2,035,Swampert,Gardevoir,rare
+B2,036,Mega Swampert ex,Gardevoir,double_rare
+B2,037,Vanillite,Gardevoir,common
+B2,038,Vanillish,Gardevoir,common
+B2,039,Vanilluxe,Gardevoir,uncommon
+B2,040,Cryogonal,Gardevoir,common
+B2,041,Amaura,Gardevoir,uncommon
+B2,042,Aurorus,Gardevoir,rare
+B2,043,Chewtle,Gardevoir,uncommon
+B2,044,Drednaw,Gardevoir,rare
+B2,045,Cramorant,Gardevoir,common
+B2,046,Arrokuda,Gardevoir,common
+B2,047,Barraskewda,Gardevoir,common
+B2,048,Wellspring Mask Ogerpon,Gardevoir,rare
+B2,049,Pikachu,Gardevoir,common
+B2,050,Alolan Raichu,Gardevoir,rare
+B2,051,Zapdos,Gardevoir,rare
+B2,052,Plusle,Gardevoir,common
+B2,053,Minun,Gardevoir,common
+B2,054,Toxel,Gardevoir,common
+B2,055,Toxtricity ex,Gardevoir,double_rare
+B2,056,Tadbulb,Gardevoir,common
+B2,057,Bellibolt,Gardevoir,uncommon
+B2,058,Galarian Ponyta,Gardevoir,common
+B2,059,Galarian Rapidash,Gardevoir,uncommon
+B2,060,Wobbuffet,Gardevoir,common
+B2,061,Snubbull,Gardevoir,common
+B2,062,Granbull,Gardevoir,uncommon
+B2,063,Ralts,Gardevoir,common
+B2,064,Kirlia,Gardevoir,uncommon
+B2,065,Gardevoir,Gardevoir,rare
+B2,066,Mega Gardevoir ex,Gardevoir,double_rare
+B2,067,Litwick,Gardevoir,common
+B2,068,Lampent,Gardevoir,uncommon
+B2,069,Chandelure,Gardevoir,rare
+B2,070,Meloetta,Gardevoir,uncommon
+B2,071,Pumpkaboo,Gardevoir,common
+B2,072,Gourgeist,Gardevoir,rare
+B2,073,Mimikyu ex,Gardevoir,double_rare
+B2,074,Sinistea,Gardevoir,common
+B2,075,Polteageist,Gardevoir,uncommon
+B2,076,Indeedee,Gardevoir,common
+B2,077,Sandshrew,Gardevoir,common
+B2,078,Sandslash,Gardevoir,common
+B2,079,Machop,Gardevoir,common
+B2,080,Machoke,Gardevoir,common
+B2,081,Machamp,Gardevoir,uncommon
+B2,082,Cubone,Gardevoir,common
+B2,083,Meditite,Gardevoir,common
+B2,084,Medicham,Gardevoir,uncommon
+B2,085,Roggenrola,Gardevoir,common
+B2,086,Boldore,Gardevoir,uncommon
+B2,087,Gigalith ex,Gardevoir,double_rare
+B2,088,Drilbur,Gardevoir,common
+B2,089,Tyrunt,Gardevoir,uncommon
+B2,090,Tyrantrum,Gardevoir,rare
+B2,091,Passimian,Gardevoir,common
+B2,092,Falinks,Gardevoir,uncommon
+B2,093,Cornerstone Mask Ogerpon,Gardevoir,rare
+B2,094,Alolan Meowth,Gardevoir,common
+B2,095,Alolan Persian,Gardevoir,uncommon
+B2,096,Alolan Grimer,Gardevoir,common
+B2,097,Alolan Muk,Gardevoir,rare
+B2,098,Galarian Zigzagoon,Gardevoir,common
+B2,099,Galarian Linoone,Gardevoir,uncommon
+B2,100,Galarian Obstagoon,Gardevoir,rare
+B2,101,Stunky,Gardevoir,common
+B2,102,Skuntank,Gardevoir,uncommon
+B2,103,Spiritomb,Gardevoir,rare
+B2,104,Purrloin,Gardevoir,common
+B2,105,Liepard,Gardevoir,uncommon
+B2,106,Scraggy,Gardevoir,common
+B2,107,Scrafty,Gardevoir,uncommon
+B2,108,Yveltal,Gardevoir,rare
+B2,109,Guzzlord,Gardevoir,rare
+B2,110,Galarian Meowth,Gardevoir,common
+B2,111,Galarian Perrserker,Gardevoir,rare
+B2,112,Mawile,Gardevoir,common
+B2,113,Mega Mawile ex,Gardevoir,double_rare
+B2,114,Excadrill,Gardevoir,uncommon
+B2,115,Ferroseed,Gardevoir,common
+B2,116,Ferrothorn,Gardevoir,common
+B2,117,Galarian Stunfisk,Gardevoir,uncommon
+B2,118,Honedge,Gardevoir,common
+B2,119,Doublade,Gardevoir,uncommon
+B2,120,Aegislash,Gardevoir,rare
+B2,121,Bagon,Gardevoir,common
+B2,122,Shelgon,Gardevoir,uncommon
+B2,123,Salamence,Gardevoir,rare
+B2,124,Meowth,Gardevoir,common
+B2,125,Persian,Gardevoir,common
+B2,126,Kangaskhan,Gardevoir,uncommon
+B2,127,Mega Kangaskhan ex,Gardevoir,double_rare
+B2,128,Sentret,Gardevoir,common
+B2,129,Furret,Gardevoir,common
+B2,130,Smeargle,Gardevoir,uncommon
+B2,131,Lugia,Gardevoir,rare
+B2,132,Taillow,Gardevoir,common
+B2,133,Swellow,Gardevoir,rare
+B2,134,Slakoth,Gardevoir,common
+B2,135,Vigoroth,Gardevoir,uncommon
+B2,136,Slaking,Gardevoir,rare
+B2,137,Spinda,Gardevoir,common
+B2,138,Tornadus,Gardevoir,rare
+B2,139,Bunnelby,Gardevoir,common
+B2,140,Diggersby,Gardevoir,uncommon
+B2,141,Furfrou,Gardevoir,uncommon
+B2,142,Tandemaus,Gardevoir,common
+B2,143,Maushold,Gardevoir,uncommon
+B2,144,Jaw Fossil,Gardevoir,uncommon
+B2,145,Lucky Ice Pop,Gardevoir,uncommon
+B2,146,Sail Fossil,Gardevoir,uncommon
+B2,147,Protective Poncho,Gardevoir,uncommon
+B2,148,Metal Core Barrier,Gardevoir,uncommon
+B2,149,Diantha,Gardevoir,uncommon
+B2,150,Sightseer,Gardevoir,uncommon
+B2,151,Juggler,Gardevoir,uncommon
+B2,152,Piers,Gardevoir,uncommon
+B2,153,Training Area,Gardevoir,uncommon
+B2,154,Starting Plains,Gardevoir,uncommon
+B2,155,Peculiar Plaza,Gardevoir,uncommon
+B2,156,Cacnea,Gardevoir,illustration_rare
+B2,157,Roserade,Gardevoir,illustration_rare
+B2,158,Vivillon,Gardevoir,illustration_rare
+B2,159,Buzzwole,Gardevoir,illustration_rare
+B2,160,Reshiram,Gardevoir,illustration_rare
+B2,161,Oricorio,Gardevoir,illustration_rare
+B2,162,Scorbunny,Gardevoir,illustration_rare
+B2,163,Aurorus,Gardevoir,illustration_rare
+B2,164,Cramorant,Gardevoir,illustration_rare
+B2,165,Minun,Gardevoir,illustration_rare
+B2,166,Toxel,Gardevoir,illustration_rare
+B2,167,Galarian Ponyta,Gardevoir,illustration_rare
+B2,168,Snubbull,Gardevoir,illustration_rare
+B2,169,Indeedee,Gardevoir,illustration_rare
+B2,170,Sandshrew,Gardevoir,illustration_rare
+B2,171,Tyrantrum,Gardevoir,illustration_rare
+B2,172,Falinks,Gardevoir,illustration_rare
+B2,173,Alolan Muk,Gardevoir,illustration_rare
+B2,174,Purrloin,Gardevoir,illustration_rare
+B2,175,Yveltal,Gardevoir,illustration_rare
+B2,176,Galarian Obstagoon,Gardevoir,illustration_rare
+B2,177,Galarian Perrserker,Gardevoir,illustration_rare
+B2,178,Salamence,Gardevoir,illustration_rare
+B2,179,Slakoth,Gardevoir,illustration_rare
+B2,180,Teal Mask Ogerpon ex,Gardevoir,special_art
+B2,181,Blacephalon ex,Gardevoir,special_art
+B2,182,Alolan Ninetales ex,Gardevoir,special_art
+B2,183,Mega Swampert ex,Gardevoir,special_art
+B2,184,Toxtricity ex,Gardevoir,special_art
+B2,185,Mega Gardevoir ex,Gardevoir,special_art
+B2,186,Mimikyu ex,Gardevoir,special_art
+B2,187,Gigalith ex,Gardevoir,special_art
+B2,188,Mega Mawile ex,Gardevoir,special_art
+B2,189,Mega Kangaskhan ex,Gardevoir,special_art
+B2,190,Diantha,Gardevoir,special_art
+B2,191,Sightseer,Gardevoir,special_art
+B2,192,Juggler,Gardevoir,special_art
+B2,193,Piers,Gardevoir,special_art
+B2,194,Teal Mask Ogerpon ex,Gardevoir,special_art
+B2,195,Blacephalon ex,Gardevoir,special_art
+B2,196,Alolan Ninetales ex,Gardevoir,special_art
+B2,197,Mega Swampert ex,Gardevoir,special_art
+B2,198,Toxtricity ex,Gardevoir,special_art
+B2,199,Mimikyu ex,Gardevoir,special_art
+B2,200,Gigalith ex,Gardevoir,special_art
+B2,201,Mega Mawile ex,Gardevoir,special_art
+B2,202,Mega Kangaskhan ex,Gardevoir,special_art
+B2,203,Mega Gardevoir ex,Gardevoir,special_art
+B2,204,Meowth,Gardevoir,immersive_rare
+B2,205,Tangela,Gardevoir,shiny_rare
+B2,206,Magby,Gardevoir,shiny_rare
+B2,207,Magmar,Gardevoir,shiny_rare
+B2,208,Horsea,Gardevoir,shiny_rare
+B2,209,Seadra,Gardevoir,shiny_rare
+B2,210,Mantyke,Gardevoir,shiny_rare
+B2,211,Omanyte,Gardevoir,shiny_rare
+B2,212,Omastar,Gardevoir,shiny_rare
+B2,213,Pichu,Gardevoir,shiny_rare
+B2,214,Clefairy,Gardevoir,shiny_rare
+B2,215,Clefable,Gardevoir,shiny_rare
+B2,216,Latias,Gardevoir,shiny_rare
+B2,217,Latios,Gardevoir,shiny_rare
+B2,218,Hitmonlee,Gardevoir,shiny_rare
+B2,219,Hitmonchan,Gardevoir,shiny_rare
+B2,220,Kabuto,Gardevoir,shiny_rare
+B2,221,Kabutops,Gardevoir,shiny_rare
+B2,222,Phanpy,Gardevoir,shiny_rare
+B2,223,Tyrogue,Gardevoir,shiny_rare
+B2,224,Tauros,Gardevoir,shiny_rare
+B2,225,Flareon ex,Gardevoir,double_shiny_rare
+B2,226,Ho-Oh ex,Gardevoir,double_shiny_rare
+B2,227,Kingdra ex,Gardevoir,double_shiny_rare
+B2,228,Espeon ex,Gardevoir,double_shiny_rare
+B2,229,Sylveon ex,Gardevoir,double_shiny_rare
+B2,230,Donphan ex,Gardevoir,double_shiny_rare
+B2,231,Umbreon ex,Gardevoir,double_shiny_rare
+B2,232,Lugia ex,Gardevoir,double_shiny_rare
+B2,233,Meloetta,Gardevoir,crown_rare
+B2,234,Protective Poncho,Gardevoir,crown_rare
