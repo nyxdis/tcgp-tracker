@@ -1,4 +1,9 @@
 import csv
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+logger = logging.getLogger(__name__)
 
 cards_file = "data/cards.csv"
 card_translations_file = "data/card_translations.csv"
@@ -55,14 +60,14 @@ missing_cards = sorted(card_names - translated_cards)
 missing_packs = sorted(pack_names - translated_packs)
 missing_sets = sorted(set_names - translated_sets)
 
-print("Cards missing translation:")
+logger.info("Cards missing translation:")
 for name in missing_cards:
-    print(name)
+    logger.info("  %s", name)
 
-print("\nPacks missing translation:")
+logger.info("\nPacks missing translation:")
 for name in missing_packs:
-    print(name)
+    logger.info("  %s", name)
 
-print("\nSets missing translation:")
+logger.info("\nSets missing translation:")
 for name in missing_sets:
-    print(name)
+    logger.info("  %s", name)

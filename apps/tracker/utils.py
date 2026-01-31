@@ -1,7 +1,11 @@
 """Tracker app utilities."""
 
+import logging
+
 from apps.tracker.models.cards import RarityProbability
 from apps.tracker.models.users import UserCard
+
+logger = logging.getLogger("tracker.utils")
 
 
 def prob_at_least_one_new_card(pack, user, pack_type=None):
@@ -27,9 +31,9 @@ def prob_at_least_one_new_card(pack, user, pack_type=None):
             pack_type = generation.pack_types.first()
 
     if not pack_type:
-        print(f"DEBUG: No pack type found for generation {generation.name}")
+        logger.debug("No pack type found for generation %s", generation.name)
         available_types = list(generation.pack_types.all())
-        print(f"DEBUG: Available pack types: {available_types}")
+        logger.debug("Available pack types: %s", available_types)
         return 0.0
 
     # Get rarity probabilities - handle god packs specially
@@ -61,20 +65,27 @@ def prob_at_least_one_new_card(pack, user, pack_type=None):
             generation=generation, pack_type=pack_type
         ).select_related("rarity")
         rarities = {rp.rarity: rp for rp in rarity_probs}
-        print(
-            f"DEBUG: Found {len(rarities)} rarity probabilities for {generation.name} - {pack_type.name}"
+        logger.debug(
+            "Found %d rarity probabilities for %s - %s",
+            len(rarities),
+            generation.name,
+            pack_type.name,
         )
         if not rarities:
             # Try without pack_type filter to see what's available
             all_probs = RarityProbability.objects.filter(
                 generation=generation
             ).select_related("rarity", "pack_type")
-            print(
-                f"DEBUG: All probabilities for generation: {[(rp.rarity.name, rp.pack_type.name if rp.pack_type else None) for rp in all_probs]}"
+            logger.debug(
+                "All probabilities for generation: %s",
+                [
+                    (rp.rarity.name, rp.pack_type.name if rp.pack_type else None)
+                    for rp in all_probs
+                ],
             )
 
     cards_in_pack = pack.cards.select_related("rarity").all()
-    print(f"DEBUG: Pack has {len(cards_in_pack)} cards")
+    logger.debug("Pack has %d cards", len(cards_in_pack))
 
     owned_card_ids = set(
         UserCard.objects.filter(user=user, card__in=cards_in_pack).values_list(
@@ -114,14 +125,22 @@ def prob_at_least_one_new_card(pack, user, pack_type=None):
             if total == 0:
                 continue
             slot_prob_no_new += prob * (owned_count / total)
-            print(
-                f"DEBUG: {slot_field} - {rarity.name}: prob={prob}, owned={owned_count}/{total}"
+            logger.debug(
+                "%s - %s: prob=%s, owned=%d/%d",
+                slot_field,
+                rarity.name,
+                prob,
+                owned_count,
+                total,
             )
         prob_no_new *= slot_prob_no_new
-        print(
-            f"DEBUG: {slot_field} - slot_prob_no_new={slot_prob_no_new}, prob_no_new={prob_no_new}"
+        logger.debug(
+            "%s - slot_prob_no_new=%s, prob_no_new=%s",
+            slot_field,
+            slot_prob_no_new,
+            prob_no_new,
         )
 
     result = round(1.0 - prob_no_new, 4)
-    print(f"DEBUG: Final result: {result}")
+    logger.debug("Final result: %s", result)
     return result
