@@ -227,7 +227,7 @@ def pack_list(request):
                     pack, request.user, pack_type
                 )
                 expected_chance += pack_type_chance * pack_type.occurrence_probability
-            chance = expected_chance * 100
+            chance = min(expected_chance, 1.0) * 100
         else:
             # Fallback to default calculation if no pack types defined
             chance = prob_at_least_one_new_card(pack, request.user) * 100
