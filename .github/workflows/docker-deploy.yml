@@ -68,23 +68,18 @@ jobs:
             docker pull ghcr.io/${{ github.repository_owner }}/tcgp-tracker:latest
 
             # Deploy with zero downtime using swarm
-            if [ -f "./swarm.sh" ]; then
-              echo "🚀 Deploying with swarm.sh..."
-              ./swarm.sh update latest
-            else
-              echo "🚀 Deploying with generic manage-swarm.sh..."
-              ../manage-swarm.sh tcgp update latest
-            fi
+            echo "🚀 Deploying with manage-swarm.sh..."
+            ../manage-swarm.sh update latest
 
-            # Wait a moment and check deployment status
+            # Wait a moment for deployment to settle
             sleep 10
 
+            # Run data import (safe to run multiple times)
+            echo "📊 Running data import..."
+            ../manage-swarm.sh shell app "python manage.py import_data"
+
             # Verify deployment
-            if [ -f "./swarm.sh" ]; then
-              ./swarm.sh status
-            else
-              ../manage-swarm.sh tcgp status
-            fi
+            ../manage-swarm.sh status
 
             echo "✅ Zero-downtime deployment completed!"
             echo "🔗 Application available at: https://tcgp.freyd.is"
