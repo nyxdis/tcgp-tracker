@@ -1,3 +1,4 @@
+import ipaddress
 import os
 
 import dj_database_url
@@ -6,36 +7,70 @@ from .base import *
 
 DEBUG = False
 SECRET_KEY = os.environ["SECRET_KEY"]
+
+# Base allowed hosts
 ALLOWED_HOSTS = [
     "tcgp.freyd.is",
     "tcgp.ngls.eu",
     "beeblebrox",
-    # Docker Swarm overlay network IPs
-    "10.0.1.1",
-    "10.0.1.2",
-    "10.0.1.3",
-    "10.0.1.4",
-    "10.0.1.5",
-    "10.0.1.6",
-    "10.0.1.7",
-    "10.0.1.8",
-    "10.0.1.9",
-    "10.0.1.10",
-    "10.0.1.11",
-    "10.0.1.12",
-    "10.0.1.13",
-    "10.0.1.14",
-    "10.0.1.15",
-    "10.0.1.16",
-    "10.0.1.17",
-    "10.0.1.18",
-    "10.0.1.19",
-    "10.0.1.20",
 ]
+
+
+# Add Docker network ranges
+def is_docker_ip(ip):
+    """Check if IP is from Docker networks"""
+    try:
+        ip_obj = ipaddress.ip_address(ip)
+        # Docker default bridge network
+        if (
+            ipaddress.ip_address("172.17.0.1")
+            <= ip_obj
+            <= ipaddress.ip_address("172.17.255.254")
+        ):
+            return True
+        # Docker overlay networks (10.0.x.x)
+        if (
+            ipaddress.ip_address("10.0.0.1")
+            <= ip_obj
+            <= ipaddress.ip_address("10.0.255.254")
+        ):
+            return True
+        # Docker user-defined networks (172.x.x.x)
+        if (
+            ipaddress.ip_address("172.16.0.1")
+            <= ip_obj
+            <= ipaddress.ip_address("172.31.255.254")
+        ):
+            return True
+        return False
+    except ValueError:
+        return False
+
+
+# Custom allowed hosts check that includes Docker IPs
+class DockerAwareAllowedHosts:
+    def __init__(self, allowed_hosts):
+        self.allowed_hosts = allowed_hosts
+
+    def __contains__(self, host):
+        # Remove port if present
+        host_ip = host.split(":")[0]
+
+        # Check static allowed hosts first
+        if host in self.allowed_hosts or host_ip in self.allowed_hosts:
+            return True
+
+        # Check if it's a Docker internal IP
+        return is_docker_ip(host_ip)
+
+
+ALLOWED_HOSTS = DockerAwareAllowedHosts(ALLOWED_HOSTS)
 
 # Environment variable override for flexibility
 if "DJANGO_ALLOWED_HOSTS" in os.environ:
-    ALLOWED_HOSTS.extend(os.environ["DJANGO_ALLOWED_HOSTS"].split(","))
+    base_hosts = ["tcgp.freyd.is", "tcgp.ngls.eu", "beeblebrox"]
+    base_hosts.extend(os.environ["DJANGO_ALLOWED_HOSTS"].split(","))
+    ALLOWED_HOSTS = DockerAwareAllowedHosts(base_hosts)
 
 CSRF_TRUSTED_ORIGINS = ["https://tcgp.freyd.is"]
 CSRF_COOKIE_SECURE = True
