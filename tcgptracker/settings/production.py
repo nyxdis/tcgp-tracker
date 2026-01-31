@@ -6,7 +6,36 @@ from .base import *
 
 DEBUG = False
 SECRET_KEY = os.environ["SECRET_KEY"]
-ALLOWED_HOSTS = ["tcgp.freyd.is", "tcgp.ngls.eu", "beeblebrox"]
+ALLOWED_HOSTS = [
+    "tcgp.freyd.is",
+    "tcgp.ngls.eu",
+    "beeblebrox",
+    # Docker Swarm overlay network IPs
+    "10.0.1.1",
+    "10.0.1.2",
+    "10.0.1.3",
+    "10.0.1.4",
+    "10.0.1.5",
+    "10.0.1.6",
+    "10.0.1.7",
+    "10.0.1.8",
+    "10.0.1.9",
+    "10.0.1.10",
+    "10.0.1.11",
+    "10.0.1.12",
+    "10.0.1.13",
+    "10.0.1.14",
+    "10.0.1.15",
+    "10.0.1.16",
+    "10.0.1.17",
+    "10.0.1.18",
+    "10.0.1.19",
+    "10.0.1.20",
+]
+
+# Environment variable override for flexibility
+if "DJANGO_ALLOWED_HOSTS" in os.environ:
+    ALLOWED_HOSTS.extend(os.environ["DJANGO_ALLOWED_HOSTS"].split(","))
 
 CSRF_TRUSTED_ORIGINS = ["https://tcgp.freyd.is"]
 CSRF_COOKIE_SECURE = True
