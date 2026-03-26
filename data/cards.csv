@@ -2758,3 +2758,120 @@ B2a,128,Raikou ex,Paldean Wonders,double_shiny_rare
 B2a,129,Tinkaton ex,Paldean Wonders,double_shiny_rare
 B2a,130,Baxcalibur,Paldean Wonders,crown_rare
 B2a,131,Electric Generator,Paldean Wonders,crown_rare
+B2b,001,Scyther,Mega Shine,common
+B2b,002,Pineco,Mega Shine,common
+B2b,003,Volbeat,Mega Shine,common
+B2b,004,Illumise,Mega Shine,common
+B2b,005,Phantump,Mega Shine,common
+B2b,006,Trevenant,Mega Shine,uncommon
+B2b,007,Charmander,Mega Shine,common
+B2b,008,Charmeleon,Mega Shine,uncommon
+B2b,009,Mega Charizard X ex,Mega Shine,double_rare
+B2b,010,Ponyta,Mega Shine,common
+B2b,011,Rapidash,Mega Shine,common
+B2b,012,Magmar,Mega Shine,common
+B2b,013,Magmortar,Mega Shine,uncommon
+B2b,014,Paldean Tauros,Mega Shine,common
+B2b,015,Slowpoke,Mega Shine,common
+B2b,016,Mega Slowbro ex,Mega Shine,double_rare
+B2b,017,Lapras,Mega Shine,uncommon
+B2b,018,Piplup,Mega Shine,common
+B2b,019,Prinplup,Mega Shine,uncommon
+B2b,020,Empoleon,Mega Shine,rare
+B2b,021,Phione,Mega Shine,uncommon
+B2b,022,Pikachu,Mega Shine,common
+B2b,023,Raichu,Mega Shine,uncommon
+B2b,024,Electabuzz,Mega Shine,common
+B2b,025,Electivire,Mega Shine,uncommon
+B2b,026,Electrike,Mega Shine,common
+B2b,027,Mega Manectric ex,Mega Shine,double_rare
+B2b,028,Drowzee,Mega Shine,common
+B2b,029,Hypno,Mega Shine,uncommon
+B2b,030,Mew,Mega Shine,rare
+B2b,031,Spoink,Mega Shine,common
+B2b,032,Grumpig,Mega Shine,uncommon
+B2b,033,Diglett,Mega Shine,common
+B2b,034,Dugtrio,Mega Shine,uncommon
+B2b,035,Groudon,Mega Shine,rare
+B2b,036,Hawlucha,Mega Shine,common
+B2b,037,Gastly,Mega Shine,common
+B2b,038,Haunter,Mega Shine,uncommon
+B2b,039,Mega Gengar ex,Mega Shine,double_rare
+B2b,040,Darkrai,Mega Shine,rare
+B2b,041,Trubbish,Mega Shine,common
+B2b,042,Garbodor,Mega Shine,uncommon
+B2b,043,Zorua,Mega Shine,common
+B2b,044,Zoroark,Mega Shine,rare
+B2b,045,Morpeko,Mega Shine,common
+B2b,046,Forretress,Mega Shine,uncommon
+B2b,047,Mega Scizor ex,Mega Shine,double_rare
+B2b,048,Kartana,Mega Shine,uncommon
+B2b,049,Varoom,Mega Shine,common
+B2b,050,Revavroom,Mega Shine,rare
+B2b,051,Dratini,Mega Shine,common
+B2b,052,Dragonair,Mega Shine,uncommon
+B2b,053,Dragonite,Mega Shine,rare
+B2b,054,Axew,Mega Shine,common
+B2b,055,Fraxure,Mega Shine,uncommon
+B2b,056,Haxorus,Mega Shine,rare
+B2b,057,Druddigon,Mega Shine,common
+B2b,058,Jigglypuff,Mega Shine,common
+B2b,059,Wigglytuff,Mega Shine,common
+B2b,060,Miltank,Mega Shine,uncommon
+B2b,061,Chatot,Mega Shine,common
+B2b,062,Minccino,Mega Shine,common
+B2b,063,Cinccino,Mega Shine,common
+B2b,064,Furfrou,Mega Shine,uncommon
+B2b,065,Nasty Notice,Mega Shine,uncommon
+B2b,066,Maintenance,Mega Shine,uncommon
+B2b,067,Iris,Mega Shine,uncommon
+B2b,068,Calem,Mega Shine,uncommon
+B2b,069,Hiking Trail,Mega Shine,uncommon
+B2b,070,Lapras,Mega Shine,illustration_rare
+B2b,071,Empoleon,Mega Shine,illustration_rare
+B2b,072,Groudon,Mega Shine,illustration_rare
+B2b,073,Morpeko,Mega Shine,illustration_rare
+B2b,074,Revavroom,Mega Shine,illustration_rare
+B2b,075,Miltank,Mega Shine,illustration_rare
+B2b,076,Mega Charizard X ex,Mega Shine,special_art
+B2b,077,Mega Slowbro ex,Mega Shine,special_art
+B2b,078,Mega Manectric ex,Mega Shine,special_art
+B2b,079,Mega Gengar ex,Mega Shine,special_art
+B2b,080,Mega Scizor ex,Mega Shine,special_art
+B2b,081,Iris,Mega Shine,special_art
+B2b,082,Calem,Mega Shine,special_art
+B2b,083,Mega Slowbro ex,Mega Shine,special_art
+B2b,084,Mega Manectric ex,Mega Shine,special_art
+B2b,085,Mew,Mega Shine,immersive_rare
+B2b,086,Mew,Mega Shine,immersive_rare
+B2b,087,Scyther,Mega Shine,shiny_rare
+B2b,088,Pineco,Mega Shine,shiny_rare
+B2b,089,Phantump,Mega Shine,shiny_rare
+B2b,090,Trevenant,Mega Shine,shiny_rare
+B2b,091,Charmander,Mega Shine,shiny_rare
+B2b,092,Charmeleon,Mega Shine,shiny_rare
+B2b,093,Ponyta,Mega Shine,shiny_rare
+B2b,094,Rapidash,Mega Shine,shiny_rare
+B2b,095,Slowpoke,Mega Shine,shiny_rare
+B2b,096,Pikachu,Mega Shine,shiny_rare
+B2b,097,Raichu,Mega Shine,shiny_rare
+B2b,098,Electrike,Mega Shine,shiny_rare
+B2b,099,Hawlucha,Mega Shine,shiny_rare
+B2b,100,Gastly,Mega Shine,shiny_rare
+B2b,101,Haunter,Mega Shine,shiny_rare
+B2b,102,Zorua,Mega Shine,shiny_rare
+B2b,103,Zoroark,Mega Shine,shiny_rare
+B2b,104,Forretress,Mega Shine,shiny_rare
+B2b,105,Dratini,Mega Shine,shiny_rare
+B2b,106,Dragonair,Mega Shine,shiny_rare
+B2b,107,Dragonite,Mega Shine,shiny_rare
+B2b,108,Axew,Mega Shine,shiny_rare
+B2b,109,Fraxure,Mega Shine,shiny_rare
+B2b,110,Haxorus,Mega Shine,shiny_rare
+B2b,111,Mega Charizard X ex,Mega Shine,double_shiny_rare
+B2b,112,Mega Slowbro ex,Mega Shine,double_shiny_rare
+B2b,113,Mega Manectric ex,Mega Shine,double_shiny_rare
+B2b,114,Mega Gengar ex,Mega Shine,double_shiny_rare
+B2b,115,Mega Scizor ex,Mega Shine,double_shiny_rare
+B2b,116,Arboliva,Mega Shine,crown_rare
+B2b,117,Metal Core Barrier,Mega Shine,crown_rare
