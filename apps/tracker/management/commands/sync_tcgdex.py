@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from tcgdexsdk import Language, TCGdex
 
-from apps.tracker.models.cards import Card, Pack, PokemonSet, Rarity, Version
+from apps.tracker.models.cards import Card, Generation, Pack, PokemonSet, Rarity
 
 
 class Command(BaseCommand):
@@ -64,7 +64,7 @@ class Command(BaseCommand):
         )
 
         for pack in s.boosters:
-            rarity_version = Version.objects.order_by("-name").first()
+            rarity_version = Generation.objects.order_by("-name").first()
             self.stdout.write(f"  - {pack.id} - {pack.name} - {rarity_version}")
             Pack.objects.create(
                 set=set_obj,
