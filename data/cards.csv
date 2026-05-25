@@ -2875,3 +2875,237 @@ B2b,114,Mega Gengar ex,Mega Shine,double_shiny_rare
 B2b,115,Mega Scizor ex,Mega Shine,double_shiny_rare
 B2b,116,Arboliva,Mega Shine,crown_rare
 B2b,117,Metal Core Barrier,Mega Shine,crown_rare
+B3,001,Tangela,Pulsing Aura,common
+B3,002,Tangrowth,Pulsing Aura,uncommon
+B3,003,Heracross,Pulsing Aura,uncommon
+B3,004,Celebi,Pulsing Aura,rare
+B3,005,Treecko,Pulsing Aura,common
+B3,006,Grovyle,Pulsing Aura,uncommon
+B3,007,Sceptile,Pulsing Aura,rare
+B3,008,Mega Sceptile ex,Pulsing Aura,double_rare
+B3,009,Surskit,Pulsing Aura,common
+B3,010,Masquerain,Pulsing Aura,common
+B3,011,Shroomish,Pulsing Aura,common
+B3,012,Breloom,Pulsing Aura,uncommon
+B3,013,Budew,Pulsing Aura,rare
+B3,014,Carnivine,Pulsing Aura,common
+B3,015,Sewaddle,Pulsing Aura,common
+B3,016,Swadloon,Pulsing Aura,common
+B3,017,Leavanny,Pulsing Aura,uncommon
+B3,018,Durant,Pulsing Aura,common
+B3,019,Applin,Pulsing Aura,common
+B3,020,Flapple,Pulsing Aura,rare
+B3,021,Numel,Pulsing Aura,common
+B3,022,Camerupt,Pulsing Aura,uncommon
+B3,023,Mega Camerupt ex,Pulsing Aura,double_rare
+B3,024,Castform Sunny Form,Pulsing Aura,common
+B3,025,Victini,Pulsing Aura,rare
+B3,026,Tepig,Pulsing Aura,common
+B3,027,Pignite,Pulsing Aura,uncommon
+B3,028,Emboar,Pulsing Aura,rare
+B3,029,Darumaka,Pulsing Aura,common
+B3,030,Darmanitan,Pulsing Aura,uncommon
+B3,031,Larvesta,Pulsing Aura,common
+B3,032,Volcarona,Pulsing Aura,uncommon
+B3,033,Poliwag,Pulsing Aura,common
+B3,034,Poliwhirl,Pulsing Aura,uncommon
+B3,035,Politoed,Pulsing Aura,rare
+B3,036,Paldean Tauros,Pulsing Aura,uncommon
+B3,037,Vaporeon ex,Pulsing Aura,double_rare
+B3,038,Wooper,Pulsing Aura,common
+B3,039,Quagsire,Pulsing Aura,uncommon
+B3,040,Castform Rainy Form,Pulsing Aura,common
+B3,041,Castform Snowy Form,Pulsing Aura,common
+B3,042,Clamperl,Pulsing Aura,common
+B3,043,Huntail,Pulsing Aura,uncommon
+B3,044,Gorebyss,Pulsing Aura,uncommon
+B3,045,Regice,Pulsing Aura,uncommon
+B3,046,Cubchoo,Pulsing Aura,common
+B3,047,Beartic,Pulsing Aura,uncommon
+B3,048,Sobble,Pulsing Aura,common
+B3,049,Drizzile,Pulsing Aura,uncommon
+B3,050,Inteleon,Pulsing Aura,rare
+B3,051,Rapid Strike Urshifu,Pulsing Aura,rare
+B3,052,Magnemite,Pulsing Aura,common
+B3,053,Magneton,Pulsing Aura,uncommon
+B3,054,Magnezone ex,Pulsing Aura,double_rare
+B3,055,Voltorb,Pulsing Aura,common
+B3,056,Electrode,Pulsing Aura,common
+B3,057,Chinchou,Pulsing Aura,common
+B3,058,Lanturn,Pulsing Aura,uncommon
+B3,059,Zekrom,Pulsing Aura,rare
+B3,060,Toxel,Pulsing Aura,common
+B3,061,Toxtricity,Pulsing Aura,rare
+B3,062,Morpeko,Pulsing Aura,common
+B3,063,Ralts,Pulsing Aura,common
+B3,064,Kirlia,Pulsing Aura,uncommon
+B3,065,Espurr,Pulsing Aura,common
+B3,066,Meowstic,Pulsing Aura,rare
+B3,067,Diancie,Pulsing Aura,rare
+B3,068,Oricorio,Pulsing Aura,common
+B3,069,Hatenna,Pulsing Aura,common
+B3,070,Hattrem,Pulsing Aura,uncommon
+B3,071,Hatterene,Pulsing Aura,rare
+B3,072,Bramblin,Pulsing Aura,common
+B3,073,Brambleghast,Pulsing Aura,rare
+B3,074,Gligar,Pulsing Aura,common
+B3,075,Gliscor,Pulsing Aura,uncommon
+B3,076,Trapinch,Pulsing Aura,common
+B3,077,Regirock,Pulsing Aura,uncommon
+B3,078,Bonsly,Pulsing Aura,rare
+B3,079,Riolu,Pulsing Aura,common
+B3,080,Lucario,Pulsing Aura,rare
+B3,081,Mega Lucario ex,Pulsing Aura,double_rare
+B3,082,Croagunk,Pulsing Aura,common
+B3,083,Toxicroak,Pulsing Aura,uncommon
+B3,084,Gallade,Pulsing Aura,rare
+B3,085,Throh,Pulsing Aura,common
+B3,086,Sawk,Pulsing Aura,common
+B3,087,Dwebble,Pulsing Aura,common
+B3,088,Crustle ex,Pulsing Aura,double_rare
+B3,089,Meloetta,Pulsing Aura,rare
+B3,090,Stufful,Pulsing Aura,common
+B3,091,Bewear,Pulsing Aura,uncommon
+B3,092,Rolycoly,Pulsing Aura,common
+B3,093,Carkol,Pulsing Aura,uncommon
+B3,094,Coalossal,Pulsing Aura,rare
+B3,095,Silicobra,Pulsing Aura,common
+B3,096,Sandaconda,Pulsing Aura,uncommon
+B3,097,Kubfu,Pulsing Aura,common
+B3,098,Zubat,Pulsing Aura,common
+B3,099,Golbat,Pulsing Aura,uncommon
+B3,100,Crobat,Pulsing Aura,rare
+B3,101,Koffing,Pulsing Aura,common
+B3,102,Weezing,Pulsing Aura,uncommon
+B3,103,Qwilfish,Pulsing Aura,common
+B3,104,Seviper,Pulsing Aura,common
+B3,105,Zorua,Pulsing Aura,common
+B3,106,Zoroark ex,Pulsing Aura,double_rare
+B3,107,Foongus,Pulsing Aura,common
+B3,108,Amoongus,Pulsing Aura,uncommon
+B3,109,Vullaby,Pulsing Aura,common
+B3,110,Mandibuzz,Pulsing Aura,uncommon
+B3,111,Inkay,Pulsing Aura,common
+B3,112,Malamar,Pulsing Aura,uncommon
+B3,113,Single Strike Urshifu,Pulsing Aura,rare
+B3,114,Zarude,Pulsing Aura,rare
+B3,115,Bombirdier,Pulsing Aura,common
+B3,116,Registeel,Pulsing Aura,uncommon
+B3,117,Bronzor,Pulsing Aura,common
+B3,118,Bronzong,Pulsing Aura,uncommon
+B3,119,Pawniard,Pulsing Aura,common
+B3,120,Bisharp,Pulsing Aura,uncommon
+B3,121,Magearna,Pulsing Aura,uncommon
+B3,122,Meltan,Pulsing Aura,common
+B3,123,Melmetal,Pulsing Aura,rare
+B3,124,Corviknight ex,Pulsing Aura,double_rare
+B3,125,Vibrava,Pulsing Aura,uncommon
+B3,126,Flygon ex,Pulsing Aura,double_rare
+B3,127,Chansey,Pulsing Aura,common
+B3,128,Blissey,Pulsing Aura,rare
+B3,129,Eevee,Pulsing Aura,common
+B3,130,Dunsparce,Pulsing Aura,rare
+B3,131,Teddiursa,Pulsing Aura,common
+B3,132,Ursaring,Pulsing Aura,uncommon
+B3,133,Castform,Pulsing Aura,common
+B3,134,Regigigas,Pulsing Aura,rare
+B3,135,Patrat,Pulsing Aura,common
+B3,136,Watchog,Pulsing Aura,common
+B3,137,Lillipup,Pulsing Aura,common
+B3,138,Herdier,Pulsing Aura,uncommon
+B3,139,Stoutland,Pulsing Aura,rare
+B3,140,Audino,Pulsing Aura,uncommon
+B3,141,Mega Audino ex,Pulsing Aura,double_rare
+B3,142,Minccino,Pulsing Aura,common
+B3,143,Cinccino,Pulsing Aura,common
+B3,144,Furfrou,Pulsing Aura,uncommon
+B3,145,Rookidee,Pulsing Aura,common
+B3,146,Corvisquire,Pulsing Aura,uncommon
+B3,147,Field Blower,Pulsing Aura,uncommon
+B3,148,Lucky Egg,Pulsing Aura,uncommon
+B3,149,Korrina,Pulsing Aura,uncommon
+B3,150,Cabble,Pulsing Aura,uncommon
+B3,151,Cheren,Pulsing Aura,uncommon
+B3,152,Parasol Lady,Pulsing Aura,uncommon
+B3,153,Fragrant Forest,Pulsing Aura,uncommon
+B3,154,Arena of Antiquity,Pulsing Aura,uncommon
+B3,155,Bounded Field,Pulsing Aura,uncommon
+B3,156,Treecko,Pulsing Aura,illustration_rare
+B3,157,Grovyle,Pulsing Aura,illustration_rare
+B3,158,Shroomish,Pulsing Aura,illustration_rare
+B3,159,Budew,Pulsing Aura,illustration_rare
+B3,160,Flapple,Pulsing Aura,illustration_rare
+B3,161,Tepig,Pulsing Aura,illustration_rare
+B3,162,Quagsire,Pulsing Aura,illustration_rare
+B3,163,Zekrom,Pulsing Aura,illustration_rare
+B3,164,Morpeko,Pulsing Aura,illustration_rare
+B3,165,Meowstic,Pulsing Aura,illustration_rare
+B3,166,Oricorio,Pulsing Aura,illustration_rare
+B3,167,Brambleghast,Pulsing Aura,illustration_rare
+B3,168,Bonsly,Pulsing Aura,illustration_rare
+B3,169,Riolu,Pulsing Aura,illustration_rare
+B3,170,Meloetta,Pulsing Aura,illustration_rare
+B3,171,Carkol,Pulsing Aura,illustration_rare
+B3,172,Kubfu,Pulsing Aura,illustration_rare
+B3,173,Seviper,Pulsing Aura,illustration_rare
+B3,174,Zorua,Pulsing Aura,illustration_rare
+B3,175,Malamar,Pulsing Aura,illustration_rare
+B3,176,Bisharp,Pulsing Aura,illustration_rare
+B3,177,Meltan,Pulsing Aura,illustration_rare
+B3,178,Castform,Pulsing Aura,illustration_rare
+B3,179,Cinccino,Pulsing Aura,illustration_rare
+B3,180,Mega Sceptile ex,Pulsing Aura,special_art
+B3,181,Mega Camerupt ex,Pulsing Aura,special_art
+B3,182,Vaporeon ex,Pulsing Aura,special_art
+B3,183,Magnezone ex,Pulsing Aura,special_art
+B3,184,Mega Lucario ex,Pulsing Aura,special_art
+B3,185,Crustle ex,Pulsing Aura,special_art
+B3,186,Zoroark ex,Pulsing Aura,special_art
+B3,187,Corviknight ex,Pulsing Aura,special_art
+B3,188,Flygon ex,Pulsing Aura,special_art
+B3,189,Mega Audino ex,Pulsing Aura,special_art
+B3,190,Korrina,Pulsing Aura,special_art
+B3,191,Cabble,Pulsing Aura,special_art
+B3,192,Cheren,Pulsing Aura,special_art
+B3,193,Parasol Lady,Pulsing Aura,special_art
+B3,194,Mega Sceptile ex,Pulsing Aura,special_art
+B3,195,Mega Camerupt ex,Pulsing Aura,special_art
+B3,196,Vaporeon ex,Pulsing Aura,special_art
+B3,197,Magnezone ex,Pulsing Aura,special_art
+B3,198,Crustle ex,Pulsing Aura,special_art
+B3,199,Zoroark ex,Pulsing Aura,special_art
+B3,200,Corviknight ex,Pulsing Aura,special_art
+B3,201,Flygon ex,Pulsing Aura,special_art
+B3,202,Mega Audino ex,Pulsing Aura,special_art
+B3,203,Sobble,Pulsing Aura,immersive_rare
+B3,204,Mega Lucario ex,Pulsing Aura,immersive_rare
+B3,205,Cottonee,Pulsing Aura,shiny_rare
+B3,206,Torchic,Pulsing Aura,shiny_rare
+B3,207,Combusken,Pulsing Aura,shiny_rare
+B3,208,Blaziken,Pulsing Aura,shiny_rare
+B3,209,Frillish,Pulsing Aura,shiny_rare
+B3,210,Jellicent,Pulsing Aura,shiny_rare
+B3,211,Onix,Pulsing Aura,shiny_rare
+B3,212,Zubat,Pulsing Aura,shiny_rare
+B3,213,Golbat,Pulsing Aura,shiny_rare
+B3,214,Crobat,Pulsing Aura,shiny_rare
+B3,215,Grimer,Pulsing Aura,shiny_rare
+B3,216,Muk,Pulsing Aura,shiny_rare
+B3,217,Absol,Pulsing Aura,shiny_rare
+B3,218,Skrelp,Pulsing Aura,shiny_rare
+B3,219,Steelix,Pulsing Aura,shiny_rare
+B3,220,Chansey,Pulsing Aura,shiny_rare
+B3,221,Blissey,Pulsing Aura,shiny_rare
+B3,222,Porygon,Pulsing Aura,shiny_rare
+B3,223,Porygon2,Pulsing Aura,shiny_rare
+B3,224,Porygon-Z,Pulsing Aura,shiny_rare
+B3,225,Whimsicott ex,Pulsing Aura,double_shiny_rare
+B3,226,Mega Blaziken ex,Pulsing Aura,double_shiny_rare
+B3,227,Greninja ex,Pulsing Aura,double_shiny_rare
+B3,228,Jolteon ex,Pulsing Aura,double_shiny_rare
+B3,229,Hitmonchan ex,Pulsing Aura,double_shiny_rare
+B3,230,Mega Absol ex,Pulsing Aura,double_shiny_rare
+B3,231,Dragalge ex,Pulsing Aura,double_shiny_rare
+B3,232,Mega Steelix ex,Pulsing Aura,double_shiny_rare
+B3,233,Celebi,Pulsing Aura,crown_rare
+B3,234,Bombirdier,Pulsing Aura,crown_rare
