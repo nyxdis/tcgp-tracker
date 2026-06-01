@@ -16,9 +16,11 @@ jobs:
         with:
           python-version: '3.13'
 
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+
       - name: Install dependencies
         run: |
-          pipx install poetry
           poetry install --with dev,test
 
       - name: Check formatting (black)
