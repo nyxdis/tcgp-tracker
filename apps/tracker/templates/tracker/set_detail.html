@@ -2,125 +2,127 @@
 {% load i18n %}
 {% load static %}
 {% block style %}
-  <link rel="stylesheet" href="{% static 'tracker/tracker_set_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'tracker/tracker_set_detail.css' %}">
 {% endblock style %}
 {% block title %}
-  {{ set.localized_name }} - Pokémon TCG Pocket Tracker
+    {{ set.localized_name }} - Pokémon TCG Pocket Tracker
 {% endblock title %}
 {% block content %}
-  <h2>{{ set.localized_name }}</h2>
-  <p>{% trans "Release Date" %}: {{ set.release_date }}</p>
-  <p class="card-text d-flex flex-wrap gap-3 align-items-center sticky-top bg-white py-2"
-     id="rarity-progress">
-    {% for rarity, data in rarity_progress.items %}
-      {% if data.collected > 0 %}
-        <span class="d-inline-flex align-items-center gap-1">
-          <img src="{% static 'tracker/img/'|add:rarity %}"
-               alt="{{ rarity|capfirst|slice:':-5' }}"
-               class="rarity-icon"
-               height="16"
-               width="16" />
-          {% if forloop.first %}
-            {{ data.collected }} / {{ data.total }}
-          {% else %}
-            {{ data.collected }}
-          {% endif %}
-        </span>
-      {% endif %}
-    {% endfor %}
-  </p>
-  <div class="mb-3 d-flex flex-column flex-sm-row justify-content-between align-items-stretch gap-2">
-    <a href="{% url 'home' %}"
-       class="btn btn-outline-primary w-100 w-sm-auto">← {% trans "Back" %}</a>
-    <div class="d-flex flex-row gap-2 flex-grow-1 flex-sm-grow-0">
-      <button id="collect-base-btn"
-              class="btn btn-success w-100 w-sm-auto flex-sm-shrink-0">{% trans "Collect all base cards" %}</button>
-      <button id="jump-to-illustration-rare-btn"
-              class="btn btn-info w-100 w-sm-auto flex-sm-shrink-0"
-              title="Springe zur ersten Illustration Rare Karte">
-        <span class="me-1">{% trans "Jump to" %}</span>
-        <img src="{% static 'tracker/img/rare.webp' %}"
-             alt="Illustration Rare"
-             width="24"
-             height="24" />
-        <span>{% trans " cards" %}</span>
-      </button>
-    </div>
-  </div>
-  <!-- Filter Input -->
-  <div class="mb-3">
-    <input type="text"
-           id="table-filter"
-           class="form-control"
-           placeholder="{% trans "Search for name or number" %}..."
-           autocomplete="off"
-           inputmode="search"
-           autocorrect="off"
-           autocapitalize="off"
-           spellcheck="false" />
-  </div>
-  <table class="table table-hover mt-4">
-    <thead>
-      <tr>
-        <th class="sortable" data-sort="number">
-          #
-          <span class="sort-arrow" data-key="number"></span>
-        </th>
-        <th class="sortable" data-sort="name">
-          {% trans "Name" %}
-          <span class="sort-arrow" data-key="name"></span>
-        </th>
-        <th class="sortable" data-sort="rarity">
-          {% trans "Rarity" %}
-          <span class="sort-arrow" data-key="rarity"></span>
-        </th>
-        <th class="sortable" data-sort="status">
-          {% trans "Status" %}
-          <span class="sort-arrow" data-key="status"></span>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for card in cards %}
-        <tr class="clickable-row"
-            data-card-id="{{ card.id }}"
-            data-action="{% if card.collected_quantity > 0 %}uncollect{% else %}collect{% endif %}"
-            data-rarity="{{ card.rarity.name }}">
-          <td>{{ card.number }}</td>
-          <td>{{ card.localized_name }}</td>
-          <td>
-            {% for _ in ""|center:card.rarity.repeat_count %}
-              <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}"
-                   alt="{{ card.rarity.display_name }}"
-                   width="24"
-                   height="24" />
-            {% endfor %}
-          </td>
-          <td class="status-cell">
-            {% if card.collected_quantity > 0 %}
-              ✅
-            {% else %}
-              ❌
+    <h2>{{ set.localized_name }}</h2>
+    <p>{% trans "Release Date" %}: {{ set.release_date }}</p>
+    <p class="card-text d-flex flex-wrap gap-3 align-items-center sticky-top bg-white py-2"
+       id="rarity-progress">
+        {% for rarity, data in rarity_progress.items %}
+            {% if data.collected > 0 %}
+                <span class="d-inline-flex align-items-center gap-1">
+                    <img src="{% static 'tracker/img/'|add:rarity %}"
+                         alt="{{ rarity|capfirst|slice:':-5' }}"
+                         class="rarity-icon"
+                         height="16"
+                         width="16" />
+                    {% if forloop.first %}
+                        {{ data.collected }} / {{ data.total }}
+                    {% else %}
+                        {{ data.collected }}
+                    {% endif %}
+                </span>
             {% endif %}
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <div class="mt-4 text-center">
-    <a href="{% url 'home' %}" class="btn btn-outline-primary">← {% trans "Back" %}</a>
-  </div>
-  <!-- Floating Buttons -->
-  <div id="floating-btns" class="floating-btns">
-    <button id="scroll-to-top-btn"
-            class="btn btn-primary"
-            title="{% trans "Scroll to top" %}">⬆</button>
-    <a href="{% url "home" %}"
-       id="floating-back-btn"
-       class="btn btn-outline-primary"
-       title="{% trans "Back" %}">←</a>
-  </div>
-  <script>
+        {% endfor %}
+    </p>
+    <div class="mb-3 d-flex flex-column flex-sm-row justify-content-between align-items-stretch gap-2">
+        <a href="{% url 'home' %}"
+           class="btn btn-outline-primary w-100 w-sm-auto">← {% trans "Back" %}</a>
+        <div class="d-flex flex-row gap-2 flex-grow-1 flex-sm-grow-0">
+            <button id="collect-base-btn"
+                    class="btn btn-success w-100 w-sm-auto flex-sm-shrink-0">
+                {% trans "Collect all base cards" %}
+            </button>
+            <button id="jump-to-illustration-rare-btn"
+                    class="btn btn-info w-100 w-sm-auto flex-sm-shrink-0"
+                    title="Springe zur ersten Illustration Rare Karte">
+                <span class="me-1">{% trans "Jump to" %}</span>
+                <img src="{% static 'tracker/img/rare.webp' %}"
+                     alt="Illustration Rare"
+                     width="24"
+                     height="24" />
+                <span>{% trans " cards" %}</span>
+            </button>
+        </div>
+    </div>
+    <!-- Filter Input -->
+    <div class="mb-3">
+        <input type="text"
+               id="table-filter"
+               class="form-control"
+               placeholder="{% trans "Search for name or number" %}..."
+               autocomplete="off"
+               inputmode="search"
+               autocorrect="off"
+               autocapitalize="off"
+               spellcheck="false" />
+    </div>
+    <table class="table table-hover mt-4">
+        <thead>
+            <tr>
+                <th class="sortable" data-sort="number">
+                    #
+                    <span class="sort-arrow" data-key="number"></span>
+                </th>
+                <th class="sortable" data-sort="name">
+                    {% trans "Name" %}
+                    <span class="sort-arrow" data-key="name"></span>
+                </th>
+                <th class="sortable" data-sort="rarity">
+                    {% trans "Rarity" %}
+                    <span class="sort-arrow" data-key="rarity"></span>
+                </th>
+                <th class="sortable" data-sort="status">
+                    {% trans "Status" %}
+                    <span class="sort-arrow" data-key="status"></span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for card in cards %}
+                <tr class="clickable-row"
+                    data-card-id="{{ card.id }}"
+                    data-action="{% if card.collected_quantity > 0 %}uncollect{% else %}collect{% endif %}"
+                    data-rarity="{{ card.rarity.name }}">
+                    <td>{{ card.number }}</td>
+                    <td>{{ card.localized_name }}</td>
+                    <td>
+                        {% for _ in ""|center:card.rarity.repeat_count %}
+                            <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}"
+                                 alt="{{ card.rarity.display_name }}"
+                                 width="24"
+                                 height="24" />
+                        {% endfor %}
+                    </td>
+                    <td class="status-cell">
+                        {% if card.collected_quantity > 0 %}
+                            ✅
+                        {% else %}
+                            ❌
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="mt-4 text-center">
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">← {% trans "Back" %}</a>
+    </div>
+    <!-- Floating Buttons -->
+    <div id="floating-btns" class="floating-btns">
+        <button id="scroll-to-top-btn"
+                class="btn btn-primary"
+                title="{% trans "Scroll to top" %}">⬆</button>
+        <a href="{% url "home" %}"
+           id="floating-back-btn"
+           class="btn btn-outline-primary"
+           title="{% trans "Back" %}">←</a>
+    </div>
+    <script>
     window.rarityOrderMap = {
       {% for rarity in rarities %}
         '{{ rarity.name }}': {{ rarity.order }}{% if not forloop.last %},{% endif %}
@@ -129,6 +131,6 @@
     window.csrfToken = "{{ csrf_token }}";
     window.uncollectConfirmText = "{% trans 'Are you sure you want to uncollect this card?' %}";
     window.collectBaseConfirmText = "{% trans 'Are you sure you want to collect all base cards?' %}";
-  </script>
-  <script src="{% static 'tracker/tracker_set_detail.js' %}"></script>
+    </script>
+    <script src="{% static 'tracker/tracker_set_detail.js' %}"></script>
 {% endblock content %}
