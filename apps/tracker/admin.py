@@ -111,7 +111,8 @@ class RarityProbabilitiesInline(admin.TabularInline):
                     msg = ", ".join(f"{sf}={total:.6f}" for sf, total in drift.items())
                     messages.warning(
                         request,
-                        f"Rarity probability sums for {generation.name} - {pack_type.name} are off (expected 1.0): {msg}",
+                        f"Rarity probability sums for {generation.name} - {pack_type.name} "
+                        f"are off (expected 1.0): {msg}",
                     )
 
         ParentFormSet.clean = clean  # type: ignore[assignment]
@@ -198,8 +199,7 @@ class SetAdmin(admin.ModelAdmin):
 
         if obj.is_available:
             return format_html('<span style="color: green;">✓ Available</span>')
-        else:
-            return format_html('<span style="color: red;">✗ Expired</span>')
+        return format_html('<span style="color: red;">✗ Expired</span>')
 
     view_cards_link.short_description = "Cards"
     is_available_status.short_description = "Status"

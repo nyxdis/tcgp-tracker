@@ -403,7 +403,8 @@ class RarityProbability(models.Model):
         return f"{self.rarity} ({generation_name} - {pack_type_name}): {shown}"
 
     def clean(self):
-        """Validate that probabilities for each slot sum to 1.0 across all rarities for this generation/pack_type combination."""
+        """Validate that probabilities for each slot sum to 1.0 across all rarities
+        for this generation/pack_type combination."""
         # Note: This validation could be expensive for large datasets
         # Consider moving to a management command for batch validation
         super().clean()

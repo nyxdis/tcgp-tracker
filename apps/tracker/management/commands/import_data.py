@@ -246,14 +246,16 @@ class Command(BaseCommand):
                     )
                 except ObjectDoesNotExist as e:
                     self.stderr.write(
-                        f"Skipping probability for rarity={row['rarity']} generation={row['generation']} pack_type={row['pack_type']}: {e}"
+                        f"Skipping probability for rarity={row['rarity']} "
+                        f"generation={row['generation']} pack_type={row['pack_type']}: {e}"
                     )
                     continue
 
                 # Skip god pack probabilities - they are calculated dynamically
                 if pack_type.is_god_pack:
                     self.stdout.write(
-                        f"Skipping god pack probability: {generation.name} - {pack_type.name} - {rarity.name} (calculated dynamically)"
+                        f"Skipping god pack probability: {generation.name} - {pack_type.name} "
+                        f"- {rarity.name} (calculated dynamically)"
                     )
                     continue
 
@@ -345,7 +347,8 @@ class Command(BaseCommand):
                 )
                 action = "Created" if created else "Updated"
                 self.stdout.write(
-                    f"{action} translation for pack '{pack_obj.name}' in set '{set_obj.name}': {row['pack_german_name']}"
+                    f"{action} translation for pack '{pack_obj.name}' "
+                    f"in set '{set_obj.name}': {row['pack_german_name']}"
                 )
 
     def import_card_translations(self, filepath):

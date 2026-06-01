@@ -5,7 +5,6 @@ from .users import *  # noqa: F403
 
 # Explicitly export all model classes for pylint and IDEs
 __all__ = [
-    "Version",
     "PokemonSet",
     "Rarity",
     "RarityProbability",

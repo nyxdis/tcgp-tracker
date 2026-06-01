@@ -5,11 +5,12 @@ from django.contrib.auth import get_user_model
 
 from apps.tracker.models.cards import (
     Card,
+    Generation,
     Pack,
+    PackType,
     PokemonSet,
     Rarity,
     RarityProbability,
-    Version,
 )
 from apps.tracker.models.users import UserCard
 from apps.tracker.utils import prob_at_least_one_new_card
@@ -20,7 +21,14 @@ def test_no_new_cards_returns_zero_probability():
     User = get_user_model()
     user = User.objects.create_user(username="testuser", password="pass")
 
-    version = Version.objects.create(name="EN", display_name="English")
+    generation = Generation.objects.create(name="G1", display_name="Generation 1")
+    pack_type = PackType.objects.create(
+        generation=generation,
+        name="normal",
+        display_name="Normal",
+        slot_count=5,
+        occurrence_probability=1.0,
+    )
     pset = PokemonSet.objects.create(
         number="001", name="Base Set", release_date=date(2024, 1, 1)
     )
@@ -32,7 +40,8 @@ def test_no_new_cards_returns_zero_probability():
         r = Rarity.objects.create(name=rname, display_name=f"R{i}", order=i)
         RarityProbability.objects.create(
             rarity=r,
-            version=version,
+            generation=generation,
+            pack_type=pack_type,
             probability_slot1=0.25,
             probability_slot2=0.25,
             probability_slot3=0.25,
@@ -42,7 +51,7 @@ def test_no_new_cards_returns_zero_probability():
         rarities.append(r)
 
     # Pack
-    pack = Pack.objects.create(set=pset, name="Starter Pack", rarity_version=version)
+    pack = Pack.objects.create(set=pset, name="Starter Pack", rarity_version=generation)
 
     # Eine Karte pro Rarity (alle werden dem User gegeben)
     for rarity in rarities:
