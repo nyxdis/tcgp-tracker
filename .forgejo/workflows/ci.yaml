@@ -53,7 +53,7 @@ jobs:
         run: echo "${{ secrets.REGISTRY_TOKEN }}" | docker login "$REGISTRY" -u "${{ github.actor }}" --password-stdin
 
       - name: Build image
-        run: docker build -t "$REGISTRY/${{ github.repository }}:${{ github.sha }}" .
+        run: docker build --build-arg GIT_HASH=${{ github.sha }} -t "$REGISTRY/${{ github.repository }}:${{ github.sha }}" .
 
       - name: Push image
         if: github.event_name == 'push'
