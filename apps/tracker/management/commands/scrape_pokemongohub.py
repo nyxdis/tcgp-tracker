@@ -80,36 +80,71 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """Main command handler."""
-        # ------------------------------------------------------------------
-        # Load existing CSV data
-        # ------------------------------------------------------------------
-        existing_sets = _read_csv_as_dict(DATA_DIR / "sets.csv", ("number",))
-        existing_cards = _read_csv_as_dict(
-            DATA_DIR / "cards.csv", ("set_number", "number")
+        existing = self._load_existing_data()
+        slugs, en_booster_slugs, de_set_slugs, de_booster_slugs = (
+            self._collect_slugs_to_process(existing)
         )
-        existing_set_trans = _read_csv_as_dict(
-            DATA_DIR / "set_translations.csv", ("english_name",)
+        if not slugs:
+            self.stdout.write(
+                self.style.SUCCESS("All sets are up to date. Nothing to do.")
+            )
+            return
+
+        new_data = self._scrape_set_pages(slugs, de_set_slugs, existing)
+        pack_cards = self._scrape_booster_pages(
+            en_booster_slugs, de_booster_slugs, new_data, existing
         )
-        existing_pack_trans = _read_csv_as_dict(
-            DATA_DIR / "pack_translations.csv",
-            ("set_english_name", "pack_english_name"),
-        )
-        existing_card_trans = _read_csv_as_dict(
-            DATA_DIR / "card_translations.csv", ("card_english_name",)
+        _assign_pack_membership(pack_cards, new_data["cards"])
+        self._write_csv_files(new_data)
+
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"Done. Added {len(new_data['sets'])} set(s), "
+                f"{len(new_data['cards'])} card(s)."
+            )
         )
 
-        # ------------------------------------------------------------------
-        # Phase 1 – determine what needs processing (no page fetches yet)
-        # ------------------------------------------------------------------
+    # ------------------------------------------------------------------
+    # Phase helpers
+    # ------------------------------------------------------------------
 
-        # Sets already in sets.csv that have no cards in cards.csv
-        sets_with_cards = {k[0] for k in existing_cards}
+    def _load_existing_data(self) -> dict:
+        """Read all five seed CSV files and return them in a single dict."""
+        return {
+            "sets": _read_csv_as_dict(DATA_DIR / "sets.csv", ("number",)),
+            "cards": _read_csv_as_dict(
+                DATA_DIR / "cards.csv", ("set_number", "number")
+            ),
+            "set_trans": _read_csv_as_dict(
+                DATA_DIR / "set_translations.csv", ("english_name",)
+            ),
+            "pack_trans": _read_csv_as_dict(
+                DATA_DIR / "pack_translations.csv",
+                ("set_english_name", "pack_english_name"),
+            ),
+            "card_trans": _read_csv_as_dict(
+                DATA_DIR / "card_translations.csv", ("card_english_name",)
+            ),
+        }
+
+    def _collect_slugs_to_process(
+        self, existing: dict
+    ) -> tuple[list[str], list[str], list[str], list[str]]:
+        """
+        Fetch homepage slug lists and decide which set slugs need scraping.
+
+        Returns ``(set_slugs_to_process, en_booster_slugs, de_set_slugs,
+        de_booster_slugs)``.
+        """
+        sets_with_cards = {k[0] for k in existing["cards"]}
         empty_set_codes = {
-            code for code in existing_sets if code not in sets_with_cards
+            code for code in existing["sets"] if code not in sets_with_cards
         }
         if empty_set_codes:
             self.stdout.write(
-                f"Found {len(empty_set_codes)} set(s) with no cards: "
+                "Found "
+                + str(len(empty_set_codes))
+                + " set(s) with no cards: "
                 + ", ".join(sorted(empty_set_codes))
             )
 
@@ -121,234 +156,207 @@ class Command(BaseCommand):
         de_set_slugs = self._collect_slugs("de", "set")
         de_booster_slugs = self._collect_slugs("de", "booster")
 
-        # Match each homepage slug to an existing set code without fetching pages
-        slug_to_existing_code: dict[str, str] = {}
-        for slug in en_set_slugs:
-            code = _slug_to_set_code(slug, existing_sets)
-            if code:
-                slug_to_existing_code[slug] = code
-
-        # Slugs that need processing:
-        #   – slug maps to a set with no cards (fill missing cards)
-        #   – slug has no match at all (new set)
+        slug_to_code = {
+            s: c for s in en_set_slugs if (c := _slug_to_set_code(s, existing["sets"]))
+        }
         slugs_to_process = [
             s
             for s in en_set_slugs
-            if slug_to_existing_code.get(s) in empty_set_codes
-            or s not in slug_to_existing_code
+            if slug_to_code.get(s) in empty_set_codes or s not in slug_to_code
         ]
-
-        if not slugs_to_process:
+        skipped = len(en_set_slugs) - len(slugs_to_process)
+        if slugs_to_process:
             self.stdout.write(
-                self.style.SUCCESS("All sets are up to date. Nothing to do.")
+                f"Processing {len(slugs_to_process)} set(s) "
+                f"({skipped} already complete, skipped)."
             )
-            return
+        return slugs_to_process, en_booster_slugs, de_set_slugs, de_booster_slugs
 
-        self.stdout.write(
-            f"Processing {len(slugs_to_process)} set(s) "
-            f"({len(en_set_slugs) - len(slugs_to_process)} already complete, skipped)."
-        )
+    def _scrape_set_pages(
+        self,
+        slugs: list[str],
+        de_set_slugs: list[str],
+        existing: dict,
+    ) -> dict:
+        """
+        Scrape EN (and DE) set pages for *slugs*.
 
-        # ------------------------------------------------------------------
-        # Phase 2 – scrape only the sets that need updating
-        # ------------------------------------------------------------------
-        new_sets = {}
-        new_cards = {}
-        new_set_trans = {}
-        new_pack_trans = {}
-        new_card_trans = {}
-
-        # set codes being processed this run (used to filter booster fetches)
-        processing_codes: set[str] = set()
-
-        # --- Set pages ---
-        for slug in slugs_to_process:
+        Returns a ``new_data`` dict with keys ``sets``, ``cards``,
+        ``set_trans``, ``pack_trans``, ``card_trans``, ``processing_codes``.
+        """
+        new_data: dict = {
+            "sets": {},
+            "cards": {},
+            "set_trans": {},
+            "pack_trans": {},
+            "card_trans": {},
+            "processing_codes": set(),
+        }
+        for slug in slugs:
             self.stdout.write(f"  Set: {slug}")
             en_data = self._parse_set_page(slug, "en")
             if en_data is None:
                 continue
+            de_slug = _find_matching_slug(slug, de_set_slugs)
+            de_data = self._parse_set_page(de_slug, "de") if de_slug else None
+            self._collect_set_data(en_data, de_data, existing, new_data)
+        return new_data
 
-            set_code = en_data["set_code"]
-            processing_codes.add(set_code)
+    def _collect_set_data(
+        self,
+        en_data: dict,
+        de_data: dict | None,
+        existing: dict,
+        new_data: dict,
+    ) -> None:
+        """Merge one set's scraped data into *new_data*."""
+        set_code = en_data["set_code"]
+        new_data["processing_codes"].add(set_code)
 
-            if set_code not in existing_sets:
-                new_sets[set_code] = {
-                    "number": set_code,
-                    "name": en_data["name"],
-                    "release_date": en_data["release_date"],
-                    "generation": _default_generation(set_code),
+        if set_code not in existing["sets"]:
+            new_data["sets"][set_code] = {
+                "number": set_code,
+                "name": en_data["name"],
+                "release_date": en_data["release_date"],
+                "generation": _default_generation(set_code),
+            }
+
+        canonical_name = _canonical_set_name(
+            set_code, en_data["name"], existing, new_data
+        )
+
+        if canonical_name not in existing["set_trans"]:
+            de_name = de_data["name"] if de_data else canonical_name
+            new_data["set_trans"][canonical_name] = de_name
+
+        for card in en_data["cards"]:
+            key = (set_code, card["number"])
+            if key not in existing["cards"]:
+                new_data["cards"][key] = {
+                    "set_number": set_code,
+                    "number": card["number"],
+                    "card": card["name"],
+                    "pack": "",
+                    "rarity": card["rarity"],
                 }
 
-            canonical_name = (
-                existing_sets[set_code].get("name", en_data["name"])
-                if set_code in existing_sets
-                else new_sets.get(set_code, {}).get("name", en_data["name"])
-            )
+        if de_data:
+            en_by_num = {c["number"]: c["name"] for c in en_data["cards"]}
+            for card in de_data["cards"]:
+                en_name = en_by_num.get(card["number"])
+                if (
+                    en_name
+                    and en_name != card["name"]
+                    and en_name not in existing["card_trans"]
+                ):
+                    new_data["card_trans"][en_name] = card["name"]
 
-            # German set name
-            if canonical_name not in existing_set_trans:
-                de_slug = _find_matching_slug(slug, de_set_slugs)
-                if de_slug:
-                    de_data = self._parse_set_page(de_slug, "de")
-                    de_name = de_data["name"] if de_data else canonical_name
-                else:
-                    de_name = canonical_name
-                new_set_trans[canonical_name] = de_name
+    def _scrape_booster_pages(
+        self,
+        en_booster_slugs: list[str],
+        de_booster_slugs: list[str],
+        new_data: dict,
+        existing: dict,
+    ) -> dict:
+        """
+        Scrape booster pages for sets in ``new_data["processing_codes"]``.
 
-            # Cards
-            for card in en_data["cards"]:
-                key = (set_code, card["number"])
-                if key not in existing_cards:
-                    new_cards[key] = {
-                        "set_number": set_code,
-                        "number": card["number"],
-                        "card": card["name"],
-                        "pack": "",
-                        "rarity": card["rarity"],
-                    }
+        Returns ``pack_cards`` mapping ``(set_code, pack_name)`` → card numbers.
+        """
+        processing_codes = new_data["processing_codes"]
+        all_sets = {**existing["sets"], **new_data["sets"]}
 
-            # German card names
-            de_slug = _find_matching_slug(slug, de_set_slugs)
-            if de_slug:
-                de_data = self._parse_set_page(de_slug, "de")
-                if de_data:
-                    en_by_num = {c["number"]: c["name"] for c in en_data["cards"]}
-                    de_by_num = {c["number"]: c["name"] for c in de_data["cards"]}
-                    for num, de_name in de_by_num.items():
-                        en_name = en_by_num.get(num)
-                        if (
-                            en_name
-                            and en_name != de_name
-                            and en_name not in existing_card_trans
-                        ):
-                            new_card_trans[en_name] = de_name
-
-        # --- Booster pages (only for sets being processed) ---
-        # Build a set of slug-name prefixes for the sets we care about so we
-        # can skip booster fetches that clearly belong to other sets.
-        processing_set_slug_names: set[str] = set()
-        all_set_names_by_code = {
-            **{
-                c: d.get("name", "")
-                for c, d in existing_sets.items()
-                if isinstance(d, dict)
-            },
-            **{c: d["name"] for c, d in new_sets.items()},
-        }
-        for code in processing_codes:
-            name = all_set_names_by_code.get(code, "")
-            if name:
-                processing_set_slug_names.add(
-                    re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
-                )
+        slug_name_prefixes = _processing_slug_names(processing_codes, all_sets)
+        booster_slugs = _filter_booster_slugs(en_booster_slugs, slug_name_prefixes)
+        skipped = len(en_booster_slugs) - len(booster_slugs)
+        self.stdout.write(
+            f"Scraping {len(booster_slugs)} booster page(s) ({skipped} skipped)."
+        )
 
         pack_cards: dict[tuple[str, str], set[str]] = {}
-        booster_slugs_to_fetch = _filter_booster_slugs(
-            en_booster_slugs, processing_set_slug_names
-        )
-        self.stdout.write(
-            f"Scraping {len(booster_slugs_to_fetch)} booster page(s) "
-            f"({len(en_booster_slugs) - len(booster_slugs_to_fetch)} skipped)."
-        )
-
-        for slug in booster_slugs_to_fetch:
+        for slug in booster_slugs:
             self.stdout.write(f"  Booster: {slug}")
             en_data = self._parse_booster_page(slug, "en")
             if en_data is None:
                 continue
-
-            set_code = _resolve_set_code(
-                en_data["set_name"], {**existing_sets, **new_sets}
-            )
+            set_code = _resolve_set_code(en_data["set_name"], all_sets)
             if not set_code:
                 self.stdout.write(
                     self.style.WARNING(
-                        f"    Cannot resolve set code for '{en_data['set_name']}', skipping"
+                        f"    Cannot resolve set code for "
+                        f"'{en_data['set_name']}', skipping"
                     )
                 )
                 continue
-
             if set_code not in processing_codes:
-                continue  # resolved but not a set we need to update
-
+                continue
             pack_en = en_data["pack_name"]
-            key = (set_code, pack_en)
-            pack_cards[key] = en_data["card_numbers"]
+            pack_cards[(set_code, pack_en)] = en_data["card_numbers"]
+            de_slug = _find_matching_slug(slug, de_booster_slugs)
+            de_data = self._parse_booster_page(de_slug, "de") if de_slug else None
+            pack_de = de_data["pack_name"] if de_data else pack_en
+            self._collect_pack_trans(set_code, pack_en, pack_de, (existing, new_data))
+        return pack_cards
 
-            canonical_set_name = (
-                existing_sets[set_code].get("name", en_data["set_name"])
-                if set_code in existing_sets
-                else new_sets.get(set_code, {}).get("name", en_data["set_name"])
-            )
-            set_has_pack_trans = any(
-                k[0] == canonical_set_name for k in existing_pack_trans
-            )
-            if set_code in new_sets or not set_has_pack_trans:
-                de_slug = _find_matching_slug(slug, de_booster_slugs)
-                if de_slug:
-                    de_data = self._parse_booster_page(de_slug, "de")
-                    pack_de = de_data["pack_name"] if de_data else pack_en
-                else:
-                    pack_de = pack_en
-                new_pack_trans[(set_code, pack_en)] = {
-                    "set_english_name": canonical_set_name,
-                    "pack_english_name": pack_en,
-                    "pack_german_name": pack_de,
-                }
+    def _collect_pack_trans(
+        self,
+        set_code: str,
+        pack_en: str,
+        pack_de: str,
+        context: tuple[dict, dict],
+    ) -> None:
+        """Add a pack translation row to *new_data* if needed."""
+        existing, new_data = context
+        canonical_set_name = _canonical_set_name(set_code, pack_en, existing, new_data)
+        set_has_trans = any(k[0] == canonical_set_name for k in existing["pack_trans"])
+        if set_code not in new_data["sets"] and set_has_trans:
+            return
+        all_sets = {**existing["sets"], **new_data["sets"]}
+        set_data = all_sets.get(set_code)
+        set_name_for_csv = (
+            set_data.get("name", canonical_set_name)
+            if isinstance(set_data, dict)
+            else canonical_set_name
+        )
+        new_data["pack_trans"][(set_code, pack_en)] = {
+            "set_english_name": set_name_for_csv,
+            "pack_english_name": pack_en,
+            "pack_german_name": pack_de,
+        }
 
-        # --- Assign pack membership to new cards ---
-        for (set_code, pack_name), card_numbers in pack_cards.items():
-            for num in card_numbers:
-                key = (set_code, num)
-                if key in new_cards:
-                    existing_pack = new_cards[key]["pack"]
-                    if existing_pack:
-                        parts = existing_pack.split("|")
-                        if pack_name not in parts:
-                            parts.append(pack_name)
-                            new_cards[key]["pack"] = "|".join(sorted(parts))
-                    else:
-                        new_cards[key]["pack"] = pack_name
-
-        # ------------------------------------------------------------------
-        # Write CSV files
-        # ------------------------------------------------------------------
+    def _write_csv_files(self, new_data: dict) -> None:
+        """Append all new rows to the seed CSV files."""
         self.stdout.write("Writing CSV files…")
         _append_csv(
             DATA_DIR / "sets.csv",
             ["number", "name", "release_date", "generation"],
-            new_sets.values(),
+            new_data["sets"].values(),
         )
         _append_csv(
             DATA_DIR / "cards.csv",
             ["set_number", "number", "card", "pack", "rarity"],
-            new_cards.values(),
+            new_data["cards"].values(),
         )
         _append_csv(
             DATA_DIR / "set_translations.csv",
             ["english_name", "german_name"],
-            ({"english_name": k, "german_name": v} for k, v in new_set_trans.items()),
+            (
+                {"english_name": k, "german_name": v}
+                for k, v in new_data["set_trans"].items()
+            ),
         )
         _append_csv(
             DATA_DIR / "pack_translations.csv",
             ["set_english_name", "pack_english_name", "pack_german_name"],
-            new_pack_trans.values(),
+            new_data["pack_trans"].values(),
         )
         _append_csv(
             DATA_DIR / "card_translations.csv",
             ["card_english_name", "card_german_name"],
             (
                 {"card_english_name": k, "card_german_name": v}
-                for k, v in new_card_trans.items()
+                for k, v in new_data["card_trans"].items()
             ),
-        )
-
-        sets_added = len(new_sets)
-        cards_added = len(new_cards)
-        self.stdout.write(
-            self.style.SUCCESS(
-                f"Done. Added {sets_added} set(s), {cards_added} card(s)."
-            )
         )
 
     # ------------------------------------------------------------------
@@ -590,6 +598,45 @@ class Command(BaseCommand):
 # ---------------------------------------------------------------------------
 # Pure helper functions
 # ---------------------------------------------------------------------------
+
+
+def _canonical_set_name(
+    set_code: str, fallback: str, existing: dict, new_data: dict
+) -> str:
+    """Return the canonical English set name for *set_code*."""
+    if set_code in existing["sets"]:
+        return existing["sets"][set_code].get("name", fallback)
+    return new_data["sets"].get(set_code, {}).get("name", fallback)
+
+
+def _processing_slug_names(processing_codes: set[str], all_sets: dict) -> set[str]:
+    """Return kebab-slug names for the sets being processed this run."""
+    result = set()
+    for code in processing_codes:
+        data = all_sets.get(code)
+        name = data.get("name", "") if isinstance(data, dict) else ""
+        if name:
+            result.add(re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-"))
+    return result
+
+
+def _assign_pack_membership(
+    pack_cards: dict[tuple[str, str], set[str]], new_cards: dict
+) -> None:
+    """Set the ``pack`` field on each new card based on *pack_cards*."""
+    for (set_code, pack_name), card_numbers in pack_cards.items():
+        for num in card_numbers:
+            row = new_cards.get((set_code, num))
+            if row is None:
+                continue
+            existing_pack = row["pack"]
+            if existing_pack:
+                parts = existing_pack.split("|")
+                if pack_name not in parts:
+                    parts.append(pack_name)
+                    row["pack"] = "|".join(sorted(parts))
+            else:
+                row["pack"] = pack_name
 
 
 def _slug_to_set_code(slug: str, existing_sets: dict) -> str | None:
