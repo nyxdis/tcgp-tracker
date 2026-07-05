@@ -3109,3 +3109,218 @@ B3,231,Dragalge ex,Pulsing Aura,double_shiny_rare
 B3,232,Mega Steelix ex,Pulsing Aura,double_shiny_rare
 B3,233,Celebi,Pulsing Aura,crown_rare
 B3,234,Bombirdier,Pulsing Aura,crown_rare
+B3a,001,Surskit,Paradox Drive,common
+B3a,002,Masquerain,Paradox Drive,common
+B3a,003,Brute Bonnet,Paradox Drive,common
+B3a,004,Slither Wing,Paradox Drive,uncommon
+B3a,005,Iron Moth,Paradox Drive,uncommon
+B3a,006,Psyduck,Paradox Drive,common
+B3a,007,Golduck,Paradox Drive,common
+B3a,008,Vaporeon,Paradox Drive,uncommon
+B3a,009,Buizel,Paradox Drive,common
+B3a,010,Floatzel,Paradox Drive,common
+B3a,011,Snom,Paradox Drive,common
+B3a,012,Frosmoth,Paradox Drive,common
+B3a,013,Iron Bundle ex,Paradox Drive,double_rare
+B3a,014,Pawmi,Paradox Drive,common
+B3a,015,Pawmo,Paradox Drive,common
+B3a,016,Pawmot,Paradox Drive,uncommon
+B3a,017,Iron Hands,Paradox Drive,common
+B3a,018,Iron Thorns,Paradox Drive,uncommon
+B3a,019,Miraidon ex,Paradox Drive,double_rare
+B3a,020,Espeon,Paradox Drive,common
+B3a,021,Flittle,Paradox Drive,common
+B3a,022,Espathra,Paradox Drive,common
+B3a,023,Greavard,Paradox Drive,uncommon
+B3a,024,Houndstone,Paradox Drive,rare
+B3a,025,Scream Tail,Paradox Drive,common
+B3a,026,Flutter Mane ex,Paradox Drive,common
+B3a,027,Iron Valiant,Paradox Drive,rare
+B3a,028,Iron Leaves,Paradox Drive,rare
+B3a,029,Iron Boulder,Paradox Drive,rare
+B3a,030,Iron Crown,Paradox Drive,uncommon
+B3a,031,Nacli,Paradox Drive,uncommon
+B3a,032,Naclstack,Paradox Drive,rare
+B3a,033,Garganacl,Paradox Drive,rare
+B3a,034,Great Tusk,Paradox Drive,rare
+B3a,035,Sandy Shocks,Paradox Drive,uncommon
+B3a,036,Koraidon ex,Paradox Drive,double_rare
+B3a,037,Umbreon,Paradox Drive,uncommon
+B3a,038,Sneasel,Paradox Drive,common
+B3a,039,Weavile,Paradox Drive,uncommon
+B3a,040,Sableye,Paradox Drive,uncommon
+B3a,041,Pawniard,Paradox Drive,common
+B3a,042,Bisharp,Paradox Drive,common
+B3a,043,Kingambit,Paradox Drive,rare
+B3a,044,Glimmet,Paradox Drive,common
+B3a,045,Glimmora,Paradox Drive,rare
+B3a,046,Iron Jugulis,Paradox Drive,uncommon
+B3a,047,Roaring Moon,Paradox Drive,rare
+B3a,048,Corviknight,Paradox Drive,uncommon
+B3a,049,Cufant,Paradox Drive,common
+B3a,050,Copperajah,Paradox Drive,uncommon
+B3a,051,Iron Treads,Paradox Drive,uncommon
+B3a,052,Altaria,Paradox Drive,uncommon
+B3a,053,Walking Wake,Paradox Drive,rare
+B3a,054,Gouging Fire,Paradox Drive,rare
+B3a,055,Raging Bolt,Paradox Drive,rare
+B3a,056,Eevee,Paradox Drive,common
+B3a,057,Girafarig,Paradox Drive,common
+B3a,058,Farigiraf,Paradox Drive,common
+B3a,059,Dunsparce,Paradox Drive,uncommon
+B3a,060,Dudunsparce,Paradox Drive,rare
+B3a,061,Swablu,Paradox Drive,common
+B3a,062,Rufflet,Paradox Drive,common
+B3a,063,Braviary,Paradox Drive,common
+B3a,064,Hawlucha,Paradox Drive,common
+B3a,065,Rookidee,Paradox Drive,common
+B3a,066,Corvisquire,Paradox Drive,common
+B3a,067,Flamigo,Paradox Drive,common
+B3a,068,Terapagos ex,Paradox Drive,double_rare
+B3a,069,Ancient Booster Energy Capsule,Paradox Drive,uncommon
+B3a,070,Future Booster Energy Capsule,Paradox Drive,uncommon
+B3a,071,Juliana,Paradox Drive,uncommon
+B3a,072,Professor Sada,Paradox Drive,uncommon
+B3a,073,Professor Turo,Paradox Drive,uncommon
+B3a,074,Area Zero,Paradox Drive,uncommon
+B3a,075,Snom,Paradox Drive,illustration_rare
+B3a,076,Flittle,Paradox Drive,illustration_rare
+B3a,077,Iron Boulder,Paradox Drive,illustration_rare
+B3a,078,Glimmora,Paradox Drive,illustration_rare
+B3a,079,Raging Bolt,Paradox Drive,illustration_rare
+B3a,080,Hawlucha,Paradox Drive,illustration_rare
+B3a,081,Iron Bundle ex,Paradox Drive,special_art
+B3a,082,Miraidon ex,Paradox Drive,special_art
+B3a,083,Flutter Mane ex,Paradox Drive,special_art
+B3a,084,Koraidon ex,Paradox Drive,special_art
+B3a,085,Terapagos ex,Paradox Drive,special_art
+B3a,086,Juliana,Paradox Drive,special_art
+B3a,087,Professor Sada,Paradox Drive,special_art
+B3a,088,Professor Turo,Paradox Drive,special_art
+B3a,089,Iron Bundle ex,Paradox Drive,special_art
+B3a,090,Miraidon ex,Paradox Drive,special_art
+B3a,091,Flutter Mane ex,Paradox Drive,special_art
+B3a,092,Koraidon ex,Paradox Drive,special_art
+B3a,093,Terapagos ex,Paradox Drive,immersive_rare
+B3a,094,Rellor,Paradox Drive,shiny_rare
+B3a,095,Charcadet,Paradox Drive,shiny_rare
+B3a,096,Tadbulb,Paradox Drive,shiny_rare
+B3a,097,Rabsca,Paradox Drive,shiny_rare
+B3a,098,Diglett,Paradox Drive,shiny_rare
+B3a,099,Dugtrio,Paradox Drive,shiny_rare
+B3a,100,Klawf,Paradox Drive,shiny_rare
+B3a,101,Orthworm,Paradox Drive,shiny_rare
+B3a,102,Swablu,Paradox Drive,shiny_rare
+B3a,103,Altaria,Paradox Drive,shiny_rare
+B3a,104,Meowscarada ex,Paradox Drive,double_shiny_rare
+B3a,105,Armarouge ex,Paradox Drive,double_shiny_rare
+B3a,106,Bellibolt ex,Paradox Drive,double_shiny_rare
+B3a,107,Mega Altaria ex,Paradox Drive,double_shiny_rare
+B3a,108,Iron Valiant,Paradox Drive,crown_rare
+B3a,109,Roaring Moon,Paradox Drive,crown_rare
+B3b,001,Caterpie,Everyday Wonders,common
+B3b,002,Metapod,Everyday Wonders,uncommon
+B3b,003,Butterfree,Everyday Wonders,rare
+B3b,004,Cacnea,Everyday Wonders,common
+B3b,005,Tropius,Everyday Wonders,uncommon
+B3b,006,Petilil,Everyday Wonders,common
+B3b,007,Hisuian Lilligant,Everyday Wonders,uncommon
+B3b,008,Vulpix,Everyday Wonders,common
+B3b,009,Ninetales,Everyday Wonders,uncommon
+B3b,010,Growlithe,Everyday Wonders,common
+B3b,011,Psyduck,Everyday Wonders,common
+B3b,012,Goldeen,Everyday Wonders,common
+B3b,013,Seaking,Everyday Wonders,uncommon
+B3b,014,Feebas,Everyday Wonders,common
+B3b,015,Milotic ex,Everyday Wonders,double_rare
+B3b,016,Snorunt,Everyday Wonders,common
+B3b,017,Froslass,Everyday Wonders,rare
+B3b,018,Luvdisc,Everyday Wonders,common
+B3b,019,Piplup,Everyday Wonders,common
+B3b,020,Iron Bundle,Everyday Wonders,uncommon
+B3b,021,Pikachu,Everyday Wonders,common
+B3b,022,Raichu,Everyday Wonders,uncommon
+B3b,023,Emolga,Everyday Wonders,common
+B3b,024,Dedenne ex,Everyday Wonders,double_rare
+B3b,025,Yamper,Everyday Wonders,common
+B3b,026,Slowpoke,Everyday Wonders,common
+B3b,027,Slowbro,Everyday Wonders,uncommon
+B3b,028,Munna,Everyday Wonders,common
+B3b,029,Musharna,Everyday Wonders,uncommon
+B3b,030,Sylveon,Everyday Wonders,rare
+B3b,031,Carbink,Everyday Wonders,uncommon
+B3b,032,Mega Diancie ex,Everyday Wonders,double_rare
+B3b,033,Enamorus,Everyday Wonders,rare
+B3b,034,Fidough,Everyday Wonders,common
+B3b,035,Flutter Mane,Everyday Wonders,uncommon
+B3b,036,Wooper,Everyday Wonders,common
+B3b,037,Quagsire,Everyday Wonders,uncommon
+B3b,038,Rockruff,Everyday Wonders,common
+B3b,039,Sandygast,Everyday Wonders,common
+B3b,040,Palossand,Everyday Wonders,uncommon
+B3b,041,Mega Sableye ex,Everyday Wonders,double_rare
+B3b,042,Cacturne,Everyday Wonders,uncommon
+B3b,043,Spiritomb,Everyday Wonders,uncommon
+B3b,044,Scraggy,Everyday Wonders,common
+B3b,045,Scrafty,Everyday Wonders,uncommon
+B3b,046,Mareanie,Everyday Wonders,common
+B3b,047,Toxapex,Everyday Wonders,uncommon
+B3b,048,Goomy,Everyday Wonders,common
+B3b,049,Hisuian Sliggoo,Everyday Wonders,uncommon
+B3b,050,Hisuian Goodra,Everyday Wonders,rare
+B3b,051,Jigglypuff,Everyday Wonders,common
+B3b,052,Wigglytuff,Everyday Wonders,uncommon
+B3b,053,Eevee,Everyday Wonders,common
+B3b,054,Munchlax,Everyday Wonders,rare
+B3b,055,Snorlax,Everyday Wonders,rare
+B3b,056,Teddiursa,Everyday Wonders,common
+B3b,057,Ursaring,Everyday Wonders,uncommon
+B3b,058,Ursaluna,Everyday Wonders,rare
+B3b,059,Hisuian Zorua,Everyday Wonders,common
+B3b,060,Hisuian Zoroark ex,Everyday Wonders,double_rare
+B3b,061,Furfrou,Everyday Wonders,common
+B3b,062,Skwovet,Everyday Wonders,common
+B3b,063,Greedent,Everyday Wonders,uncommon
+B3b,064,Small Balloon,Everyday Wonders,uncommon
+B3b,065,Elegant Cape,Everyday Wonders,uncommon
+B3b,066,Elesa,Everyday Wonders,uncommon
+B3b,067,Puppy-Loving Girl,Everyday Wonders,uncommon
+B3b,068,Wallace,Everyday Wonders,uncommon
+B3b,069,Kid's Room,Everyday Wonders,uncommon
+B3b,070,Vulpix,Everyday Wonders,illustration_rare
+B3b,071,Piplup,Everyday Wonders,illustration_rare
+B3b,072,Pikachu,Everyday Wonders,illustration_rare
+B3b,073,Sylveon,Everyday Wonders,illustration_rare
+B3b,074,Mareanie,Everyday Wonders,illustration_rare
+B3b,075,Jigglypuff,Everyday Wonders,illustration_rare
+B3b,076,Snorlax,Everyday Wonders,illustration_rare
+B3b,077,Greedent,Everyday Wonders,illustration_rare
+B3b,078,Milotic ex,Everyday Wonders,special_art
+B3b,079,Dedenne ex,Everyday Wonders,special_art
+B3b,080,Mega Diancie ex,Everyday Wonders,special_art
+B3b,081,Mega Sableye ex,Everyday Wonders,special_art
+B3b,082,Hisuian Zoroark ex,Everyday Wonders,special_art
+B3b,083,Elesa,Everyday Wonders,special_art
+B3b,084,Puppy-Loving Girl,Everyday Wonders,special_art
+B3b,085,Wallace,Everyday Wonders,special_art
+B3b,086,Milotic ex,Everyday Wonders,special_art
+B3b,087,Mega Diancie ex,Everyday Wonders,special_art
+B3b,088,Mega Sableye ex,Everyday Wonders,special_art
+B3b,089,Hisuian Zoroark ex,Everyday Wonders,special_art
+B3b,090,Dedenne ex,Everyday Wonders,immersive_rare
+B3b,091,Caterpie,Everyday Wonders,shiny_rare
+B3b,092,Metapod,Everyday Wonders,shiny_rare
+B3b,093,Butterfree,Everyday Wonders,shiny_rare
+B3b,094,Mareep,Everyday Wonders,shiny_rare
+B3b,095,Flaaffy,Everyday Wonders,shiny_rare
+B3b,096,Ampharos,Everyday Wonders,shiny_rare
+B3b,097,Slowbro,Everyday Wonders,shiny_rare
+B3b,098,Kangaskhan,Everyday Wonders,shiny_rare
+B3b,099,Ditto,Everyday Wonders,shiny_rare
+B3b,100,Snorlax,Everyday Wonders,shiny_rare
+B3b,101,Mega Gyarados ex,Everyday Wonders,double_shiny_rare
+B3b,102,Vaporeon ex,Everyday Wonders,double_shiny_rare
+B3b,103,Mega Ampharos ex,Everyday Wonders,double_shiny_rare
+B3b,104,Indeedee ex,Everyday Wonders,double_shiny_rare
+B3b,105,Munchlax,Everyday Wonders,crown_rare
+B3b,106,Small Balloon,Everyday Wonders,crown_rare
