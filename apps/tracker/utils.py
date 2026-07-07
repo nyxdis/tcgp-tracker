@@ -8,6 +8,20 @@ from apps.tracker.models.users import UserCard
 logger = logging.getLogger("tracker.utils")
 
 
+class _RarityProb:
+    """Simple object to hold god-pack slot probabilities, for compatibility
+    with the RarityProbability interface used below."""
+
+    def __init__(self, rarity_name, slot_probs):
+        self.rarity_name = rarity_name
+        self.probability_slot1 = slot_probs[0]
+        self.probability_slot2 = slot_probs[1]
+        self.probability_slot3 = slot_probs[2]
+        self.probability_slot4 = slot_probs[3]
+        self.probability_slot5 = slot_probs[4]
+        self.probability_slot6 = slot_probs[5]
+
+
 def prob_at_least_one_new_card(pack, user, pack_type=None):
     """
     Calculate the probability that at least one new card is drawn from a pack for a user.
@@ -42,23 +56,12 @@ def prob_at_least_one_new_card(pack, user, pack_type=None):
         pack_set = pack.set
         rarity_probs_dict = pack_set.get_rarity_probabilities(pack_type)
         # Convert dict format to object-like structure for compatibility
+        from apps.tracker.models.cards import Rarity
+
         rarities = {}
         for rarity_name, slot_probs in rarity_probs_dict.items():
-            # Create a simple object to hold probabilities
-            class RarityProb:
-                def __init__(self, rarity_name, slot_probs):
-                    self.rarity_name = rarity_name
-                    self.probability_slot1 = slot_probs[0]
-                    self.probability_slot2 = slot_probs[1]
-                    self.probability_slot3 = slot_probs[2]
-                    self.probability_slot4 = slot_probs[3]
-                    self.probability_slot5 = slot_probs[4]
-                    self.probability_slot6 = slot_probs[5]
-
-            from apps.tracker.models.cards import Rarity
-
             rarity = Rarity.objects.get(name=rarity_name)
-            rarities[rarity] = RarityProb(rarity_name, slot_probs)
+            rarities[rarity] = _RarityProb(rarity_name, slot_probs)
     else:
         # For normal/shiny packs, get stored probabilities
         rarity_probs = RarityProbability.objects.filter(
