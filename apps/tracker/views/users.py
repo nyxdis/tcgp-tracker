@@ -7,6 +7,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.db import models
 from django.db.models import Q
 from django.shortcuts import redirect, render
+from django.utils.translation import gettext as _
 
 from apps.tracker.forms import RegisterForm, UserProfileForm
 from apps.tracker.models.users import FriendRequest, UserProfile
@@ -34,14 +35,14 @@ def account(request):
             if password_form.is_valid():
                 user = password_form.save()
                 update_session_auth_hash(request, user)
-                messages.success(request, "Ihr Passwort wurde erfolgreich geändert!")
+                messages.success(request, _("Your password was changed successfully!"))
             else:
-                messages.error(request, "Bitte korrigieren Sie die Fehler unten.")
+                messages.error(request, _("Please correct the errors below."))
         elif "delete_account" in request.POST:
             user = request.user
             logout(request)
             user.delete()
-            messages.success(request, "Ihr Account wurde erfolgreich gelöscht.")
+            messages.success(request, _("Your account was deleted successfully."))
             return redirect("home")
     else:
         password_form = PasswordChangeForm(request.user)
