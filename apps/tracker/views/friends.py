@@ -3,8 +3,19 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.http import url_has_allowed_host_and_scheme
 
 from apps.tracker.models.users import FriendRequest, UserProfile
+
+
+def _safe_next_url(request, fallback):
+    """Return the requested redirect target if it points to this host, else *fallback*."""
+    next_url = request.POST.get("next") or request.META.get("HTTP_REFERER")
+    if next_url and url_has_allowed_host_and_scheme(
+        next_url, allowed_hosts={request.get_host()}, require_https=request.is_secure()
+    ):
+        return next_url
+    return fallback
 
 
 @login_required
@@ -15,10 +26,7 @@ def send_friend_request(request, user_id):
     if to_profile != from_profile:
         FriendRequest.objects.get_or_create(from_user=from_profile, to_user=to_profile)
         messages.success(request, f"Friend request sent to {to_profile.user.username}!")
-    next_url = (
-        request.POST.get("next") or request.META.get("HTTP_REFERER") or "user_search"
-    )
-    return redirect(next_url)
+    return redirect(_safe_next_url(request, "user_search"))
 
 
 @login_required
@@ -32,8 +40,7 @@ def accept_friend_request(request, request_id):
     messages.success(
         request, f"{friend_request.from_user.user.username} is now your friend!"
     )
-    next_url = request.POST.get("next") or request.META.get("HTTP_REFERER") or "profile"
-    return redirect(next_url)
+    return redirect(_safe_next_url(request, "profile"))
 
 
 def public_profile(request, username):
