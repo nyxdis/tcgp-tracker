@@ -834,23 +834,6 @@ def _parse_card_anchor(a, lang: str) -> tuple[str, str]:
     return "", ""
 
 
-def _parse_card_link_text(text: str) -> tuple[str, str]:
-    """
-    Parse a card link label like:
-        'Bulbasaur (Pokémon TCG Pocket) grass #1'
-        'Bulbasaur (Pokémon TCG Pocket) #001'
-    Returns (zero_padded_number, card_name) or ('', '').
-    """
-    m = re.search(r"#(\d+)$", text.strip())
-    if not m:
-        return "", ""
-    raw_num = m.group(1)
-    number = raw_num.zfill(3)
-    # Name is everything before the first '('
-    name_part = text[: text.find("(")].strip() if "(" in text else ""
-    return number, name_part
-
-
 def _rarity_from_heading(heading_lower: str) -> str:
     """
     Map a lower-cased heading string to an internal rarity name.
