@@ -4,7 +4,7 @@ from collections import defaultdict
 
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
-from django.http import JsonResponse
+from django.http import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import get_language
 
@@ -13,17 +13,28 @@ from apps.tracker.models.users import UserCard
 from apps.tracker.utils import prob_at_least_one_new_card
 
 
+def _parse_card_id(request):
+    """Return the POSTed card_id as an int, or None if missing/invalid."""
+    try:
+        return int(request.POST.get("card_id"))
+    except (TypeError, ValueError):
+        return None
+
+
 @login_required
 def home(request):
     """Render the home page with all sets and the user's cards."""
     sets = PokemonSet.objects.all().order_by("-release_date")
     user_cards = UserCard.objects.filter(user=request.user)
     if request.method == "POST":
-        card_id = int(request.POST.get("card_id"))
+        card_id = _parse_card_id(request)
+        if card_id is None:
+            return HttpResponseBadRequest("Invalid card_id")
         action = request.POST.get("action")
         if action == "collect":
+            card = get_object_or_404(Card, id=card_id)
             UserCard.objects.get_or_create(
-                user=request.user, card_id=card_id, defaults={"quantity": 1}
+                user=request.user, card=card, defaults={"quantity": 1}
             )
         elif action == "uncollect":
             UserCard.objects.filter(user=request.user, card_id=card_id).delete()
@@ -149,11 +160,14 @@ def set_detail(request, set_number):
         .prefetch_related("translations")
     )
     if request.method == "POST":
-        card_id = int(request.POST.get("card_id"))
+        card_id = _parse_card_id(request)
+        if card_id is None:
+            return HttpResponseBadRequest("Invalid card_id")
         action = request.POST.get("action")
         if action == "collect":
+            card = get_object_or_404(Card, id=card_id)
             UserCard.objects.get_or_create(
-                user=request.user, card_id=card_id, defaults={"quantity": 1}
+                user=request.user, card=card, defaults={"quantity": 1}
             )
         elif action == "uncollect":
             UserCard.objects.filter(user=request.user, card_id=card_id).delete()
