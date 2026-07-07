@@ -1,1 +1,0 @@
-"""Tracker app test module."""
