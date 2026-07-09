@@ -81,6 +81,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  function refreshRarityProgress() {
+    fetch(window.location.pathname + "?fragment=rarity_progress")
+      .then((r) => r.text())
+      .then((html) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const newProgress = doc.getElementById("rarity-progress");
+        if (newProgress) {
+          document.getElementById("rarity-progress").innerHTML = newProgress.innerHTML;
+        }
+      });
+  }
+
   rows.forEach((row) => {
     row.addEventListener("click", function () {
       const cardId = row.dataset.cardId;
@@ -112,17 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
             statusCell.textContent = "❌";
             row.dataset.action = "collect";
           }
-          // Live update rarity progress
-          fetch(window.location.pathname + "?fragment=rarity_progress")
-            .then(r => r.text())
-            .then(html => {
-              const parser = new DOMParser();
-              const doc = parser.parseFromString(html, "text/html");
-              const newProgress = doc.getElementById("rarity-progress");
-              if (newProgress) {
-                document.getElementById("rarity-progress").innerHTML = newProgress.innerHTML;
-              }
-            });
+          refreshRarityProgress();
         });
     });
   });
@@ -133,32 +136,36 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     const rarities = ["common", "uncommon", "rare", "double_rare"];
     const csrfToken = window.csrfToken;
+    const requests = [];
     rows.forEach((row) => {
       const rarity = row.dataset.rarity;
       if (rarities.includes(rarity) && row.dataset.action === "collect") {
         const cardId = row.dataset.cardId;
-        fetch("", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "X-CSRFToken": csrfToken,
-            "X-Requested-With": "XMLHttpRequest",
-          },
-          body: new URLSearchParams({
-            card_id: cardId,
-            action: "collect",
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            const statusCell = row.querySelector(".status-cell");
-            if (data.collected) {
-              statusCell.textContent = "✅";
-              row.dataset.action = "uncollect";
-            }
-          });
+        requests.push(
+          fetch("", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              "X-CSRFToken": csrfToken,
+              "X-Requested-With": "XMLHttpRequest",
+            },
+            body: new URLSearchParams({
+              card_id: cardId,
+              action: "collect",
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              const statusCell = row.querySelector(".status-cell");
+              if (data.collected) {
+                statusCell.textContent = "✅";
+                row.dataset.action = "uncollect";
+              }
+            })
+        );
       }
     });
+    Promise.all(requests).then(refreshRarityProgress);
   });
 
   document.getElementById("jump-to-illustration-rare-btn").addEventListener("click", function () {
