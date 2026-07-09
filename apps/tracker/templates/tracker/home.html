@@ -12,6 +12,11 @@
 {% endblock style %}
 {% block content %}
     <h1 class="mb-4">{% trans "Welcome to TCGP Tracker!" %}</h1>
+    <p class="text-muted mb-4">
+        <strong>{% trans "Overall Collection:" %}</strong>
+        {{ total_collected }} / {{ total_cards }}
+        ({{ total_progress_percent }}%)
+    </p>
     <div class="mb-4">
         <a href="{% url "pack_list" %}" class="btn btn-success">{% trans "Which pack should I open?" %}</a>
     </div>

@@ -72,6 +72,8 @@ def home(request):
                 .order_by("set__release_date", "set__name", "number")
             )
     user_card_ids = set(user_cards.values_list("card_id", flat=True))
+    total_cards = sum(total_dict.values())
+    total_collected = user_cards.count()
     return render(
         request,
         "tracker/home.html",
@@ -80,6 +82,13 @@ def home(request):
             "search_query": search_query,
             "search_results": search_results,
             "user_card_ids": user_card_ids,
+            "total_cards": total_cards,
+            "total_collected": total_collected,
+            "total_progress_percent": (
+                round((total_collected / total_cards) * 100, 2)
+                if total_cards > 0
+                else 0
+            ),
         },
     )
 
