@@ -48,29 +48,35 @@
                                            {% if profile.public %}checked{% endif %}>
                                     <label class="form-check-label ms-2 fw-semibold" for="id_public">
                                         {% if profile.public %}
-                                            <span class="text-success">{% trans "Public" %}</span>
+                                            <span id="public-status-label" class="text-success">{% trans "Public" %}</span>
                                         {% else %}
-                                            <span class="text-secondary">{% trans "Private" %}</span>
+                                            <span id="public-status-label" class="text-secondary">{% trans "Private" %}</span>
                                         {% endif %}
                                     </label>
                                 </div>
                             </form>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 pt-0">
-                            <span class="fw-semibold">{% trans "Friend Code:" %}</span>
-                            <span class="text-monospace">
-                                <form method="post" class="d-inline" id="friend-code-form">
-                                    {% csrf_token %}
-                                    <input type="text"
-                                           name="friend_code"
-                                           id="id_friend_code"
-                                           value="{{ profile.friend_code|default:'' }}"
-                                           maxlength="10"
-                                           class="form-control form-control-sm friend-code-input">
-                                </form>
-                            </span>
+                        <li class="list-group-item border-0 pt-0">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-semibold">{% trans "Friend Code:" %}</span>
+                                <span class="text-monospace">
+                                    <form method="post" class="d-inline" id="friend-code-form">
+                                        {% csrf_token %}
+                                        <input type="text"
+                                               name="friend_code"
+                                               id="id_friend_code"
+                                               value="{{ profile.friend_code|default:'' }}"
+                                               maxlength="10"
+                                               class="form-control form-control-sm friend-code-input">
+                                    </form>
+                                </span>
+                            </div>
+                            <div class="text-muted small text-end mt-1">{% trans "Up to 10 characters." %}</div>
                         </li>
                     </ul>
+                    <div id="profile-save-feedback" class="text-success small text-end mb-3 d-none">
+                        ✓ {% trans "Saved" %}
+                    </div>
                     <hr>
                     <div class="d-flex justify-content-end mb-3">
                         <a href="{% url 'user_search' %}" class="btn btn-primary">
@@ -122,22 +128,61 @@
         </div>
     </div>
     <script>
+window.csrfToken = "{{ csrf_token }}";
 document.addEventListener('DOMContentLoaded', function() {
     const friendInput = document.querySelector('#id_friend_code');
-    if (friendInput) {
-        friendInput.addEventListener('change', function() {
-            document.getElementById('friend-code-form').submit();
-        });
-        friendInput.addEventListener('blur', function() {
-            document.getElementById('friend-code-form').submit();
+    const publicInput = document.querySelector('#id_public');
+    const publicStatusLabel = document.getElementById('public-status-label');
+    const feedback = document.getElementById('profile-save-feedback');
+    let feedbackTimeout;
+
+    function showSaved() {
+        if (!feedback) return;
+        clearTimeout(feedbackTimeout);
+        feedback.classList.remove('d-none');
+        feedbackTimeout = setTimeout(function() {
+            feedback.classList.add('d-none');
+        }, 2000);
+    }
+
+    function saveProfile() {
+        const params = new URLSearchParams({ friend_code: friendInput.value });
+        if (publicInput.checked) {
+            params.set('public', 'true');
+        }
+        fetch('', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': window.csrfToken,
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: params,
+        }).then(function(response) {
+            if (response.ok) {
+                showSaved();
+            }
         });
     }
-    const publicInput = document.querySelector('#id_public');
+
+    if (friendInput) {
+        friendInput.addEventListener('change', saveProfile);
+    }
     if (publicInput) {
         publicInput.addEventListener('change', function() {
-            document.getElementById('public-profile-form').submit();
+            if (publicStatusLabel) {
+                publicStatusLabel.textContent = publicInput.checked ? '{% trans "Public" %}' : '{% trans "Private" %}';
+                publicStatusLabel.className = publicInput.checked ? 'text-success' : 'text-secondary';
+            }
+            saveProfile();
         });
     }
+    document.getElementById('friend-code-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+    });
+    document.getElementById('public-profile-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+    });
 });
     </script>
 {% endblock content %}

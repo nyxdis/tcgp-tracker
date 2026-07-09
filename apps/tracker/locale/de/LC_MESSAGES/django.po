@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-09 11:52+0000\n"
+"POT-Creation-Date: 2026-07-09 13:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,8 +26,8 @@ msgstr "Einloggen"
 
 #: apps/tracker/templates/registration/login.html:23
 #: apps/tracker/templates/registration/register.html:5
-#: apps/tracker/templates/registration/register.html:35
-#: apps/tracker/templates/tracker/base.html:72
+#: apps/tracker/templates/registration/register.html:37
+#: apps/tracker/templates/tracker/base.html:73
 msgid "Register"
 msgstr "Registrieren"
 
@@ -47,12 +47,12 @@ msgstr "E-Mail"
 msgid "Password"
 msgstr "Passwort"
 
-#: apps/tracker/templates/registration/register.html:31
+#: apps/tracker/templates/registration/register.html:32
 msgid "Confirm password"
 msgstr "Passwort bestätigen"
 
 #: apps/tracker/templates/tracker/account.html:4
-#: apps/tracker/templates/tracker/base.html:57
+#: apps/tracker/templates/tracker/base.html:58
 msgid "Account"
 msgstr "Konto"
 
@@ -86,28 +86,28 @@ msgstr ""
 "Bist du dir sicher, dass du dein Konto endgültig löschen möchtest? Dies kann "
 "nicht rückgängig gemacht werden."
 
-#: apps/tracker/templates/tracker/base.html:54
+#: apps/tracker/templates/tracker/base.html:55
 msgid "Profile"
 msgstr "Profil"
 
-#: apps/tracker/templates/tracker/base.html:55
+#: apps/tracker/templates/tracker/base.html:56
 msgid "Sets"
 msgstr "Sets"
 
-#: apps/tracker/templates/tracker/base.html:56
+#: apps/tracker/templates/tracker/base.html:57
 #: apps/tracker/templates/tracker/pack_list.html:4
 msgid "Packs"
 msgstr "Packs"
 
-#: apps/tracker/templates/tracker/base.html:59
+#: apps/tracker/templates/tracker/base.html:60
 msgid "Admin"
 msgstr "Admin"
 
-#: apps/tracker/templates/tracker/base.html:63
+#: apps/tracker/templates/tracker/base.html:64
 msgid "Logout"
 msgstr "Ausloggen"
 
-#: apps/tracker/templates/tracker/base.html:69
+#: apps/tracker/templates/tracker/base.html:70
 msgid "Login"
 msgstr "Einloggen"
 
@@ -211,41 +211,51 @@ msgid "Public Profile:"
 msgstr "Öffentliches Profil:"
 
 #: apps/tracker/templates/tracker/profile.html:51
+#: apps/tracker/templates/tracker/profile.html:174
 msgid "Public"
 msgstr "Öffentlich"
 
 #: apps/tracker/templates/tracker/profile.html:53
+#: apps/tracker/templates/tracker/profile.html:174
 msgid "Private"
 msgstr "Privat"
 
-#: apps/tracker/templates/tracker/profile.html:60
+#: apps/tracker/templates/tracker/profile.html:61
 #: apps/tracker/templates/tracker/public_profile.html:36
 #: apps/tracker/templates/tracker/user_search.html:36
 msgid "Friend Code:"
 msgstr "Freundescode:"
 
-#: apps/tracker/templates/tracker/profile.html:77
+#: apps/tracker/templates/tracker/profile.html:74
+msgid "Up to 10 characters."
+msgstr "Bis zu 10 Zeichen."
+
+#: apps/tracker/templates/tracker/profile.html:79
+msgid "Saved"
+msgstr "Gespeichert"
+
+#: apps/tracker/templates/tracker/profile.html:83
 msgid "Find Friends"
 msgstr "Freunde finden"
 
-#: apps/tracker/templates/tracker/profile.html:80
+#: apps/tracker/templates/tracker/profile.html:86
 msgid "Your Friends"
 msgstr "Deine Freunde"
 
-#: apps/tracker/templates/tracker/profile.html:94
+#: apps/tracker/templates/tracker/profile.html:100
 msgid "You have no friends yet."
 msgstr "Du hast noch keine Freunde."
 
-#: apps/tracker/templates/tracker/profile.html:96
+#: apps/tracker/templates/tracker/profile.html:102
 msgid "Friend Requests"
 msgstr "Freundschaftsanfragen"
 
-#: apps/tracker/templates/tracker/profile.html:112
+#: apps/tracker/templates/tracker/profile.html:118
 #: apps/tracker/templates/tracker/user_search.html:52
 msgid "Accept"
 msgstr "Annehmen"
 
-#: apps/tracker/templates/tracker/profile.html:118
+#: apps/tracker/templates/tracker/profile.html:124
 msgid "No pending friend requests."
 msgstr "Keine ausstehenden Freundschaftsanfragen."
 

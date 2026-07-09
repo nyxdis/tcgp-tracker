@@ -31,7 +31,11 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     public = models.BooleanField(default=True, verbose_name="Public Profile")
     friend_code = models.CharField(
-        max_length=10, blank=True, null=True, verbose_name="Friend Code"
+        max_length=10,
+        blank=True,
+        null=True,
+        verbose_name="Friend Code",
+        help_text="Up to 10 characters.",
     )
 
     def __str__(self):
