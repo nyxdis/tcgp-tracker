@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-07 20:22+0000\n"
+"POT-Creation-Date: 2026-07-09 11:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,6 +52,7 @@ msgid "Confirm password"
 msgstr "Passwort bestätigen"
 
 #: apps/tracker/templates/tracker/account.html:4
+#: apps/tracker/templates/tracker/base.html:57
 msgid "Account"
 msgstr "Konto"
 
@@ -65,7 +66,7 @@ msgid "Change Password"
 msgstr "Passwort ändern"
 
 #: apps/tracker/templates/tracker/account.html:24
-#: apps/tracker/templates/tracker/account.html:33
+#: apps/tracker/templates/tracker/account.html:34
 msgid "Delete Account"
 msgstr "Konto löschen"
 
@@ -76,6 +77,35 @@ msgstr "Möchtest du dein Konto wirklich löschen?"
 #: apps/tracker/templates/tracker/account.html:28
 msgid "This action cannot be undone."
 msgstr "Diese Aktion kann nicht rückgängig gemacht werden."
+
+#: apps/tracker/templates/tracker/account.html:31
+msgid ""
+"Are you sure you want to permanently delete your account? This cannot be "
+"undone."
+msgstr ""
+"Bist du dir sicher, dass du dein Konto endgültig löschen möchtest? Dies kann "
+"nicht rückgängig gemacht werden."
+
+#: apps/tracker/templates/tracker/base.html:54
+msgid "Profile"
+msgstr "Profil"
+
+#: apps/tracker/templates/tracker/base.html:55
+msgid "Sets"
+msgstr "Sets"
+
+#: apps/tracker/templates/tracker/base.html:56
+#: apps/tracker/templates/tracker/pack_list.html:4
+msgid "Packs"
+msgstr "Packs"
+
+#: apps/tracker/templates/tracker/base.html:59
+msgid "Admin"
+msgstr "Admin"
+
+#: apps/tracker/templates/tracker/base.html:63
+msgid "Logout"
+msgstr "Ausloggen"
 
 #: apps/tracker/templates/tracker/base.html:69
 msgid "Login"
@@ -128,31 +158,47 @@ msgid "Release Date"
 msgstr "Erscheinungsdatum"
 
 #: apps/tracker/templates/tracker/home.html:88
-#: apps/tracker/templates/tracker/pack_list.html:23
+#: apps/tracker/templates/tracker/pack_list.html:36
 msgid "Progress"
 msgstr "Fortschritt"
 
-#: apps/tracker/templates/tracker/pack_list.html:4
-msgid "Packs"
-msgstr "Packs"
-
 #: apps/tracker/templates/tracker/pack_list.html:6
-#: apps/tracker/templates/tracker/pack_list.html:48
+#: apps/tracker/templates/tracker/pack_list.html:62
 #: apps/tracker/templates/tracker/set_detail.html:34
 #: apps/tracker/templates/tracker/set_detail.html:113
 #: apps/tracker/templates/tracker/set_detail.html:123
 msgid "Back"
 msgstr "Zurück"
 
-#: apps/tracker/templates/tracker/pack_list.html:19
+#: apps/tracker/templates/tracker/pack_list.html:7
+msgid "Sort packs"
+msgstr "Packs sortieren"
+
+#: apps/tracker/templates/tracker/pack_list.html:9
+msgid "Best odds"
+msgstr "Beste Chancen"
+
+#: apps/tracker/templates/tracker/pack_list.html:11
+msgid "Release date"
+msgstr "Erscheinungsdatum"
+
+#: apps/tracker/templates/tracker/pack_list.html:13
+msgid "A–Z"
+msgstr "A–Z"
+
+#: apps/tracker/templates/tracker/pack_list.html:27
+msgid "No data yet"
+msgstr "Noch keine Daten"
+
+#: apps/tracker/templates/tracker/pack_list.html:30
 msgid "Chance to get a new card"
 msgstr "Chance auf eine neue Karte"
 
-#: apps/tracker/templates/tracker/pack_list.html:35
+#: apps/tracker/templates/tracker/pack_list.html:49
 msgid "Best choice"
 msgstr "Beste Wahl"
 
-#: apps/tracker/templates/tracker/pack_list.html:38
+#: apps/tracker/templates/tracker/pack_list.html:52
 msgid "Base cards missing"
 msgstr "Basiskarten fehlen"
 

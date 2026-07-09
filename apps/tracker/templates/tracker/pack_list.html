@@ -2,8 +2,16 @@
 {% load i18n %}
 {% block content %}
     <h1>{% trans "Packs" %}</h1>
-    <div class="mb-3">
+    <div class="mb-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
         <a href="{% url 'home' %}" class="btn btn-outline-primary">← {% trans "Back" %}</a>
+        <div class="btn-group" role="group" aria-label="{% trans 'Sort packs' %}">
+            <a href="?sort=best"
+               class="btn btn-outline-secondary {% if sort_by == 'best' %}active{% endif %}">{% trans "Best odds" %}</a>
+            <a href="?sort=release"
+               class="btn btn-outline-secondary {% if sort_by == 'release' %}active{% endif %}">{% trans "Release date" %}</a>
+            <a href="?sort=az"
+               class="btn btn-outline-secondary {% if sort_by == 'az' %}active{% endif %}">{% trans "A–Z" %}</a>
+        </div>
     </div>
     {% for set, packs in grouped_packs %}
         <h3 class="mt-5">{{ set.localized_name }}</h3>
@@ -15,22 +23,28 @@
                         <div class="card h-100 {% if item.is_best %}border-success{% endif %}{% if item.incomplete_base %} border-warning border-3{% endif %}">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-2">
-                                    <span class="badge bg-primary fs-5 me-2 px-3 py-2">{{ item.chance }} %</span>
-                                    <span class="fw-bold">{% trans "Chance to get a new card" %}</span>
+                                    {% if item.chance is None %}
+                                        <span class="badge bg-secondary fs-6 me-2 px-3 py-2">{% trans "No data yet" %}</span>
+                                    {% else %}
+                                        <span class="badge bg-primary fs-5 me-2 px-3 py-2">{{ item.chance }} %</span>
+                                        <span class="fw-bold">{% trans "Chance to get a new card" %}</span>
+                                    {% endif %}
                                 </div>
                                 <h5 class="card-title mt-2">{{ item.pack.localized_name }}</h5>
-                                <p class="card-text mb-1">
-                                    <strong>{% trans "Progress" %}:</strong>
-                                    {{ item.owned }} / {{ item.total }}
-                                </p>
-                                <div class="progress mb-2">
-                                    <div class="progress-bar"
-                                         role="progressbar"
-                                         style="width: {{ item.progress_percent|floatformat:"2u" }}%"
-                                         aria-valuenow="{{ item.progress_percent }}"
-                                         aria-valuemin="0"
-                                         aria-valuemax="100">{{ item.progress_percent }}%</div>
-                                </div>
+                                {% if item.chance is not None %}
+                                    <p class="card-text mb-1">
+                                        <strong>{% trans "Progress" %}:</strong>
+                                        {{ item.owned }} / {{ item.total }}
+                                    </p>
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar"
+                                             role="progressbar"
+                                             style="width: {{ item.progress_percent|floatformat:"2u" }}%"
+                                             aria-valuenow="{{ item.progress_percent }}"
+                                             aria-valuemin="0"
+                                             aria-valuemax="100">{{ item.progress_percent }}%</div>
+                                    </div>
+                                {% endif %}
                                 {% if item.is_best %}
                                     <span class="badge bg-success">{% trans "Best choice" %}</span>
                                 {% endif %}

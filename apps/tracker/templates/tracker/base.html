@@ -51,16 +51,16 @@
                                    aria-expanded="false">{{ user.get_full_name|default:user.username }}</a>
                                 <div class="dropdown-menu dropdown-menu-end"
                                      aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{% url 'profile' %}">Profil</a>
-                                    <a class="dropdown-item" href="{% url 'home' %}">Sets</a>
-                                    <a class="dropdown-item" href="{% url 'pack_list' %}">Packs</a>
-                                    <a class="dropdown-item" href="{% url 'account' %}">Account</a>
+                                    <a class="dropdown-item" href="{% url 'profile' %}">{% trans "Profile" %}</a>
+                                    <a class="dropdown-item" href="{% url 'home' %}">{% trans "Sets" %}</a>
+                                    <a class="dropdown-item" href="{% url 'pack_list' %}">{% trans "Packs" %}</a>
+                                    <a class="dropdown-item" href="{% url 'account' %}">{% trans "Account" %}</a>
                                     {% if user.is_superuser %}
-                                        <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+                                        <a class="dropdown-item" href="{% url 'admin:index' %}">{% trans "Admin" %}</a>
                                     {% endif %}
                                     <form method="post" action="{% url 'logout' %}">
                                         {% csrf_token %}
-                                        <button type="submit" class="dropdown-item">Logout</button>
+                                        <button type="submit" class="dropdown-item">{% trans "Logout" %}</button>
                                     </form>
                                 </div>
                             </li>

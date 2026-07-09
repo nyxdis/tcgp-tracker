@@ -27,7 +27,8 @@
                             <br />
                             <strong>{% trans "This action cannot be undone." %}</strong>
                         </p>
-                        <form method="post">
+                        <form method="post"
+                              onsubmit="return confirm('{% trans "Are you sure you want to permanently delete your account? This cannot be undone." %}');">
                             {% csrf_token %}
                             <div class="d-grid gap-2">
                                 <button type="submit" name="delete_account" class="btn btn-danger">{% trans "Delete Account" %}</button>

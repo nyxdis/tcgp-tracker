@@ -229,6 +229,21 @@ def pack_list(request):
         total = len(cards)
         owned = sum(1 for c in cards if c.id in owned_card_ids)
 
+        if total == 0:
+            # No card data for this pack yet (e.g. an announced-but-unreleased
+            # set) - there's nothing to compute odds from.
+            pack_data.append(
+                {
+                    "pack": pack,
+                    "chance": None,
+                    "total": total,
+                    "owned": owned,
+                    "progress_percent": 0,
+                    "incomplete_base": False,
+                }
+            )
+            continue
+
         # Calculate weighted chance considering all pack types for this generation
         generation = pack.rarity_version
         available_pack_types = generation.pack_types.all()
@@ -260,24 +275,47 @@ def pack_list(request):
                 "incomplete_base": incomplete_base,
             }
         )
-    if pack_data:
-        best_pack = max(pack_data, key=lambda p: p["chance"])
+
+    # Pick the single best pack to recommend. Ties on chance (very common,
+    # since the odds saturate near 100% once a set is mostly uncollected)
+    # are broken by preferring the pack with the most cards still missing,
+    # so the recommendation is deterministic instead of depending on
+    # queryset order.
+    ratable_packs = [p for p in pack_data if p["chance"] is not None]
+    if ratable_packs:
+        best_pack = max(ratable_packs, key=lambda p: (p["chance"], -p["owned"]))
         best_pack["is_best"] = True
-    grouped_packs = defaultdict(list)
-    # Sort: packs with missing base cards first, then by chance desc, then name
+
+    groups = defaultdict(list)
+    # Sort packs within each set: packs with missing base cards first, then
+    # by chance desc, then name. Packs with no data sort last.
     for entry in sorted(
         pack_data,
         key=lambda p: (
+            p["chance"] is None,
             not p["incomplete_base"],  # False (missing) sorts before True (complete)
-            -p["chance"],
+            -(p["chance"] or 0),
             p["pack"].name,
         ),
     ):
-        grouped_packs[entry["pack"].set].append(entry)
+        groups[entry["pack"].set].append(entry)
+
+    sort_by = request.GET.get("sort", "best")
+    if sort_by == "release":
+        ordered_sets = sorted(groups, key=lambda s: s.release_date, reverse=True)
+    elif sort_by == "az":
+        ordered_sets = sorted(groups, key=lambda s: s.localized_name.lower())
+    else:
+        sort_by = "best"
+        # Groups were inserted in the order their best-ranked pack was
+        # encountered above, i.e. "sets with the most worthwhile pack first".
+        ordered_sets = list(groups)
+
     return render(
         request,
         "tracker/pack_list.html",
         {
-            "grouped_packs": grouped_packs.items(),
+            "grouped_packs": [(s, groups[s]) for s in ordered_sets],
+            "sort_by": sort_by,
         },
     )
