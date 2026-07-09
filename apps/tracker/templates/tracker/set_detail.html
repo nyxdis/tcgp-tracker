@@ -61,54 +61,57 @@
                autocapitalize="off"
                spellcheck="false" />
     </div>
-    <table class="table table-hover mt-4">
-        <thead>
-            <tr>
-                <th class="sortable" data-sort="number">
-                    #
-                    <span class="sort-arrow" data-key="number"></span>
-                </th>
-                <th class="sortable" data-sort="name">
-                    {% trans "Name" %}
-                    <span class="sort-arrow" data-key="name"></span>
-                </th>
-                <th class="sortable" data-sort="rarity">
-                    {% trans "Rarity" %}
-                    <span class="sort-arrow" data-key="rarity"></span>
-                </th>
-                <th class="sortable" data-sort="status">
-                    {% trans "Status" %}
-                    <span class="sort-arrow" data-key="status"></span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for card in cards %}
-                <tr class="clickable-row"
-                    data-card-id="{{ card.id }}"
-                    data-action="{% if card.collected_quantity > 0 %}uncollect{% else %}collect{% endif %}"
-                    data-rarity="{{ card.rarity.name }}">
-                    <td>{{ card.number }}</td>
-                    <td>{{ card.localized_name }}</td>
-                    <td>
-                        {% for _ in ""|center:card.rarity.repeat_count %}
-                            <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}"
-                                 alt="{{ card.rarity.label }}"
-                                 width="24"
-                                 height="24" />
-                        {% endfor %}
-                    </td>
-                    <td class="status-cell">
-                        {% if card.collected_quantity > 0 %}
-                            <span role="img" aria-label="{% trans "Collected" %}">✅</span>
-                        {% else %}
-                            <span role="img" aria-label="{% trans "Not collected" %}">❌</span>
-                        {% endif %}
-                    </td>
+    <div class="table-responsive">
+        <table class="table table-hover mt-4">
+            <thead>
+                <tr>
+                    <th class="sortable" data-sort="number">
+                        #
+                        <span class="sort-arrow" data-key="number"></span>
+                    </th>
+                    <th class="sortable" data-sort="name">
+                        {% trans "Name" %}
+                        <span class="sort-arrow" data-key="name"></span>
+                    </th>
+                    <th class="sortable" data-sort="rarity">
+                        {% trans "Rarity" %}
+                        <span class="sort-arrow" data-key="rarity"></span>
+                    </th>
+                    <th class="sortable" data-sort="status">
+                        {% trans "Status" %}
+                        <span class="sort-arrow" data-key="status"></span>
+                    </th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for card in cards %}
+                    <tr class="clickable-row"
+                        data-card-id="{{ card.id }}"
+                        data-action="{% if card.collected_quantity > 0 %}uncollect{% else %}collect{% endif %}"
+                        data-rarity="{{ card.rarity.name }}">
+                        <td>{{ card.number }}</td>
+                        <td>{{ card.localized_name }}</td>
+                        <td class="rarity-cell">
+                            {% for _ in ""|center:card.rarity.repeat_count %}
+                                <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}"
+                                     alt="{{ card.rarity.label }}"
+                                     class="rarity-cell-icon"
+                                     width="24"
+                                     height="24" />
+                            {% endfor %}
+                        </td>
+                        <td class="status-cell">
+                            {% if card.collected_quantity > 0 %}
+                                <span role="img" aria-label="{% trans "Collected" %}">✅</span>
+                            {% else %}
+                                <span role="img" aria-label="{% trans "Not collected" %}">❌</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <div class="mt-4 text-center">
         <a href="{% url 'home' %}" class="btn btn-outline-primary">← {% trans "Back" %}</a>
     </div>

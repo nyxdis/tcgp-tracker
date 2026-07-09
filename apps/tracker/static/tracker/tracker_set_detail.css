@@ -92,3 +92,14 @@
 #floating-back-btn {
     display: inline-block;
 }
+
+.rarity-cell {
+    white-space: nowrap;
+}
+
+@media (max-width: 575.98px) {
+    .rarity-cell-icon {
+        width: 16px;
+        height: 16px;
+    }
+}
