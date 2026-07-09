@@ -93,22 +93,31 @@ class ThemeManager {
       autoIcon.classList.add('hidden');
       autoIcon.classList.remove('visible');
 
+      const labels = (typeof window !== 'undefined' && window.themeLabels) || {
+        light: 'Light mode (click for dark)',
+        dark: 'Dark mode (click for auto)',
+        auto: 'Auto mode (click for light)',
+      };
+
       switch (theme) {
         case 'light':
           sunIcon.classList.remove('hidden');
           sunIcon.classList.add('visible');
-          toggleButton.title = 'Light mode (click for dark)';
+          toggleButton.title = labels.light;
+          toggleButton.setAttribute('aria-label', labels.light);
           break;
         case 'dark':
           moonIcon.classList.remove('hidden');
           moonIcon.classList.add('visible');
-          toggleButton.title = 'Dark mode (click for auto)';
+          toggleButton.title = labels.dark;
+          toggleButton.setAttribute('aria-label', labels.dark);
           break;
         case 'auto':
         default:
           autoIcon.classList.remove('hidden');
           autoIcon.classList.add('visible');
-          toggleButton.title = 'Auto mode (click for light)';
+          toggleButton.title = labels.auto;
+          toggleButton.setAttribute('aria-label', labels.auto);
           break;
       }
     }
