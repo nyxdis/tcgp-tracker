@@ -87,9 +87,14 @@ def home(request):
 def _get_sets_with_progress(sets, user_cards, progress_dict, total_dict):
     """Helper to calculate set progress and rarity stats."""
     sets_with_progress = []
-    rarities = Card.objects.values(
-        "rarity__image_name", "rarity__name", "rarity__order"
-    ).distinct()
+    # order_by() clears Card's default ("set", "number") ordering, which
+    # Django would otherwise fold into the SELECT and silently defeat
+    # distinct() here (each row would be per-card, not per rarity).
+    rarities = (
+        Card.objects.order_by()
+        .values("rarity__image_name", "rarity__name", "rarity__order")
+        .distinct()
+    )
     # Build a mapping from image_name to (order, [names])
     rarity_groups = defaultdict(lambda: {"order": 999, "names": []})
     for rarity in rarities:
@@ -106,6 +111,10 @@ def _get_sets_with_progress(sets, user_cards, progress_dict, total_dict):
         )
     )
     rarity_groups = sorted_rarity_groups
+    rarity_labels = {
+        group_name: ", ".join(name.replace("_", " ").title() for name in names)
+        for group_name, names in rarity_groups.items()
+    }
     rarity_totals = {}
     for group_name, rarity_names in rarity_groups.items():
         group_totals = (
@@ -134,6 +143,7 @@ def _get_sets_with_progress(sets, user_cards, progress_dict, total_dict):
             group_name: {
                 "collected": rarity_progress[group_name].get(s.id, 0),
                 "total": rarity_totals[group_name].get(s.id, 0),
+                "label": rarity_labels[group_name],
             }
             for group_name in rarity_groups
         }

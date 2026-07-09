@@ -317,6 +317,11 @@ class Rarity(models.Model):
     def __str__(self):
         return f"{self.display_name}"
 
+    @property
+    def label(self):
+        """Human-readable rarity name, for use in alt text and other a11y contexts."""
+        return self.name.replace("_", " ").title()
+
     class Meta:
         ordering = ("order",)
         indexes = [models.Index(fields=["order"])]

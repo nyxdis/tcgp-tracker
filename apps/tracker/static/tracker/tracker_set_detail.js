@@ -81,6 +81,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  function setStatusCell(statusCell, collected) {
+    const emoji = collected ? "✅" : "❌";
+    const label = collected ? window.collectedLabel || "Collected" : window.notCollectedLabel || "Not collected";
+    statusCell.innerHTML = "";
+    const span = document.createElement("span");
+    span.setAttribute("role", "img");
+    span.setAttribute("aria-label", label);
+    span.textContent = emoji;
+    statusCell.appendChild(span);
+  }
+
   function refreshRarityProgress() {
     fetch(window.location.pathname + "?fragment=rarity_progress")
       .then((r) => r.text())
@@ -118,13 +129,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => response.json())
         .then((data) => {
           const statusCell = row.querySelector(".status-cell");
-          if (data.collected) {
-            statusCell.textContent = "✅";
-            row.dataset.action = "uncollect";
-          } else {
-            statusCell.textContent = "❌";
-            row.dataset.action = "collect";
-          }
+          setStatusCell(statusCell, data.collected);
+          row.dataset.action = data.collected ? "uncollect" : "collect";
           refreshRarityProgress();
         });
     });
@@ -158,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then((data) => {
               const statusCell = row.querySelector(".status-cell");
               if (data.collected) {
-                statusCell.textContent = "✅";
+                setStatusCell(statusCell, true);
                 row.dataset.action = "uncollect";
               }
             })

@@ -92,7 +92,7 @@
                             {% for rarity, data in entry.rarity_progress.items %}
                                 {% if data.collected > 0 %}
                                     <img src="{% static 'tracker/img/'|add:rarity %}"
-                                         alt="{{ rarity|capfirst|slice:':-5' }}"
+                                         alt="{{ data.label }}"
                                          class="rarity-icon"
                                          height="16"
                                          width="16" />

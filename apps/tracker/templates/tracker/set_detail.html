@@ -16,7 +16,7 @@
             {% if data.collected > 0 %}
                 <span class="d-inline-flex align-items-center gap-1">
                     <img src="{% static 'tracker/img/'|add:rarity %}"
-                         alt="{{ rarity|capfirst|slice:':-5' }}"
+                         alt="{{ data.label }}"
                          class="rarity-icon"
                          height="16"
                          width="16" />
@@ -39,10 +39,10 @@
             </button>
             <button id="jump-to-illustration-rare-btn"
                     class="btn btn-info w-100 w-sm-auto flex-sm-shrink-0"
-                    title="Springe zur ersten Illustration Rare Karte">
+                    title="{% trans "Jump to the first Illustration Rare card" %}">
                 <span class="me-1">{% trans "Jump to" %}</span>
                 <img src="{% static 'tracker/img/rare.webp' %}"
-                     alt="Illustration Rare"
+                     alt="{% trans "Illustration Rare" %}"
                      width="24"
                      height="24" />
                 <span>{% trans " cards" %}</span>
@@ -93,16 +93,16 @@
                     <td>
                         {% for _ in ""|center:card.rarity.repeat_count %}
                             <img src="{% static 'tracker/img/'|add:card.rarity.image_name %}"
-                                 alt="{{ card.rarity.display_name }}"
+                                 alt="{{ card.rarity.label }}"
                                  width="24"
                                  height="24" />
                         {% endfor %}
                     </td>
                     <td class="status-cell">
                         {% if card.collected_quantity > 0 %}
-                            ✅
+                            <span role="img" aria-label="{% trans "Collected" %}">✅</span>
                         {% else %}
-                            ❌
+                            <span role="img" aria-label="{% trans "Not collected" %}">❌</span>
                         {% endif %}
                     </td>
                 </tr>
@@ -131,6 +131,8 @@
     window.csrfToken = "{{ csrf_token }}";
     window.uncollectConfirmText = "{% trans 'Are you sure you want to uncollect this card?' %}";
     window.collectBaseConfirmText = "{% trans 'Are you sure you want to collect all base cards?' %}";
+    window.collectedLabel = "{% trans 'Collected' %}";
+    window.notCollectedLabel = "{% trans 'Not collected' %}";
     </script>
     <script src="{% static 'tracker/tracker_set_detail.js' %}"></script>
 {% endblock content %}

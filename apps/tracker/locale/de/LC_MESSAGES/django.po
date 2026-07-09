@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-09 13:58+0000\n"
+"POT-Creation-Date: 2026-07-09 14:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,6 +110,23 @@ msgstr "Ausloggen"
 #: apps/tracker/templates/tracker/base.html:70
 msgid "Login"
 msgstr "Einloggen"
+
+#: apps/tracker/templates/tracker/base.html:80
+#: apps/tracker/templates/tracker/base.html:81
+msgid "Toggle theme"
+msgstr "Design umschalten"
+
+#: apps/tracker/templates/tracker/base.html:154
+msgid "Light mode (click for dark)"
+msgstr "Heller Modus (klicken für dunkel)"
+
+#: apps/tracker/templates/tracker/base.html:155
+msgid "Dark mode (click for auto)"
+msgstr "Dunkler Modus (klicken für automatisch)"
+
+#: apps/tracker/templates/tracker/base.html:156
+msgid "Auto mode (click for light)"
+msgstr "Automatischer Modus (klicken für hell)"
 
 #: apps/tracker/templates/tracker/home.html:14
 msgid "Welcome to TCGP Tracker!"
@@ -230,7 +247,7 @@ msgstr "Freundescode:"
 msgid "Up to 10 characters."
 msgstr "Bis zu 10 Zeichen."
 
-#: apps/tracker/templates/tracker/profile.html:79
+#: apps/tracker/templates/tracker/profile.html:78
 msgid "Saved"
 msgstr "Gespeichert"
 
@@ -273,9 +290,17 @@ msgstr "Freundschaftsanfrage senden"
 msgid "Collect all base cards"
 msgstr "Alle Basiskarten sammeln"
 
+#: apps/tracker/templates/tracker/set_detail.html:42
+msgid "Jump to the first Illustration Rare card"
+msgstr "Springe zur ersten Illustration Rare Karte"
+
 #: apps/tracker/templates/tracker/set_detail.html:43
 msgid "Jump to"
 msgstr "Zu"
+
+#: apps/tracker/templates/tracker/set_detail.html:45
+msgid "Illustration Rare"
+msgstr "Illustration Rare"
 
 #: apps/tracker/templates/tracker/set_detail.html:48
 msgid " cards"
@@ -296,6 +321,16 @@ msgstr "Seltenheit"
 #: apps/tracker/templates/tracker/set_detail.html:80
 msgid "Status"
 msgstr "Status"
+
+#: apps/tracker/templates/tracker/set_detail.html:103
+#: apps/tracker/templates/tracker/set_detail.html:134
+msgid "Collected"
+msgstr "Gesammelt"
+
+#: apps/tracker/templates/tracker/set_detail.html:105
+#: apps/tracker/templates/tracker/set_detail.html:135
+msgid "Not collected"
+msgstr "Nicht gesammelt"
 
 #: apps/tracker/templates/tracker/set_detail.html:119
 msgid "Scroll to top"
