@@ -31,8 +31,12 @@
                         <h1 class="card-title fw-bold mb-0 text-center">{{ profile.user.username }}</h1>
                     </div>
                     <ul class="list-group list-group-flush mb-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 pb-3">
+                            <span class="fw-semibold">{% trans "Collection:" %}</span>
+                            <span>{{ total_collected }} / {{ total_cards }} ({{ completion_percent }}%)</span>
+                        </li>
                         {% if profile.friend_code %}
-                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 pb-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 pb-3 pt-0">
                                 <span class="fw-semibold">{% trans "Friend Code:" %}</span>
                                 <span class="text-monospace">{{ profile.friend_code }}</span>
                             </li>

@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.http import url_has_allowed_host_and_scheme
 
-from apps.tracker.models.users import FriendRequest, UserProfile
+from apps.tracker.models.cards import Card
+from apps.tracker.models.users import FriendRequest, UserCard, UserProfile
 
 
 def _safe_next_url(request, fallback):
@@ -53,6 +54,8 @@ def public_profile(request, username):
         already_sent = FriendRequest.objects.filter(
             from_user=request.user.profile, to_user=profile
         ).exists()
+    total_cards = Card.objects.count()
+    total_collected = UserCard.objects.filter(user=profile.user).count()
     return render(
         request,
         "tracker/public_profile.html",
@@ -60,5 +63,12 @@ def public_profile(request, username):
             "profile": profile,
             "can_send_request": can_send_request,
             "already_sent": already_sent,
+            "total_cards": total_cards,
+            "total_collected": total_collected,
+            "completion_percent": (
+                round((total_collected / total_cards) * 100, 2)
+                if total_cards > 0
+                else 0
+            ),
         },
     )
