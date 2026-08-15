@@ -15,6 +15,7 @@ A Django-based web app for tracking your Pokémon TCG Pocket card collection. Br
 
 - **Backend:** Django 5.2, Python 3.13
 - **Database:** PostgreSQL (production) / SQLite (development)
+- **Cache/Sessions:** Redis (production) / locmem + DB sessions (development)
 - **Frontend:** Bootstrap, django-widget-tweaks
 - **Server:** Gunicorn + WhiteNoise
 - **Containerisation:** Docker & Docker Compose
@@ -57,7 +58,12 @@ DJANGO_SETTINGS_MODULE=tcgptracker.settings.production
 SECRET_KEY=your-secret-key
 DATABASE_URL=postgres://tcgpuser:secret@db:5432/tcgp
 ALLOWED_HOSTS=localhost
+REDIS_URL=redis://:password@your-redis-host:6379/1
 ```
+
+`REDIS_URL` is optional. When set, it enables the Redis cache backend and
+Redis-backed sessions (`cached_db`, so sessions survive a Redis restart). When
+unset, the app falls back to an in-process cache and DB-backed sessions.
 
 Then start the stack:
 

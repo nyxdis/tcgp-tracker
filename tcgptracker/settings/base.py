@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 from django.utils.translation import gettext_lazy as _
@@ -131,6 +132,31 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+# Redis cache + session backend.
+# Falls back to per-process locmem cache and DB-backed sessions when
+# REDIS_URL isn't set, so local development doesn't require a Redis server.
+REDIS_URL = os.environ.get("REDIS_URL")
+
+if REDIS_URL:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": REDIS_URL,
+            # The Redis instance is shared with other apps, so namespace all
+            # keys (cache entries and sessions alike) to avoid collisions.
+            "KEY_PREFIX": "tcgptracker",
+        }
+    }
+    # cached_db reads/writes sessions to Redis but keeps the DB as a durable
+    # fallback, so a Redis flush/restart doesn't log everyone out.
+    SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        }
+    }
 
 # PWA settings
 PWA_APP_NAME = "Pokémon TCG Pocket Tracker"
