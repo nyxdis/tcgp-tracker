@@ -66,5 +66,9 @@ RUN python manage.py compilemessages
 # Expose port
 EXPOSE 8000
 
+# Health check hits the app's own /health/ endpoint (checks DB + cache)
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD python -c "import sys,urllib.request; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health/', timeout=3).status == 200 else 1)"
+
 # Start Django app using gunicorn, running migrations first
 CMD ["/bin/sh", "-c", "export $(cat /app/.git_hash | xargs) && python manage.py migrate --noinput && exec gunicorn tcgptracker.wsgi:application --bind 0.0.0.0:8000"]
