@@ -31,6 +31,12 @@ CSRF_TRUSTED_ORIGINS = ["https://tcgp.freyd.is"]
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
+# Traefik terminates TLS and forwards over plain HTTP, so without this,
+# request.is_secure() is always False — which made mozilla-django-oidc build
+# an http:// redirect_uri that didn't match the https:// one registered in
+# Authentik.
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
