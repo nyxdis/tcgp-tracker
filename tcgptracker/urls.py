@@ -23,6 +23,7 @@ from apps.tracker.views.users import register
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
+    path("oidc/", include("mozilla_django_oidc.urls")),
     path("register/", register, name="register"),
     path("", include("apps.tracker.urls")),
     path("", include("pwa.urls")),

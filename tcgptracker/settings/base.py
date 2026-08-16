@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "widget_tweaks",
     "pwa",
+    "mozilla_django_oidc",
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "apps.tracker.context_processors.git_hash",
+                "apps.tracker.context_processors.oidc_enabled",
             ],
         },
     },
@@ -132,6 +134,22 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+# OIDC login (Authentik), alongside the regular username/password login.
+# Unset OIDC_RP_CLIENT_ID entirely to disable it (e.g. local dev) — the
+# ModelBackend-only fallback keeps username/password login working either way.
+AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
+OIDC_ENABLED = bool(os.environ.get("OIDC_RP_CLIENT_ID"))
+if OIDC_ENABLED:
+    AUTHENTICATION_BACKENDS.append("apps.tracker.oidc.AuthentikOIDCBackend")
+    OIDC_RP_CLIENT_ID = os.environ["OIDC_RP_CLIENT_ID"]
+    OIDC_RP_CLIENT_SECRET = os.environ["OIDC_RP_CLIENT_SECRET"]
+    OIDC_OP_AUTHORIZATION_ENDPOINT = os.environ["OIDC_OP_AUTHORIZATION_ENDPOINT"]
+    OIDC_OP_TOKEN_ENDPOINT = os.environ["OIDC_OP_TOKEN_ENDPOINT"]
+    OIDC_OP_USER_ENDPOINT = os.environ["OIDC_OP_USER_ENDPOINT"]
+    OIDC_OP_JWKS_ENDPOINT = os.environ["OIDC_OP_JWKS_ENDPOINT"]
+    OIDC_RP_SIGN_ALGO = "RS256"
+    OIDC_RP_SCOPES = "openid email profile"
 
 # Redis cache + session backend.
 # Falls back to per-process locmem cache and DB-backed sessions when
