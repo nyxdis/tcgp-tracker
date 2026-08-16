@@ -25,9 +25,8 @@
                     </form>
                     {% if oidc_enabled %}
                         <hr>
-                        <a href="{% url 'oidc_authentication_init' %}" class="btn btn-outline-primary w-100">
-                            {% trans "Log in with Authentik" %}
-                        </a>
+                        <a href="{% url 'oidc_authentication_init' %}"
+                           class="btn btn-outline-primary w-100">{% trans "Log in with Authentik" %}</a>
                     {% endif %}
                 </div>
             </div>
