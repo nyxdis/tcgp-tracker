@@ -3557,3 +3557,113 @@ B4,230,Zoroark ex,Ruler of the Skies,double_shiny_rare
 B4,231,Mega Kangaskhan ex,Ruler of the Skies,double_shiny_rare
 B4,232,Raichu,Ruler of the Skies,crown_rare
 B4,233,Dragonair,Ruler of the Skies,crown_rare
+B4a,001,Volbeat,Team Rocket,common
+B4a,002,Illumise,Team Rocket,common
+B4a,003,Snivy,Team Rocket,common
+B4a,004,Servine,Team Rocket,uncommon
+B4a,005,Serperior,Team Rocket,rare
+B4a,006,Team Rocket's Magmar,Team Rocket,common
+B4a,007,Team Rocket's Moltres ex,Team Rocket,double_rare
+B4a,008,Team Rocket's Houndour,Team Rocket,common
+B4a,009,Team Rocket's Houndoom,Team Rocket,common
+B4a,010,Fennekin,Team Rocket,common
+B4a,011,Braixen,Team Rocket,uncommon
+B4a,012,Delphox,Team Rocket,rare
+B4a,013,Team Rocket's Lapras,Team Rocket,uncommon
+B4a,014,Team Rocket's Articuno ex,Team Rocket,double_rare
+B4a,015,Wingull,Team Rocket,common
+B4a,016,Pelipper,Team Rocket,uncommon
+B4a,017,Hisuian Basculin,Team Rocket,common
+B4a,018,Hisuian Basculegion,Team Rocket,uncommon
+B4a,019,Team Rocket's Voltorb,Team Rocket,common
+B4a,020,Team Rocket's Electrode,Team Rocket,uncommon
+B4a,021,Team Rocket's Zapdos ex,Team Rocket,double_rare
+B4a,022,Blitzle,Team Rocket,common
+B4a,023,Zebstrika,Team Rocket,uncommon
+B4a,024,Team Rocket's Pincurchin,Team Rocket,common
+B4a,025,Team Rocket's Slowpoke,Team Rocket,common
+B4a,026,Team Rocket's Slowking ex,Team Rocket,double_rare
+B4a,027,Team Rocket's Drowzee,Team Rocket,common
+B4a,028,Team Rocket's Hypno,Team Rocket,uncommon
+B4a,029,Team Rocket's Mr. Mime,Team Rocket,common
+B4a,030,Team Rocket's Mewtwo,Team Rocket,rare
+B4a,031,Espurr,Team Rocket,common
+B4a,032,Meowstic,Team Rocket,uncommon
+B4a,033,Oranguru,Team Rocket,uncommon
+B4a,034,Gimmighoul,Team Rocket,common
+B4a,035,Cubone,Team Rocket,common
+B4a,036,Marowak,Team Rocket,uncommon
+B4a,037,Landorus,Team Rocket,rare
+B4a,038,Team Rocket's Ekans,Team Rocket,common
+B4a,039,Team Rocket's Arbok,Team Rocket,uncommon
+B4a,040,Team Rocket's Grimer,Team Rocket,common
+B4a,041,Team Rocket's Muk,Team Rocket,uncommon
+B4a,042,Team Rocket's Koffing,Team Rocket,common
+B4a,043,Team Rocket's Weezing ex,Team Rocket,double_rare
+B4a,044,Team Rocket's Sneasel,Team Rocket,common
+B4a,045,Togedemaru,Team Rocket,common
+B4a,046,Cufant,Team Rocket,common
+B4a,047,Copperajah,Team Rocket,uncommon
+B4a,048,Team Rocket's Tinkatink,Team Rocket,common
+B4a,049,Team Rocket's Tinkatuff,Team Rocket,uncommon
+B4a,050,Team Rocket's Tinkaton,Team Rocket,rare
+B4a,051,Gholdengo,Team Rocket,uncommon
+B4a,052,Gible,Team Rocket,common
+B4a,053,Gabite,Team Rocket,uncommon
+B4a,054,Garchomp,Team Rocket,rare
+B4a,055,Duraludon,Team Rocket,uncommon
+B4a,056,Archaludon,Team Rocket,rare
+B4a,057,Regidrago,Team Rocket,uncommon
+B4a,058,Team Rocket's Rattata,Team Rocket,common
+B4a,059,Team Rocket's Raticate ex,Team Rocket,double_rare
+B4a,060,Team Rocket's Meowth,Team Rocket,common
+B4a,061,Team Rocket's Persian,Team Rocket,uncommon
+B4a,062,Team Rocket's Kecleon,Team Rocket,common
+B4a,063,Happiny,Team Rocket,rare
+B4a,064,Furfrou,Team Rocket,common
+B4a,065,Lechonk,Team Rocket,common
+B4a,066,Oinkologne,Team Rocket,common
+B4a,067,Team Rocket's Thieving Machine,Team Rocket,uncommon
+B4a,068,Team Rocket's Goo-zooka,Team Rocket,uncommon
+B4a,069,Team Rocket's Researcher,Team Rocket,uncommon
+B4a,070,Team Rocket's Master Plan,Team Rocket,uncommon
+B4a,071,Team Rocket's Boss,Team Rocket,uncommon
+B4a,072,Arcade,Team Rocket,uncommon
+B4a,073,Delphox,Team Rocket,illustration_rare
+B4a,074,Team Rocket's Hypno,Team Rocket,illustration_rare
+B4a,075,Team Rocket's Tinkaton,Team Rocket,illustration_rare
+B4a,076,Team Rocket's Kecleon,Team Rocket,illustration_rare
+B4a,077,Happiny,Team Rocket,illustration_rare
+B4a,078,Lechonk,Team Rocket,illustration_rare
+B4a,079,Team Rocket's Moltres ex,Team Rocket,special_art
+B4a,080,Team Rocket's Articuno ex,Team Rocket,special_art
+B4a,081,Team Rocket's Zapdos ex,Team Rocket,special_art
+B4a,082,Team Rocket's Slowking ex,Team Rocket,special_art
+B4a,083,Team Rocket's Weezing ex,Team Rocket,special_art
+B4a,084,Team Rocket's Raticate ex,Team Rocket,special_art
+B4a,085,Team Rocket's Researcher,Team Rocket,special_art
+B4a,086,Team Rocket's Master Plan,Team Rocket,special_art
+B4a,087,Team Rocket's Boss,Team Rocket,special_art
+B4a,088,Team Rocket's Moltres ex,Team Rocket,special_art
+B4a,089,Team Rocket's Articuno ex,Team Rocket,special_art
+B4a,090,Team Rocket's Zapdos ex,Team Rocket,special_art
+B4a,091,Team Rocket's Slowking ex,Team Rocket,special_art
+B4a,092,Team Rocket's Weezing ex,Team Rocket,special_art
+B4a,093,Team Rocket's Raticate ex,Team Rocket,special_art
+B4a,094,Team Rocket's Master Plan,Team Rocket,immersive_rare
+B4a,095,Vulpix,Team Rocket,shiny_rare
+B4a,096,Ninetales,Team Rocket,shiny_rare
+B4a,097,Goldeen,Team Rocket,shiny_rare
+B4a,098,Seaking,Team Rocket,shiny_rare
+B4a,099,Toxel,Team Rocket,shiny_rare
+B4a,100,Sinistea,Team Rocket,shiny_rare
+B4a,101,Polteageist,Team Rocket,shiny_rare
+B4a,102,Mawile,Team Rocket,shiny_rare
+B4a,103,Taillow,Team Rocket,shiny_rare
+B4a,104,Swellow,Team Rocket,shiny_rare
+B4a,105,Mega Charizard Y ex,Team Rocket,double_shiny_rare
+B4a,106,Toxtricity ex,Team Rocket,double_shiny_rare
+B4a,107,Mimikyu ex,Team Rocket,double_shiny_rare
+B4a,108,Mega Mawile ex,Team Rocket,double_shiny_rare
+B4a,109,Gholdengo,Team Rocket,crown_rare
+B4a,110,Team Rocket's Goo-zooka,Team Rocket,crown_rare
