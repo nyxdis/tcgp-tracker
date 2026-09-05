@@ -1641,7 +1641,7 @@ A4b,058,Charmeleon,Deluxepack,uncommon
 A4b,059,Charizard ex,Deluxepack,double_rare
 A4b,060,Charizard ex,Deluxepack,double_rare
 A4b,061,Growlithe,Deluxepack,common
-A4b,062,Growlithe,Deluxepack,uncommon
+A4b,062,Growlithe,Deluxepack,common
 A4b,063,Arcanine ex,Deluxepack,double_rare
 A4b,064,Flareon,Deluxepack,rare
 A4b,065,Flareon,Deluxepack,rare
@@ -1745,8 +1745,8 @@ A4b,162,Misdreavus,Deluxepack,common
 A4b,163,Mismagius ex,Deluxepack,double_rare
 A4b,164,Ralts,Deluxepack,common
 A4b,165,Ralts,Deluxepack,common
-A4b,166,Kirlia,Deluxepack,uncommon
-A4b,167,Kirlia,Deluxepack,uncommon
+A4b,166,Kirlia,Deluxepack,common
+A4b,167,Kirlia,Deluxepack,common
 A4b,168,Gardevoir,Deluxepack,rare
 A4b,169,Gardevoir,Deluxepack,rare
 A4b,170,Giratina,Deluxepack,rare
@@ -1774,7 +1774,7 @@ A4b,191,Machoke,Deluxepack,uncommon
 A4b,192,Machoke,Deluxepack,uncommon
 A4b,193,Machamp ex,Deluxepack,double_rare
 A4b,194,Cubone,Deluxepack,common
-A4b,195,Cubone,Deluxepack,uncommon
+A4b,195,Cubone,Deluxepack,common
 A4b,196,Marowak ex,Deluxepack,double_rare
 A4b,197,Aerodactyl ex,Deluxepack,double_rare
 A4b,198,Sudowoodo,Deluxepack,uncommon
@@ -2004,7 +2004,7 @@ B1,042,Lampent,Altaria,uncommon
 B1,043,Chandelure,Altaria,rare
 B1,044,Heatmor,Blaziken|Gyarados|Altaria,common
 B1,045,Litleo,Blaziken,common
-B1,046,Pyroar,Blaziken,uncommon
+B1,046,Pyroar,Blaziken,rare
 B1,047,Turtonator,Gyarados,uncommon
 B1,048,Psyduck,Blaziken,common
 B1,049,Golduck,Blaziken,common
@@ -2335,7 +2335,7 @@ B1a,042,Mega Lopunny ex,Crimson Blaze,double_rare
 B1a,043,Mienfoo,Crimson Blaze,common
 B1a,044,Mienshao,Crimson Blaze,common
 B1a,045,Grimer,Crimson Blaze,common
-B1a,046,Muk,Crimson Blaze,uncommon
+B1a,046,Muk,Crimson Blaze,common
 B1a,047,Purrloin,Crimson Blaze,common
 B1a,048,Liepard,Crimson Blaze,uncommon
 B1a,049,Trubbish,Crimson Blaze,common
@@ -2424,7 +2424,7 @@ B2,028,Alolan Vulpix,Gardevoir,common
 B2,029,Alolan Ninetales ex,Gardevoir,double_rare
 B2,030,Galarian Mr. Mime,Gardevoir,common
 B2,031,Galarian Mr. Rime,Gardevoir,uncommon
-B2,032,Delibird,Gardevoir,common
+B2,032,Delibird,Gardevoir,uncommon
 B2,033,Mudkip,Gardevoir,common
 B2,034,Marshtomp,Gardevoir,uncommon
 B2,035,Swampert,Gardevoir,rare
@@ -2435,8 +2435,8 @@ B2,039,Vanilluxe,Gardevoir,uncommon
 B2,040,Cryogonal,Gardevoir,common
 B2,041,Amaura,Gardevoir,uncommon
 B2,042,Aurorus,Gardevoir,rare
-B2,043,Chewtle,Gardevoir,uncommon
-B2,044,Drednaw,Gardevoir,rare
+B2,043,Chewtle,Gardevoir,common
+B2,044,Drednaw,Gardevoir,uncommon
 B2,045,Cramorant,Gardevoir,common
 B2,046,Arrokuda,Gardevoir,common
 B2,047,Barraskewda,Gardevoir,common
@@ -2536,9 +2536,9 @@ B2,140,Diggersby,Gardevoir,uncommon
 B2,141,Furfrou,Gardevoir,uncommon
 B2,142,Tandemaus,Gardevoir,common
 B2,143,Maushold,Gardevoir,uncommon
-B2,144,Jaw Fossil,Gardevoir,uncommon
+B2,144,Jaw Fossil,Gardevoir,common
 B2,145,Lucky Ice Pop,Gardevoir,uncommon
-B2,146,Sail Fossil,Gardevoir,uncommon
+B2,146,Sail Fossil,Gardevoir,common
 B2,147,Protective Poncho,Gardevoir,uncommon
 B2,148,Metal Core Barrier,Gardevoir,uncommon
 B2,149,Diantha,Gardevoir,uncommon
@@ -2595,7 +2595,7 @@ B2,199,Mimikyu ex,Gardevoir,special_art
 B2,200,Gigalith ex,Gardevoir,special_art
 B2,201,Mega Mawile ex,Gardevoir,special_art
 B2,202,Mega Kangaskhan ex,Gardevoir,special_art
-B2,203,Mega Gardevoir ex,Gardevoir,special_art
+B2,203,Mega Gardevoir ex,Gardevoir,immersive_rare
 B2,204,Meowth,Gardevoir,immersive_rare
 B2,205,Tangela,Gardevoir,shiny_rare
 B2,206,Magby,Gardevoir,shiny_rare
@@ -2706,7 +2706,7 @@ B2a,076,Revavroom,Paldean Wonders,uncommon
 B2a,077,Orthworm,Paldean Wonders,uncommon
 B2a,078,Gholdengo ex,Paldean Wonders,double_rare
 B2a,079,Lechonk,Paldean Wonders,common
-B2a,080,Oinkologne,Paldean Wonders,uncommon
+B2a,080,Oinkologne,Paldean Wonders,common
 B2a,081,Tandemaus,Paldean Wonders,common
 B2a,082,Maushold,Paldean Wonders,uncommon
 B2a,083,Squawkabilly,Paldean Wonders,common
@@ -2799,7 +2799,7 @@ B2b,038,Haunter,Mega Shine,uncommon
 B2b,039,Mega Gengar ex,Mega Shine,double_rare
 B2b,040,Darkrai,Mega Shine,rare
 B2b,041,Trubbish,Mega Shine,common
-B2b,042,Garbodor,Mega Shine,uncommon
+B2b,042,Garbodor,Mega Shine,common
 B2b,043,Zorua,Mega Shine,common
 B2b,044,Zoroark,Mega Shine,rare
 B2b,045,Morpeko,Mega Shine,common
@@ -2989,7 +2989,7 @@ B3,111,Inkay,Pulsing Aura,common
 B3,112,Malamar,Pulsing Aura,uncommon
 B3,113,Single Strike Urshifu,Pulsing Aura,rare
 B3,114,Zarude,Pulsing Aura,rare
-B3,115,Bombirdier,Pulsing Aura,common
+B3,115,Bombirdier,Pulsing Aura,rare
 B3,116,Registeel,Pulsing Aura,uncommon
 B3,117,Bronzor,Pulsing Aura,common
 B3,118,Bronzong,Pulsing Aura,uncommon
@@ -3128,21 +3128,21 @@ B3a,016,Pawmot,Paradox Drive,uncommon
 B3a,017,Iron Hands,Paradox Drive,common
 B3a,018,Iron Thorns,Paradox Drive,uncommon
 B3a,019,Miraidon ex,Paradox Drive,double_rare
-B3a,020,Espeon,Paradox Drive,common
+B3a,020,Espeon,Paradox Drive,uncommon
 B3a,021,Flittle,Paradox Drive,common
-B3a,022,Espathra,Paradox Drive,common
-B3a,023,Greavard,Paradox Drive,uncommon
-B3a,024,Houndstone,Paradox Drive,rare
+B3a,022,Espathra,Paradox Drive,uncommon
+B3a,023,Greavard,Paradox Drive,common
+B3a,024,Houndstone,Paradox Drive,uncommon
 B3a,025,Scream Tail,Paradox Drive,common
-B3a,026,Flutter Mane ex,Paradox Drive,common
+B3a,026,Flutter Mane ex,Paradox Drive,double_rare
 B3a,027,Iron Valiant,Paradox Drive,rare
 B3a,028,Iron Leaves,Paradox Drive,rare
 B3a,029,Iron Boulder,Paradox Drive,rare
-B3a,030,Iron Crown,Paradox Drive,uncommon
-B3a,031,Nacli,Paradox Drive,uncommon
-B3a,032,Naclstack,Paradox Drive,rare
+B3a,030,Iron Crown,Paradox Drive,rare
+B3a,031,Nacli,Paradox Drive,common
+B3a,032,Naclstack,Paradox Drive,common
 B3a,033,Garganacl,Paradox Drive,rare
-B3a,034,Great Tusk,Paradox Drive,rare
+B3a,034,Great Tusk,Paradox Drive,uncommon
 B3a,035,Sandy Shocks,Paradox Drive,uncommon
 B3a,036,Koraidon ex,Paradox Drive,double_rare
 B3a,037,Umbreon,Paradox Drive,uncommon
@@ -3469,8 +3469,8 @@ B4,142,Furfrou,Ruler of the Skies,uncommon
 B4,143,Type: Null,Ruler of the Skies,uncommon
 B4,144,Silvally,Ruler of the Skies,rare
 B4,145,Order Pad,Ruler of the Skies,uncommon
-B4,146,Claw Fossil,Ruler of the Skies,uncommon
-B4,147,Root Fossil,Ruler of the Skies,uncommon
+B4,146,Claw Fossil,Ruler of the Skies,common
+B4,147,Root Fossil,Ruler of the Skies,common
 B4,148,Deceptive Needle,Ruler of the Skies,uncommon
 B4,149,Clear Veil,Ruler of the Skies,uncommon
 B4,150,Psychic,Ruler of the Skies,uncommon
@@ -3527,7 +3527,7 @@ B4,200,Mega Metagross ex,Ruler of the Skies,special_art
 B4,201,Swanna ex,Ruler of the Skies,special_art
 B4,202,Rotom ex,Ruler of the Skies,immersive_rare
 B4,203,Mega Rayquaza ex,Ruler of the Skies,immersive_rare
-B4,204,Alolan Vulpix,Ruler of the Skies,common
+B4,204,Alolan Vulpix,Ruler of the Skies,shiny_rare
 B4,205,Mudkip,Ruler of the Skies,shiny_rare
 B4,206,Marshtomp,Ruler of the Skies,shiny_rare
 B4,207,Swampert,Ruler of the Skies,shiny_rare
