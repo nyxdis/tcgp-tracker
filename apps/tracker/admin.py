@@ -184,6 +184,7 @@ class SetAdmin(admin.ModelAdmin):
     list_per_page = 25
     ordering = ("release_date",)
     list_filter = ("available_until", "generation")
+    change_list_template = "admin/tracker/pokemonset/change_list.html"
 
     @staticmethod
     def view_cards_link(obj):
@@ -203,6 +204,63 @@ class SetAdmin(admin.ModelAdmin):
 
     view_cards_link.short_description = "Cards"
     is_available_status.short_description = "Status"
+
+    def get_urls(self):
+        from django.urls import path
+
+        urls = [
+            path(
+                "import-data/",
+                self.admin_site.admin_view(self.import_data_view),
+                name="tracker_pokemonset_import_data",
+            ),
+        ]
+        return urls + super().get_urls()
+
+    def import_data_view(self, request):
+        """Run the import_data management command from the admin UI."""
+        import logging
+        import re
+        from io import StringIO
+
+        from django.contrib import messages
+        from django.core.management import call_command
+        from django.http import HttpResponseForbidden
+        from django.shortcuts import redirect, render
+
+        if not request.user.is_superuser:
+            return HttpResponseForbidden("Superuser access required.")
+
+        if request.method == "POST":
+            out, err = StringIO(), StringIO()
+            try:
+                call_command("import_data", stdout=out, stderr=err)
+            except Exception as exc:  # noqa: BLE001 - surface any failure to the admin
+                messages.error(request, f"Import failed: {exc}")
+            else:
+                created = len(re.findall(r"^Created ", out.getvalue(), re.MULTILINE))
+                updated = len(re.findall(r"^Updated ", out.getvalue(), re.MULTILINE))
+                messages.success(
+                    request,
+                    f"Import complete: {created} created, {updated} updated.",
+                )
+                error_output = err.getvalue().strip()
+                if error_output:
+                    skipped = len(error_output.splitlines())
+                    messages.warning(
+                        request,
+                        f"{skipped} row(s) skipped — see server logs for details.",
+                    )
+                    logging.getLogger(__name__).warning(
+                        "import_data skipped rows:\n%s", error_output
+                    )
+            return redirect("admin:tracker_pokemonset_changelist")
+
+        return render(
+            request,
+            "admin/tracker/pokemonset/import_data_confirm.html",
+            {**self.admin_site.each_context(request), "opts": self.model._meta},
+        )
 
 
 @admin.register(Pack)

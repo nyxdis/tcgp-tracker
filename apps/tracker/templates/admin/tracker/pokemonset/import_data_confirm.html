@@ -1,0 +1,14 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+    <p>
+        This will import/update sets, cards, rarities, pack types, and
+        translations from the <code>data/</code> CSV files. Existing rows are
+        updated in place; nothing is deleted.
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Run Import" class="default">
+        <a href="{% url 'admin:tracker_pokemonset_changelist' %}" class="button cancel-link">Cancel</a>
+    </form>
+{% endblock %}
