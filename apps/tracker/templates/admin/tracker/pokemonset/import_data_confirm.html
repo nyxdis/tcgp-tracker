@@ -1,5 +1,4 @@
 {% extends "admin/base_site.html" %}
-
 {% block content %}
     <p>
         This will import/update sets, cards, rarities, pack types, and
@@ -9,6 +8,7 @@
     <form method="post">
         {% csrf_token %}
         <input type="submit" value="Run Import" class="default">
-        <a href="{% url 'admin:tracker_pokemonset_changelist' %}" class="button cancel-link">Cancel</a>
+        <a href="{% url 'admin:tracker_pokemonset_changelist' %}"
+           class="button cancel-link">Cancel</a>
     </form>
 {% endblock %}

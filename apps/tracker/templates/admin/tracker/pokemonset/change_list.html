@@ -1,8 +1,8 @@
 {% extends "admin/change_list.html" %}
-
 {% block object-tools-items %}
     {{ block.super }}
     <li>
-        <a href="{% url 'admin:tracker_pokemonset_import_data' %}" class="addlink">Import Data</a>
+        <a href="{% url 'admin:tracker_pokemonset_import_data' %}"
+           class="addlink">Import Data</a>
     </li>
 {% endblock %}
