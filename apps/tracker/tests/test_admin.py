@@ -1,3 +1,6 @@
+# pylint: disable=redefined-outer-name
+# Test functions take the fixture as a same-named parameter; that's the
+# standard pytest pattern, not an actual shadowing bug.
 from unittest.mock import patch
 
 import pytest

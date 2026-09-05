@@ -235,7 +235,7 @@ class SetAdmin(admin.ModelAdmin):
             out, err = StringIO(), StringIO()
             try:
                 call_command("import_data", stdout=out, stderr=err)
-            except Exception as exc:  # noqa: BLE001 - surface any failure to the admin
+            except Exception as exc:  # pylint: disable=broad-exception-caught
                 messages.error(request, f"Import failed: {exc}")
             else:
                 created = len(re.findall(r"^Created ", out.getvalue(), re.MULTILINE))
