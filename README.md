@@ -83,6 +83,7 @@ poetry run pytest
 |---|---|
 | `import_data` | Import sets, cards, rarities and pack types from CSV files |
 | `sync_tcgdex` | Sync card data from the TCGdex API |
+| `sync_flibustier` | Sync new sets/cards from the flibustier JSON dataset into `data/*.csv` |
 | `update_pack_generations` | Backfill generation data on packs |
 | `validate_probabilities` | Validate that rarity probabilities sum to 1 per pack slot |
 
