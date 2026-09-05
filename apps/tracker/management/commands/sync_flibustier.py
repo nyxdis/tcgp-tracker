@@ -11,6 +11,7 @@ translations for anything newly added must be filled in by hand.
 """
 
 import csv
+import sys
 from pathlib import Path
 
 import requests
@@ -54,6 +55,17 @@ class Command(BaseCommand):
             {"User-Agent": "TCGPTracker-scraper/1.0 (educational data sync)"}
         )
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            "--interactive",
+            action="store_true",
+            help=(
+                "Prompt for each rarity mismatch against flibustier and let "
+                "you accept or keep the local value, instead of just listing "
+                "them."
+            ),
+        )
+
     def handle(self, *args, **options):
         existing_sets = _read_csv_as_dict(DATA_DIR / "sets.csv", ("number",))
         existing_cards = _read_csv_as_dict(
@@ -66,7 +78,9 @@ class Command(BaseCommand):
         all_sets = [s for series in sets_by_series.values() for s in series]
 
         new_sets = self._collect_new_sets(all_sets, existing_sets)
-        new_cards, mismatches = self._collect_cards(cards, existing_cards)
+        new_cards, mismatches = self._collect_cards(
+            cards, existing_cards, existing_sets
+        )
 
         if not new_sets and not new_cards:
             self.stdout.write(
@@ -97,7 +111,10 @@ class Command(BaseCommand):
                 for s in new_sets:
                     self.stdout.write(f"  {s['number']} - {s['name']}")
 
-        self._report_mismatches(mismatches)
+        if options["interactive"]:
+            self._review_mismatches_interactively(mismatches, existing_cards)
+        else:
+            self._report_mismatches(mismatches)
 
     # ------------------------------------------------------------------
     # Collection helpers
@@ -120,7 +137,7 @@ class Command(BaseCommand):
         return new_sets
 
     def _collect_cards(
-        self, cards: list[dict], existing_cards: dict
+        self, cards: list[dict], existing_cards: dict, existing_sets: dict
     ) -> tuple[list, list]:
         new_cards = []
         mismatches = []
@@ -147,8 +164,17 @@ class Command(BaseCommand):
                     }
                 )
             elif existing["rarity"] != rarity:
+                set_name = existing_sets.get(set_code, {}).get("name", "")
                 mismatches.append(
-                    (set_code, number, existing["card"], existing["rarity"], rarity)
+                    {
+                        "key": key,
+                        "set_code": set_code,
+                        "set_name": set_name,
+                        "number": number,
+                        "name": existing["card"],
+                        "local_rarity": existing["rarity"],
+                        "flib_rarity": rarity,
+                    }
                 )
         return new_cards, mismatches
 
@@ -159,14 +185,55 @@ class Command(BaseCommand):
             self.style.WARNING(
                 f"\n{len(mismatches)} existing card(s) have a rarity in "
                 "data/cards.csv that disagrees with flibustier. Not auto-fixed, "
-                "please review and correct by hand:"
+                "please review and correct by hand (or re-run with "
+                "--interactive):"
             )
         )
-        for set_code, number, name, local_rarity, flib_rarity in mismatches:
+        for m in mismatches:
             self.stdout.write(
-                f"  {set_code} #{number} {name}: "
-                f"local={local_rarity} flibustier={flib_rarity}"
+                f"  {m['set_code']} ({m['set_name']}) #{m['number']} {m['name']}: "
+                f"local={m['local_rarity']} flibustier={m['flib_rarity']}"
             )
+
+    def _review_mismatches_interactively(
+        self, mismatches: list, existing_cards: dict
+    ) -> None:
+        if not mismatches:
+            return
+        self.stdout.write(
+            self.style.WARNING(
+                f"\n{len(mismatches)} rarity mismatch(es) to review. For each, "
+                "press (no Enter needed): "
+                "[y] use flibustier's rarity  [n] keep local (default)  "
+                "[q] stop reviewing"
+            )
+        )
+        fixed = 0
+        for i, m in enumerate(mismatches, start=1):
+            prompt = (
+                f"[{i}/{len(mismatches)}] {m['set_code']} ({m['set_name']}) "
+                f"#{m['number']} {m['name']}: local={m['local_rarity']} "
+                f"flibustier={m['flib_rarity']} — fix? [y/N/q] "
+            )
+            answer = _read_key(prompt)
+            if answer == "q":
+                self.stdout.write(
+                    f"Stopped reviewing ({len(mismatches) - i + 1} left unreviewed)."
+                )
+                break
+            if answer == "y":
+                existing_cards[m["key"]]["rarity"] = m["flib_rarity"]
+                fixed += 1
+
+        if fixed:
+            _write_csv(
+                DATA_DIR / "cards.csv",
+                ["set_number", "number", "card", "pack", "rarity"],
+                existing_cards.values(),
+            )
+        self.stdout.write(
+            self.style.SUCCESS(f"Fixed {fixed} of {len(mismatches)} mismatch(es).")
+        )
 
     # ------------------------------------------------------------------
     # HTTP helpers
@@ -176,6 +243,43 @@ class Command(BaseCommand):
         resp = self._session.get(f"{BASE_URL}/{filename}", timeout=20)
         resp.raise_for_status()
         return resp.json()
+
+
+def _read_key(prompt: str) -> str:
+    """
+    Print *prompt* and read a single y/n/q keypress with no Enter required.
+
+    Falls back to line-buffered input() when stdin isn't a real terminal
+    (e.g. piped input in scripts/tests). A bare Enter counts as "n".
+    """
+    sys.stdout.write(prompt)
+    sys.stdout.flush()
+
+    if not sys.stdin.isatty():
+        answer = input().strip().lower()
+        return answer[:1] or "n"
+
+    import termios
+    import tty
+
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setcbreak(fd)
+        while True:
+            ch = sys.stdin.read(1)
+            if not ch or ch in ("\r", "\n"):
+                ch = "n" if ch else "q"  # EOF (Ctrl-D) stops the review
+                break
+            ch = ch.lower()
+            if ch in ("y", "n", "q"):
+                break
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+
+    sys.stdout.write(ch + "\n")
+    sys.stdout.flush()
+    return ch
 
 
 def _is_promo(set_code: str) -> bool:
@@ -216,5 +320,16 @@ def _append_csv(path: Path, fieldnames: list[str], rows) -> None:
         writer = csv.DictWriter(
             f, fieldnames=fieldnames, extrasaction="ignore", lineterminator="\n"
         )
+        for row in rows:
+            writer.writerow(row)
+
+
+def _write_csv(path: Path, fieldnames: list[str], rows) -> None:
+    """Overwrite *path* with *rows*, replacing its current contents."""
+    with path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(
+            f, fieldnames=fieldnames, extrasaction="ignore", lineterminator="\n"
+        )
+        writer.writeheader()
         for row in rows:
             writer.writerow(row)
