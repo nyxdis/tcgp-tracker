@@ -352,27 +352,31 @@ class Command(BaseCommand):
                 )
 
     def import_card_translations(self, filepath):
+        from apps.tracker.card_name_rules import derive_translation
         from apps.tracker.models.cards import CardNameTranslation
 
+        lookup = {}
         with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 english_name = row["card_english_name"].strip()
                 german_name = row["card_german_name"].strip()
-                if not english_name or not german_name:
-                    continue
-                # Find all cards with this English name
-                cards = Card.objects.filter(name=english_name)
-                if not cards.exists():
-                    self.stderr.write(f"Card not found: {english_name}")
-                    continue
-                for card in cards:
-                    _obj, created = CardNameTranslation.objects.update_or_create(
-                        card=card,
-                        language_code="de",
-                        defaults={"localized_name": german_name},
-                    )
-                    action = "Created" if created else "Updated"
-                    self.stdout.write(
-                        f"{action} translation for card '{card.name}' ({card.set.name} {card.number}): {german_name}"
-                    )
+                if english_name and german_name:
+                    lookup[english_name] = german_name
+
+        card_names = Card.objects.values_list("name", flat=True).distinct()
+        for name in card_names:
+            german_name = derive_translation(name, lookup)
+            if german_name is None:
+                self.stderr.write(f"No German translation for card: {name}")
+                continue
+            for card in Card.objects.filter(name=name):
+                _obj, created = CardNameTranslation.objects.update_or_create(
+                    card=card,
+                    language_code="de",
+                    defaults={"localized_name": german_name},
+                )
+                action = "Created" if created else "Updated"
+                self.stdout.write(
+                    f"{action} translation for card '{card.name}' ({card.set.name} {card.number}): {german_name}"
+                )

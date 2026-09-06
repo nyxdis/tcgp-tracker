@@ -1,9 +1,6 @@
 import csv
-import logging
 
-# Set up logging
-logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-logger = logging.getLogger(__name__)
+from apps.tracker.card_name_rules import derive_translation
 
 cards_file = "data/cards.csv"
 card_translations_file = "data/card_translations.csv"
@@ -34,12 +31,14 @@ with open(cards_file, newline="", encoding="utf-8") as f:
         if set_name:
             set_names.add(set_name)
 
-# Get all translated card names
-translated_cards = set()
+# Get all translated card names (english_name -> german_name, used both as
+# the "is this translated" set and as the base lookup for derived names like
+# "X ex"/"Team Rocket's X" that don't need their own row)
+card_translations = {}
 with open(card_translations_file, newline="", encoding="utf-8") as f:
     reader = csv.DictReader(f)
     for row in reader:
-        translated_cards.add(row["card_english_name"])
+        card_translations[row["card_english_name"]] = row["card_german_name"]
 
 # Get all translated pack names
 translated_packs = set()
@@ -55,19 +54,26 @@ with open(set_translations_file, newline="", encoding="utf-8") as f:
     for row in reader:
         translated_sets.add(row["english_name"])
 
-# Find missing translations
-missing_cards = sorted(card_names - translated_cards)
+# Find missing translations. Card names also count as translated if they're
+# derivable from a base name (e.g. "Bulbasaur ex" from "Bulbasaur") — see
+# apps/tracker/card_name_rules.py.
+missing_cards = sorted(
+    name for name in card_names if derive_translation(name, card_translations) is None
+)
 missing_packs = sorted(pack_names - translated_packs)
 missing_sets = sorted(set_names - translated_sets)
 
-logger.info("Cards missing translation:")
-for name in missing_cards:
-    logger.info("  %s", name)
 
-logger.info("\nPacks missing translation:")
-for name in missing_packs:
-    logger.info("  %s", name)
+def report(label, missing):
+    print(f"{label} missing translation ({len(missing)}):")
+    if not missing:
+        print("  none")
+    for name in missing:
+        print(f"  {name}")
 
-logger.info("\nSets missing translation:")
-for name in missing_sets:
-    logger.info("  %s", name)
+
+report("Cards", missing_cards)
+print()
+report("Packs", missing_packs)
+print()
+report("Sets", missing_sets)
