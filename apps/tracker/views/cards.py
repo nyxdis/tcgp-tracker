@@ -10,7 +10,7 @@ from django.utils.translation import get_language
 
 from apps.tracker.models.cards import Card, Pack, PokemonSet
 from apps.tracker.models.users import UserCard
-from apps.tracker.utils import prob_at_least_one_new_card
+from apps.tracker.utils import load_rarity_tables, prob_new_card_any_pack_type
 
 
 def _parse_card_id(request):
@@ -241,6 +241,14 @@ def pack_list(request):
     owned_card_ids = set(
         UserCard.objects.filter(user=request.user).values_list("card_id", flat=True)
     )
+    # Pack types and rarity tables are per generation: load each once.
+    generations = {pack.rarity_version_id: pack.rarity_version for pack in packs}
+    pack_types_by_generation = {
+        gen_id: list(gen.pack_types.all()) for gen_id, gen in generations.items()
+    }
+    rarity_tables_by_generation = {
+        gen_id: load_rarity_tables(gen) for gen_id, gen in generations.items()
+    }
     BASE_RARITIES = {"common", "uncommon", "rare", "double_rare"}
     pack_data = []
     for pack in packs:
@@ -263,22 +271,18 @@ def pack_list(request):
             )
             continue
 
-        # Calculate weighted chance considering all pack types for this generation
-        generation = pack.rarity_version
-        available_pack_types = generation.pack_types.all()
-
-        if available_pack_types.exists():
-            # Calculate expected probability across all pack types
-            expected_chance = 0.0
-            for pack_type in available_pack_types:
-                pack_type_chance = prob_at_least_one_new_card(
-                    pack, request.user, pack_type
-                )
-                expected_chance += pack_type_chance * pack_type.occurrence_probability
-            chance = min(expected_chance, 1.0) * 100
-        else:
-            # Fallback to default calculation if no pack types defined
-            chance = prob_at_least_one_new_card(pack, request.user) * 100
+        # Chance over all pack types of the generation, weighted by occurrence.
+        chance = (
+            prob_new_card_any_pack_type(
+                pack,
+                request.user,
+                pack_types=pack_types_by_generation[pack.rarity_version_id],
+                cards=cards,
+                owned_card_ids=owned_card_ids,
+                rarity_tables=rarity_tables_by_generation[pack.rarity_version_id],
+            )
+            * 100
+        )
 
         # Find base cards in this pack
         base_cards = [c for c in cards if c.rarity.name in BASE_RARITIES]

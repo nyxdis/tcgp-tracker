@@ -4,6 +4,47 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import get_language
 
+SLOT_FIELD_COUNT = 6
+
+# Rarities that can appear in a god pack: illustration rare and above. Shiny
+# rarities are added for the generations that put shinies into normal packs.
+GOD_PACK_BASE_RARITIES = (
+    "illustration_rare",
+    "special_art",
+    "immersive_rare",
+    "crown_rare",
+)
+GOD_PACK_SHINY_RARITIES = ("shiny_rare", "double_shiny_rare")
+GOD_PACK_SHINY_GENERATIONS = ("G2", "G3")
+
+
+def god_pack_slot_table(rarity_card_counts, slot_count):
+    """Build a god pack rarity table from per-rarity card counts.
+
+    A god pack draws every slot uniformly from the pack's eligible cards, so the
+    probability of a rarity in any slot is its share of that pool.
+
+    Args:
+        rarity_card_counts: Mapping of rarity name to number of eligible cards
+            of that rarity in the pack.
+        slot_count: Number of card slots in the god pack.
+
+    Returns:
+        dict: ``{rarity_name: [p, ..., p, 0.0, ...]}`` padded to 6 slots. Empty
+        when the pool is empty.
+    """
+    total = sum(rarity_card_counts.values())
+    if total <= 0:
+        return {}
+    slot_count = min(slot_count, SLOT_FIELD_COUNT)
+    table = {}
+    for name, count in rarity_card_counts.items():
+        if count <= 0:
+            continue
+        share = count / total
+        table[name] = [share] * slot_count + [0.0] * (SLOT_FIELD_COUNT - slot_count)
+    return table
+
 
 class PackType(models.Model):
     """Represents different types of booster packs for a specific generation."""
@@ -85,80 +126,48 @@ class Generation(models.Model):
         """Count of pack types using this generation."""
         return self.pack_types.count()
 
+    def god_pack_eligible_rarity_names(self):
+        """Names of the rarities that can appear in this generation's god packs."""
+        names = list(GOD_PACK_BASE_RARITIES)
+        if self.name in GOD_PACK_SHINY_GENERATIONS:
+            names.extend(GOD_PACK_SHINY_RARITIES)
+        return names
+
     def get_god_pack_eligible_rarities(self):
-        """Get rarities eligible for god packs in this generation.
-
-        Returns rarities with illustration_rare or higher, including shinies for G2/G3.
-        """
-        base_rarities = [
-            "illustration_rare",
-            "special_art",
-            "immersive_rare",
-            "crown_rare",
-        ]
-
-        # G2 and G3 include shinies in god packs
-        if self.name in ["G2", "G3"]:
-            base_rarities.extend(["shiny_rare", "double_shiny_rare"])
-
-        # Access Rarity model using Django's model registry to avoid circular reference
+        """Rarities eligible for god packs: illustration rare and higher, plus
+        shinies for the generations that have them in normal packs."""
         from django.apps import apps
 
         rarity_model = apps.get_model("tracker", "Rarity")
-        return rarity_model.objects.filter(name__in=base_rarities)
+        return rarity_model.objects.filter(
+            name__in=self.god_pack_eligible_rarity_names()
+        )
 
-    def calculate_god_pack_probabilities(self, pack_type, pokemon_set):
-        """Calculate probabilities for god pack rarities based on actual card counts.
+    def calculate_god_pack_probabilities(self, pack_type, pack):
+        """Calculate the god pack rarity table for one pack.
+
+        A god pack draws from the pack's own pool of eligible cards, so the
+        counts are taken per pack, not per set.
 
         Args:
-            pack_type: The god pack type to calculate probabilities for
-            pokemon_set: The PokemonSet to count cards from
+            pack_type: The god pack type to calculate probabilities for.
+            pack: The Pack whose cards form the pool.
 
         Returns:
-            dict: Mapping of rarity names to probability values for each slot
+            dict: Mapping of rarity name to probability per slot (6 entries).
         """
         if not pack_type.is_god_pack:
             return {}
 
-        eligible_rarities = self.get_god_pack_eligible_rarities()
-
-        if eligible_rarities.count() == 0:
-            return {}
-
-        # Count cards of each eligible rarity in this set
-        from django.apps import apps
-
-        card_model = apps.get_model("tracker", "Card")
-
-        rarity_card_counts = {}
-        total_rare_cards = 0
-
-        for rarity in eligible_rarities:
-            card_count = card_model.objects.filter(
-                set=pokemon_set, rarity=rarity
-            ).count()
-            rarity_card_counts[rarity.name] = card_count
-            total_rare_cards += card_count
-
-        if total_rare_cards == 0:
-            return {}
-
-        # Calculate probability for each rarity based on card count
-        probabilities = {}
-        for rarity_name, card_count in rarity_card_counts.items():
-            if card_count > 0:
-                rarity_prob = card_count / total_rare_cards
-
-                slot_probs = []
-                for _ in range(pack_type.slot_count):
-                    slot_probs.append(rarity_prob)
-                # Pad with zeros for unused slots (up to 6)
-                while len(slot_probs) < 6:
-                    slot_probs.append(0.0)
-
-                probabilities[rarity_name] = slot_probs
-
-        return probabilities
+        counts = {
+            row["rarity_id"]: row["n"]
+            for row in pack.cards.filter(
+                rarity_id__in=self.god_pack_eligible_rarity_names()
+            )
+            .values("rarity_id")
+            .annotate(n=models.Count("id"))
+        }
+        return god_pack_slot_table(counts, pack_type.slot_count)
 
     class Meta:
         verbose_name = "Generation"
@@ -231,21 +240,19 @@ class PokemonSet(models.Model):
         return self.generation.pack_types.all()
 
     def get_rarity_probabilities(self, pack_type=None):
-        """Get rarity probabilities for this set's generation.
+        """Get the stored rarity probabilities for this set's generation.
+
+        God pack tables are not stored; they depend on the individual pack's
+        card pool, see :meth:`Generation.calculate_god_pack_probabilities`.
 
         Args:
-            pack_type: Optional PackType to get probabilities for. If god pack,
-                      returns calculated probabilities instead of stored ones.
+            pack_type: Optional PackType to filter by.
 
         Returns:
-            QuerySet or dict: RarityProbability objects for normal/shiny packs,
-                            or calculated probabilities dict for god packs
+            QuerySet: RarityProbability rows.
         """
         if not self.generation:
             return RarityProbability.objects.none()
-
-        if pack_type and pack_type.is_god_pack:
-            return self.generation.calculate_god_pack_probabilities(pack_type, self)
 
         queryset = self.generation.rarity_probabilities.all()
         if pack_type:

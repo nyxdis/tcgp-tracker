@@ -3,6 +3,7 @@
 import csv
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
 from apps.tracker.models.cards import (
@@ -87,6 +88,7 @@ class Command(BaseCommand):
             self.import_pack_types(options["packtypes"])
         if options["rarityprob"]:
             self.import_rarity_probabilities(options["rarityprob"])
+            self.validate_probabilities()
         if options["sets"]:
             self.import_sets(options["sets"])
         if options["cards"]:
@@ -97,6 +99,18 @@ class Command(BaseCommand):
             self.import_pack_translations(options["packtranslations"])
         if options["cardtranslations"]:
             self.import_card_translations(options["cardtranslations"])
+
+    def validate_probabilities(self):
+        """Run the slot-sum validation and report, without aborting the import."""
+        try:
+            call_command(
+                "validate_probabilities", stdout=self.stdout, stderr=self.stderr
+            )
+        except SystemExit:
+            self.stderr.write(
+                "Rarity probability validation failed; pull chances for the affected "
+                "pack types will be wrong until data/rarity_probabilities.csv is fixed."
+            )
 
     def import_sets(self, filepath):
         with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
@@ -198,22 +212,28 @@ class Command(BaseCommand):
                         if not pack_name:
                             continue
 
-                        # Versuche Pack zu finden
+                        # The pack uses its set's generation (pack types and
+                        # rarity tables are defined per generation).
+                        generation = pset.generation
                         pack_obj = pset.packs.filter(name=pack_name).first()
                         if not pack_obj:
-                            # Neueste Generation ermitteln
-                            generation = Generation.objects.order_by("-name").first()
                             if not generation:
                                 self.stderr.write(
-                                    f"No Generation found, cannot create pack '{pack_name}' for card '{card_obj.name}'"
+                                    f"Set '{pset.number}' has no generation, cannot create "
+                                    f"pack '{pack_name}' for card '{card_obj.name}'"
                                 )
                                 continue
-                            # Pack neu anlegen
                             pack_obj = pset.packs.create(
                                 name=pack_name, rarity_version=generation
                             )
                             self.stdout.write(
                                 f"→ Created new pack '{pack_name}' with generation '{generation.name}'"
+                            )
+                        elif generation and pack_obj.rarity_version_id != generation.pk:
+                            pack_obj.rarity_version = generation
+                            pack_obj.save(update_fields=["rarity_version"])
+                            self.stdout.write(
+                                f"→ Updated pack '{pack_name}' to generation '{generation.name}'"
                             )
 
                         # Karte zu Pack hinzufügen

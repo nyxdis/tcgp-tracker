@@ -3,9 +3,16 @@ from django.db.models import Sum
 
 from apps.tracker.models.cards import PackType, RarityProbability
 
+# Published offering rates are rounded to 3 decimals of a percent, so a column
+# of ~10 rarities can legitimately be off by up to 1e-4.
+TOLERANCE = 1e-4
+
 
 class Command(BaseCommand):
-    help = "Validate that for every pack type each active slot (1..slot_count) sums to 1.0 across rarities."
+    help = (
+        "Validate that for every stored (non-god) pack type each active slot "
+        "(1..slot_count) sums to 1.0 across rarities."
+    )
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -22,6 +29,9 @@ class Command(BaseCommand):
         for pack_type in PackType.objects.select_related("generation").order_by(
             "generation__name", "name"
         ):
+            if pack_type.is_god_pack:
+                # God pack tables are derived from each pack's card pool, not stored.
+                continue
             slot_fields = [
                 "probability_slot1",
                 "probability_slot2",
@@ -36,7 +46,7 @@ class Command(BaseCommand):
             label = f"{pack_type.generation.name}/{pack_type.name}"
             for f in slot_fields:
                 total = agg.get(f) or 0.0
-                if abs(total - 1.0) > 1e-5:
+                if abs(total - 1.0) > TOLERANCE:
                     errors += 1
                     self.stderr.write(
                         self.style.ERROR(
