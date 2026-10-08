@@ -1,3 +1,4 @@
+# pylint: disable=protected-access
 """Tests for the flibustier sync's foil handling (no network access)."""
 
 from io import StringIO
