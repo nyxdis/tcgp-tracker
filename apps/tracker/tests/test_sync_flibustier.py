@@ -56,3 +56,36 @@ def test_slot_mismatches_split_foil_and_sum_shared_rows():
 def _row(*slots):
     slots = list(slots) + [0] * (6 - len(slots))
     return {f"probability_slot{i}": str(v) for i, v in enumerate(slots, start=1)}
+
+
+def _prob_mismatch(key, flib_slots):
+    generation, pack_type, rarity, is_foil = key
+    return {
+        "key": key,
+        "generation": generation,
+        "pack_type": pack_type,
+        "rarity": rarity,
+        "is_foil": is_foil == "1",
+        "flib_slots": list(flib_slots),
+    }
+
+
+def test_known_overrides_are_dropped_only_for_the_recorded_flibustier_value():
+    cmd = Command(stdout=StringIO())
+    key = ("G3", "normal", "rare", "1")
+    known = _prob_mismatch(key, (0, 0, 0.203295, 0, 0, 0))
+    changed = _prob_mismatch(key, (0, 0, 0.1, 0, 0, 0))
+    other = _prob_mismatch(("G1", "normal", "rare", "0"), (0, 0, 0.203295, 0, 0, 0))
+    god = {
+        "key": ("G3", "god"),
+        "generation": "G3",
+        "pack_type": "god",
+        "flib_occurrence": 0.0005,
+        "flib_slot_count": 5,
+    }
+
+    pack_types, probs = cmd._drop_known_overrides([god], [known, changed, other])
+
+    assert not pack_types
+    assert probs == [changed, other]
+    assert "known difference kept: G3/normal/rare (foil)" in cmd.stdout.getvalue()

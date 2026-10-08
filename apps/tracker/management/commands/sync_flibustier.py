@@ -84,6 +84,28 @@ RARITY_PROBABILITY_FIELDS = ["generation", "pack_type", "rarity", "is_foil"] + [
 # in the source data (rounding noise) is not worth flagging as a mismatch.
 _PROB_TOLERANCE = 1e-4
 
+# Known, verified-in-game differences where flibustier is wrong and the local
+# data is kept. Each entry records the flibustier value it was checked
+# against, so if flibustier changes that value (e.g. fixes it) the row is
+# reported again instead of being silently skipped.
+KNOWN_PACK_TYPE_OVERRIDES = {
+    ("G3", "god"): {
+        "flib_occurrence": 0.0005,
+        "flib_slot_count": 5,
+        "reason": "the in-game A4b god pack has 4 cards",
+    },
+}
+KNOWN_RARITY_PROBABILITY_OVERRIDES = {
+    ("G3", "normal", "rare", "0"): {
+        "flib_slots": (0.0, 0.0, 0.203295, 0.0, 0.0, 0.0),
+        "reason": "in-game A4b slot 3 is 1.266% per standard ♢♢♢ card",
+    },
+    ("G3", "normal", "rare", "1"): {
+        "flib_slots": (0.0, 0.0, 0.203295, 0.0, 0.0, 0.0),
+        "reason": "in-game A4b slot 3 is 0.359% per foil ♢♢♢ card",
+    },
+}
+
 
 class Command(BaseCommand):
     help = "Sync data/sets.csv and data/cards.csv from the flibustier JSON dataset"
@@ -163,6 +185,9 @@ class Command(BaseCommand):
         self.stdout.write("\nChecking pull-rate probabilities…")
         pack_type_mismatches, prob_mismatches = self._collect_probability_data(
             pull_rates, existing_sets, existing_pack_types, existing_rarity_probs
+        )
+        pack_type_mismatches, prob_mismatches = self._drop_known_overrides(
+            pack_type_mismatches, prob_mismatches
         )
         if options["interactive"]:
             self._review_probability_mismatches_interactively(
@@ -395,6 +420,46 @@ class Command(BaseCommand):
                 )
 
         return pack_type_mismatches, prob_mismatches
+
+    def _drop_known_overrides(
+        self, pack_type_mismatches: list, prob_mismatches: list
+    ) -> tuple[list, list]:
+        """Remove mismatches listed in the KNOWN_*_OVERRIDES tables, noting each."""
+
+        def is_known_pack_type(m):
+            known = KNOWN_PACK_TYPE_OVERRIDES.get(m["key"])
+            return (
+                known is not None
+                and abs(m["flib_occurrence"] - known["flib_occurrence"])
+                <= _PROB_TOLERANCE
+                and m["flib_slot_count"] == known["flib_slot_count"]
+            )
+
+        def is_known_prob(m):
+            known = KNOWN_RARITY_PROBABILITY_OVERRIDES.get(m["key"])
+            return known is not None and all(
+                abs(a - b) <= _PROB_TOLERANCE
+                for a, b in zip(m["flib_slots"], known["flib_slots"])
+            )
+
+        for m in pack_type_mismatches:
+            if is_known_pack_type(m):
+                self.stdout.write(
+                    f"  known difference kept: {m['generation']}/{m['pack_type']} "
+                    f"({KNOWN_PACK_TYPE_OVERRIDES[m['key']]['reason']})"
+                )
+        for m in prob_mismatches:
+            if is_known_prob(m):
+                label = _rarity_label(m["rarity"], m["is_foil"])
+                self.stdout.write(
+                    f"  known difference kept: {m['generation']}/{m['pack_type']}/"
+                    f"{label} "
+                    f"({KNOWN_RARITY_PROBABILITY_OVERRIDES[m['key']]['reason']})"
+                )
+        return (
+            [m for m in pack_type_mismatches if not is_known_pack_type(m)],
+            [m for m in prob_mismatches if not is_known_prob(m)],
+        )
 
     def _collect_slot_mismatches(
         self,
