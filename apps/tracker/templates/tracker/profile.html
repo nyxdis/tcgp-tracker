@@ -48,9 +48,11 @@
                                            {% if profile.public %}checked{% endif %}>
                                     <label class="form-check-label ms-2 fw-semibold" for="id_public">
                                         {% if profile.public %}
-                                            <span id="public-status-label" class="text-success">{% trans "Public" %}</span>
+                                            <span id="public-status-label"
+                                                  class="text-success">{% trans "Public" %}</span>
                                         {% else %}
-                                            <span id="public-status-label" class="text-secondary">{% trans "Private" %}</span>
+                                            <span id="public-status-label"
+                                                  class="text-secondary">{% trans "Private" %}</span>
                                         {% endif %}
                                     </label>
                                 </div>
@@ -114,7 +116,8 @@
                                           class="d-inline">
                                         {% csrf_token %}
                                         <input type="hidden" name="next" value="{{ request.get_full_path }}">
-                                        <button type="submit" class="btn btn-success btn-sm">{% trans "Accept" %}</button>
+                                        <button type="submit"
+                                                class="btn btn-success btn-sm">{% trans "Accept" %}</button>
                                     </form>
                                 </li>
                             {% endfor %}

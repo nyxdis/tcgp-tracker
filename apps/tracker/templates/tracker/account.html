@@ -15,7 +15,9 @@
                         <form method="post" class="needs-validation" novalidate>
                             {% csrf_token %} {{ password_form.as_p }}
                             <div class="d-grid gap-2">
-                                <button type="submit" name="password_change" class="btn btn-primary">{% trans "Change Password" %}</button>
+                                <button type="submit"
+                                        name="password_change"
+                                        class="btn btn-primary">{% trans "Change Password" %}</button>
                             </div>
                         </form>
                     </div>
@@ -31,7 +33,9 @@
                               onsubmit="return confirm('{% trans "Are you sure you want to permanently delete your account? This cannot be undone." %}');">
                             {% csrf_token %}
                             <div class="d-grid gap-2">
-                                <button type="submit" name="delete_account" class="btn btn-danger">{% trans "Delete Account" %}</button>
+                                <button type="submit"
+                                        name="delete_account"
+                                        class="btn btn-danger">{% trans "Delete Account" %}</button>
                             </div>
                         </form>
                     </div>
