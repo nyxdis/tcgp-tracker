@@ -1,4 +1,7 @@
 [MASTER]
+# Put the repo root on sys.path so apps.* and the settings module import
+# when pylint gets single files (pre-commit); the project is not installed.
+init-hook="import os, sys; sys.path.insert(0, os.getcwd())"
 load-plugins=pylint_django
 ignore-paths=apps/tracker/migrations
 
