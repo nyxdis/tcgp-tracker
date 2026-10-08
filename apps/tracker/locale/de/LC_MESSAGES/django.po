@@ -390,4 +390,4 @@ msgstr "Ihr Account wurde erfolgreich gelöscht."
 
 #: apps/tracker/templates/tracker/home.html apps/tracker/templates/tracker/set_detail.html apps/tracker/views/cards.py
 msgid "Foil"
-msgstr "Folie"
+msgstr "Parallelfolie"
