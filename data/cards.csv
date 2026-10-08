@@ -3667,3 +3667,432 @@ B4a,107,Mimikyu ex,Team Rocket,double_shiny_rare
 B4a,108,Mega Mawile ex,Team Rocket,double_shiny_rare
 B4a,109,Gholdengo,Team Rocket,crown_rare
 B4a,110,Team Rocket's Goo-zooka,Team Rocket,crown_rare
+B4b,001,Bulbasaur,Deluxe Pack Mega,common
+B4b,002,Ivysaur,Deluxe Pack Mega,uncommon
+B4b,003,Mega Venusaur ex,Deluxe Pack Mega,double_rare
+B4b,004,Caterpie,Deluxe Pack Mega,common
+B4b,005,Metapod,Deluxe Pack Mega,uncommon
+B4b,006,Butterfree,Deluxe Pack Mega,rare
+B4b,007,Scyther,Deluxe Pack Mega,common
+B4b,008,Mega Pinsir ex,Deluxe Pack Mega,double_rare
+B4b,009,Celebi,Deluxe Pack Mega,rare
+B4b,010,Treecko,Deluxe Pack Mega,common
+B4b,011,Grovyle,Deluxe Pack Mega,uncommon
+B4b,012,Mega Sceptile ex,Deluxe Pack Mega,double_rare
+B4b,013,Budew,Deluxe Pack Mega,rare
+B4b,014,Combee,Deluxe Pack Mega,common
+B4b,015,Vespiquen ex,Deluxe Pack Mega,double_rare
+B4b,016,Cottonee,Deluxe Pack Mega,common
+B4b,017,Whimsicott ex,Deluxe Pack Mega,double_rare
+B4b,018,Petilil,Deluxe Pack Mega,common
+B4b,019,Lilligant,Deluxe Pack Mega,rare
+B4b,020,Durant,Deluxe Pack Mega,common
+B4b,021,Sprigatito,Deluxe Pack Mega,common
+B4b,022,Floragato,Deluxe Pack Mega,common
+B4b,023,Meowscarada ex,Deluxe Pack Mega,double_rare
+B4b,024,Smoliv,Deluxe Pack Mega,common
+B4b,025,Dolliv,Deluxe Pack Mega,common
+B4b,026,Arboliva,Deluxe Pack Mega,rare
+B4b,027,Teal Mask Ogerpon,Deluxe Pack Mega,rare
+B4b,028,Teal Mask Ogerpon ex,Deluxe Pack Mega,double_rare
+B4b,029,Charmander,Deluxe Pack Mega,common
+B4b,030,Charmeleon,Deluxe Pack Mega,uncommon
+B4b,031,Mega Charizard X ex,Deluxe Pack Mega,double_rare
+B4b,032,Mega Charizard Y ex,Deluxe Pack Mega,double_rare
+B4b,033,Growlithe,Deluxe Pack Mega,common
+B4b,034,Ponyta,Deluxe Pack Mega,common
+B4b,035,Rapidash ex,Deluxe Pack Mega,double_rare
+B4b,036,Cyndaquil,Deluxe Pack Mega,common
+B4b,037,Quilava,Deluxe Pack Mega,uncommon
+B4b,038,Typhlosion ex,Deluxe Pack Mega,double_rare
+B4b,039,Torchic,Deluxe Pack Mega,common
+B4b,040,Combusken,Deluxe Pack Mega,uncommon
+B4b,041,Mega Blaziken ex,Deluxe Pack Mega,double_rare
+B4b,042,Numel,Deluxe Pack Mega,common
+B4b,043,Mega Camerupt ex,Deluxe Pack Mega,double_rare
+B4b,044,Victini,Deluxe Pack Mega,rare
+B4b,045,Blacephalon ex,Deluxe Pack Mega,double_rare
+B4b,046,Fuecoco,Deluxe Pack Mega,common
+B4b,047,Crocalor,Deluxe Pack Mega,common
+B4b,048,Skeledirge,Deluxe Pack Mega,rare
+B4b,049,Charcadet,Deluxe Pack Mega,common
+B4b,050,Armarouge ex,Deluxe Pack Mega,double_rare
+B4b,051,Hearthflame Mask Ogerpon,Deluxe Pack Mega,rare
+B4b,052,Squirtle,Deluxe Pack Mega,common
+B4b,053,Wartortle,Deluxe Pack Mega,uncommon
+B4b,054,Mega Blastoise ex,Deluxe Pack Mega,double_rare
+B4b,055,Alolan Vulpix,Deluxe Pack Mega,common
+B4b,056,Alolan Ninetales ex,Deluxe Pack Mega,double_rare
+B4b,057,Slowpoke,Deluxe Pack Mega,common
+B4b,058,Mega Slowbro ex,Deluxe Pack Mega,double_rare
+B4b,059,Magikarp,Deluxe Pack Mega,common
+B4b,060,Mega Gyarados ex,Deluxe Pack Mega,double_rare
+B4b,061,Vaporeon ex,Deluxe Pack Mega,double_rare
+B4b,062,Mudkip,Deluxe Pack Mega,common
+B4b,063,Marshtomp,Deluxe Pack Mega,uncommon
+B4b,064,Mega Swampert ex,Deluxe Pack Mega,double_rare
+B4b,065,Carvanha,Deluxe Pack Mega,common
+B4b,066,Mega Sharpedo ex,Deluxe Pack Mega,double_rare
+B4b,067,Wailmer,Deluxe Pack Mega,common
+B4b,068,Wailord ex,Deluxe Pack Mega,double_rare
+B4b,069,Feebas,Deluxe Pack Mega,common
+B4b,070,Milotic ex,Deluxe Pack Mega,double_rare
+B4b,071,Froakie,Deluxe Pack Mega,common
+B4b,072,Frogadier,Deluxe Pack Mega,uncommon
+B4b,073,Greninja ex,Deluxe Pack Mega,double_rare
+B4b,074,Sobble,Deluxe Pack Mega,common
+B4b,075,Drizzile,Deluxe Pack Mega,uncommon
+B4b,076,Inteleon,Deluxe Pack Mega,rare
+B4b,077,Iron Bundle ex,Deluxe Pack Mega,double_rare
+B4b,078,Frigibax,Deluxe Pack Mega,common
+B4b,079,Arctibax,Deluxe Pack Mega,common
+B4b,080,Baxcalibur,Deluxe Pack Mega,rare
+B4b,081,Chien-Pao ex,Deluxe Pack Mega,double_rare
+B4b,082,Pikachu,Deluxe Pack Mega,common
+B4b,083,Raichu,Deluxe Pack Mega,rare
+B4b,084,Magnemite,Deluxe Pack Mega,common
+B4b,085,Magneton,Deluxe Pack Mega,uncommon
+B4b,086,Magnezone ex,Deluxe Pack Mega,double_rare
+B4b,087,Jolteon ex,Deluxe Pack Mega,double_rare
+B4b,088,Mareep,Deluxe Pack Mega,common
+B4b,089,Flaaffy,Deluxe Pack Mega,uncommon
+B4b,090,Mega Ampharos ex,Deluxe Pack Mega,double_rare
+B4b,091,Electrike,Deluxe Pack Mega,common
+B4b,092,Mega Manectric ex,Deluxe Pack Mega,double_rare
+B4b,093,Rotom ex,Deluxe Pack Mega,double_rare
+B4b,094,Helioptile,Deluxe Pack Mega,common
+B4b,095,Heliolisk,Deluxe Pack Mega,uncommon
+B4b,096,Dedenne ex,Deluxe Pack Mega,double_rare
+B4b,097,Yamper,Deluxe Pack Mega,common
+B4b,098,Toxel,Deluxe Pack Mega,common
+B4b,099,Toxtricity ex,Deluxe Pack Mega,double_rare
+B4b,100,Tadbulb,Deluxe Pack Mega,common
+B4b,101,Bellibolt ex,Deluxe Pack Mega,double_rare
+B4b,102,Iron Thorns,Deluxe Pack Mega,uncommon
+B4b,103,Miraidon ex,Deluxe Pack Mega,double_rare
+B4b,104,Ralts,Deluxe Pack Mega,common
+B4b,105,Kirlia,Deluxe Pack Mega,uncommon
+B4b,106,Mega Gardevoir ex,Deluxe Pack Mega,double_rare
+B4b,107,Mega Altaria ex,Deluxe Pack Mega,double_rare
+B4b,108,Wynaut,Deluxe Pack Mega,rare
+B4b,109,Chingling,Deluxe Pack Mega,rare
+B4b,110,Mime Jr.,Deluxe Pack Mega,rare
+B4b,111,Meloetta,Deluxe Pack Mega,uncommon
+B4b,112,Sylveon,Deluxe Pack Mega,rare
+B4b,113,Klefki,Deluxe Pack Mega,rare
+B4b,114,Mega Diancie ex,Deluxe Pack Mega,double_rare
+B4b,115,Mimikyu ex,Deluxe Pack Mega,double_rare
+B4b,116,Indeedee ex,Deluxe Pack Mega,double_rare
+B4b,117,Fidough,Deluxe Pack Mega,common
+B4b,118,Bramblin,Deluxe Pack Mega,common
+B4b,119,Brambleghast,Deluxe Pack Mega,rare
+B4b,120,Flutter Mane ex,Deluxe Pack Mega,double_rare
+B4b,121,Gimmighoul,Deluxe Pack Mega,common
+B4b,122,Onix,Deluxe Pack Mega,common
+B4b,123,Hitmonchan ex,Deluxe Pack Mega,double_rare
+B4b,124,Trapinch,Deluxe Pack Mega,common
+B4b,125,Mega Lopunny ex,Deluxe Pack Mega,double_rare
+B4b,126,Riolu,Deluxe Pack Mega,common
+B4b,127,Mega Lucario ex,Deluxe Pack Mega,double_rare
+B4b,128,Mega Gallade ex,Deluxe Pack Mega,double_rare
+B4b,129,Roggenrola,Deluxe Pack Mega,common
+B4b,130,Boldore,Deluxe Pack Mega,uncommon
+B4b,131,Gigalith ex,Deluxe Pack Mega,double_rare
+B4b,132,Dwebble,Deluxe Pack Mega,common
+B4b,133,Crustle ex,Deluxe Pack Mega,double_rare
+B4b,134,Rockruff,Deluxe Pack Mega,common
+B4b,135,Falinks,Deluxe Pack Mega,uncommon
+B4b,136,Koraidon ex,Deluxe Pack Mega,double_rare
+B4b,137,Alolan Grimer,Deluxe Pack Mega,common
+B4b,138,Alolan Muk,Deluxe Pack Mega,rare
+B4b,139,Gastly,Deluxe Pack Mega,common
+B4b,140,Haunter,Deluxe Pack Mega,uncommon
+B4b,141,Mega Gengar ex,Deluxe Pack Mega,double_rare
+B4b,142,Mega Sableye ex,Deluxe Pack Mega,double_rare
+B4b,143,Mega Absol ex,Deluxe Pack Mega,double_rare
+B4b,144,Darkrai,Deluxe Pack Mega,rare
+B4b,145,Zorua,Deluxe Pack Mega,common
+B4b,146,Zoroark ex,Deluxe Pack Mega,double_rare
+B4b,147,Skrelp,Deluxe Pack Mega,common
+B4b,148,Dragalge ex,Deluxe Pack Mega,double_rare
+B4b,149,Hoopa ex,Deluxe Pack Mega,double_rare
+B4b,150,Zarude,Deluxe Pack Mega,rare
+B4b,151,Bombirdier,Deluxe Pack Mega,rare
+B4b,152,Roaring Moon,Deluxe Pack Mega,rare
+B4b,153,Galarian Meowth,Deluxe Pack Mega,common
+B4b,154,Galarian Perrserker,Deluxe Pack Mega,rare
+B4b,155,Mega Steelix ex,Deluxe Pack Mega,double_rare
+B4b,156,Mega Scizor ex,Deluxe Pack Mega,double_rare
+B4b,157,Mega Mawile ex,Deluxe Pack Mega,double_rare
+B4b,158,Beldum,Deluxe Pack Mega,common
+B4b,159,Metang,Deluxe Pack Mega,uncommon
+B4b,160,Mega Metagross ex,Deluxe Pack Mega,double_rare
+B4b,161,Honedge,Deluxe Pack Mega,common
+B4b,162,Doublade,Deluxe Pack Mega,uncommon
+B4b,163,Aegislash,Deluxe Pack Mega,rare
+B4b,164,Aegislash,Deluxe Pack Mega,rare
+B4b,165,Meltan,Deluxe Pack Mega,common
+B4b,166,Melmetal ex,Deluxe Pack Mega,double_rare
+B4b,167,Corviknight ex,Deluxe Pack Mega,double_rare
+B4b,168,Gholdengo ex,Deluxe Pack Mega,double_rare
+B4b,169,Dratini,Deluxe Pack Mega,common
+B4b,170,Dragonair,Deluxe Pack Mega,uncommon
+B4b,171,Vibrava,Deluxe Pack Mega,uncommon
+B4b,172,Flygon ex,Deluxe Pack Mega,double_rare
+B4b,173,Mega Rayquaza ex,Deluxe Pack Mega,double_rare
+B4b,174,Axew,Deluxe Pack Mega,common
+B4b,175,Fraxure,Deluxe Pack Mega,uncommon
+B4b,176,Haxorus,Deluxe Pack Mega,rare
+B4b,177,Drampa,Deluxe Pack Mega,uncommon
+B4b,178,Rattata,Deluxe Pack Mega,common
+B4b,179,Raticate,Deluxe Pack Mega,rare
+B4b,180,Meowth,Deluxe Pack Mega,common
+B4b,181,Mega Kangaskhan ex,Deluxe Pack Mega,double_rare
+B4b,182,Tauros ex,Deluxe Pack Mega,double_rare
+B4b,183,Eevee,Deluxe Pack Mega,common
+B4b,184,Skitty,Deluxe Pack Mega,common
+B4b,185,Delcatty,Deluxe Pack Mega,rare
+B4b,186,Swablu,Deluxe Pack Mega,common
+B4b,187,Buneary,Deluxe Pack Mega,common
+B4b,188,Munchlax,Deluxe Pack Mega,rare
+B4b,189,Lillipup,Deluxe Pack Mega,common
+B4b,190,Mega Audino ex,Deluxe Pack Mega,double_rare
+B4b,191,Hisuian Zorua,Deluxe Pack Mega,common
+B4b,192,Hisuian Zoroark ex,Deluxe Pack Mega,double_rare
+B4b,193,Ducklett,Deluxe Pack Mega,common
+B4b,194,Swanna ex,Deluxe Pack Mega,double_rare
+B4b,195,Rookidee,Deluxe Pack Mega,common
+B4b,196,Corvisquire,Deluxe Pack Mega,uncommon
+B4b,197,Terapagos ex,Deluxe Pack Mega,double_rare
+B4b,198,Lucky Ice Pop,Deluxe Pack Mega,uncommon
+B4b,199,Electric Generator,Deluxe Pack Mega,uncommon
+B4b,200,Order Pad,Deluxe Pack Mega,uncommon
+B4b,201,Quick-Grow Extract,Deluxe Pack Mega,uncommon
+B4b,202,Field Blower,Deluxe Pack Mega,uncommon
+B4b,203,Flame Patch,Deluxe Pack Mega,uncommon
+B4b,204,Deceptive Needle,Deluxe Pack Mega,uncommon
+B4b,205,Lucky Egg,Deluxe Pack Mega,uncommon
+B4b,206,Small Balloon,Deluxe Pack Mega,uncommon
+B4b,207,Ancient Booster Energy Capsule,Deluxe Pack Mega,uncommon
+B4b,208,Future Booster Energy Capsule,Deluxe Pack Mega,uncommon
+B4b,209,Protective Poncho,Deluxe Pack Mega,uncommon
+B4b,210,Metal Core Barrier,Deluxe Pack Mega,uncommon
+B4b,211,Elegant Cape,Deluxe Pack Mega,uncommon
+B4b,212,Iris,Deluxe Pack Mega,uncommon
+B4b,213,Juliana,Deluxe Pack Mega,uncommon
+B4b,214,Diantha,Deluxe Pack Mega,uncommon
+B4b,215,Calem,Deluxe Pack Mega,uncommon
+B4b,216,Puppy-Loving Girl,Deluxe Pack Mega,uncommon
+B4b,217,Korrina,Deluxe Pack Mega,uncommon
+B4b,218,Clemont,Deluxe Pack Mega,uncommon
+B4b,219,Serena,Deluxe Pack Mega,uncommon
+B4b,220,May,Deluxe Pack Mega,uncommon
+B4b,221,Skyla,Deluxe Pack Mega,uncommon
+B4b,222,Arven,Deluxe Pack Mega,uncommon
+B4b,223,Wallace,Deluxe Pack Mega,uncommon
+B4b,224,Wally,Deluxe Pack Mega,uncommon
+B4b,225,Copycat,Deluxe Pack Mega,uncommon
+B4b,226,Lisia,Deluxe Pack Mega,uncommon
+B4b,227,Fragrant Forest,Deluxe Pack Mega,uncommon
+B4b,228,Arena of Antiquity,Deluxe Pack Mega,uncommon
+B4b,229,Soothing Shore,Deluxe Pack Mega,uncommon
+B4b,230,Bounded Field,Deluxe Pack Mega,uncommon
+B4b,231,Mesagoza,Deluxe Pack Mega,uncommon
+B4b,232,Training Area,Deluxe Pack Mega,uncommon
+B4b,233,Rainbow Cave,Deluxe Pack Mega,uncommon
+B4b,234,Hiking Trail,Deluxe Pack Mega,uncommon
+B4b,235,Starting Plains,Deluxe Pack Mega,uncommon
+B4b,236,Peculiar Plaza,Deluxe Pack Mega,uncommon
+B4b,237,Bulbasaur,Deluxe Pack Mega,common
+B4b,238,Ivysaur,Deluxe Pack Mega,uncommon
+B4b,239,Caterpie,Deluxe Pack Mega,common
+B4b,240,Metapod,Deluxe Pack Mega,uncommon
+B4b,241,Butterfree,Deluxe Pack Mega,rare
+B4b,242,Scyther,Deluxe Pack Mega,common
+B4b,243,Celebi,Deluxe Pack Mega,rare
+B4b,244,Treecko,Deluxe Pack Mega,common
+B4b,245,Grovyle,Deluxe Pack Mega,uncommon
+B4b,246,Budew,Deluxe Pack Mega,rare
+B4b,247,Combee,Deluxe Pack Mega,common
+B4b,248,Cottonee,Deluxe Pack Mega,common
+B4b,249,Petilil,Deluxe Pack Mega,common
+B4b,250,Lilligant,Deluxe Pack Mega,rare
+B4b,251,Durant,Deluxe Pack Mega,common
+B4b,252,Sprigatito,Deluxe Pack Mega,common
+B4b,253,Floragato,Deluxe Pack Mega,common
+B4b,254,Smoliv,Deluxe Pack Mega,common
+B4b,255,Dolliv,Deluxe Pack Mega,common
+B4b,256,Arboliva,Deluxe Pack Mega,rare
+B4b,257,Teal Mask Ogerpon,Deluxe Pack Mega,rare
+B4b,258,Charmander,Deluxe Pack Mega,common
+B4b,259,Charmeleon,Deluxe Pack Mega,uncommon
+B4b,260,Growlithe,Deluxe Pack Mega,common
+B4b,261,Ponyta,Deluxe Pack Mega,common
+B4b,262,Cyndaquil,Deluxe Pack Mega,common
+B4b,263,Quilava,Deluxe Pack Mega,uncommon
+B4b,264,Torchic,Deluxe Pack Mega,common
+B4b,265,Combusken,Deluxe Pack Mega,uncommon
+B4b,266,Numel,Deluxe Pack Mega,common
+B4b,267,Victini,Deluxe Pack Mega,rare
+B4b,268,Fuecoco,Deluxe Pack Mega,common
+B4b,269,Crocalor,Deluxe Pack Mega,common
+B4b,270,Skeledirge,Deluxe Pack Mega,rare
+B4b,271,Charcadet,Deluxe Pack Mega,common
+B4b,272,Hearthflame Mask Ogerpon,Deluxe Pack Mega,rare
+B4b,273,Squirtle,Deluxe Pack Mega,common
+B4b,274,Wartortle,Deluxe Pack Mega,uncommon
+B4b,275,Alolan Vulpix,Deluxe Pack Mega,common
+B4b,276,Slowpoke,Deluxe Pack Mega,common
+B4b,277,Magikarp,Deluxe Pack Mega,common
+B4b,278,Mudkip,Deluxe Pack Mega,common
+B4b,279,Marshtomp,Deluxe Pack Mega,uncommon
+B4b,280,Carvanha,Deluxe Pack Mega,common
+B4b,281,Wailmer,Deluxe Pack Mega,common
+B4b,282,Feebas,Deluxe Pack Mega,common
+B4b,283,Froakie,Deluxe Pack Mega,common
+B4b,284,Frogadier,Deluxe Pack Mega,uncommon
+B4b,285,Sobble,Deluxe Pack Mega,common
+B4b,286,Drizzile,Deluxe Pack Mega,uncommon
+B4b,287,Inteleon,Deluxe Pack Mega,rare
+B4b,288,Frigibax,Deluxe Pack Mega,common
+B4b,289,Arctibax,Deluxe Pack Mega,common
+B4b,290,Baxcalibur,Deluxe Pack Mega,rare
+B4b,291,Pikachu,Deluxe Pack Mega,common
+B4b,292,Raichu,Deluxe Pack Mega,rare
+B4b,293,Magnemite,Deluxe Pack Mega,common
+B4b,294,Magneton,Deluxe Pack Mega,uncommon
+B4b,295,Mareep,Deluxe Pack Mega,common
+B4b,296,Flaaffy,Deluxe Pack Mega,uncommon
+B4b,297,Electrike,Deluxe Pack Mega,common
+B4b,298,Helioptile,Deluxe Pack Mega,common
+B4b,299,Heliolisk,Deluxe Pack Mega,uncommon
+B4b,300,Yamper,Deluxe Pack Mega,common
+B4b,301,Toxel,Deluxe Pack Mega,common
+B4b,302,Tadbulb,Deluxe Pack Mega,common
+B4b,303,Iron Thorns,Deluxe Pack Mega,uncommon
+B4b,304,Ralts,Deluxe Pack Mega,common
+B4b,305,Kirlia,Deluxe Pack Mega,uncommon
+B4b,306,Wynaut,Deluxe Pack Mega,rare
+B4b,307,Chingling,Deluxe Pack Mega,rare
+B4b,308,Mime Jr.,Deluxe Pack Mega,rare
+B4b,309,Meloetta,Deluxe Pack Mega,uncommon
+B4b,310,Sylveon,Deluxe Pack Mega,rare
+B4b,311,Klefki,Deluxe Pack Mega,rare
+B4b,312,Fidough,Deluxe Pack Mega,common
+B4b,313,Bramblin,Deluxe Pack Mega,common
+B4b,314,Brambleghast,Deluxe Pack Mega,rare
+B4b,315,Gimmighoul,Deluxe Pack Mega,common
+B4b,316,Onix,Deluxe Pack Mega,common
+B4b,317,Trapinch,Deluxe Pack Mega,common
+B4b,318,Riolu,Deluxe Pack Mega,common
+B4b,319,Roggenrola,Deluxe Pack Mega,common
+B4b,320,Boldore,Deluxe Pack Mega,uncommon
+B4b,321,Dwebble,Deluxe Pack Mega,common
+B4b,322,Rockruff,Deluxe Pack Mega,common
+B4b,323,Falinks,Deluxe Pack Mega,uncommon
+B4b,324,Alolan Grimer,Deluxe Pack Mega,common
+B4b,325,Alolan Muk,Deluxe Pack Mega,rare
+B4b,326,Gastly,Deluxe Pack Mega,common
+B4b,327,Haunter,Deluxe Pack Mega,uncommon
+B4b,328,Darkrai,Deluxe Pack Mega,rare
+B4b,329,Zorua,Deluxe Pack Mega,common
+B4b,330,Skrelp,Deluxe Pack Mega,common
+B4b,331,Zarude,Deluxe Pack Mega,rare
+B4b,332,Bombirdier,Deluxe Pack Mega,rare
+B4b,333,Roaring Moon,Deluxe Pack Mega,rare
+B4b,334,Galarian Meowth,Deluxe Pack Mega,common
+B4b,335,Galarian Perrserker,Deluxe Pack Mega,rare
+B4b,336,Beldum,Deluxe Pack Mega,common
+B4b,337,Metang,Deluxe Pack Mega,uncommon
+B4b,338,Honedge,Deluxe Pack Mega,common
+B4b,339,Doublade,Deluxe Pack Mega,uncommon
+B4b,340,Aegislash,Deluxe Pack Mega,rare
+B4b,341,Aegislash,Deluxe Pack Mega,rare
+B4b,342,Meltan,Deluxe Pack Mega,common
+B4b,343,Dratini,Deluxe Pack Mega,common
+B4b,344,Dragonair,Deluxe Pack Mega,uncommon
+B4b,345,Vibrava,Deluxe Pack Mega,uncommon
+B4b,346,Axew,Deluxe Pack Mega,common
+B4b,347,Fraxure,Deluxe Pack Mega,uncommon
+B4b,348,Haxorus,Deluxe Pack Mega,rare
+B4b,349,Drampa,Deluxe Pack Mega,uncommon
+B4b,350,Rattata,Deluxe Pack Mega,common
+B4b,351,Raticate,Deluxe Pack Mega,rare
+B4b,352,Meowth,Deluxe Pack Mega,common
+B4b,353,Eevee,Deluxe Pack Mega,common
+B4b,354,Skitty,Deluxe Pack Mega,common
+B4b,355,Delcatty,Deluxe Pack Mega,rare
+B4b,356,Swablu,Deluxe Pack Mega,common
+B4b,357,Buneary,Deluxe Pack Mega,common
+B4b,358,Munchlax,Deluxe Pack Mega,rare
+B4b,359,Lillipup,Deluxe Pack Mega,common
+B4b,360,Hisuian Zorua,Deluxe Pack Mega,common
+B4b,361,Ducklett,Deluxe Pack Mega,common
+B4b,362,Rookidee,Deluxe Pack Mega,common
+B4b,363,Corvisquire,Deluxe Pack Mega,uncommon
+B4b,364,Lucky Ice Pop,Deluxe Pack Mega,uncommon
+B4b,365,Electric Generator,Deluxe Pack Mega,uncommon
+B4b,366,Order Pad,Deluxe Pack Mega,uncommon
+B4b,367,Quick-Grow Extract,Deluxe Pack Mega,uncommon
+B4b,368,Field Blower,Deluxe Pack Mega,uncommon
+B4b,369,Flame Patch,Deluxe Pack Mega,uncommon
+B4b,370,Deceptive Needle,Deluxe Pack Mega,uncommon
+B4b,371,Lucky Egg,Deluxe Pack Mega,uncommon
+B4b,372,Small Balloon,Deluxe Pack Mega,uncommon
+B4b,373,Ancient Booster Energy Capsule,Deluxe Pack Mega,uncommon
+B4b,374,Future Booster Energy Capsule,Deluxe Pack Mega,uncommon
+B4b,375,Protective Poncho,Deluxe Pack Mega,uncommon
+B4b,376,Metal Core Barrier,Deluxe Pack Mega,uncommon
+B4b,377,Elegant Cape,Deluxe Pack Mega,uncommon
+B4b,378,Iris,Deluxe Pack Mega,uncommon
+B4b,379,Juliana,Deluxe Pack Mega,uncommon
+B4b,380,Diantha,Deluxe Pack Mega,uncommon
+B4b,381,Calem,Deluxe Pack Mega,uncommon
+B4b,382,Puppy-Loving Girl,Deluxe Pack Mega,uncommon
+B4b,383,Korrina,Deluxe Pack Mega,uncommon
+B4b,384,Clemont,Deluxe Pack Mega,uncommon
+B4b,385,Serena,Deluxe Pack Mega,uncommon
+B4b,386,May,Deluxe Pack Mega,uncommon
+B4b,387,Skyla,Deluxe Pack Mega,uncommon
+B4b,388,Arven,Deluxe Pack Mega,uncommon
+B4b,389,Wallace,Deluxe Pack Mega,uncommon
+B4b,390,Wally,Deluxe Pack Mega,uncommon
+B4b,391,Copycat,Deluxe Pack Mega,uncommon
+B4b,392,Lisia,Deluxe Pack Mega,uncommon
+B4b,393,Fragrant Forest,Deluxe Pack Mega,uncommon
+B4b,394,Arena of Antiquity,Deluxe Pack Mega,uncommon
+B4b,395,Soothing Shore,Deluxe Pack Mega,uncommon
+B4b,396,Bounded Field,Deluxe Pack Mega,uncommon
+B4b,397,Mesagoza,Deluxe Pack Mega,uncommon
+B4b,398,Training Area,Deluxe Pack Mega,uncommon
+B4b,399,Rainbow Cave,Deluxe Pack Mega,uncommon
+B4b,400,Hiking Trail,Deluxe Pack Mega,uncommon
+B4b,401,Starting Plains,Deluxe Pack Mega,uncommon
+B4b,402,Peculiar Plaza,Deluxe Pack Mega,uncommon
+B4b,403,Charmeleon,Deluxe Pack Mega,illustration_rare
+B4b,404,Baxcalibur,Deluxe Pack Mega,illustration_rare
+B4b,405,Meloetta,Deluxe Pack Mega,illustration_rare
+B4b,406,Fidough,Deluxe Pack Mega,illustration_rare
+B4b,407,Dratini,Deluxe Pack Mega,illustration_rare
+B4b,408,Eevee,Deluxe Pack Mega,illustration_rare
+B4b,409,Mega Venusaur ex,Deluxe Pack Mega,special_art
+B4b,410,Mega Sceptile ex,Deluxe Pack Mega,special_art
+B4b,411,Mega Charizard X ex,Deluxe Pack Mega,special_art
+B4b,412,Mega Charizard Y ex,Deluxe Pack Mega,special_art
+B4b,413,Mega Blaziken ex,Deluxe Pack Mega,special_art
+B4b,414,Mega Blastoise ex,Deluxe Pack Mega,special_art
+B4b,415,Mega Gyarados ex,Deluxe Pack Mega,special_art
+B4b,416,Mega Gardevoir ex,Deluxe Pack Mega,special_art
+B4b,417,Mega Altaria ex,Deluxe Pack Mega,special_art
+B4b,418,Mega Lucario ex,Deluxe Pack Mega,special_art
+B4b,419,Mega Gengar ex,Deluxe Pack Mega,special_art
+B4b,420,Mega Rayquaza ex,Deluxe Pack Mega,special_art
+B4b,421,Iris,Deluxe Pack Mega,special_art
+B4b,422,Elesa,Deluxe Pack Mega,special_art
+B4b,423,Arven,Deluxe Pack Mega,special_art
+B4b,424,Copycat,Deluxe Pack Mega,special_art
+B4b,425,Mega Charizard X ex,Deluxe Pack Mega,immersive_rare
+B4b,426,Dedenne ex,Deluxe Pack Mega,double_shiny_rare
+B4b,427,Mega Diancie ex,Deluxe Pack Mega,double_shiny_rare
+B4b,428,Miraidon ex,Deluxe Pack Mega,crown_rare
+B4b,429,Koraidon ex,Deluxe Pack Mega,crown_rare
