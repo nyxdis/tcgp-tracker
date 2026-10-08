@@ -37,12 +37,15 @@
                                         {{ item.owned }} / {{ item.total }}
                                     </p>
                                     <div class="progress mb-2">
+                                        {# djlint:off H021 #}
+                                        {# The width is the per-pack progress, so it can only be set inline. #}
                                         <div class="progress-bar"
                                              role="progressbar"
                                              style="width: {{ item.progress_percent|floatformat:"2u" }}%"
                                              aria-valuenow="{{ item.progress_percent }}"
                                              aria-valuemin="0"
                                              aria-valuemax="100">{{ item.progress_percent }}%</div>
+                                        {# djlint:on #}
                                     </div>
                                 {% endif %}
                                 {% if item.is_best %}
