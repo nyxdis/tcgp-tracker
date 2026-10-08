@@ -257,8 +257,6 @@ def set_detail(request, set_number):
 def pack_list(request):
     """Show a list of all packs with stats about owned cards and chance for new cards."""
     # Filter out packs from expired sets
-    from django.utils import timezone
-
     today = timezone.now().date()
 
     packs = list(
