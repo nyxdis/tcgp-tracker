@@ -345,6 +345,11 @@ class RarityProbability(models.Model):
     rarity = models.ForeignKey(
         Rarity, on_delete=models.CASCADE, related_name="probabilities"
     )
+    is_foil = models.BooleanField(
+        default=False,
+        verbose_name="Foil",
+        help_text="Applies to the parallel-foil prints of this rarity (deluxe packs)",
+    )
     generation = models.ForeignKey(
         Generation,
         on_delete=models.CASCADE,
@@ -412,7 +417,8 @@ class RarityProbability(models.Model):
         pack_type_name = self.pack_type.name if self.pack_type else "unknown"
         generation_name = self.generation.name if self.generation else "unknown"
 
-        return f"{self.rarity} ({generation_name} - {pack_type_name}): {shown}"
+        foil = " foil" if self.is_foil else ""
+        return f"{self.rarity}{foil} ({generation_name} - {pack_type_name}): {shown}"
 
     def clean(self):
         """Validate that probabilities for each slot sum to 1.0 across all rarities
@@ -433,7 +439,7 @@ class RarityProbability(models.Model):
                 raise ValidationError(f"Slot {i} probability cannot exceed 100%")
 
     class Meta:
-        unique_together = ("generation", "pack_type", "rarity")
+        unique_together = ("generation", "pack_type", "rarity", "is_foil")
         verbose_name = "Rarity Probability"
         verbose_name_plural = "Rarity Probabilities"
         indexes = [models.Index(fields=["generation", "pack_type", "rarity"])]
@@ -496,6 +502,14 @@ class Card(models.Model):
     number = models.CharField(max_length=10, db_index=True, verbose_name="Card Number")
     name = models.CharField(max_length=100, db_index=True, verbose_name="Card Name")
     rarity = models.ForeignKey(Rarity, on_delete=models.PROTECT, related_name="cards")
+    is_foil = models.BooleanField(
+        default=False,
+        verbose_name="Foil",
+        help_text=(
+            "Parallel-foil print of a card that also exists as a standard print "
+            "(deluxe packs draw the two from different slots)"
+        ),
+    )
     packs = models.ManyToManyField(Pack, related_name="cards", blank=True)
 
     def __str__(self):

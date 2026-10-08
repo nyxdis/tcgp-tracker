@@ -15,11 +15,14 @@
         {% for rarity, data in rarity_progress.items %}
             {% if data.collected > 0 %}
                 <span class="d-inline-flex align-items-center gap-1">
-                    <img src="{% static 'tracker/img/'|add:rarity %}"
+                    <img src="{% static 'tracker/img/'|add:data.image %}"
                          alt="{{ data.label }}"
                          class="rarity-icon"
                          height="16"
                          width="16" />
+                    {% if data.is_foil %}
+                        <span class="badge text-bg-info">{% trans "Foil" %}</span>
+                    {% endif %}
                     {% if forloop.first %}
                         {{ data.collected }} / {{ data.total }}
                     {% else %}
@@ -33,11 +36,13 @@
         <a href="{% url 'home' %}"
            class="btn btn-outline-primary w-100 w-sm-auto">← {% trans "Back" %}</a>
         <div class="d-flex flex-row gap-2 flex-grow-1 flex-sm-grow-0">
-            <button id="collect-base-btn"
+            <button type="button"
+                    id="collect-base-btn"
                     class="btn btn-success w-100 w-sm-auto flex-sm-shrink-0">
                 {% trans "Collect all base cards" %}
             </button>
-            <button id="jump-to-illustration-rare-btn"
+            <button type="button"
+                    id="jump-to-illustration-rare-btn"
                     class="btn btn-info w-100 w-sm-auto flex-sm-shrink-0"
                     title="{% trans "Jump to the first Illustration Rare card" %}">
                 <span class="me-1">{% trans "Jump to" %}</span>
@@ -99,6 +104,9 @@
                                      width="24"
                                      height="24" />
                             {% endfor %}
+                            {% if card.is_foil %}
+                                <span class="badge text-bg-info ms-1 align-middle">{% trans "Foil" %}</span>
+                            {% endif %}
                         </td>
                         <td class="status-cell">
                             {% if card.collected_quantity > 0 %}
@@ -117,7 +125,8 @@
     </div>
     <!-- Floating Buttons -->
     <div id="floating-btns" class="floating-btns">
-        <button id="scroll-to-top-btn"
+        <button type="button"
+                id="scroll-to-top-btn"
                 class="btn btn-primary"
                 title="{% trans "Scroll to top" %}">⬆</button>
         <a href="{% url "home" %}"

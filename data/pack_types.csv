@@ -8,3 +8,6 @@ G3,god,God Deluxe Pack,4,0.0005,Extremely rare 4-card pack
 G4,normal,Normal Pack,5,0.94711,Standard booster pack (shinies moved to separate packs)
 G4,shiny,Shiny Pack,6,0.05238,Special pack with guaranteed shiny card
 G4,god,God Pack,5,0.0005,Extremely rare pack containing only rare cards
+G5,normal,Deluxe Pack,4,0.98283,Special 4-card deluxe pack with parallel foils
+G5,shiny,Shiny Deluxe Pack,5,0.01666,Deluxe pack with an extra guaranteed shiny card
+G5,god,God Deluxe Pack,4,0.0005,Extremely rare 4-card pack

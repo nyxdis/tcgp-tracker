@@ -16,6 +16,11 @@ from apps.tracker.models.cards import (
 )
 
 
+def _parse_bool(value):
+    """Parse an optional CSV flag column ("1"/"true"/"yes"); missing is False."""
+    return (value or "").strip().lower() in ("1", "true", "yes")
+
+
 class Command(BaseCommand):
     help = (
         "Imports Pokémon sets, cards, rarities and rarity probabilities from CSV files"
@@ -199,7 +204,11 @@ class Command(BaseCommand):
                 card_obj, created = Card.objects.update_or_create(
                     set=pset,
                     number=row["number"],
-                    defaults={"name": row["card"], "rarity": rarity},
+                    defaults={
+                        "name": row["card"],
+                        "rarity": rarity,
+                        "is_foil": _parse_bool(row.get("is_foil")),
+                    },
                 )
                 action = "Created" if created else "Updated"
                 self.stdout.write(f"{action} Card: {card_obj.name}")
@@ -264,6 +273,7 @@ class Command(BaseCommand):
                     pack_type = PackType.objects.get(
                         name=row["pack_type"], generation=generation
                     )
+                    is_foil = _parse_bool(row.get("is_foil"))
                 except ObjectDoesNotExist as e:
                     self.stderr.write(
                         f"Skipping probability for rarity={row['rarity']} "
@@ -291,7 +301,10 @@ class Command(BaseCommand):
                     # First, delete any conflicting records to prevent unique constraint violations
                     # Remove records that would conflict with the new unique constraint
                     RarityProbability.objects.filter(
-                        rarity=rarity, generation=generation, pack_type=pack_type
+                        rarity=rarity,
+                        generation=generation,
+                        pack_type=pack_type,
+                        is_foil=is_foil,
                     ).delete()
 
                     # Also clean up any orphaned records with null generation/pack_type for this rarity
@@ -302,6 +315,7 @@ class Command(BaseCommand):
                     # Create the new record with proper values
                     _obj = RarityProbability.objects.create(
                         rarity=rarity,
+                        is_foil=is_foil,
                         generation=generation,
                         pack_type=pack_type,
                         probability_slot1=prob_slot1,
@@ -315,6 +329,7 @@ class Command(BaseCommand):
 
                     self.stdout.write(
                         f"{action} RarityProbability: {generation.name} - {pack_type.name} - {rarity.name}"
+                        f"{' (foil)' if is_foil else ''}"
                     )
 
                 except ValueError as e:

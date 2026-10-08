@@ -34,22 +34,31 @@ def _rarity(name, order):
 
 
 def _table(generation, pack_type, rows):
-    """Create RarityProbability rows from ``{rarity: (slot1..slot6)}``."""
-    for rarity, probs in rows.items():
+    """Create RarityProbability rows from ``{rarity: (slot1..slot6)}``.
+
+    A key may also be ``(rarity, is_foil)`` for a parallel-foil row.
+    """
+    for key, probs in rows.items():
+        rarity, is_foil = key if isinstance(key, tuple) else (key, False)
         probs = tuple(probs) + ZERO[len(probs) :]
         RarityProbability.objects.create(
             rarity=rarity,
+            is_foil=is_foil,
             generation=generation,
             pack_type=pack_type,
             **{f"probability_slot{i + 1}": p for i, p in enumerate(probs)},
         )
 
 
-def _cards(pset, pack, rarity, count, prefix):
+def _cards(pset, pack, rarity, count, prefix, is_foil=False):
     cards = []
     for i in range(count):
         card = Card.objects.create(
-            set=pset, number=f"{prefix}{i:03}", name=f"{prefix}{i}", rarity=rarity
+            set=pset,
+            number=f"{prefix}{i:03}",
+            name=f"{prefix}{i}",
+            rarity=rarity,
+            is_foil=is_foil,
         )
         card.packs.add(pack)
         cards.append(card)
@@ -254,3 +263,28 @@ def test_prefetched_inputs_match_queried(user, generation, pset, pack, normal, g
 def test_no_cards_or_no_pack_type(user, generation, pset, pack):
     assert prob_at_least_one_new_card(pack, user) == 0.0
     assert prob_new_card_any_pack_type(pack, user) == 0.0
+
+
+def test_foil_and_standard_prints_are_separate_pools(
+    user, generation, pset, pack, normal
+):
+    """Deluxe packs draw standard prints in slot 1 and foil prints in slot 2."""
+    common = _rarity("common", 1)
+    normal.slot_count = 2
+    normal.save()
+    _table(generation, normal, {common: (1, 0), (common, True): (0, 1)})
+    _own(user, _cards(pset, pack, common, 4, "c"))  # all standard owned
+    foils = _cards(pset, pack, common, 4, "f", is_foil=True)
+    _own(user, foils[:3])  # 3/4 foils owned
+
+    # slot1: standard only, all owned -> 1 ; slot2: foil only -> 3/4
+    assert prob_at_least_one_new_card(pack, user) == round(1 - 3 / 4, 4)
+
+
+def test_load_rarity_tables_keys_by_rarity_and_foil(generation, normal):
+    common = _rarity("common", 1)
+    _table(generation, normal, {common: (1,), (common, True): (0, 1)})
+
+    table = load_rarity_tables(generation)[normal.id]
+    assert table[("common", False)][:2] == [1, 0]
+    assert table[("common", True)][:2] == [0, 1]

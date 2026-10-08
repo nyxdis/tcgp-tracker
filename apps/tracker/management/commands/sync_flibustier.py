@@ -12,6 +12,13 @@ one-off bonus packs (a guaranteed-rare "baby slot" pack, an ultra-rare
 "Themed Rare Pack") that don't fit this project's shared-per-generation
 pack_type model. Those are deliberately ignored rather than modeled.
 
+Deluxe sets (DELUXE_GENERATIONS) contain parallel-foil reprints of their
+♢/♢♢/♢♢♢ cards. flibustier gives those the same rarity code as the standard
+print and only tells them apart by the image's variant index, and uses the
+separate pull-rate codes CF/UF/RF for them. Both are mapped to this project's
+is_foil flag. A new deluxe set is only recognised as such once its generation
+in data/sets.csv has been changed by hand (new sets default to G4).
+
 The dataset has no German localisation, so data/set_translations.csv,
 data/pack_translations.csv and data/card_translations.csv are left untouched;
 translations for anything newly added must be filled in by hand.
@@ -48,8 +55,18 @@ RARITY_MAP = {
     "SSR": "double_shiny_rare",
 }
 
+# Pull-rate-only codes for the parallel-foil prints of deluxe sets, mapped to
+# the base rarity they share with the standard print.
+FOIL_RARITY_MAP = {"CF": "common", "UF": "uncommon", "RF": "rare"}
+
+# Generations whose sets have parallel-foil prints of their ♢/♢♢/♢♢♢ cards.
+DELUXE_GENERATIONS = ("G3", "G5")
+_FOIL_RARITY_CODES = ("C", "U", "R")
+
 # All sets this command can add postdate the introduction of generation G4.
 _DEFAULT_GENERATION = "G4"
+
+CARD_FIELDS = ["set_number", "number", "card", "pack", "rarity", "is_foil"]
 
 PACK_TYPE_FIELDS = [
     "generation",
@@ -59,7 +76,7 @@ PACK_TYPE_FIELDS = [
     "occurrence_probability",
     "description",
 ]
-RARITY_PROBABILITY_FIELDS = ["generation", "pack_type", "rarity"] + [
+RARITY_PROBABILITY_FIELDS = ["generation", "pack_type", "rarity", "is_foil"] + [
     f"probability_slot{i}" for i in range(1, 7)
 ]
 
@@ -99,7 +116,7 @@ class Command(BaseCommand):
         )
         existing_rarity_probs = _read_csv_as_dict(
             DATA_DIR / "rarity_probabilities.csv",
-            ("generation", "pack_type", "rarity"),
+            ("generation", "pack_type", "rarity", "is_foil"),
         )
 
         self.stdout.write("Fetching flibustier dataset…")
@@ -123,11 +140,7 @@ class Command(BaseCommand):
                 ["number", "name", "release_date", "generation"],
                 new_sets,
             )
-            _append_csv(
-                DATA_DIR / "cards.csv",
-                ["set_number", "number", "card", "pack", "rarity"],
-                new_cards,
-            )
+            _append_csv(DATA_DIR / "cards.csv", CARD_FIELDS, new_cards)
             self.stdout.write(
                 self.style.SUCCESS(
                     f"Done. Added {len(new_sets)} set(s), {len(new_cards)} card(s)."
@@ -193,6 +206,10 @@ class Command(BaseCommand):
             number = str(c["number"]).zfill(3)
             key = (set_code, number)
             rarity = RARITY_MAP.get(c["rarity"], c["rarity"])
+            generation = existing_sets.get(set_code, {}).get(
+                "generation", _DEFAULT_GENERATION
+            )
+            is_foil = _is_foil_print(c, generation)
             pack = "|".join(
                 sorted(_normalise_apostrophe(p) for p in c.get("packs") or [])
             )
@@ -206,9 +223,13 @@ class Command(BaseCommand):
                         "card": _normalise_apostrophe(c["name"]),
                         "pack": pack,
                         "rarity": rarity,
+                        "is_foil": int(is_foil),
                     }
                 )
-            elif existing["rarity"] != rarity:
+            elif (existing["rarity"], _parse_flag(existing.get("is_foil"))) != (
+                rarity,
+                is_foil,
+            ):
                 set_name = existing_sets.get(set_code, {}).get("name", "")
                 mismatches.append(
                     {
@@ -218,7 +239,9 @@ class Command(BaseCommand):
                         "number": number,
                         "name": existing["card"],
                         "local_rarity": existing["rarity"],
+                        "local_is_foil": _parse_flag(existing.get("is_foil")),
                         "flib_rarity": rarity,
+                        "flib_is_foil": is_foil,
                     }
                 )
         return new_cards, mismatches
@@ -237,7 +260,8 @@ class Command(BaseCommand):
         for m in mismatches:
             self.stdout.write(
                 f"  {m['set_code']} ({m['set_name']}) #{m['number']} {m['name']}: "
-                f"local={m['local_rarity']} flibustier={m['flib_rarity']}"
+                f"local={_rarity_label(m['local_rarity'], m['local_is_foil'])} "
+                f"flibustier={_rarity_label(m['flib_rarity'], m['flib_is_foil'])}"
             )
 
     def _review_mismatches_interactively(
@@ -257,8 +281,10 @@ class Command(BaseCommand):
         for i, m in enumerate(mismatches, start=1):
             prompt = (
                 f"[{i}/{len(mismatches)}] {m['set_code']} ({m['set_name']}) "
-                f"#{m['number']} {m['name']}: local={m['local_rarity']} "
-                f"flibustier={m['flib_rarity']} — fix? [y/N/q] "
+                f"#{m['number']} {m['name']}: "
+                f"local={_rarity_label(m['local_rarity'], m['local_is_foil'])} "
+                f"flibustier={_rarity_label(m['flib_rarity'], m['flib_is_foil'])} "
+                "— fix? [y/N/q] "
             )
             answer = _read_key(prompt)
             if answer == "q":
@@ -268,14 +294,11 @@ class Command(BaseCommand):
                 break
             if answer == "y":
                 existing_cards[m["key"]]["rarity"] = m["flib_rarity"]
+                existing_cards[m["key"]]["is_foil"] = int(m["flib_is_foil"])
                 fixed += 1
 
         if fixed:
-            _write_csv(
-                DATA_DIR / "cards.csv",
-                ["set_number", "number", "card", "pack", "rarity"],
-                existing_cards.values(),
-            )
+            _write_csv(DATA_DIR / "cards.csv", CARD_FIELDS, existing_cards.values())
         self.stdout.write(
             self.style.SUCCESS(f"Fixed {fixed} of {len(mismatches)} mismatch(es).")
         )
@@ -383,7 +406,7 @@ class Command(BaseCommand):
         slot_vectors = [_sorted_slots(pack_data) for _set_code, pack_data in entries]
         all_codes = {code for slots in slot_vectors for slot in slots for code in slot}
 
-        unrecognized = sorted(all_codes - RARITY_MAP.keys())
+        unrecognized = sorted(all_codes - RARITY_MAP.keys() - FOIL_RARITY_MAP.keys())
         if unrecognized:
             self.stdout.write(
                 self.style.WARNING(
@@ -394,12 +417,23 @@ class Command(BaseCommand):
             )
             return []
 
+        # Several codes can share one local row (SR and SAR are both
+        # special_art), so their slot percentages are summed per pool.
+        pool_keys = sorted({_pool_key(code) for code in all_codes})
         mismatches = []
-        for code in sorted(all_codes):
-            rarity = RARITY_MAP[code]
+        for rarity, is_foil in pool_keys:
             per_set_values = [
-                tuple(slot.get(code, 0.0) for slot in slots) for slots in slot_vectors
+                tuple(
+                    sum(
+                        pct
+                        for code, pct in slot.items()
+                        if _pool_key(code) == (rarity, is_foil)
+                    )
+                    for slot in slots
+                )
+                for slots in slot_vectors
             ]
+            label = f"{generation}/{pack_type}/{_rarity_label(rarity, is_foil)}"
             value, is_majority = _cluster_consensus(
                 per_set_values,
                 lambda a, b: all(abs(x - y) <= 0.01 for x, y in zip(a, b)),
@@ -407,8 +441,8 @@ class Command(BaseCommand):
             if not is_majority:
                 self.stdout.write(
                     self.style.WARNING(
-                        f"  conflict: {generation}/{pack_type}/{rarity} sets "
-                        "disagree on slot percentages, skipping: "
+                        f"  conflict: {label} sets disagree on slot percentages, "
+                        "skipping: "
                         f"{list(zip((s for s, _ in entries), per_set_values))}"
                     )
                 )
@@ -418,7 +452,7 @@ class Command(BaseCommand):
             while len(flib_slots) < 6:
                 flib_slots.append(0.0)
 
-            rp_key = (generation, pack_type, rarity)
+            rp_key = (generation, pack_type, rarity, str(int(is_foil)))
             existing_rp = existing_rarity_probs.get(rp_key)
             local_slots = (
                 [float(existing_rp[f"probability_slot{i}"]) for i in range(1, 7)]
@@ -434,6 +468,7 @@ class Command(BaseCommand):
                         "generation": generation,
                         "pack_type": pack_type,
                         "rarity": rarity,
+                        "is_foil": is_foil,
                         "local_slots": local_slots,
                         "flib_slots": flib_slots,
                         "is_new": existing_rp is None,
@@ -465,7 +500,8 @@ class Command(BaseCommand):
         for m in prob_mismatches:
             tag = "NEW" if m["is_new"] else "MISMATCH"
             self.stdout.write(
-                f"  [{tag}] {m['generation']}/{m['pack_type']}/{m['rarity']}: "
+                f"  [{tag}] {m['generation']}/{m['pack_type']}/"
+                f"{_rarity_label(m['rarity'], m['is_foil'])}: "
                 f"local={m['local_slots']} flib={m['flib_slots']}"
             )
 
@@ -525,7 +561,8 @@ class Command(BaseCommand):
                 tag = "NEW" if m["is_new"] else "MISMATCH"
                 prompt = (
                     f"[{i}/{total}] [{tag}] {m['generation']}/{m['pack_type']}/"
-                    f"{m['rarity']}: local={m['local_slots']} "
+                    f"{_rarity_label(m['rarity'], m['is_foil'])}: "
+                    f"local={m['local_slots']} "
                     f"flib={m['flib_slots']} — fix? [y/N/q] "
                 )
                 answer = _read_key(prompt)
@@ -537,6 +574,7 @@ class Command(BaseCommand):
                         "generation": m["generation"],
                         "pack_type": m["pack_type"],
                         "rarity": m["rarity"],
+                        "is_foil": int(m["is_foil"]),
                     }
                     for idx, value in enumerate(m["flib_slots"], start=1):
                         row[f"probability_slot{idx}"] = _fmt_number(value)
@@ -641,6 +679,35 @@ def _classify_pull_rate_pack(pack_name: str, pack_data: dict) -> str | None:
         if bonus_slot_codes & {"S", "SSR"}:
             return "shiny"
     return None
+
+
+def _pool_key(code: str) -> tuple[str, bool]:
+    """Map a flibustier pull-rate code to this project's (rarity, is_foil)."""
+    if code in FOIL_RARITY_MAP:
+        return FOIL_RARITY_MAP[code], True
+    return RARITY_MAP[code], False
+
+
+def _is_foil_print(card: dict, generation: str) -> bool:
+    """Return True if *card* is the parallel-foil print of a deluxe set card.
+
+    flibustier's image names end in ``_<dex>_<variant>_<NAME>_<RARITY>.webp``;
+    the standard print is variant ``00``. Other sets also have non-``00``
+    variants (alternate arts), so only deluxe generations are considered.
+    """
+    if generation not in DELUXE_GENERATIONS or card["rarity"] not in _FOIL_RARITY_CODES:
+        return False
+    parts = (card.get("image") or "").split("_")
+    return len(parts) > 3 and parts[3] != "00"
+
+
+def _parse_flag(value) -> bool:
+    """Parse a 0/1 CSV flag column; missing or empty is False."""
+    return str(value or "").strip().lower() in ("1", "true", "yes")
+
+
+def _rarity_label(rarity: str, is_foil: bool) -> str:
+    return f"{rarity} (foil)" if is_foil else rarity
 
 
 def _fmt_number(value: float):

@@ -54,6 +54,9 @@
                                              width="24"
                                              height="24" />
                                     {% endfor %}
+                                    {% if card.is_foil %}
+                                        <span class="badge text-bg-info ms-1 align-middle">{% trans "Foil" %}</span>
+                                    {% endif %}
                                 </span>
                             </span>
                             <div class="btn-group ms-2" role="group">
@@ -65,10 +68,12 @@
                                     {% if search_query %}<input type="hidden" name="q" value="{{ search_query }}">{% endif %}
                                     {% if card.id in user_card_ids %}
                                         <input type="hidden" name="action" value="uncollect">
-                                        <button type="submit" class="btn btn-outline-danger btn-sm">{% trans "Uncollect" %}</button>
+                                        <button type="submit"
+                                                class="btn btn-outline-danger btn-sm">{% trans "Uncollect" %}</button>
                                     {% else %}
                                         <input type="hidden" name="action" value="collect">
-                                        <button type="submit" class="btn btn-outline-primary btn-sm">{% trans "Collect" %}</button>
+                                        <button type="submit"
+                                                class="btn btn-outline-primary btn-sm">{% trans "Collect" %}</button>
                                     {% endif %}
                                 </form>
                             </div>
@@ -96,11 +101,14 @@
                         <p class="card-text">
                             {% for rarity, data in entry.rarity_progress.items %}
                                 {% if data.collected > 0 %}
-                                    <img src="{% static 'tracker/img/'|add:rarity %}"
+                                    <img src="{% static 'tracker/img/'|add:data.image %}"
                                          alt="{{ data.label }}"
                                          class="rarity-icon"
                                          height="16"
                                          width="16" />
+                                    {% if data.is_foil %}
+                                        <span class="badge text-bg-info">{% trans "Foil" %}</span>
+                                    {% endif %}
                                     {% if forloop.first %}
                                         {{ data.collected }} / {{ data.total }}
                                     {% else %}
@@ -110,12 +118,15 @@
                             {% endfor %}
                         </p>
                         <div class="progress mb-2">
+                            {# djlint:off H021 #}
+                            {# The width is the per-set progress, so it can only be set inline. #}
                             <div class="progress-bar"
                                  role="progressbar"
                                  style="width: {{ entry.progress_percent|floatformat:"2u" }}%"
                                  aria-valuenow="{{ entry.progress_percent }}"
                                  aria-valuemin="0"
                                  aria-valuemax="100">{{ entry.progress_percent }}%</div>
+                            {# djlint:on #}
                         </div>
                     </div>
                 </div>

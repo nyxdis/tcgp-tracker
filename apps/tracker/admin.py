@@ -284,8 +284,8 @@ class PackAdmin(admin.ModelAdmin):
 class CardAdmin(admin.ModelAdmin):
     """Admin for Card."""
 
-    list_display = ("name", "number", "rarity", "set")
-    list_filter = ("rarity", "set")
+    list_display = ("name", "number", "rarity", "is_foil", "set")
+    list_filter = ("rarity", "is_foil", "set")
     search_fields = ("name", "number", "set__name")
     autocomplete_fields = ["set", "rarity", "packs"]
     list_select_related = ("set", "rarity")
@@ -314,6 +314,7 @@ class RarityProbabilityAdmin(admin.ModelAdmin):
         "generation",
         "pack_type",
         "rarity",
+        "is_foil",
         "probability_slot1_percent",
         "probability_slot2_percent",
         "probability_slot3_percent",
@@ -324,9 +325,9 @@ class RarityProbabilityAdmin(admin.ModelAdmin):
     search_fields = ("rarity__name", "generation__name", "pack_type__name")
     autocomplete_fields = ["generation", "pack_type", "rarity"]
     list_select_related = ("generation", "pack_type", "rarity")
-    list_filter = ("generation", "pack_type", "rarity")
+    list_filter = ("generation", "pack_type", "rarity", "is_foil")
     list_per_page = 25
-    ordering = ("generation", "pack_type", "rarity")
+    ordering = ("generation", "pack_type", "rarity", "is_foil")
 
     class Form(forms.ModelForm):
         class Meta:
@@ -335,6 +336,7 @@ class RarityProbabilityAdmin(admin.ModelAdmin):
                 "generation",
                 "pack_type",
                 "rarity",
+                "is_foil",
                 "probability_slot1",
                 "probability_slot2",
                 "probability_slot3",

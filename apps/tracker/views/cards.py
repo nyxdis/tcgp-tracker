@@ -7,6 +7,7 @@ from django.db.models import Count, Q
 from django.http import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import get_language
+from django.utils.translation import gettext as _
 
 from apps.tracker.models.cards import Card, Pack, PokemonSet
 from apps.tracker.models.users import UserCard
@@ -101,47 +102,49 @@ def _get_sets_with_progress(sets, user_cards, progress_dict, total_dict):
     # distinct() here (each row would be per-card, not per rarity).
     rarities = (
         Card.objects.order_by()
-        .values("rarity__image_name", "rarity__name", "rarity__order")
+        .values("rarity__image_name", "rarity__name", "rarity__order", "is_foil")
         .distinct()
     )
-    # Build a mapping from image_name to (order, [names])
+    # Group by (image_name, is_foil): parallel-foil prints share their base
+    # rarity's symbol but are counted separately.
     rarity_groups = defaultdict(lambda: {"order": 999, "names": []})
     for rarity in rarities:
-        group = rarity_groups[rarity["rarity__image_name"]]
-        group["names"].append(rarity["rarity__name"])
+        group = rarity_groups[(rarity["rarity__image_name"], rarity["is_foil"])]
+        if rarity["rarity__name"] not in group["names"]:
+            group["names"].append(rarity["rarity__name"])
         # Use the lowest order found for the group
         if "rarity__order" in rarity and rarity["rarity__order"] is not None:
             group["order"] = min(group["order"], rarity["rarity__order"])
-    # Now sort rarity_groups by order
-    sorted_rarity_groups = dict(
+    # Sort by order, each foil group right after its standard counterpart
+    rarity_groups = dict(
         sorted(
             ((k, v["names"]) for k, v in rarity_groups.items()),
-            key=lambda item: rarity_groups[item[0]]["order"],
+            key=lambda item: (rarity_groups[item[0]]["order"], item[0][1]),
         )
     )
-    rarity_groups = sorted_rarity_groups
     rarity_labels = {
-        group_name: ", ".join(name.replace("_", " ").title() for name in names)
-        for group_name, names in rarity_groups.items()
+        group_key: ", ".join(name.replace("_", " ").title() for name in names)
+        + (f" ({_('Foil')})" if group_key[1] else "")
+        for group_key, names in rarity_groups.items()
     }
     rarity_totals = {}
-    for group_name, rarity_names in rarity_groups.items():
+    for group_key, rarity_names in rarity_groups.items():
         group_totals = (
-            Card.objects.filter(rarity__in=rarity_names)
+            Card.objects.filter(rarity__in=rarity_names, is_foil=group_key[1])
             .values("set")
             .annotate(total=Count("id"))
         )
-        rarity_totals[group_name] = {
+        rarity_totals[group_key] = {
             entry["set"]: entry["total"] for entry in group_totals
         }
     rarity_progress = {}
-    for group_name, rarities in rarity_groups.items():
+    for group_key, rarity_names in rarity_groups.items():
         group_progress = (
-            user_cards.filter(card__rarity__in=rarities)
+            user_cards.filter(card__rarity__in=rarity_names, card__is_foil=group_key[1])
             .values("card__set")
             .annotate(collected=Count("card"))
         )
-        rarity_progress[group_name] = {
+        rarity_progress[group_key] = {
             entry["card__set"]: entry["collected"] for entry in group_progress
         }
     for s in sets:
@@ -149,12 +152,14 @@ def _get_sets_with_progress(sets, user_cards, progress_dict, total_dict):
         total = total_dict.get(s.id, 0)
         progress_percent = round((collected / total) * 100, 2) if total > 0 else 0
         rarity_data = {
-            group_name: {
-                "collected": rarity_progress[group_name].get(s.id, 0),
-                "total": rarity_totals[group_name].get(s.id, 0),
-                "label": rarity_labels[group_name],
+            group_key: {
+                "image": group_key[0],
+                "is_foil": group_key[1],
+                "collected": rarity_progress[group_key].get(s.id, 0),
+                "total": rarity_totals[group_key].get(s.id, 0),
+                "label": rarity_labels[group_key],
             }
-            for group_name in rarity_groups
+            for group_key in rarity_groups
         }
         sets_with_progress.append(
             {
@@ -256,9 +261,10 @@ def pack_list(request):
         total = len(cards)
         owned = sum(1 for c in cards if c.id in owned_card_ids)
 
-        if total == 0:
+        if total == 0 or not rarity_tables_by_generation[pack.rarity_version_id]:
             # No card data for this pack yet (e.g. an announced-but-unreleased
-            # set) - there's nothing to compute odds from.
+            # set) or no published slot odds for its generation - there's
+            # nothing to compute odds from.
             pack_data.append(
                 {
                     "pack": pack,

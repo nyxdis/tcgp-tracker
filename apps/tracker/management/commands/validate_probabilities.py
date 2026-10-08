@@ -40,10 +40,17 @@ class Command(BaseCommand):
                 "probability_slot5",
                 "probability_slot6",
             ][: pack_type.slot_count]
-            agg = RarityProbability.objects.filter(
+            rows = RarityProbability.objects.filter(
                 generation=pack_type.generation, pack_type=pack_type
-            ).aggregate(**{f: Sum(f) for f in slot_fields})
+            )
             label = f"{pack_type.generation.name}/{pack_type.name}"
+            if not rows.exists():
+                # Odds not published yet: no table is not a wrong table.
+                self.stdout.write(
+                    self.style.WARNING(f"{label} has no rarity table yet, skipped")
+                )
+                continue
+            agg = rows.aggregate(**{f: Sum(f) for f in slot_fields})
             for f in slot_fields:
                 total = agg.get(f) or 0.0
                 if abs(total - 1.0) > TOLERANCE:

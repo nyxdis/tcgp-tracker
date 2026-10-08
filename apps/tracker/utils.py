@@ -20,30 +20,38 @@ def load_rarity_tables(generation):
         generation: The Generation whose RarityProbability rows to load.
 
     Returns:
-        dict: ``{pack_type_id: {rarity_name: [slot1, ..., slot6]}}`` for every
-        pack type that has stored probabilities (god packs have none; their
-        table is derived from the pack's card pool).
+        dict: ``{pack_type_id: {(rarity_name, is_foil): [slot1, ..., slot6]}}``
+        for every pack type that has stored probabilities (god packs have none;
+        their table is derived from the pack's card pool).
     """
     tables = defaultdict(dict)
     rows = RarityProbability.objects.filter(generation=generation).exclude(
         pack_type__isnull=True
     )
     for row in rows:
-        tables[row.pack_type_id][row.rarity_id] = row.get_slot_probabilities()
+        tables[row.pack_type_id][
+            (row.rarity_id, row.is_foil)
+        ] = row.get_slot_probabilities()
     return tables
 
 
 def _god_pack_table(generation, cards_by_rarity, slot_count):
-    """Derive the god pack rarity table from the pack's own card pool."""
+    """Derive the god pack rarity table from the pack's own card pool.
+
+    God pack rarities (illustration rare and up) have no parallel-foil prints.
+    """
     counts = {
-        name: len(cards_by_rarity.get(name, ()))
+        name: len(cards_by_rarity.get((name, False), ()))
         for name in generation.god_pack_eligible_rarity_names()
     }
-    return god_pack_slot_table(counts, slot_count)
+    return {
+        (name, False): probs
+        for name, probs in god_pack_slot_table(counts, slot_count).items()
+    }
 
 
 def _rarity_table(generation, pack_type, cards_by_rarity, rarity_tables):
-    """Resolve the ``{rarity_name: [slot probs]}`` table for a pack type."""
+    """Resolve the ``{(rarity_name, is_foil): [slot probs]}`` table for a pack type."""
     if pack_type.is_god_pack:
         return _god_pack_table(generation, cards_by_rarity, pack_type.slot_count)
     if rarity_tables is None:
@@ -63,9 +71,9 @@ def _slot_no_new_factor(table, slot, cards_by_rarity, owned_card_ids):
     """
     slot_mass = 0.0
     slot_no_new = 0.0
-    for rarity_name, slot_probs in table.items():
+    for pool_key, slot_probs in table.items():
         prob = slot_probs[slot]
-        pool = cards_by_rarity.get(rarity_name)
+        pool = cards_by_rarity.get(pool_key)
         if prob <= 0 or not pool:
             continue
         owned = sum(1 for card in pool if card.id in owned_card_ids)
@@ -90,6 +98,8 @@ def prob_at_least_one_new_card(  # pylint: disable=too-many-arguments
     Model: slots are drawn independently; each slot draws a rarity according to
     the pack type's table and then a card uniformly from the pack's cards of
     that rarity. ``P(new) = 1 - prod_slots sum_rarity P(rarity) * owned/total``.
+    Standard and parallel-foil prints of a rarity are separate pools with
+    their own slot probabilities (deluxe packs draw them from different slots).
 
     Rarities that appear in the table but have no cards in this pack cannot be
     drawn from it, so each slot's distribution is renormalised over the
@@ -130,7 +140,7 @@ def prob_at_least_one_new_card(  # pylint: disable=too-many-arguments
     # Rarity's primary key is its name, so rarity_id needs no join.
     cards_by_rarity = defaultdict(list)
     for card in cards:
-        cards_by_rarity[card.rarity_id].append(card)
+        cards_by_rarity[(card.rarity_id, card.is_foil)].append(card)
 
     table = _rarity_table(generation, pack_type, cards_by_rarity, rarity_tables)
     if not table:

@@ -387,3 +387,7 @@ msgstr "Bitte korrigieren Sie die Fehler unten."
 #: apps/tracker/views/users.py:45
 msgid "Your account was deleted successfully."
 msgstr "Ihr Account wurde erfolgreich gelöscht."
+
+#: apps/tracker/templates/tracker/home.html apps/tracker/templates/tracker/set_detail.html apps/tracker/views/cards.py
+msgid "Foil"
+msgstr "Folie"
