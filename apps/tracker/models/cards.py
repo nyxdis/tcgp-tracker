@@ -1,5 +1,7 @@
 """Tracker app cards models."""
 
+import re
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import get_language
@@ -223,6 +225,11 @@ class PokemonSet(models.Model):
     def localized_name(self):
         language_code = get_language() or "en"
         return self.get_localized_name(language_code)
+
+    @property
+    def series(self):
+        """Series letter(s) leading the set number, e.g. "B" for "B2a"."""
+        return re.match(r"[A-Za-z]*", self.number).group().upper()
 
     @property
     def is_available(self):

@@ -13,7 +13,11 @@
 {% block content %}
     <h1 class="mb-4">{% trans "Welcome to TCGP Tracker!" %}</h1>
     <p class="text-muted mb-4">
-        <strong>{% trans "Overall Collection:" %}</strong>
+        {% if selected_series == "all" %}
+            <strong>{% trans "Overall Collection:" %}</strong>
+        {% else %}
+            <strong>{% blocktrans with series=selected_series %}Series {{ series }} Collection:{% endblocktrans %}</strong>
+        {% endif %}
         {{ total_collected }} / {{ total_cards }}
         ({{ total_progress_percent }}%)
     </p>
@@ -35,6 +39,7 @@
                    autocomplete="off">
             <button class="btn btn-primary" type="submit">{% trans "Search" %}</button>
         </div>
+        <input type="hidden" name="series" value="{{ selected_series }}">
     </form>
     <div id="search-results-section">
         {% if search_query %}
@@ -65,6 +70,7 @@
                                 <form method="post" action="" class="mb-0 ms-2 d-inline">
                                     {% csrf_token %}
                                     <input type="hidden" name="card_id" value="{{ card.id }}">
+                                    <input type="hidden" name="series" value="{{ selected_series }}">
                                     {% if search_query %}<input type="hidden" name="q" value="{{ search_query }}">{% endif %}
                                     {% if card.id in user_card_ids %}
                                         <input type="hidden" name="action" value="uncollect">
@@ -86,6 +92,20 @@
         {% endif %}
     </div>
     <h2>{% trans "Your Set Progress" %}</h2>
+    <ul class="nav nav-pills mb-3">
+        <li class="nav-item">
+            <a class="nav-link{% if selected_series == "all" %} active{% endif %}"
+               {% if selected_series == "all" %}aria-current="page"{% endif %}
+               href="?series=all{% if search_query %}&amp;q={{ search_query|urlencode }}{% endif %}">{% trans "All" %}</a>
+        </li>
+        {% for series in series_options %}
+            <li class="nav-item">
+                <a class="nav-link{% if selected_series == series %} active{% endif %}"
+                   {% if selected_series == series %}aria-current="page"{% endif %}
+                   href="?series={{ series }}{% if search_query %}&amp;q={{ search_query|urlencode }}{% endif %}">{% blocktrans %}Series {{ series }}{% endblocktrans %}</a>
+            </li>
+        {% endfor %}
+    </ul>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for entry in sets %}
             <div class="col">

@@ -391,3 +391,17 @@ msgstr "Ihr Account wurde erfolgreich gelöscht."
 #: apps/tracker/templates/tracker/home.html apps/tracker/templates/tracker/set_detail.html apps/tracker/views/cards.py
 msgid "Foil"
 msgstr "Parallelfolie"
+
+#: apps/tracker/templates/tracker/home.html
+#, python-format
+msgid "Series %(series)s Collection:"
+msgstr "Sammlung Serie %(series)s:"
+
+#: apps/tracker/templates/tracker/home.html
+msgid "All"
+msgstr "Alle"
+
+#: apps/tracker/templates/tracker/home.html
+#, python-format
+msgid "Series %(series)s"
+msgstr "Serie %(series)s"

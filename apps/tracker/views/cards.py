@@ -1,11 +1,14 @@
 """Tracker app views for cards."""
 
 from collections import defaultdict
+from urllib.parse import urlencode
 
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.http import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+from django.utils import timezone
 from django.utils.translation import get_language
 from django.utils.translation import gettext as _
 
@@ -22,10 +25,29 @@ def _parse_card_id(request):
         return None
 
 
+def _series_options(sets):
+    """Series codes of the given sets (newest release first), newest series first."""
+    return list(dict.fromkeys(s.series for s in sets))
+
+
+def _default_series(sets):
+    """Series of the newest released set, so a preloaded upcoming set doesn't
+    switch the default early. Falls back to the newest set overall."""
+    today = timezone.localdate()
+    released = [s for s in sets if s.release_date <= today]
+    newest = (released or sets)[0] if sets else None
+    return newest.series if newest else "all"
+
+
 @login_required
 def home(request):
-    """Render the home page with all sets and the user's cards."""
-    sets = PokemonSet.objects.all().order_by("-release_date")
+    """Render the home page with the sets of the selected series and the user's cards."""
+    all_sets = list(PokemonSet.objects.all().order_by("-release_date"))
+    series_options = _series_options(all_sets)
+    selected_series = request.GET.get("series") or request.POST.get("series")
+    if selected_series != "all" and selected_series not in series_options:
+        selected_series = _default_series(all_sets)
+    sets = [s for s in all_sets if selected_series in ("all", s.series)]
     user_cards = UserCard.objects.filter(user=request.user)
     if request.method == "POST":
         card_id = _parse_card_id(request)
@@ -39,10 +61,11 @@ def home(request):
             )
         elif action == "uncollect":
             UserCard.objects.filter(user=request.user, card_id=card_id).delete()
+        params = {"series": selected_series}
         q = request.POST.get("q", "")
         if q:
-            return redirect(f"/?q={q}")
-        return redirect("home")
+            params["q"] = q
+        return redirect(f"{reverse('home')}?{urlencode(params)}")
     progress_by_set = user_cards.values("card__set").annotate(collected=Count("card"))
     progress_dict = {
         entry["card__set"]: entry["collected"] for entry in progress_by_set
@@ -73,13 +96,15 @@ def home(request):
                 .order_by("set__release_date", "set__name", "number")
             )
     user_card_ids = set(user_cards.values_list("card_id", flat=True))
-    total_cards = sum(total_dict.values())
-    total_collected = user_cards.count()
+    total_cards = sum(total_dict.get(s.id, 0) for s in sets)
+    total_collected = sum(progress_dict.get(s.id, 0) for s in sets)
     return render(
         request,
         "tracker/home.html",
         {
             "sets": sets_with_progress,
+            "series_options": series_options,
+            "selected_series": selected_series,
             "search_query": search_query,
             "search_results": search_results,
             "user_card_ids": user_card_ids,
