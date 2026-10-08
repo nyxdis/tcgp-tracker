@@ -16,27 +16,28 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Install Poetry
-        uses: https://github.com/snok/install-poetry@v1
+      - name: Install uv
+        uses: https://github.com/astral-sh/setup-uv@v10.1.0
+        with:
+          version: '0.12.18'
 
       - name: Install dependencies
-        run: |
-          poetry install --with dev,test
+        run: uv sync --frozen
 
       - name: Check formatting (black)
-        run: poetry run black --check .
+        run: uv run --frozen black --check .
 
       - name: Check imports (isort)
-        run: poetry run isort --check .
+        run: uv run --frozen isort --check .
 
       - name: Lint (pylint)
-        run: poetry run pylint apps/ tcgptracker/
+        run: uv run --frozen pylint apps/ tcgptracker/
 
       - name: Lint templates (djlint)
-        run: poetry run djlint apps/tracker/templates --check
+        run: uv run --frozen djlint apps/tracker/templates --check
 
       - name: Tests
-        run: poetry run pytest
+        run: uv run --frozen pytest
 
   docker-build:
     name: Docker build & push

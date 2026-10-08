@@ -39,16 +39,16 @@ Tests live in `apps/tracker/tests/` (e.g., `apps/tracker/tests/test_models_cards
 
 ```bash
 # Install deps
-poetry install
+uv sync
 
 # Run tests
-poetry run pytest
+uv run pytest
 
 # Apply migrations (dev)
-DJANGO_SETTINGS_MODULE=tcgptracker.settings.development python manage.py migrate
+DJANGO_SETTINGS_MODULE=tcgptracker.settings.development uv run python manage.py migrate
 
 # Compile translations
-python manage.py compilemessages
+uv run python manage.py compilemessages
 ```
 
 ## Database

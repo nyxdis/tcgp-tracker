@@ -21,7 +21,7 @@ repos:
     hooks:
       - id: pylint
         name: pylint
-        entry: poetry run pylint --errors-only
+        entry: uv run pylint --errors-only
         language: system
         types: [python]
   - repo: https://github.com/Riverside-Healthcare/djLint
@@ -29,6 +29,6 @@ repos:
     hooks:
       - id: djlint
         name: djLint
-        entry: poetry run djlint
+        entry: uv run djlint
         language: system
         types: [html]

@@ -25,26 +25,26 @@ A Django-based web app for tracking your Pokémon TCG Pocket card collection. Br
 ### Prerequisites
 
 - Python 3.13+
-- [Poetry](https://python-poetry.org/)
+- [uv](https://docs.astral.sh/uv/)
 
 ### Local development (SQLite)
 
 ```bash
 # Install dependencies
-poetry install
+uv sync
 
 # Apply migrations
-DJANGO_SETTINGS_MODULE=tcgptracker.settings.development python manage.py migrate
+DJANGO_SETTINGS_MODULE=tcgptracker.settings.development uv run python manage.py migrate
 
 # Import seed data
-DJANGO_SETTINGS_MODULE=tcgptracker.settings.development python manage.py import_data \
+DJANGO_SETTINGS_MODULE=tcgptracker.settings.development uv run python manage.py import_data \
   --sets data/sets.csv \
   --cards data/cards.csv \
   --rarities data/rarities.csv \
   --packtypes data/pack_types.csv
 
 # Start the development server
-DJANGO_SETTINGS_MODULE=tcgptracker.settings.development python manage.py runserver
+DJANGO_SETTINGS_MODULE=tcgptracker.settings.development uv run python manage.py runserver
 ```
 
 Open <http://localhost:8000>.
@@ -74,7 +74,7 @@ docker compose up --build
 ## Running Tests
 
 ```bash
-poetry run pytest
+uv run pytest
 ```
 
 ## Management Commands
@@ -105,7 +105,7 @@ tcgptracker/           # Django project config & settings
 Translations live in `apps/tracker/locale/` and `tcgptracker/locale/`. To compile messages:
 
 ```bash
-python manage.py compilemessages
+uv run python manage.py compilemessages
 ```
 
 To find missing translation strings:

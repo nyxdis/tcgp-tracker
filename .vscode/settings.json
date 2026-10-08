@@ -11,6 +11,6 @@
     "black"
   ],
   "chat.tools.terminal.autoApprove": {
-    "poetry": true
+    "uv": true
   }
 }

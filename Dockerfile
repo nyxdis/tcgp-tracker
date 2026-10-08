@@ -5,24 +5,24 @@ FROM python:3.13-slim AS builder
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Install build dependencies and Poetry
+# Use the image's Python instead of letting uv download one
+ENV UV_PYTHON_DOWNLOADS=never
+
+# Install build dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
-    curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Poetry
-RUN curl -sSL https://install.python-poetry.org | python3 - && \
-    ln -s /root/.local/bin/poetry /usr/local/bin/poetry
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:0.12.18 /uv /usr/local/bin/uv
 
-# Set workdir and copy poetry files
+# Set workdir and copy dependency files
 WORKDIR /app
-COPY pyproject.toml poetry.lock* ./
+COPY pyproject.toml uv.lock ./
 
-# Install dependencies (no dev, no root package)
-RUN poetry config virtualenvs.create false && \
-    poetry install --no-interaction --no-ansi --no-root --only=main
+# Install runtime dependencies into /app/.venv (no dev/test groups)
+RUN uv sync --frozen --no-default-groups
 
 # Set GIT_HASH environment variable and write to file using build-arg
 ARG GIT_HASH=unknown
@@ -37,16 +37,12 @@ ENV PYTHONUNBUFFERED=1
 RUN apt-get update && apt-get install -y gettext \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Poetry (for manage.py/compilemessages if needed)
-RUN curl -sSL https://install.python-poetry.org | python3 - && \
-    ln -s /root/.local/bin/poetry /usr/local/bin/poetry
-
 # Set workdir
 WORKDIR /app
 
-# Copy installed site-packages from builder
-COPY --from=builder /usr/local/lib/python3.13/site-packages /usr/local/lib/python3.13/site-packages
-COPY --from=builder /usr/local/bin /usr/local/bin
+# Copy the virtualenv from builder and put it first on PATH
+COPY --from=builder /app/.venv /app/.venv
+ENV PATH="/app/.venv/bin:$PATH"
 
 # Copy project files
 COPY . .
