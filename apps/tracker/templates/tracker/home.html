@@ -8,6 +8,12 @@
     vertical-align: middle;
     margin-left: 10px;
   }
+  .set-logo {
+    height: 96px;
+    width: 100%;
+    object-fit: contain;
+    padding: 12px 12px 0;
+  }
     </style>
 {% endblock style %}
 {% block content %}
@@ -111,6 +117,15 @@
             <div class="col">
                 <div class="card h-100">
                     <a href="{% url "set_detail" entry.set.number %}" class="stretched-link"></a>
+                    {% if entry.set.logo_url %}
+                        <img src="{{ entry.set.logo_url }}"
+                             alt=""
+                             class="card-img-top set-logo"
+                             width="256"
+                             height="113"
+                             loading="lazy"
+                             onerror="this.remove()" />
+                    {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ entry.set.localized_name }}</h5>
                         <p class="card-text">{% trans "Release Date" %}: {{ entry.set.release_date }}</p>

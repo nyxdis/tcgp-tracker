@@ -59,7 +59,18 @@ SECRET_KEY=your-secret-key
 DATABASE_URL=postgres://tcgpuser:secret@db:5432/tcgp
 ALLOWED_HOSTS=localhost
 REDIS_URL=redis://:password@your-redis-host:6379/1
+S3_ENDPOINT=http://minio:9000
+S3_BUCKET=tcgptracker-images
+S3_ACCESS_KEY_ID=...
+S3_SECRET_ACCESS_KEY=...
 ```
+
+The `S3_*` variables are optional. When `S3_ENDPOINT` is set, card thumbnails
+and set logos are read from that S3-compatible bucket (MinIO) and served
+through the app's `/images/` proxy, so the bucket can stay private.
+`S3_REGION` defaults to `eu-central-1`. Fill the bucket with
+`manage.py sync_card_images`, and re-run it after new sets are imported. When
+`S3_ENDPOINT` is unset, no images are shown.
 
 `REDIS_URL` is optional. When set, it enables the Redis cache backend and
 Redis-backed sessions (`cached_db`, so sessions survive a Redis restart). When
@@ -84,6 +95,7 @@ uv run pytest
 | `import_data` | Import sets, cards, rarities and pack types from CSV files |
 | `sync_tcgdex` | Sync card data from the TCGdex API |
 | `sync_flibustier` | Sync new sets/cards from the flibustier JSON dataset into `data/*.csv` |
+| `sync_card_images` | Upload missing card thumbnails and set logos to the image bucket |
 | `update_pack_generations` | Backfill generation data on packs |
 | `validate_probabilities` | Validate that rarity probabilities sum to 1 per pack slot |
 

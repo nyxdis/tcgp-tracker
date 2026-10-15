@@ -405,3 +405,15 @@ msgstr "Alle"
 #, python-format
 msgid "Series %(series)s"
 msgstr "Serie %(series)s"
+
+#: apps/tracker/templates/tracker/set_detail.html
+msgid "View"
+msgstr "Ansicht"
+
+#: apps/tracker/templates/tracker/set_detail.html
+msgid "Table"
+msgstr "Tabelle"
+
+#: apps/tracker/templates/tracker/set_detail.html
+msgid "Grid"
+msgstr "Raster"

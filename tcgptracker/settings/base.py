@@ -176,6 +176,16 @@ else:
         }
     }
 
+# Card thumbnails and set logos live in an S3-compatible bucket (MinIO) and are
+# served through the app's own /images/ proxy, so the bucket stays private.
+# Leave S3_ENDPOINT unset to disable images entirely (e.g. local dev).
+S3_ENDPOINT = os.environ.get("S3_ENDPOINT")
+S3_REGION = os.environ.get("S3_REGION", "eu-central-1")
+S3_BUCKET = os.environ.get("S3_BUCKET", "tcgptracker-images")
+S3_ACCESS_KEY_ID = os.environ.get("S3_ACCESS_KEY_ID")
+S3_SECRET_ACCESS_KEY = os.environ.get("S3_SECRET_ACCESS_KEY")
+IMAGES_ENABLED = bool(S3_ENDPOINT)
+
 # PWA settings
 PWA_APP_NAME = "Pokémon TCG Pocket Tracker"
 PWA_APP_DESCRIPTION = "A web application to track your Pokémon TCG Pocket cards."
@@ -221,6 +231,11 @@ LOGGING = {
             "handlers": ["console"],
             "level": "DEBUG" if DEBUG else "INFO",
             "propagate": False,
+        },
+        # boto logs every image request in detail at DEBUG.
+        **{
+            name: {"level": "WARNING"}
+            for name in ("boto3", "botocore", "s3transfer", "urllib3")
         },
     },
 }

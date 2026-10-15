@@ -8,6 +8,14 @@
     {{ set.localized_name }} - Pokémon TCG Pocket Tracker
 {% endblock title %}
 {% block content %}
+    {% if set.logo_url %}
+        <img src="{{ set.logo_url }}"
+             alt=""
+             class="set-logo set-logo-header d-block mb-2"
+             width="256"
+             height="113"
+             onerror="this.remove()" />
+    {% endif %}
     <h2>{{ set.localized_name }}</h2>
     <p>{% trans "Release Date" %}: {{ set.release_date }}</p>
     <p class="card-text d-flex flex-wrap gap-3 align-items-center sticky-top bg-white py-2"
@@ -54,8 +62,8 @@
             </button>
         </div>
     </div>
-    <!-- Filter Input -->
-    <div class="mb-3">
+    <!-- Filter Input and view toggle -->
+    <div class="mb-3 d-flex gap-2">
         <input type="text"
                id="table-filter"
                class="form-control"
@@ -65,8 +73,56 @@
                autocorrect="off"
                autocapitalize="off"
                spellcheck="false" />
+        {% if images_enabled %}
+            <div class="btn-group flex-shrink-0"
+                 role="group"
+                 aria-label="{% trans "View" %}">
+                <input type="radio"
+                       class="btn-check"
+                       name="view-mode"
+                       id="view-table"
+                       value="table"
+                       autocomplete="off"
+                       checked />
+                <label class="btn btn-outline-secondary" for="view-table">{% trans "Table" %}</label>
+                <input type="radio"
+                       class="btn-check"
+                       name="view-mode"
+                       id="view-grid"
+                       value="grid"
+                       autocomplete="off" />
+                <label class="btn btn-outline-secondary" for="view-grid">{% trans "Grid" %}</label>
+            </div>
+        {% endif %}
     </div>
-    <div class="table-responsive">
+    {% if images_enabled %}
+        <div id="grid-view" class="card-grid mt-4" hidden>
+            {% for card in cards %}
+                <button type="button"
+                        class="card-tile"
+                        data-card-id="{{ card.id }}"
+                        data-action="{% if card.collected_quantity > 0 %}uncollect{% else %}collect{% endif %}"
+                        data-rarity="{{ card.rarity.name }}"
+                        data-search="{{ card.number }} {{ card.localized_name|lower }}"
+                        aria-pressed="{% if card.collected_quantity > 0 %}true{% else %}false{% endif %}"
+                        title="{{ card.number }} {{ card.localized_name }}">
+                    <img src="{{ card.thumbnail_url }}"
+                         alt="{{ card.number }} {{ card.localized_name }}"
+                         width="208"
+                         height="290"
+                         loading="lazy"
+                         onerror="this.onerror=null;this.src='{% static 'tracker/img/card-placeholder.svg' %}'" />
+                    <span class="card-tile-label">
+                        {{ card.number }}
+                        {% if card.is_foil %}
+                            <span class="badge text-bg-info">{% trans "Foil" %}</span>
+                        {% endif %}
+                    </span>
+                </button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="table-responsive" id="table-view">
         <table class="table table-hover mt-4">
             <thead>
                 <tr>

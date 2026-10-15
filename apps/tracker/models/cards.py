@@ -2,9 +2,13 @@
 
 import re
 
+from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import get_language
+
+from apps.tracker import images
 
 SLOT_FIELD_COUNT = 6
 
@@ -230,6 +234,17 @@ class PokemonSet(models.Model):
     def series(self):
         """Series letter(s) leading the set number, e.g. "B" for "B2a"."""
         return re.match(r"[A-Za-z]*", self.number).group().upper()
+
+    @property
+    def logo_url(self):
+        """URL of the set logo in the active language, or None if images are
+        disabled. The image proxy falls back to English for missing logos."""
+        if not settings.IMAGES_ENABLED:
+            return None
+        language = (get_language() or "").split("-")[0]
+        if language not in images.LOGO_LOCALES:
+            language = images.DEFAULT_LOGO_LANGUAGE
+        return reverse("image", args=[images.logo_key(self.number, language)])
 
     @property
     def is_available(self):
@@ -475,6 +490,13 @@ class Pack(models.Model):
         language_code = get_language() or "en"
         return self.get_localized_name(language_code)
 
+    @property
+    def image_url(self):
+        """URL of the pack art, or None if images are disabled."""
+        if not settings.IMAGES_ENABLED:
+            return None
+        return reverse("image", args=[images.pack_key(self.set.number, self.name)])
+
     class Meta:
         ordering = ("set", "name")
         unique_together = ("set", "name")
@@ -532,6 +554,15 @@ class Card(models.Model):
     def localized_name(self):
         language_code = get_language() or "en"
         return self.get_localized_name(language_code)
+
+    @property
+    def thumbnail_url(self):
+        """URL of the card's thumbnail, or None if images are disabled."""
+        if not settings.IMAGES_ENABLED:
+            return None
+        return reverse(
+            "image", args=[images.thumbnail_key(self.set.number, self.number)]
+        )
 
     class Meta:
         ordering = ("set", "number")

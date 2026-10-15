@@ -4,4 +4,5 @@
 from .cards import *
 from .friends import *
 from .health import health_check
+from .images import image_proxy
 from .users import *
