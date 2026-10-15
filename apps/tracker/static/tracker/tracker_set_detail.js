@@ -2,10 +2,24 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   const rows = document.querySelectorAll(".clickable-row");
+  const tiles = document.querySelectorAll(".card-tile");
+  const tilesById = new Map(Array.from(tiles, (tile) => [tile.dataset.cardId, tile]));
+  const rowsById = new Map(Array.from(rows, (row) => [row.dataset.cardId, row]));
+  const gridView = document.getElementById("grid-view");
+  const tableView = document.getElementById("table-view");
   const filterInput = document.getElementById("table-filter");
   const table = document.querySelector("table");
   const headers = table.querySelectorAll("th.sortable");
   let sortDirection = {};
+
+  // Keep the grid in the same order as the (sorted) table
+  function syncGridOrder() {
+    if (!gridView) return;
+    table.querySelectorAll("tbody tr").forEach((row) => {
+      const tile = tilesById.get(row.dataset.cardId);
+      if (tile) gridView.appendChild(tile);
+    });
+  }
 
   // Initial sort by card number (ascending)
   (function initialSortByNumber() {
@@ -17,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return aVal - bVal;
     });
     rowArr.forEach((row) => tbody.appendChild(row));
+    syncGridOrder();
     // Set arrow for number column
     const numberHeader = Array.from(headers).find((h) => h.dataset.sort === "number");
     if (numberHeader) {
@@ -64,10 +79,11 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       rows.forEach((row) => tbody.appendChild(row));
+      syncGridOrder();
     });
   });
 
-  // Filter table rows based on input
+  // Filter table rows and grid tiles based on input
   filterInput.addEventListener("input", function () {
     const filterValue = filterInput.value.toLowerCase();
     rows.forEach((row) => {
@@ -78,6 +94,9 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         row.style.display = "none";
       }
+    });
+    tiles.forEach((tile) => {
+      tile.hidden = !tile.dataset.search.includes(filterValue);
     });
   });
 
@@ -90,6 +109,36 @@ document.addEventListener("DOMContentLoaded", function () {
     span.setAttribute("aria-label", label);
     span.textContent = emoji;
     statusCell.appendChild(span);
+  }
+
+  // Reflect a card's collected state in both its table row and grid tile
+  function setCollected(cardId, collected) {
+    const action = collected ? "uncollect" : "collect";
+    const row = rowsById.get(cardId);
+    if (row) {
+      setStatusCell(row.querySelector(".status-cell"), collected);
+      row.dataset.action = action;
+    }
+    const tile = tilesById.get(cardId);
+    if (tile) {
+      tile.dataset.action = action;
+      tile.setAttribute("aria-pressed", collected ? "true" : "false");
+    }
+  }
+
+  function postCardAction(cardId, action) {
+    return fetch("", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-CSRFToken": window.csrfToken,
+        "X-Requested-With": "XMLHttpRequest",
+      },
+      body: new URLSearchParams({
+        card_id: cardId,
+        action: action,
+      }),
+    }).then((response) => response.json());
   }
 
   function refreshRarityProgress() {
@@ -105,81 +154,78 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  rows.forEach((row) => {
-    row.addEventListener("click", function () {
-      const cardId = row.dataset.cardId;
-      const action = row.dataset.action;
-      if (action === "uncollect") {
-        if (!confirm(window.uncollectConfirmText || "Are you sure you want to uncollect this card?")) {
-          return;
-        }
+  function toggleCard(el) {
+    const cardId = el.dataset.cardId;
+    const action = el.dataset.action;
+    if (action === "uncollect") {
+      if (!confirm(window.uncollectConfirmText || "Are you sure you want to uncollect this card?")) {
+        return;
       }
-      fetch("", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "X-CSRFToken": window.csrfToken,
-          "X-Requested-With": "XMLHttpRequest",
-        },
-        body: new URLSearchParams({
-          card_id: cardId,
-          action: action,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          const statusCell = row.querySelector(".status-cell");
-          setStatusCell(statusCell, data.collected);
-          row.dataset.action = data.collected ? "uncollect" : "collect";
-          refreshRarityProgress();
-        });
+    }
+    postCardAction(cardId, action).then((data) => {
+      setCollected(cardId, data.collected);
+      refreshRarityProgress();
     });
-  });
+  }
+
+  rows.forEach((row) => row.addEventListener("click", () => toggleCard(row)));
+  tiles.forEach((tile) => tile.addEventListener("click", () => toggleCard(tile)));
 
   document.getElementById("collect-base-btn").addEventListener("click", function () {
     if (!confirm(window.collectBaseConfirmText || "Are you sure you want to collect all base cards?")) {
       return;
     }
     const rarities = ["common", "uncommon", "rare", "double_rare"];
-    const csrfToken = window.csrfToken;
     const requests = [];
     rows.forEach((row) => {
       const rarity = row.dataset.rarity;
       if (rarities.includes(rarity) && row.dataset.action === "collect") {
         const cardId = row.dataset.cardId;
         requests.push(
-          fetch("", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-              "X-CSRFToken": csrfToken,
-              "X-Requested-With": "XMLHttpRequest",
-            },
-            body: new URLSearchParams({
-              card_id: cardId,
-              action: "collect",
-            }),
+          postCardAction(cardId, "collect").then((data) => {
+            if (data.collected) {
+              setCollected(cardId, true);
+            }
           })
-            .then((response) => response.json())
-            .then((data) => {
-              const statusCell = row.querySelector(".status-cell");
-              if (data.collected) {
-                setStatusCell(statusCell, true);
-                row.dataset.action = "uncollect";
-              }
-            })
         );
       }
     });
     Promise.all(requests).then(refreshRarityProgress);
   });
 
+  // Table / grid view toggle, remembered per browser
+  const VIEW_KEY = "tcgp.setDetailView";
+  function showView(mode) {
+    if (!gridView) return;
+    const grid = mode === "grid";
+    gridView.hidden = !grid;
+    tableView.hidden = grid;
+    const radio = document.getElementById(grid ? "view-grid" : "view-table");
+    if (radio) radio.checked = true;
+  }
+  document.querySelectorAll('input[name="view-mode"]').forEach((radio) => {
+    radio.addEventListener("change", function () {
+      showView(radio.value);
+      try {
+        localStorage.setItem(VIEW_KEY, radio.value);
+      } catch (e) {
+        // Storage unavailable (private mode etc.); the toggle still works.
+      }
+    });
+  });
+  try {
+    showView(localStorage.getItem(VIEW_KEY) || "table");
+  } catch (e) {
+    showView("table");
+  }
+
   document.getElementById("jump-to-illustration-rare-btn").addEventListener("click", function () {
-    const illustrationRareRow = Array.from(rows).find((row) => row.dataset.rarity === "illustration_rare");
-    if (illustrationRareRow) {
-      illustrationRareRow.scrollIntoView({ behavior: "smooth", block: "center" });
-      illustrationRareRow.classList.add("highlight");
-      setTimeout(() => illustrationRareRow.classList.remove("highlight"), 2000);
+    const items = gridView && !gridView.hidden ? tiles : rows;
+    const target = Array.from(items).find((el) => el.dataset.rarity === "illustration_rare");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      target.classList.add("highlight");
+      setTimeout(() => target.classList.remove("highlight"), 2000);
     }
   });
 

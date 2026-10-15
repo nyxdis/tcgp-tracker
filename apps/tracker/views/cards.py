@@ -3,6 +3,7 @@
 from collections import defaultdict
 from urllib.parse import urlencode
 
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.http import HttpResponseBadRequest, JsonResponse
@@ -204,7 +205,7 @@ def set_detail(request, set_number):
     set_obj = get_object_or_404(PokemonSet, number=set_number)
     cards = (
         Card.objects.filter(set=set_obj)
-        .select_related("rarity")
+        .select_related("set", "rarity")
         .order_by("number")
         .prefetch_related("translations")
     )
@@ -244,6 +245,7 @@ def set_detail(request, set_number):
         {
             "set": set_obj,
             "cards": cards,
+            "images_enabled": settings.IMAGES_ENABLED,
             "rarities": rarities,
             "rarity_progress": set_progress.get("rarity_progress", {}),
             "collected": set_progress.get("collected", 0),
