@@ -113,6 +113,15 @@
     }
 }
 
+/* Fixed column counts chosen via the column toggle; "full" keeps auto-fill */
+.card-grid[data-cols="3"] {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.card-grid[data-cols="5"] {
+    grid-template-columns: repeat(5, 1fr);
+}
+
 .card-tile {
     display: flex;
     flex-direction: column;
@@ -152,7 +161,8 @@
 
 /* display: grid/flex above would otherwise override the hidden attribute */
 .card-grid[hidden],
-.card-tile[hidden] {
+.card-tile[hidden],
+#grid-cols-group[hidden] {
     display: none;
 }
 

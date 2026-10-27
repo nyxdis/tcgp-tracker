@@ -417,3 +417,11 @@ msgstr "Tabelle"
 #: apps/tracker/templates/tracker/set_detail.html
 msgid "Grid"
 msgstr "Raster"
+
+#: apps/tracker/templates/tracker/set_detail.html
+msgid "Columns"
+msgstr "Spalten"
+
+#: apps/tracker/templates/tracker/set_detail.html
+msgid "Full width"
+msgstr "Volle Breite"

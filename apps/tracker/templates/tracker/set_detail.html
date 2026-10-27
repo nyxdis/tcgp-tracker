@@ -93,6 +93,34 @@
                        autocomplete="off" />
                 <label class="btn btn-outline-secondary" for="view-grid">{% trans "Grid" %}</label>
             </div>
+            <div class="btn-group flex-shrink-0"
+                 id="grid-cols-group"
+                 role="group"
+                 aria-label="{% trans "Columns" %}"
+                 hidden>
+                <input type="radio"
+                       class="btn-check"
+                       name="grid-cols"
+                       id="grid-cols-3"
+                       value="3"
+                       autocomplete="off" />
+                <label class="btn btn-outline-secondary" for="grid-cols-3">3</label>
+                <input type="radio"
+                       class="btn-check"
+                       name="grid-cols"
+                       id="grid-cols-5"
+                       value="5"
+                       autocomplete="off" />
+                <label class="btn btn-outline-secondary" for="grid-cols-5">5</label>
+                <input type="radio"
+                       class="btn-check"
+                       name="grid-cols"
+                       id="grid-cols-full"
+                       value="full"
+                       autocomplete="off"
+                       checked />
+                <label class="btn btn-outline-secondary" for="grid-cols-full">{% trans "Full width" %}</label>
+            </div>
         {% endif %}
     </div>
     {% if images_enabled %}

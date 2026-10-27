@@ -195,11 +195,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Table / grid view toggle, remembered per browser
   const VIEW_KEY = "tcgp.setDetailView";
+  const gridColsGroup = document.getElementById("grid-cols-group");
   function showView(mode) {
     if (!gridView) return;
     const grid = mode === "grid";
     gridView.hidden = !grid;
     tableView.hidden = grid;
+    if (gridColsGroup) gridColsGroup.hidden = !grid;
     const radio = document.getElementById(grid ? "view-grid" : "view-table");
     if (radio) radio.checked = true;
   }
@@ -217,6 +219,35 @@ document.addEventListener("DOMContentLoaded", function () {
     showView(localStorage.getItem(VIEW_KEY) || "table");
   } catch (e) {
     showView("table");
+  }
+
+  // Grid column count toggle (3 / 5 / full width), remembered per browser
+  const GRID_COLS_KEY = "tcgp.setDetailGridCols";
+  function setGridCols(cols) {
+    if (!gridView) return;
+    const radio = document.getElementById("grid-cols-" + cols);
+    if (!radio) return;
+    radio.checked = true;
+    if (cols === "full") {
+      delete gridView.dataset.cols;
+    } else {
+      gridView.dataset.cols = cols;
+    }
+  }
+  document.querySelectorAll('input[name="grid-cols"]').forEach((radio) => {
+    radio.addEventListener("change", function () {
+      setGridCols(radio.value);
+      try {
+        localStorage.setItem(GRID_COLS_KEY, radio.value);
+      } catch (e) {
+        // Storage unavailable (private mode etc.); the toggle still works.
+      }
+    });
+  });
+  try {
+    setGridCols(localStorage.getItem(GRID_COLS_KEY) || "full");
+  } catch (e) {
+    setGridCols("full");
   }
 
   document.getElementById("jump-to-illustration-rare-btn").addEventListener("click", function () {
