@@ -1,6 +1,12 @@
+# pylint: disable=redefined-outer-name
+# Test functions take the fixture as a same-named parameter; that's the
+# standard pytest pattern, not an actual shadowing bug.
 from datetime import date
+from io import StringIO
 
 import pytest
+from django.core.management import call_command
+from django.core.management.base import CommandError
 
 from apps.tracker.management.commands.import_data import Command
 from apps.tracker.models.cards import (
@@ -13,6 +19,7 @@ from apps.tracker.models.cards import (
     Rarity,
     RarityProbability,
 )
+from apps.tracker.models.imports import DataImport
 
 
 @pytest.mark.django_db
@@ -133,3 +140,87 @@ def test_import_rarity_probabilities_keeps_standard_and_foil_rows(tmp_path):
     assert dict(
         RarityProbability.objects.values_list("is_foil", "probability_slot3")
     ) == {False: 0.3, True: 0.1}
+
+
+@pytest.fixture
+def data_dir(tmp_path, monkeypatch):
+    """A minimal data/ directory with one generation, set and card."""
+    files = {
+        "rarities.csv": "name,display_name,order\ncommon,C,1\n",
+        "generations.csv": "name,display_name,description\nG1,Generation 1,\n",
+        "pack_types.csv": (
+            "generation,pack_type,display_name,slot_count,"
+            "occurrence_probability,description\n"
+        ),
+        "rarity_probabilities.csv": (
+            "generation,pack_type,rarity,is_foil,probability_slot1,"
+            "probability_slot2,probability_slot3,probability_slot4,"
+            "probability_slot5,probability_slot6\n"
+        ),
+        "sets.csv": "number,name,release_date,generation\nA1,Genetic Apex,2024-10-30,G1\n",
+        "cards.csv": "set_number,number,card,pack,rarity,is_foil\nA1,001,Bulbasaur,,common,0\n",
+        "set_translations.csv": "english_name,german_name\n",
+        "pack_translations.csv": "set_english_name,pack_english_name,pack_german_name\n",
+        "card_translations.csv": "card_english_name,card_german_name\n",
+    }
+    for name, content in files.items():
+        (tmp_path / name).write_text(content, encoding="utf-8")
+    monkeypatch.setattr(
+        "apps.tracker.management.commands.import_data.DATA_DIR", f"{tmp_path}/"
+    )
+    return tmp_path
+
+
+@pytest.mark.django_db
+def test_full_import_records_fingerprint(data_dir):
+    call_command("import_data", stdout=StringIO())
+
+    assert Card.objects.filter(set__number="A1", number="001").exists()
+    assert DataImport.objects.count() == 1
+
+
+@pytest.mark.django_db
+def test_if_changed_skips_unchanged_data(data_dir):
+    call_command("import_data", stdout=StringIO())
+    Card.objects.all().delete()
+
+    out = StringIO()
+    call_command("import_data", "--if-changed", stdout=out)
+
+    assert "unchanged" in out.getvalue()
+    assert not Card.objects.exists()
+    assert DataImport.objects.count() == 1
+
+
+@pytest.mark.django_db
+def test_if_changed_imports_changed_data(data_dir):
+    call_command("import_data", stdout=StringIO())
+    with open(data_dir / "cards.csv", "a", encoding="utf-8") as f:
+        f.write("A1,002,Ivysaur,,common,0\n")
+
+    call_command("import_data", "--if-changed", stdout=StringIO())
+
+    assert Card.objects.filter(set__number="A1", number="002").exists()
+    assert DataImport.objects.count() == 2
+
+
+@pytest.mark.django_db
+def test_if_changed_imports_when_nothing_was_imported_yet(data_dir):
+    call_command("import_data", "--if-changed", stdout=StringIO())
+
+    assert Card.objects.exists()
+    assert DataImport.objects.count() == 1
+
+
+@pytest.mark.django_db
+def test_partial_import_records_no_fingerprint(data_dir):
+    call_command("import_data", "--rarities", str(data_dir / "rarities.csv"))
+
+    assert not DataImport.objects.exists()
+
+
+def test_if_changed_rejects_file_options(data_dir):
+    with pytest.raises(CommandError):
+        call_command(
+            "import_data", "--if-changed", "--sets", str(data_dir / "sets.csv")
+        )

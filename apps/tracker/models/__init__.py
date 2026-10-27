@@ -1,6 +1,7 @@
 """Tracker app models package."""
 
 from .cards import *  # noqa: F403
+from .imports import *  # noqa: F403
 from .users import *  # noqa: F403
 
 # Explicitly export all model classes for pylint and IDEs
@@ -10,6 +11,7 @@ __all__ = [
     "RarityProbability",
     "Pack",
     "Card",
+    "DataImport",
     "UserCard",
     "UserProfile",
     "FriendRequest",

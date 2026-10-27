@@ -1,10 +1,13 @@
 """Management command to import data for tracker app."""
 
 import csv
+import hashlib
+from pathlib import Path
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management import call_command
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
+from django.db import transaction
 
 from apps.tracker.models.cards import (
     Card,
@@ -14,11 +17,43 @@ from apps.tracker.models.cards import (
     Rarity,
     RarityProbability,
 )
+from apps.tracker.models.imports import DataImport
+
+DATA_DIR = "data/"
+
+# Option name -> file in DATA_DIR, used when no file options are given.
+DATA_FILES = {
+    "rarities": "rarities.csv",
+    "generations": "generations.csv",
+    "packtypes": "pack_types.csv",
+    "rarityprob": "rarity_probabilities.csv",
+    "sets": "sets.csv",
+    "cards": "cards.csv",
+    "settranslations": "set_translations.csv",
+    "packtranslations": "pack_translations.csv",
+    "cardtranslations": "card_translations.csv",
+}
 
 
 def _parse_bool(value):
     """Parse an optional CSV flag column ("1"/"true"/"yes"); missing is False."""
     return (value or "").strip().lower() in ("1", "true", "yes")
+
+
+def _fingerprint(paths):
+    """SHA-256 over the names and contents of *paths*."""
+    digest = hashlib.sha256()
+    for path in sorted(paths):
+        digest.update(Path(path).name.encode())
+        digest.update(b"\0")
+        digest.update(Path(path).read_bytes())
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
+def data_fingerprint():
+    """Fingerprint of the full set of data/ files."""
+    return _fingerprint(DATA_DIR + filename for filename in DATA_FILES.values())
 
 
 class Command(BaseCommand):
@@ -58,33 +93,44 @@ class Command(BaseCommand):
             type=str,
             help="Path to CSV file with card name translations",
         )
+        parser.add_argument(
+            "--if-changed",
+            action="store_true",
+            help=(
+                "Skip the import if the data/ files are unchanged since the last "
+                "full import. Only valid without file options."
+            ),
+        )
 
     def handle(self, *args, **options):
-        # If no arguments are supplied, import everything from the data directory
-        if not any(
-            [
-                options.get("rarities"),
-                options.get("generations"),
-                options.get("packtypes"),
-                options.get("rarityprob"),
-                options.get("sets"),
-                options.get("cards"),
-                options.get("settranslations"),
-                options.get("packtranslations"),
-                options.get("cardtranslations"),
-            ]
-        ):
-            base = "data/"
-            options["rarities"] = base + "rarities.csv"
-            options["generations"] = base + "generations.csv"
-            options["packtypes"] = base + "pack_types.csv"
-            options["rarityprob"] = base + "rarity_probabilities.csv"
-            options["sets"] = base + "sets.csv"
-            options["cards"] = base + "cards.csv"
-            options["settranslations"] = base + "set_translations.csv"
-            options["packtranslations"] = base + "pack_translations.csv"
-            options["cardtranslations"] = base + "card_translations.csv"
+        # If no file options are supplied, import everything from the data
+        # directory and record its fingerprint.
+        full_import = not any(options.get(option) for option in DATA_FILES)
+        if options["if_changed"] and not full_import:
+            raise CommandError("--if-changed cannot be combined with file options.")
 
+        fingerprint = None
+        if full_import:
+            for option, filename in DATA_FILES.items():
+                options[option] = DATA_DIR + filename
+            fingerprint = data_fingerprint()
+
+            if options["if_changed"]:
+                last = DataImport.objects.order_by("-imported_at").first()
+                if last and last.fingerprint == fingerprint:
+                    self.stdout.write(
+                        "data/ is unchanged since the last import, skipping."
+                    )
+                    return
+                self.stdout.write("data/ has changed since the last import.")
+
+        # One transaction, so the app never sees a half-finished import.
+        with transaction.atomic():
+            self.import_all(options)
+            if fingerprint:
+                DataImport.objects.create(fingerprint=fingerprint)
+
+    def import_all(self, options):
         if options["rarities"]:
             self.import_rarities(options["rarities"])
         if options["generations"]:

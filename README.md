@@ -92,12 +92,21 @@ uv run pytest
 
 | Command | Description |
 |---|---|
-| `import_data` | Import sets, cards, rarities and pack types from CSV files |
+| `import_data` | Import sets, cards, rarities and pack types from CSV files (`--if-changed` skips the import when `data/` is unchanged since the last full import) |
 | `sync_tcgdex` | Sync card data from the TCGdex API |
 | `sync_flibustier` | Sync new sets/cards from the flibustier JSON dataset into `data/*.csv` |
 | `sync_card_images` | Upload missing card thumbnails and set logos to the image bucket |
 | `update_pack_generations` | Backfill generation data on packs |
 | `validate_probabilities` | Validate that rarity probabilities sum to 1 per pack slot |
+
+`data/` is kept up to date by a daily CI job (`.forgejo/workflows/sync-flibustier.yaml`)
+that runs `sync_flibustier` and pushes any changes to main, which deploys a new image.
+On container start, `import_data --if-changed` runs in the background next to gunicorn:
+it compares a hash of `data/*.csv` with the one recorded for the last full import and
+only imports when they differ. The import runs in one transaction, so the old data is
+served until it commits. The admin's *Import Data* button starts the same import in the
+background, either only if changed or as a forced full re-import; completed imports are
+listed under *Data Imports*.
 
 ## Project Structure
 

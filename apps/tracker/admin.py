@@ -15,6 +15,7 @@ from apps.tracker.models.cards import (
     Rarity,
     RarityProbability,
 )
+from apps.tracker.models.imports import DataImport
 from apps.tracker.models.users import FriendRequest, UserCard, UserProfile
 
 
@@ -218,48 +219,56 @@ class SetAdmin(admin.ModelAdmin):
         return urls + super().get_urls()
 
     def import_data_view(self, request):
-        """Run the import_data management command from the admin UI."""
-        import logging
-        import re
-        from io import StringIO
+        """Start the import_data management command from the admin UI.
+
+        The import takes longer than a request may, so it runs as a separate
+        process that outlives the request (and a recycled gunicorn worker).
+        Its output goes to the server logs; a Data Import entry is added when
+        it finishes.
+        """
+        import subprocess
+        import sys
 
         from django.contrib import messages
-        from django.core.management import call_command
         from django.http import HttpResponseForbidden
         from django.shortcuts import redirect, render
+
+        from apps.tracker.management.commands.import_data import data_fingerprint
 
         if not request.user.is_superuser:
             return HttpResponseForbidden("Superuser access required.")
 
         if request.method == "POST":
-            out, err = StringIO(), StringIO()
+            command = [sys.executable, "manage.py", "import_data"]
+            if request.POST.get("mode") != "force":
+                command.append("--if-changed")
             try:
-                call_command("import_data", stdout=out, stderr=err)
-            except Exception as exc:  # pylint: disable=broad-exception-caught
-                messages.error(request, f"Import failed: {exc}")
+                subprocess.Popen(  # pylint: disable=consider-using-with
+                    command, start_new_session=True
+                )
+            except OSError as exc:
+                messages.error(request, f"Could not start the import: {exc}")
             else:
-                created = len(re.findall(r"^Created ", out.getvalue(), re.MULTILINE))
-                updated = len(re.findall(r"^Updated ", out.getvalue(), re.MULTILINE))
                 messages.success(
                     request,
-                    f"Import complete: {created} created, {updated} updated.",
+                    "Import started in the background. It takes a few minutes; "
+                    "a new Data Import entry appears when it has finished, and "
+                    "skipped rows are listed in the server logs.",
                 )
-                error_output = err.getvalue().strip()
-                if error_output:
-                    skipped = len(error_output.splitlines())
-                    messages.warning(
-                        request,
-                        f"{skipped} row(s) skipped — see server logs for details.",
-                    )
-                    logging.getLogger(__name__).warning(
-                        "import_data skipped rows:\n%s", error_output
-                    )
             return redirect("admin:tracker_pokemonset_changelist")
 
+        last_import = DataImport.objects.order_by("-imported_at").first()
         return render(
             request,
             "admin/tracker/pokemonset/import_data_confirm.html",
-            {**self.admin_site.each_context(request), "opts": self.model._meta},
+            {
+                **self.admin_site.each_context(request),
+                "opts": self.model._meta,
+                "last_import": last_import,
+                "data_changed": (
+                    last_import is None or last_import.fingerprint != data_fingerprint()
+                ),
+            },
         )
 
 
@@ -528,3 +537,17 @@ class CardNameTranslationAdmin(admin.ModelAdmin):
     autocomplete_fields = ["card"]
     list_filter = ("language_code",)
     ordering = ("language_code", "localized_name")
+
+
+@admin.register(DataImport)
+class DataImportAdmin(admin.ModelAdmin):
+    """Read-only history of completed data/ imports."""
+
+    list_display = ("imported_at", "fingerprint")
+    ordering = ("-imported_at",)
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False

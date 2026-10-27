@@ -66,5 +66,7 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD python -c "import sys,urllib.request; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health/', timeout=3).status == 200 else 1)"
 
-# Start Django app using gunicorn, running migrations first
-CMD ["/bin/sh", "-c", "export $(cat /app/.git_hash | xargs) && python manage.py migrate --noinput && exec gunicorn tcgptracker.wsgi:application --bind 0.0.0.0:8000"]
+# Start Django app using gunicorn, running migrations first. The data/ import
+# runs alongside gunicorn and only does work when data/ changed since the last
+# import; until it commits, the previous data is served.
+CMD ["/bin/sh", "-c", "export $(cat /app/.git_hash | xargs) && python manage.py migrate --noinput && { python manage.py import_data --if-changed & } && exec gunicorn tcgptracker.wsgi:application --bind 0.0.0.0:8000"]

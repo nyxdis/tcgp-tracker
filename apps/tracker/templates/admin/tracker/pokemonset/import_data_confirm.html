@@ -5,9 +5,24 @@
         translations from the <code>data/</code> CSV files. Existing rows are
         updated in place; nothing is deleted.
     </p>
+    <p>
+        {% if not last_import %}
+            <code>data/</code> has never been imported.
+        {% elif data_changed %}
+            <code>data/</code> has changed since the last import ({{ last_import.imported_at }}).
+        {% else %}
+            <code>data/</code> is unchanged since the last import ({{ last_import.imported_at }}).
+        {% endif %}
+    </p>
+    <p>
+        The import runs in the background and takes a few minutes. A new
+        <a href="{% url 'admin:tracker_dataimport_changelist' %}">Data Import</a>
+        entry appears when it has finished.
+    </p>
     <form method="post">
         {% csrf_token %}
-        <input type="submit" value="Run Import" class="default">
+        <button type="submit" name="mode" value="if_changed" class="default">Import if changed</button>
+        <button type="submit" name="mode" value="force">Force full re-import</button>
         <a href="{% url 'admin:tracker_pokemonset_changelist' %}"
            class="button cancel-link">Cancel</a>
     </form>
