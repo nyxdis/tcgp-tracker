@@ -59,6 +59,13 @@ RARITY_MAP = {
 # the base rarity they share with the standard print.
 FOIL_RARITY_MAP = {"CF": "common", "UF": "uncommon", "RF": "rare"}
 
+# Rarity codes of cards this project deliberately doesn't track. AN
+# ("Anomaly") is only used by the three unnumbered, untradeable RGB Mews in
+# the SP1 special pack. Cards with any other unknown code are skipped too,
+# but with a warning, so a new rarity is noticed instead of being written to
+# data/cards.csv as a raw code that import_data can't resolve.
+SKIPPED_RARITY_CODES = ("AN",)
+
 # Generations whose sets have parallel-foil prints of their ♢/♢♢/♢♢♢ cards.
 DELUXE_GENERATIONS = ("G3", "G5")
 _FOIL_RARITY_CODES = ("C", "U", "R")
@@ -224,13 +231,19 @@ class Command(BaseCommand):
     ) -> tuple[list, list]:
         new_cards = []
         mismatches = []
+        unknown_codes = {}
         for c in cards:
             set_code = c["set"]
-            if _is_promo(set_code):
+            if _is_promo(set_code) or c["rarity"] in SKIPPED_RARITY_CODES:
+                continue
+            if c["rarity"] not in RARITY_MAP:
+                unknown_codes.setdefault(c["rarity"], []).append(
+                    f"{set_code} #{c['number']} {c['name']}"
+                )
                 continue
             number = str(c["number"]).zfill(3)
             key = (set_code, number)
-            rarity = RARITY_MAP.get(c["rarity"], c["rarity"])
+            rarity = RARITY_MAP[c["rarity"]]
             generation = existing_sets.get(set_code, {}).get(
                 "generation", _DEFAULT_GENERATION
             )
@@ -269,6 +282,14 @@ class Command(BaseCommand):
                         "flib_is_foil": is_foil,
                     }
                 )
+        for code, skipped in sorted(unknown_codes.items()):
+            self.stdout.write(
+                self.style.WARNING(
+                    f"Skipped {len(skipped)} card(s) with unknown rarity code "
+                    f"{code!r} (add it to RARITY_MAP or SKIPPED_RARITY_CODES): "
+                    f"{', '.join(skipped)}"
+                )
+            )
         return new_cards, mismatches
 
     def _report_mismatches(self, mismatches: list) -> None:

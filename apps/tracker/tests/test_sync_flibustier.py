@@ -90,3 +90,24 @@ def test_known_overrides_are_dropped_only_for_the_recorded_flibustier_value():
     assert not pack_types
     assert probs == [changed, other]
     assert "known difference kept: G3/normal/rare (foil)" in cmd.stdout.getvalue()
+
+
+def _flib_card(set_code, number, name, rarity="C"):
+    return {"set": set_code, "number": number, "name": name, "rarity": rarity}
+
+
+def test_collect_cards_skips_anomaly_and_warns_about_unknown_rarities():
+    cmd = Command(stdout=StringIO())
+    cards = [
+        {**_flib_card("SP1", 1, "Bulbasaur", "AR"), "image": "x_00_y.webp"},
+        {**_flib_card("SP1", -1, "Mew", "AN"), "image": "x_00_y.webp"},
+        {**_flib_card("SP1", 2, "Ivysaur", "ZZ"), "image": "x_00_y.webp"},
+    ]
+
+    new_cards, mismatches = cmd._collect_cards(cards, {}, {"SP1": {"generation": "G4"}})
+
+    assert [c["card"] for c in new_cards] == ["Bulbasaur"]
+    assert not mismatches
+    output = cmd.stdout.getvalue()
+    assert "unknown rarity code 'ZZ'" in output and "SP1 #2 Ivysaur" in output
+    assert "Mew" not in output
