@@ -68,5 +68,8 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 
 # Start Django app using gunicorn, running migrations first. The data/ import
 # runs alongside gunicorn and only does work when data/ changed since the last
-# import; until it commits, the previous data is served.
-CMD ["/bin/sh", "-c", "export $(cat /app/.git_hash | xargs) && python manage.py migrate --noinput && { python manage.py import_data --if-changed & } && exec gunicorn tcgptracker.wsgi:application --bind 0.0.0.0:8000"]
+# import; until it commits, the previous data is served. After it, missing card
+# images are uploaded to the bucket (when S3_ENDPOINT is set). That also runs
+# when the import is skipped, so images that failed or weren't available
+# upstream last time are retried.
+CMD ["/bin/sh", "-c", "export $(cat /app/.git_hash | xargs) && python manage.py migrate --noinput && { { python manage.py import_data --if-changed; [ -z \"$S3_ENDPOINT\" ] || python manage.py sync_card_images; } & } && exec gunicorn tcgptracker.wsgi:application --bind 0.0.0.0:8000"]

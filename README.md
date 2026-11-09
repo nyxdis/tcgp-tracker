@@ -68,9 +68,11 @@ S3_SECRET_ACCESS_KEY=...
 The `S3_*` variables are optional. When `S3_ENDPOINT` is set, card thumbnails
 and set logos are read from that S3-compatible bucket (MinIO) and served
 through the app's `/images/` proxy, so the bucket can stay private.
-`S3_REGION` defaults to `eu-central-1`. Fill the bucket with
-`manage.py sync_card_images`, and re-run it after new sets are imported. When
-`S3_ENDPOINT` is unset, no images are shown.
+`S3_REGION` defaults to `eu-central-1`. The container runs
+`manage.py sync_card_images` on every start, after the data import, and it only
+uploads images missing from the bucket. Run it by hand to fill the bucket
+outside a restart. When `S3_ENDPOINT` is unset, no images are shown and the
+sync is skipped.
 
 `REDIS_URL` is optional. When set, it enables the Redis cache backend and
 Redis-backed sessions (`cached_db`, so sessions survive a Redis restart). When
@@ -104,7 +106,8 @@ that runs `sync_flibustier` and pushes any changes to main, which deploys a new 
 On container start, `import_data --if-changed` runs in the background next to gunicorn:
 it compares a hash of `data/*.csv` with the one recorded for the last full import and
 only imports when they differ. The import runs in one transaction, so the old data is
-served until it commits. The admin's *Import Data* button starts the same import in the
+served until it commits. After it, `sync_card_images` uploads any images missing from
+the bucket. The admin's *Import Data* button starts the same import in the
 background, either only if changed or as a forced full re-import; completed imports are
 listed under *Data Imports*.
 
