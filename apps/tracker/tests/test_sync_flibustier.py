@@ -3,6 +3,7 @@
 
 from io import StringIO
 
+from apps.tracker.management.commands import sync_flibustier
 from apps.tracker.management.commands.sync_flibustier import (
     Command,
     _collect_card_translations,
@@ -75,7 +76,32 @@ def _prob_mismatch(key, flib_slots):
     }
 
 
-def test_known_overrides_are_dropped_only_for_the_recorded_flibustier_value():
+def test_known_overrides_are_dropped_only_for_the_recorded_flibustier_value(
+    monkeypatch,
+):
+    # The A4b differences these entries described have since been fixed
+    # upstream; they're kept here as example data.
+    monkeypatch.setattr(
+        sync_flibustier,
+        "KNOWN_PACK_TYPE_OVERRIDES",
+        {
+            ("G3", "god"): {
+                "flib_occurrence": 0.0005,
+                "flib_slot_count": 5,
+                "reason": "the in-game A4b god pack has 4 cards",
+            }
+        },
+    )
+    monkeypatch.setattr(
+        sync_flibustier,
+        "KNOWN_RARITY_PROBABILITY_OVERRIDES",
+        {
+            ("G3", "normal", "rare", "1"): {
+                "flib_slots": (0.0, 0.0, 0.203295, 0.0, 0.0, 0.0),
+                "reason": "in-game A4b slot 3 is 0.359% per foil ♢♢♢ card",
+            }
+        },
+    )
     cmd = Command(stdout=StringIO())
     key = ("G3", "normal", "rare", "1")
     known = _prob_mismatch(key, (0, 0, 0.203295, 0, 0, 0))

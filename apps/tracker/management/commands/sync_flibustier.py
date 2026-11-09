@@ -102,24 +102,13 @@ _PROB_TOLERANCE = 1e-4
 # Known, verified-in-game differences where flibustier is wrong and the local
 # data is kept. Each entry records the flibustier value it was checked
 # against, so if flibustier changes that value (e.g. fixes it) the row is
-# reported again instead of being silently skipped.
-KNOWN_PACK_TYPE_OVERRIDES = {
-    ("G3", "god"): {
-        "flib_occurrence": 0.0005,
-        "flib_slot_count": 5,
-        "reason": "the in-game A4b god pack has 4 cards",
-    },
-}
-KNOWN_RARITY_PROBABILITY_OVERRIDES = {
-    ("G3", "normal", "rare", "0"): {
-        "flib_slots": (0.0, 0.0, 0.203295, 0.0, 0.0, 0.0),
-        "reason": "in-game A4b slot 3 is 1.266% per standard ♢♢♢ card",
-    },
-    ("G3", "normal", "rare", "1"): {
-        "flib_slots": (0.0, 0.0, 0.203295, 0.0, 0.0, 0.0),
-        "reason": "in-game A4b slot 3 is 0.359% per foil ♢♢♢ card",
-    },
-}
+# reported again instead of being silently skipped. Entry shapes:
+#   KNOWN_PACK_TYPE_OVERRIDES[(generation, pack_type)] =
+#       {"flib_occurrence": 0.0005, "flib_slot_count": 5, "reason": "..."}
+#   KNOWN_RARITY_PROBABILITY_OVERRIDES[(generation, pack_type, rarity, is_foil)] =
+#       {"flib_slots": (0.0, 0.0, 0.2, 0.0, 0.0, 0.0), "reason": "..."}
+KNOWN_PACK_TYPE_OVERRIDES: dict[tuple, dict] = {}
+KNOWN_RARITY_PROBABILITY_OVERRIDES: dict[tuple, dict] = {}
 
 # Verified German names that differ from flibustier's, keyed by English name,
 # in the same shape as the overrides above: if flibustier's value changes,
