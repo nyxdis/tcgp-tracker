@@ -96,7 +96,7 @@ uv run pytest
 |---|---|
 | `import_data` | Import sets, cards, rarities and pack types from CSV files (`--if-changed` skips the import when `data/` is unchanged since the last full import) |
 | `sync_tcgdex` | Sync card data from the TCGdex API |
-| `sync_flibustier` | Sync new sets/cards from the flibustier JSON dataset into `data/*.csv` |
+| `sync_flibustier` | Sync new sets/cards and missing German set/card names from the flibustier JSON dataset into `data/*.csv` |
 | `sync_card_images` | Upload missing card thumbnails and set logos to the image bucket |
 | `update_pack_generations` | Backfill generation data on packs |
 | `validate_probabilities` | Validate that rarity probabilities sum to 1 per pack slot |

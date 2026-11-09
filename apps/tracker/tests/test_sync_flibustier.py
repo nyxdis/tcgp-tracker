@@ -5,8 +5,12 @@ from io import StringIO
 
 from apps.tracker.management.commands.sync_flibustier import (
     Command,
+    _collect_card_translations,
+    _collect_set_translations,
+    _flib_german_card_names,
     _is_foil_print,
     _pool_key,
+    _to_local_german_style,
 )
 
 
@@ -111,3 +115,99 @@ def test_collect_cards_skips_anomaly_and_warns_about_unknown_rarities():
     output = cmd.stdout.getvalue()
     assert "unknown rarity code 'ZZ'" in output and "SP1 #2 Ivysaur" in output
     assert "Mew" not in output
+
+
+def test_to_local_german_style_converts_ex_and_mega_spelling():
+    assert _to_local_german_style("Charizard ex", "Glurak ex") == "Glurak-ex"
+    assert (
+        _to_local_german_style("Mega Charizard X ex", "Mega Glurak X ex")
+        == "Mega-Glurak X-ex"
+    )
+    # Only converted when the English name has the affix too.
+    assert _to_local_german_style("Exeggcute", "Owei") == "Owei"
+
+
+def test_flib_german_card_names_skips_promos_and_anomalies():
+    cards = [
+        _flib_card("A1", 4, "Charizard ex", "RR"),
+        _flib_card("PROMO-A", 1, "Potion"),
+        _flib_card("SP1", -1, "Mew", "AN"),
+    ]
+    cards_de = [
+        _flib_card("A1", 4, "Glurak ex", "RR"),
+        _flib_card("PROMO-A", 1, "Trank"),
+        _flib_card("SP1", -1, "Mew", "AN"),
+    ]
+
+    assert _flib_german_card_names(cards, cards_de) == {"Charizard ex": {"Glurak-ex"}}
+
+
+def test_collect_card_translations_adds_base_names_before_variants():
+    flib = {
+        "Amoonguss": {"Hutsassa"},
+        "Amoonguss ex": {"Hutsassa-ex"},
+        "Mega Mewtwo X ex": {"Mega-Mewtu X-ex"},
+        "Haunter": {"Alpollo"},
+        "Pikachu": {"Pikachu", "Pikachuu"},
+    }
+    existing = {"Haunter": "Apollo"}
+    names = ["Amoonguss ex", "Amoonguss", "Mega Mewtwo X ex", "Haunter", "Pikachu"]
+
+    new_rows, mismatches, conflicts = _collect_card_translations(names, flib, existing)
+
+    # "Amoonguss ex" is derived from the new base row, so it gets none itself.
+    assert new_rows == [
+        {"card_english_name": "Amoonguss", "card_german_name": "Hutsassa"},
+        {
+            "card_english_name": "Mega Mewtwo X ex",
+            "card_german_name": "Mega-Mewtu X-ex",
+        },
+    ]
+    assert mismatches == [
+        {
+            "kind": "card",
+            "english": "Haunter",
+            "local": "Apollo",
+            "flib_german": "Alpollo",
+        }
+    ]
+    assert conflicts == [{"english": "Pikachu", "flib_german": ["Pikachu", "Pikachuu"]}]
+
+
+def test_collect_set_translations_only_for_local_sets():
+    all_sets = [
+        {"code": "C1", "name": {"en": "Dual Fusion", "de": "Doppelte Fusion"}},
+        {"code": "A1", "name": {"en": "Genetic Apex", "de": "Unschlagbare Gene"}},
+        {"code": "B1", "name": {"en": "Mega Rising", "de": "Mega-Aufstieg"}},
+        {"code": "Z9", "name": {"en": "Not Synced", "de": "Nicht synchronisiert"}},
+        {"code": "PROMO-A", "name": {"en": "Promo-A", "de": "Promo-A"}},
+    ]
+    existing = {"Dual Fusion": "Duale Fusion", "Genetic Apex": "Unschlagbare Gene"}
+
+    new_rows, mismatches = _collect_set_translations(
+        all_sets, ["Dual Fusion", "Genetic Apex", "Mega Rising", "Promo-A"], existing
+    )
+
+    assert new_rows == [{"english_name": "Mega Rising", "german_name": "Mega-Aufstieg"}]
+    assert mismatches == [
+        {
+            "kind": "set",
+            "english": "Dual Fusion",
+            "local": "Duale Fusion",
+            "flib_german": "Doppelte Fusion",
+        }
+    ]
+
+
+def test_known_translation_overrides_are_dropped_only_for_the_recorded_value():
+    cmd = Command(stdout=StringIO())
+    known = {
+        "kind": "set",
+        "english": "Dual Fusion",
+        "local": "Duale Fusion",
+        "flib_german": "Doppelte Fusion",
+    }
+    changed = {**known, "flib_german": "Duale Fusion II"}
+
+    assert cmd._drop_known_translation_overrides([known, changed]) == [changed]
+    assert "known difference kept: set Dual Fusion" in cmd.stdout.getvalue()

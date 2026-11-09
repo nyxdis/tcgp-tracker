@@ -19,9 +19,15 @@ separate pull-rate codes CF/UF/RF for them. Both are mapped to this project's
 is_foil flag. A new deluxe set is only recognised as such once its generation
 in data/sets.csv has been changed by hand (new sets default to G4).
 
-The dataset has no German localisation, so data/set_translations.csv,
-data/pack_translations.csv and data/card_translations.csv are left untouched;
-translations for anything newly added must be filled in by hand.
+German set names (sets.json) and card names (cards.de.json) are added to
+data/set_translations.csv and data/card_translations.csv when this project
+has none yet. Existing German names are never modified; where they disagree
+with flibustier they are listed for review instead (KNOWN_*_TRANSLATION_
+OVERRIDES records verified differences). flibustier writes "Glurak ex" and
+"Mega Glurak X ex" where this project uses the official "Glurak-ex" and
+"Mega-Glurak X-ex", so its names are converted before being compared or
+added. flibustier has no German pack names, so data/pack_translations.csv
+must still be filled in by hand.
 """
 
 import csv
@@ -30,6 +36,8 @@ from pathlib import Path
 
 import requests
 from django.core.management.base import BaseCommand
+
+from apps.tracker.card_name_rules import AFFIX_RULES, derive_translation
 
 DATA_DIR = Path(__file__).resolve().parents[4] / "data"
 BASE_URL = (
@@ -113,6 +121,24 @@ KNOWN_RARITY_PROBABILITY_OVERRIDES = {
     },
 }
 
+# Verified German names that differ from flibustier's, keyed by English name,
+# in the same shape as the overrides above: if flibustier's value changes,
+# the name is reported again.
+KNOWN_SET_TRANSLATION_OVERRIDES = {
+    "Dual Fusion": {
+        "flib_german": "Doppelte Fusion",
+        "reason": 'the official German name is "Duale Fusion"',
+    },
+    "Special Pack: First Partners": {
+        "flib_german": "Erste Partner",
+        "reason": '"Erste Partner" is the pack; the set is "Spezialpack: Erste Partner"',
+    },
+}
+KNOWN_CARD_TRANSLATION_OVERRIDES: dict[str, dict] = {}
+
+SET_TRANSLATION_FIELDS = ["english_name", "german_name"]
+CARD_TRANSLATION_FIELDS = ["card_english_name", "card_german_name"]
+
 
 class Command(BaseCommand):
     help = "Sync data/sets.csv and data/cards.csv from the flibustier JSON dataset"
@@ -151,6 +177,7 @@ class Command(BaseCommand):
         self.stdout.write("Fetching flibustier dataset…")
         sets_by_series = self._fetch_json("sets.json")
         cards = self._fetch_json("cards.json")
+        cards_de = self._fetch_json("cards.de.json")
         pull_rates = self._fetch_json("pullRates.json")
         all_sets = [s for series in sets_by_series.values() for s in series]
 
@@ -177,9 +204,8 @@ class Command(BaseCommand):
             )
             if new_sets:
                 self.stdout.write(
-                    "New sets need German translations added by hand to "
-                    "data/set_translations.csv (and data/pack_translations.csv "
-                    "for their packs):"
+                    "New sets need German pack names added by hand to "
+                    "data/pack_translations.csv (flibustier has none):"
                 )
                 for s in new_sets:
                     self.stdout.write(f"  {s['number']} - {s['name']}")
@@ -188,6 +214,16 @@ class Command(BaseCommand):
             self._review_mismatches_interactively(mismatches, existing_cards)
         else:
             self._report_mismatches(mismatches)
+
+        self._sync_translations(
+            all_sets,
+            cards,
+            cards_de,
+            set_names=[s["name"] for s in existing_sets.values()]
+            + [s["name"] for s in new_sets],
+            card_names=[c["card"] for c in existing_cards.values()]
+            + [c["card"] for c in new_cards],
+        )
 
         self.stdout.write("\nChecking pull-rate probabilities…")
         pack_type_mismatches, prob_mismatches = self._collect_probability_data(
@@ -690,6 +726,123 @@ class Command(BaseCommand):
         )
 
     # ------------------------------------------------------------------
+    # German names
+    # ------------------------------------------------------------------
+
+    def _sync_translations(
+        self, all_sets, cards, cards_de, set_names, card_names
+    ) -> None:
+        """Add German set and card names this project has none for yet, and
+        report the ones that disagree with flibustier."""
+        self.stdout.write("\nChecking German names…")
+        existing_sets = {
+            english: row["german_name"].strip()
+            for english, row in _read_csv_as_dict(
+                DATA_DIR / "set_translations.csv", ("english_name",)
+            ).items()
+        }
+        existing_cards = {
+            english.strip(): row["card_german_name"].strip()
+            for english, row in _read_csv_as_dict(
+                DATA_DIR / "card_translations.csv", ("card_english_name",)
+            ).items()
+        }
+
+        new_set_rows, set_mismatches = _collect_set_translations(
+            all_sets, set_names, existing_sets
+        )
+        new_card_rows, card_mismatches, conflicts = _collect_card_translations(
+            card_names, _flib_german_card_names(cards, cards_de), existing_cards
+        )
+        _append_csv(
+            DATA_DIR / "set_translations.csv", SET_TRANSLATION_FIELDS, new_set_rows
+        )
+        _append_csv(
+            DATA_DIR / "card_translations.csv", CARD_TRANSLATION_FIELDS, new_card_rows
+        )
+
+        if new_set_rows or new_card_rows:
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f"Added {len(new_set_rows)} German set name(s) and "
+                    f"{len(new_card_rows)} German card name(s) from flibustier:"
+                )
+            )
+            for row in new_set_rows:
+                self.stdout.write(f"  set {row['english_name']}: {row['german_name']}")
+            for row in new_card_rows:
+                self.stdout.write(
+                    f"  card {row['card_english_name']}: {row['card_german_name']}"
+                )
+
+        mismatches = self._drop_known_translation_overrides(
+            set_mismatches + card_mismatches
+        )
+        if mismatches:
+            self.stdout.write(
+                self.style.WARNING(
+                    f"\n{len(mismatches)} German name(s) disagree with "
+                    "flibustier. Not auto-fixed, please check the official name "
+                    "and either correct data/*_translations.csv or record it in "
+                    "KNOWN_*_TRANSLATION_OVERRIDES:"
+                )
+            )
+            for m in mismatches:
+                self.stdout.write(
+                    f"  {m['kind']} {m['english']}: local={m['local']} "
+                    f"flibustier={m['flib_german']}"
+                )
+        for c in conflicts:
+            self.stdout.write(
+                self.style.WARNING(
+                    f"  flibustier has several German names for card "
+                    f"{c['english']} ({', '.join(c['flib_german'])}), not added"
+                )
+            )
+
+        set_lookup = existing_sets | {
+            r["english_name"]: r["german_name"] for r in new_set_rows
+        }
+        card_lookup = existing_cards | {
+            r["card_english_name"]: r["card_german_name"] for r in new_card_rows
+        }
+        untranslated = [
+            f"set {name}" for name in sorted(set(set_names)) if name not in set_lookup
+        ] + [
+            f"card {name}"
+            for name in sorted(set(card_names))
+            if derive_translation(name, card_lookup) is None
+        ]
+        if untranslated:
+            self.stdout.write(
+                self.style.WARNING(
+                    f"\n{len(untranslated)} name(s) have no German name yet and "
+                    "flibustier has none either; add them by hand to "
+                    "data/set_translations.csv / data/card_translations.csv:"
+                )
+            )
+            for name in untranslated:
+                self.stdout.write(f"  {name}")
+
+    def _drop_known_translation_overrides(self, mismatches: list) -> list:
+        """Remove mismatches listed in KNOWN_*_TRANSLATION_OVERRIDES, noting each."""
+        known_by_kind = {
+            "set": KNOWN_SET_TRANSLATION_OVERRIDES,
+            "card": KNOWN_CARD_TRANSLATION_OVERRIDES,
+        }
+        remaining = []
+        for m in mismatches:
+            known = known_by_kind[m["kind"]].get(m["english"])
+            if known is not None and known["flib_german"] == m["flib_german"]:
+                self.stdout.write(
+                    f"  known difference kept: {m['kind']} {m['english']} "
+                    f"({known['reason']})"
+                )
+            else:
+                remaining.append(m)
+        return remaining
+
+    # ------------------------------------------------------------------
     # HTTP helpers
     # ------------------------------------------------------------------
 
@@ -825,6 +978,108 @@ def _cluster_consensus(values: list, is_close) -> tuple:
             clusters.append([v])
     largest = max(clusters, key=len)
     return largest[0], len(largest) * 2 > len(values)
+
+
+def _to_local_german_style(english: str, german: str) -> str:
+    """Convert flibustier's "Glurak ex" / "Mega Glurak X ex" spelling to the
+    official "Glurak-ex" / "Mega-Glurak X-ex" this project uses (see
+    card_name_rules.AFFIX_RULES)."""
+    if english.endswith(" ex") and german.endswith(" ex"):
+        german = german[: -len(" ex")] + "-ex"
+    if english.startswith("Mega ") and german.startswith("Mega "):
+        german = "Mega-" + german[len("Mega ") :]
+    return german
+
+
+def _has_affix(name: str) -> bool:
+    """True if *name* is a variant that derive_translation() builds from a
+    base name ("X ex", "Mega X", "Alolan X", ...)."""
+    return any(
+        name.endswith(affix) if kind == "suffix" else name.startswith(affix)
+        for kind, affix, _ in AFFIX_RULES
+    )
+
+
+def _flib_german_card_names(cards: list[dict], cards_de: list[dict]) -> dict:
+    """Map each English card name to the set of German names flibustier
+    gives its prints, in this project's spelling."""
+    german_by_print = {(c["set"], c["number"]): c["name"] for c in cards_de}
+    result: dict[str, set[str]] = {}
+    for c in cards:
+        if _is_promo(c["set"]) or c["rarity"] in SKIPPED_RARITY_CODES:
+            continue
+        german = german_by_print.get((c["set"], c["number"]))
+        if not german:
+            continue
+        english = _normalise_apostrophe(c["name"])
+        result.setdefault(english, set()).add(
+            _to_local_german_style(english, _normalise_apostrophe(german))
+        )
+    return result
+
+
+def _collect_set_translations(
+    all_sets: list[dict], set_names, existing: dict
+) -> tuple[list, list]:
+    """German names for local sets that have none yet, and those that
+    disagree with flibustier."""
+    wanted = set(set_names)
+    new_rows, mismatches = [], []
+    for s in all_sets:
+        english = _normalise_apostrophe(s["name"]["en"])
+        german = s["name"].get("de")
+        if _is_promo(s["code"]) or english not in wanted or not german:
+            continue
+        german = _normalise_apostrophe(german)
+        local = existing.get(english)
+        if local is None:
+            new_rows.append({"english_name": english, "german_name": german})
+        elif local != german:
+            mismatches.append(
+                {
+                    "kind": "set",
+                    "english": english,
+                    "local": local,
+                    "flib_german": german,
+                }
+            )
+    return new_rows, mismatches
+
+
+def _collect_card_translations(
+    card_names, flib_names: dict, existing: dict
+) -> tuple[list, list, list]:
+    """German names for local card names that have none yet (not even a
+    derived one), names that disagree with flibustier, and names flibustier
+    itself is inconsistent about.
+
+    Base names are handled before their variants, so adding e.g. "Hutsassa"
+    lets "Amoonguss ex" be derived instead of getting a row of its own.
+    """
+    lookup = dict(existing)
+    new_rows, mismatches, conflicts = [], [], []
+    for english in sorted(set(card_names), key=lambda n: (_has_affix(n), n)):
+        candidates = flib_names.get(english)
+        if not candidates:
+            continue
+        if len(candidates) > 1:
+            conflicts.append({"english": english, "flib_german": sorted(candidates)})
+            continue
+        (german,) = candidates
+        local = derive_translation(english, lookup)
+        if local is None:
+            lookup[english] = german
+            new_rows.append({"card_english_name": english, "card_german_name": german})
+        elif local != german:
+            mismatches.append(
+                {
+                    "kind": "card",
+                    "english": english,
+                    "local": local,
+                    "flib_german": german,
+                }
+            )
+    return new_rows, mismatches, conflicts
 
 
 def _is_promo(set_code: str) -> bool:
