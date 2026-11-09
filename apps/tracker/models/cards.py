@@ -549,8 +549,9 @@ class Card(models.Model):
         verbose_name="Reprint of",
         help_text=(
             "The original this card is a reprint of, when the game treats both "
-            "prints as the same card (from B4b on). Collection entries are "
-            "stored on the original and count for every print."
+            "prints as the same card (same artwork, e.g. A4b and B4b "
+            "reprints). Collection entries are stored on the original and "
+            "count for every print."
         ),
     )
 

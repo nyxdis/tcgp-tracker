@@ -1,7 +1,7 @@
 """A user's card collection, with reprints that share their original's entry.
 
-From B4b on, the game treats a reprint as the same card as its original
-(Card.reprint_of). A collection entry (UserCard) is therefore stored once, on
+The game treats a reprint with the same artwork as the same card as its
+original (Card.reprint_of). A collection entry (UserCard) is therefore stored once, on
 the original, and every print of the card counts as owned when it exists.
 All ownership checks should go through this module rather than querying
 UserCard per print.

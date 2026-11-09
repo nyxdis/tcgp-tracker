@@ -1,6 +1,6 @@
 # pylint: disable=redefined-outer-name
 # Test functions take fixtures as same-named parameters (standard pytest pattern).
-"""Tests for reprints sharing their original's collection entry (B4b on)."""
+"""Tests for reprints sharing their original's collection entry."""
 
 from datetime import date
 

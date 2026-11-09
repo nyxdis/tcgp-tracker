@@ -245,31 +245,35 @@ def _print(set_code, number, image, rarity="C"):
     return {"set": set_code, "number": number, "rarity": rarity, "image": image}
 
 
-def test_reprint_links_only_from_b4b_on_to_the_earliest_print():
+def test_reprint_links_point_same_artwork_prints_to_the_earliest_print():
     all_sets = [
         {"code": "A1", "releaseDate": "2024-10-30"},
         {"code": "A1a", "releaseDate": "2024-12-17"},
         {"code": "A4b", "releaseDate": "2025-09-30"},
         {"code": "B1", "releaseDate": "2026-01-01"},
         {"code": "B4b", "releaseDate": "2026-09-30"},
-        {"code": "D9", "releaseDate": "2027-09-30"},
     ]
     cards = [
-        # Old Amber: an A-series card reprinted before B4b stays separate.
+        # Old Amber is one card in A1, A1a and A4b.
         _print("A1", 218, "amber.webp"),
         _print("A1a", 63, "amber.webp"),
         _print("A4b", 312, "amber.webp"),
-        # Reprinted in B4b and again in a later (hypothetical) deluxe set.
+        # The parallel-foil print has its own image and stays separate.
+        _print("A4b", 313, "amber-foil.webp"),
+        # Listed out of order on purpose; the earliest release is the original.
         _print("B4b", 1, "bulbasaur.webp"),
         _print("B1", 1, "bulbasaur.webp"),
-        _print("D9", 7, "bulbasaur.webp"),
+        # Promos and cards with skipped rarities are never linked.
         _print("B4b", 2, "only-once.webp"),
         _print("PROMO-B", 1, "only-once.webp"),
+        _print("B4b", 3, "anomaly.webp", rarity="AN"),
+        _print("B1", 3, "anomaly.webp"),
     ]
 
     assert _reprint_links(cards, all_sets) == {
+        ("A1a", "063"): "A1/218",
+        ("A4b", "312"): "A1/218",
         ("B4b", "001"): "B1/001",
-        ("D9", "007"): "B1/001",
     }
 
 

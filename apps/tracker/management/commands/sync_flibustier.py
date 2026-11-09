@@ -19,9 +19,9 @@ separate pull-rate codes CF/UF/RF for them. Both are mapped to this project's
 is_foil flag. A new deluxe set is only recognised as such once its generation
 in data/sets.csv has been changed by hand (new sets default to G4).
 
-From B4b on, reprints are the same card as their original in the game; the
-reprint_of column of data/cards.csv records the original ("SET/NUMBER"),
-derived from prints sharing an image (see LINKED_REPRINTS_FROM_SET). It is
+A reprint with the same artwork is the same card as its original in the game;
+the reprint_of column of data/cards.csv records the original ("SET/NUMBER"),
+derived from prints sharing an image (see _reprint_links). It is
 filled in for new cards and for existing rows that have none yet; existing
 values that disagree are reported, not changed.
 
@@ -86,13 +86,6 @@ _FOIL_RARITY_CODES = ("C", "U", "R")
 
 # All sets this command can add postdate the introduction of generation G4.
 _DEFAULT_GENERATION = "G4"
-
-# From B4b on, the game treats a reprint as the same card as its original (it
-# keeps the original's id), so such prints get the original's "SET/NUMBER" in
-# the reprint_of column of data/cards.csv and share one collection entry with
-# it. Earlier reprints (A4b) are separate cards in the game. Prints are
-# matched by identical image.
-LINKED_REPRINTS_FROM_SET = "B4b"
 
 CARD_FIELDS = [
     "set_number",
@@ -1028,14 +1021,15 @@ def _cluster_consensus(values: list, is_close) -> tuple:
 
 
 def _reprint_links(cards: list[dict], all_sets: list[dict]) -> dict:
-    """Map (set, number) of each print the game treats as the same card as an
-    earlier print to that original's "SET/NUMBER" (see
-    LINKED_REPRINTS_FROM_SET). Prints with the same image are the same card;
-    the earliest-released one is the original."""
+    """Map (set, number) of each reprint to the "SET/NUMBER" of its original.
+
+    A print with the same image (artwork) as an earlier one is the same card
+    in the game: it keeps the original's id, so both share one collection
+    entry. B4b introduced this, it was backported to A4b, and it also holds
+    for A1a's Old Amber. The earliest-released print is the original.
+    Parallel-foil prints have their own image and stay separate cards.
+    """
     release = {s["code"]: s.get("releaseDate", "") for s in all_sets}
-    linked_from = release.get(LINKED_REPRINTS_FROM_SET)
-    if not linked_from:
-        return {}
     prints_by_image: dict[str, list[dict]] = {}
     for c in cards:
         if (
@@ -1055,7 +1049,7 @@ def _reprint_links(cards: list[dict], all_sets: list[dict]) -> dict:
         original = prints[0]
         target = f"{original['set']}/{str(original['number']).zfill(3)}"
         for c in prints[1:]:
-            if c["set"] != original["set"] and release.get(c["set"], "") >= linked_from:
+            if c["set"] != original["set"]:
                 links[(c["set"], str(c["number"]).zfill(3))] = target
     return links
 
