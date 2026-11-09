@@ -1,5 +1,8 @@
 name: Sync flibustier
 
+# Email the repo owner when a scheduled run fails (and when it recovers).
+enable-email-notifications: true
+
 on:
   schedule:
     - cron: '0 6 * * *'
