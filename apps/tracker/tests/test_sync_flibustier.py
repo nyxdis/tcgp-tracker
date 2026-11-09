@@ -3,17 +3,19 @@
 
 from io import StringIO
 
+from apps.tracker.flibustier import fill_reprint_links, reprint_links
+from apps.tracker.flibustier_german import (
+    collect_card_translations,
+    collect_set_translations,
+    drop_known_overrides,
+    flib_german_card_names,
+    to_local_german_style,
+)
 from apps.tracker.management.commands import sync_flibustier
 from apps.tracker.management.commands.sync_flibustier import (
     Command,
-    _collect_card_translations,
-    _collect_set_translations,
-    _fill_reprint_links,
-    _flib_german_card_names,
     _is_foil_print,
     _pool_key,
-    _reprint_links,
-    _to_local_german_style,
 )
 
 
@@ -146,13 +148,13 @@ def test_collect_cards_skips_anomaly_and_warns_about_unknown_rarities():
 
 
 def test_to_local_german_style_converts_ex_and_mega_spelling():
-    assert _to_local_german_style("Charizard ex", "Glurak ex") == "Glurak-ex"
+    assert to_local_german_style("Charizard ex", "Glurak ex") == "Glurak-ex"
     assert (
-        _to_local_german_style("Mega Charizard X ex", "Mega Glurak X ex")
+        to_local_german_style("Mega Charizard X ex", "Mega Glurak X ex")
         == "Mega-Glurak X-ex"
     )
     # Only converted when the English name has the affix too.
-    assert _to_local_german_style("Exeggcute", "Owei") == "Owei"
+    assert to_local_german_style("Exeggcute", "Owei") == "Owei"
 
 
 def test_flib_german_card_names_skips_promos_and_anomalies():
@@ -167,7 +169,7 @@ def test_flib_german_card_names_skips_promos_and_anomalies():
         _flib_card("SP1", -1, "Mew", "AN"),
     ]
 
-    assert _flib_german_card_names(cards, cards_de) == {"Charizard ex": {"Glurak-ex"}}
+    assert flib_german_card_names(cards, cards_de) == {"Charizard ex": {"Glurak-ex"}}
 
 
 def test_collect_card_translations_adds_base_names_before_variants():
@@ -181,7 +183,7 @@ def test_collect_card_translations_adds_base_names_before_variants():
     existing = {"Haunter": "Apollo"}
     names = ["Amoonguss ex", "Amoonguss", "Mega Mewtwo X ex", "Haunter", "Pikachu"]
 
-    new_rows, mismatches, conflicts = _collect_card_translations(names, flib, existing)
+    new_rows, mismatches, conflicts = collect_card_translations(names, flib, existing)
 
     # "Amoonguss ex" is derived from the new base row, so it gets none itself.
     assert new_rows == [
@@ -212,7 +214,7 @@ def test_collect_set_translations_only_for_local_sets():
     ]
     existing = {"Dual Fusion": "Duale Fusion", "Genetic Apex": "Unschlagbare Gene"}
 
-    new_rows, mismatches = _collect_set_translations(
+    new_rows, mismatches = collect_set_translations(
         all_sets, ["Dual Fusion", "Genetic Apex", "Mega Rising", "Promo-A"], existing
     )
 
@@ -228,7 +230,6 @@ def test_collect_set_translations_only_for_local_sets():
 
 
 def test_known_translation_overrides_are_dropped_only_for_the_recorded_value():
-    cmd = Command(stdout=StringIO())
     known = {
         "kind": "set",
         "english": "Dual Fusion",
@@ -237,8 +238,10 @@ def test_known_translation_overrides_are_dropped_only_for_the_recorded_value():
     }
     changed = {**known, "flib_german": "Duale Fusion II"}
 
-    assert cmd._drop_known_translation_overrides([known, changed]) == [changed]
-    assert "known difference kept: set Dual Fusion" in cmd.stdout.getvalue()
+    remaining, kept = drop_known_overrides([known, changed])
+
+    assert remaining == [changed]
+    assert kept == [(known, 'the official German name is "Duale Fusion"')]
 
 
 def _print(set_code, number, image, rarity="C"):
@@ -270,7 +273,7 @@ def test_reprint_links_point_same_artwork_prints_to_the_earliest_print():
         _print("B1", 3, "anomaly.webp"),
     ]
 
-    assert _reprint_links(cards, all_sets) == {
+    assert reprint_links(cards, all_sets) == {
         ("A1a", "063"): "A1/218",
         ("A4b", "312"): "A1/218",
         ("B4b", "001"): "B1/001",
@@ -290,7 +293,7 @@ def test_fill_reprint_links_only_fills_empty_rows_and_reports_conflicts():
         ("B4b", "004"): "B1/004",
     }
 
-    linked, conflicts = _fill_reprint_links(existing, links)
+    linked, conflicts = fill_reprint_links(existing, links)
 
     assert linked == [(("B4b", "001"), "B1/001")]
     assert existing[("B4b", "001")]["reprint_of"] == "B1/001"

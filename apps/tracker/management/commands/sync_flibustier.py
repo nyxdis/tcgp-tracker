@@ -21,64 +21,41 @@ in data/sets.csv has been changed by hand (new sets default to G4).
 
 A reprint with the same artwork is the same card as its original in the game;
 the reprint_of column of data/cards.csv records the original ("SET/NUMBER"),
-derived from prints sharing an image (see _reprint_links). It is
+derived from prints sharing an image (see flibustier.reprint_links). It is
 filled in for new cards and for existing rows that have none yet; existing
 values that disagree are reported, not changed.
 
-German set names (sets.json) and card names (cards.de.json) are added to
-data/set_translations.csv and data/card_translations.csv when this project
-has none yet. Existing German names are never modified; where they disagree
-with flibustier they are listed for review instead (KNOWN_*_TRANSLATION_
-OVERRIDES records verified differences). flibustier writes "Glurak ex" and
-"Mega Glurak X ex" where this project uses the official "Glurak-ex" and
-"Mega-Glurak X-ex", so its names are converted before being compared or
-added. flibustier has no German pack names, so data/pack_translations.csv
-must still be filled in by hand.
+German set and card names are synced from sets.json and cards.de.json; see
+apps/tracker/flibustier_german.py.
 """
 
-import csv
 import sys
-from pathlib import Path
 
 import requests
 from django.core.management.base import BaseCommand
 
-from apps.tracker.card_name_rules import AFFIX_RULES, derive_translation
+from apps.tracker.flibustier import (
+    DATA_DIR,
+    RARITY_MAP,
+    SKIPPED_RARITY_CODES,
+    append_csv,
+    fill_reprint_links,
+    is_promo,
+    normalise_apostrophe,
+    read_csv_as_dict,
+    reprint_links,
+    write_csv,
+)
+from apps.tracker.flibustier_german import flib_german_card_names, sync_german_names
 
-DATA_DIR = Path(__file__).resolve().parents[4] / "data"
 BASE_URL = (
     "https://raw.githubusercontent.com/flibustier/"
     "pokemon-tcg-pocket-database/main/dist"
 )
 
-# Maps flibustier rarity codes (dist/rarities.json) to this project's
-# internal rarity names (data/rarities.csv). SR and SAR are visually distinct
-# card treatments that both occupy the "2-star" probability tier, so both
-# map to special_art.
-RARITY_MAP = {
-    "C": "common",
-    "U": "uncommon",
-    "R": "rare",
-    "RR": "double_rare",
-    "AR": "illustration_rare",
-    "SR": "special_art",
-    "SAR": "special_art",
-    "IM": "immersive_rare",
-    "UR": "crown_rare",
-    "S": "shiny_rare",
-    "SSR": "double_shiny_rare",
-}
-
 # Pull-rate-only codes for the parallel-foil prints of deluxe sets, mapped to
 # the base rarity they share with the standard print.
 FOIL_RARITY_MAP = {"CF": "common", "UF": "uncommon", "RF": "rare"}
-
-# Rarity codes of cards this project deliberately doesn't track. AN
-# ("Anomaly") is only used by the three unnumbered, untradeable RGB Mews in
-# the SP1 special pack. Cards with any other unknown code are skipped too,
-# but with a warning, so a new rarity is noticed instead of being written to
-# data/cards.csv as a raw code that import_data can't resolve.
-SKIPPED_RARITY_CODES = ("AN",)
 
 # Generations whose sets have parallel-foil prints of their ♢/♢♢/♢♢♢ cards.
 DELUXE_GENERATIONS = ("G3", "G5")
@@ -124,24 +101,6 @@ _PROB_TOLERANCE = 1e-4
 KNOWN_PACK_TYPE_OVERRIDES: dict[tuple, dict] = {}
 KNOWN_RARITY_PROBABILITY_OVERRIDES: dict[tuple, dict] = {}
 
-# Verified German names that differ from flibustier's, keyed by English name,
-# in the same shape as the overrides above: if flibustier's value changes,
-# the name is reported again.
-KNOWN_SET_TRANSLATION_OVERRIDES = {
-    "Dual Fusion": {
-        "flib_german": "Doppelte Fusion",
-        "reason": 'the official German name is "Duale Fusion"',
-    },
-    "Special Pack: First Partners": {
-        "flib_german": "Erste Partner",
-        "reason": '"Erste Partner" is the pack; the set is "Spezialpack: Erste Partner"',
-    },
-}
-KNOWN_CARD_TRANSLATION_OVERRIDES: dict[str, dict] = {}
-
-SET_TRANSLATION_FIELDS = ["english_name", "german_name"]
-CARD_TRANSLATION_FIELDS = ["card_english_name", "card_german_name"]
-
 
 class Command(BaseCommand):
     help = "Sync data/sets.csv and data/cards.csv from the flibustier JSON dataset"
@@ -165,14 +124,14 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        existing_sets = _read_csv_as_dict(DATA_DIR / "sets.csv", ("number",))
-        existing_cards = _read_csv_as_dict(
+        existing_sets = read_csv_as_dict(DATA_DIR / "sets.csv", ("number",))
+        existing_cards = read_csv_as_dict(
             DATA_DIR / "cards.csv", ("set_number", "number")
         )
-        existing_pack_types = _read_csv_as_dict(
+        existing_pack_types = read_csv_as_dict(
             DATA_DIR / "pack_types.csv", ("generation", "pack_type")
         )
-        existing_rarity_probs = _read_csv_as_dict(
+        existing_rarity_probs = read_csv_as_dict(
             DATA_DIR / "rarity_probabilities.csv",
             ("generation", "pack_type", "rarity", "is_foil"),
         )
@@ -188,30 +147,30 @@ class Command(BaseCommand):
         new_cards, mismatches = self._collect_cards(
             cards, existing_cards, existing_sets
         )
-        reprint_links = _reprint_links(cards, all_sets)
+        links = reprint_links(cards, all_sets)
         for c in new_cards:
-            c["reprint_of"] = reprint_links.get((c["set_number"], c["number"]), "")
-        linked, link_conflicts = _fill_reprint_links(existing_cards, reprint_links)
+            c["reprint_of"] = links.get((c["set_number"], c["number"]), "")
+        linked, link_conflicts = fill_reprint_links(existing_cards, links)
 
         if not new_sets and not new_cards and not linked:
             self.stdout.write(
                 self.style.SUCCESS("All sets are up to date. Nothing to do.")
             )
         else:
-            _append_csv(
+            append_csv(
                 DATA_DIR / "sets.csv",
                 ["number", "name", "release_date", "generation"],
                 new_sets,
             )
             if linked:
                 # Existing rows changed, so the whole file is rewritten.
-                _write_csv(
+                write_csv(
                     DATA_DIR / "cards.csv",
                     CARD_FIELDS,
                     list(existing_cards.values()) + new_cards,
                 )
             else:
-                _append_csv(DATA_DIR / "cards.csv", CARD_FIELDS, new_cards)
+                append_csv(DATA_DIR / "cards.csv", CARD_FIELDS, new_cards)
             self.stdout.write(
                 self.style.SUCCESS(
                     f"Done. Added {len(new_sets)} set(s), {len(new_cards)} card(s)."
@@ -234,10 +193,10 @@ class Command(BaseCommand):
         else:
             self._report_mismatches(mismatches)
 
-        self._sync_translations(
+        sync_german_names(
+            self,
             all_sets,
-            cards,
-            cards_de,
+            flib_german_card_names(cards, cards_de),
             set_names=[s["name"] for s in existing_sets.values()]
             + [s["name"] for s in new_sets],
             card_names=[c["card"] for c in existing_cards.values()],
@@ -268,12 +227,12 @@ class Command(BaseCommand):
         new_sets = []
         for s in all_sets:
             code = s["code"]
-            if _is_promo(code) or code in existing_sets:
+            if is_promo(code) or code in existing_sets:
                 continue
             new_sets.append(
                 {
                     "number": code,
-                    "name": _normalise_apostrophe(s["name"]["en"]),
+                    "name": normalise_apostrophe(s["name"]["en"]),
                     "release_date": s.get("releaseDate", ""),
                     "generation": _DEFAULT_GENERATION,
                 }
@@ -288,7 +247,7 @@ class Command(BaseCommand):
         unknown_codes = {}
         for c in cards:
             set_code = c["set"]
-            if _is_promo(set_code) or c["rarity"] in SKIPPED_RARITY_CODES:
+            if is_promo(set_code) or c["rarity"] in SKIPPED_RARITY_CODES:
                 continue
             if c["rarity"] not in RARITY_MAP:
                 unknown_codes.setdefault(c["rarity"], []).append(
@@ -303,7 +262,7 @@ class Command(BaseCommand):
             )
             is_foil = _is_foil_print(c, generation)
             pack = "|".join(
-                sorted(_normalise_apostrophe(p) for p in c.get("packs") or [])
+                sorted(normalise_apostrophe(p) for p in c.get("packs") or [])
             )
 
             existing = existing_cards.get(key)
@@ -312,7 +271,7 @@ class Command(BaseCommand):
                     {
                         "set_number": set_code,
                         "number": number,
-                        "card": _normalise_apostrophe(c["name"]),
+                        "card": normalise_apostrophe(c["name"]),
                         "pack": pack,
                         "rarity": rarity,
                         "is_foil": int(is_foil),
@@ -420,7 +379,7 @@ class Command(BaseCommand):
                 fixed += 1
 
         if fixed:
-            _write_csv(DATA_DIR / "cards.csv", CARD_FIELDS, existing_cards.values())
+            write_csv(DATA_DIR / "cards.csv", CARD_FIELDS, existing_cards.values())
         self.stdout.write(
             self.style.SUCCESS(f"Fixed {fixed} of {len(mismatches)} mismatch(es).")
         )
@@ -747,13 +706,13 @@ class Command(BaseCommand):
             self.stdout.write(f"Stopped reviewing ({total - i + 1} left unreviewed).")
 
         if fixed_pack_types:
-            _write_csv(
+            write_csv(
                 DATA_DIR / "pack_types.csv",
                 PACK_TYPE_FIELDS,
                 existing_pack_types.values(),
             )
         if fixed_probs:
-            _write_csv(
+            write_csv(
                 DATA_DIR / "rarity_probabilities.csv",
                 RARITY_PROBABILITY_FIELDS,
                 existing_rarity_probs.values(),
@@ -764,123 +723,6 @@ class Command(BaseCommand):
                 f"probability row(s) of {total} mismatch(es)."
             )
         )
-
-    # ------------------------------------------------------------------
-    # German names
-    # ------------------------------------------------------------------
-
-    def _sync_translations(
-        self, all_sets, cards, cards_de, set_names, card_names
-    ) -> None:
-        """Add German set and card names this project has none for yet, and
-        report the ones that disagree with flibustier."""
-        self.stdout.write("\nChecking German names…")
-        existing_sets = {
-            english: row["german_name"].strip()
-            for english, row in _read_csv_as_dict(
-                DATA_DIR / "set_translations.csv", ("english_name",)
-            ).items()
-        }
-        existing_cards = {
-            english.strip(): row["card_german_name"].strip()
-            for english, row in _read_csv_as_dict(
-                DATA_DIR / "card_translations.csv", ("card_english_name",)
-            ).items()
-        }
-
-        new_set_rows, set_mismatches = _collect_set_translations(
-            all_sets, set_names, existing_sets
-        )
-        new_card_rows, card_mismatches, conflicts = _collect_card_translations(
-            card_names, _flib_german_card_names(cards, cards_de), existing_cards
-        )
-        _append_csv(
-            DATA_DIR / "set_translations.csv", SET_TRANSLATION_FIELDS, new_set_rows
-        )
-        _append_csv(
-            DATA_DIR / "card_translations.csv", CARD_TRANSLATION_FIELDS, new_card_rows
-        )
-
-        if new_set_rows or new_card_rows:
-            self.stdout.write(
-                self.style.SUCCESS(
-                    f"Added {len(new_set_rows)} German set name(s) and "
-                    f"{len(new_card_rows)} German card name(s) from flibustier:"
-                )
-            )
-            for row in new_set_rows:
-                self.stdout.write(f"  set {row['english_name']}: {row['german_name']}")
-            for row in new_card_rows:
-                self.stdout.write(
-                    f"  card {row['card_english_name']}: {row['card_german_name']}"
-                )
-
-        mismatches = self._drop_known_translation_overrides(
-            set_mismatches + card_mismatches
-        )
-        if mismatches:
-            self.stdout.write(
-                self.style.WARNING(
-                    f"\n{len(mismatches)} German name(s) disagree with "
-                    "flibustier. Not auto-fixed, please check the official name "
-                    "and either correct data/*_translations.csv or record it in "
-                    "KNOWN_*_TRANSLATION_OVERRIDES:"
-                )
-            )
-            for m in mismatches:
-                self.stdout.write(
-                    f"  {m['kind']} {m['english']}: local={m['local']} "
-                    f"flibustier={m['flib_german']}"
-                )
-        for c in conflicts:
-            self.stdout.write(
-                self.style.WARNING(
-                    f"  flibustier has several German names for card "
-                    f"{c['english']} ({', '.join(c['flib_german'])}), not added"
-                )
-            )
-
-        set_lookup = existing_sets | {
-            r["english_name"]: r["german_name"] for r in new_set_rows
-        }
-        card_lookup = existing_cards | {
-            r["card_english_name"]: r["card_german_name"] for r in new_card_rows
-        }
-        untranslated = [
-            f"set {name}" for name in sorted(set(set_names)) if name not in set_lookup
-        ] + [
-            f"card {name}"
-            for name in sorted(set(card_names))
-            if derive_translation(name, card_lookup) is None
-        ]
-        if untranslated:
-            self.stdout.write(
-                self.style.WARNING(
-                    f"\n{len(untranslated)} name(s) have no German name yet and "
-                    "flibustier has none either; add them by hand to "
-                    "data/set_translations.csv / data/card_translations.csv:"
-                )
-            )
-            for name in untranslated:
-                self.stdout.write(f"  {name}")
-
-    def _drop_known_translation_overrides(self, mismatches: list) -> list:
-        """Remove mismatches listed in KNOWN_*_TRANSLATION_OVERRIDES, noting each."""
-        known_by_kind = {
-            "set": KNOWN_SET_TRANSLATION_OVERRIDES,
-            "card": KNOWN_CARD_TRANSLATION_OVERRIDES,
-        }
-        remaining = []
-        for m in mismatches:
-            known = known_by_kind[m["kind"]].get(m["english"])
-            if known is not None and known["flib_german"] == m["flib_german"]:
-                self.stdout.write(
-                    f"  known difference kept: {m['kind']} {m['english']} "
-                    f"({known['reason']})"
-                )
-            else:
-                remaining.append(m)
-        return remaining
 
     # ------------------------------------------------------------------
     # HTTP helpers
@@ -1018,209 +860,3 @@ def _cluster_consensus(values: list, is_close) -> tuple:
             clusters.append([v])
     largest = max(clusters, key=len)
     return largest[0], len(largest) * 2 > len(values)
-
-
-def _reprint_links(cards: list[dict], all_sets: list[dict]) -> dict:
-    """Map (set, number) of each reprint to the "SET/NUMBER" of its original.
-
-    A print with the same image (artwork) as an earlier one is the same card
-    in the game: it keeps the original's id, so both share one collection
-    entry. B4b introduced this, it was backported to A4b, and it also holds
-    for A1a's Old Amber. The earliest-released print is the original.
-    Parallel-foil prints have their own image and stay separate cards.
-    """
-    release = {s["code"]: s.get("releaseDate", "") for s in all_sets}
-    prints_by_image: dict[str, list[dict]] = {}
-    for c in cards:
-        if (
-            _is_promo(c["set"])
-            or c["rarity"] in SKIPPED_RARITY_CODES
-            or c["rarity"] not in RARITY_MAP
-            or not c.get("image")
-        ):
-            continue
-        prints_by_image.setdefault(c["image"], []).append(c)
-
-    links = {}
-    for prints in prints_by_image.values():
-        if len(prints) < 2:
-            continue
-        prints.sort(key=lambda c: (release.get(c["set"], ""), c["set"], c["number"]))
-        original = prints[0]
-        target = f"{original['set']}/{str(original['number']).zfill(3)}"
-        for c in prints[1:]:
-            if c["set"] != original["set"]:
-                links[(c["set"], str(c["number"]).zfill(3))] = target
-    return links
-
-
-def _fill_reprint_links(existing_cards: dict, links: dict) -> tuple[list, list]:
-    """Set reprint_of on existing rows that have none yet (in place), and list
-    rows whose reprint_of disagrees with *links*."""
-    linked, conflicts = [], []
-    for key, row in existing_cards.items():
-        local = (row.get("reprint_of") or "").strip()
-        flib = links.get(key, "")
-        if local == flib:
-            continue
-        if not local:
-            row["reprint_of"] = flib
-            linked.append((key, flib))
-        else:
-            conflicts.append((key, local, flib))
-    return linked, conflicts
-
-
-def _to_local_german_style(english: str, german: str) -> str:
-    """Convert flibustier's "Glurak ex" / "Mega Glurak X ex" spelling to the
-    official "Glurak-ex" / "Mega-Glurak X-ex" this project uses (see
-    card_name_rules.AFFIX_RULES)."""
-    if english.endswith(" ex") and german.endswith(" ex"):
-        german = german[: -len(" ex")] + "-ex"
-    if english.startswith("Mega ") and german.startswith("Mega "):
-        german = "Mega-" + german[len("Mega ") :]
-    return german
-
-
-def _has_affix(name: str) -> bool:
-    """True if *name* is a variant that derive_translation() builds from a
-    base name ("X ex", "Mega X", "Alolan X", ...)."""
-    return any(
-        name.endswith(affix) if kind == "suffix" else name.startswith(affix)
-        for kind, affix, _ in AFFIX_RULES
-    )
-
-
-def _flib_german_card_names(cards: list[dict], cards_de: list[dict]) -> dict:
-    """Map each English card name to the set of German names flibustier
-    gives its prints, in this project's spelling."""
-    german_by_print = {(c["set"], c["number"]): c["name"] for c in cards_de}
-    result: dict[str, set[str]] = {}
-    for c in cards:
-        if _is_promo(c["set"]) or c["rarity"] in SKIPPED_RARITY_CODES:
-            continue
-        german = german_by_print.get((c["set"], c["number"]))
-        if not german:
-            continue
-        english = _normalise_apostrophe(c["name"])
-        result.setdefault(english, set()).add(
-            _to_local_german_style(english, _normalise_apostrophe(german))
-        )
-    return result
-
-
-def _collect_set_translations(
-    all_sets: list[dict], set_names, existing: dict
-) -> tuple[list, list]:
-    """German names for local sets that have none yet, and those that
-    disagree with flibustier."""
-    wanted = set(set_names)
-    new_rows, mismatches = [], []
-    for s in all_sets:
-        english = _normalise_apostrophe(s["name"]["en"])
-        german = s["name"].get("de")
-        if _is_promo(s["code"]) or english not in wanted or not german:
-            continue
-        german = _normalise_apostrophe(german)
-        local = existing.get(english)
-        if local is None:
-            new_rows.append({"english_name": english, "german_name": german})
-        elif local != german:
-            mismatches.append(
-                {
-                    "kind": "set",
-                    "english": english,
-                    "local": local,
-                    "flib_german": german,
-                }
-            )
-    return new_rows, mismatches
-
-
-def _collect_card_translations(
-    card_names, flib_names: dict, existing: dict
-) -> tuple[list, list, list]:
-    """German names for local card names that have none yet (not even a
-    derived one), names that disagree with flibustier, and names flibustier
-    itself is inconsistent about.
-
-    Base names are handled before their variants, so adding e.g. "Hutsassa"
-    lets "Amoonguss ex" be derived instead of getting a row of its own.
-    """
-    lookup = dict(existing)
-    new_rows, mismatches, conflicts = [], [], []
-    for english in sorted(set(card_names), key=lambda n: (_has_affix(n), n)):
-        candidates = flib_names.get(english)
-        if not candidates:
-            continue
-        if len(candidates) > 1:
-            conflicts.append({"english": english, "flib_german": sorted(candidates)})
-            continue
-        (german,) = candidates
-        local = derive_translation(english, lookup)
-        if local is None:
-            lookup[english] = german
-            new_rows.append({"card_english_name": english, "card_german_name": german})
-        elif local != german:
-            mismatches.append(
-                {
-                    "kind": "card",
-                    "english": english,
-                    "local": local,
-                    "flib_german": german,
-                }
-            )
-    return new_rows, mismatches, conflicts
-
-
-def _is_promo(set_code: str) -> bool:
-    """Return True if the set code belongs to a promotional set."""
-    return set_code.upper().startswith("PROMO")
-
-
-def _normalise_apostrophe(text: str) -> str:
-    """Replace the curly apostrophe used by the source data with a straight
-    one, matching this project's existing naming convention (e.g. "Farfetch'd",
-    "Clemont's Backpack")."""
-    return text.replace("’", "'")
-
-
-def _read_csv_as_dict(path: Path, key_cols: tuple[str, ...]) -> dict:
-    """
-    Read a CSV file and return a dict keyed by the tuple of values in
-    *key_cols*. Single-key tuples are unwrapped to plain strings.
-    """
-    result = {}
-    if not path.exists():
-        return result
-    with path.open(newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            key_vals = tuple(row[k] for k in key_cols)
-            key = key_vals[0] if len(key_vals) == 1 else key_vals
-            result[key] = row
-    return result
-
-
-def _append_csv(path: Path, fieldnames: list[str], rows) -> None:
-    """Append *rows* to the CSV at *path* (file must already exist)."""
-    rows = list(rows)
-    if not rows:
-        return
-    with path.open("a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(
-            f, fieldnames=fieldnames, extrasaction="ignore", lineterminator="\n"
-        )
-        for row in rows:
-            writer.writerow(row)
-
-
-def _write_csv(path: Path, fieldnames: list[str], rows) -> None:
-    """Overwrite *path* with *rows*, replacing its current contents."""
-    with path.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(
-            f, fieldnames=fieldnames, extrasaction="ignore", lineterminator="\n"
-        )
-        writer.writeheader()
-        for row in rows:
-            writer.writerow(row)
