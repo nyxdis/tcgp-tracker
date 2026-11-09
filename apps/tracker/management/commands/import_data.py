@@ -9,6 +9,7 @@ from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
+from apps.tracker.collection import merge_reprint_entries
 from apps.tracker.models.cards import (
     Card,
     Generation,
@@ -236,8 +237,12 @@ class Command(BaseCommand):
                 )
 
     def import_cards(self, filepath):
+        # Card pk -> "SET/NUMBER" of the original it reprints ("" for none);
+        # only filled when the optional reprint_of column is present.
+        reprint_links = {}
         with open(filepath, newline="", encoding="utf-8-sig") as csvfile:
             reader = csv.DictReader(csvfile)
+            has_reprint_column = "reprint_of" in (reader.fieldnames or [])
             for row in reader:
                 try:
                     pset = PokemonSet.objects.get(number=row["set_number"])
@@ -258,6 +263,8 @@ class Command(BaseCommand):
                 )
                 action = "Created" if created else "Updated"
                 self.stdout.write(f"{action} Card: {card_obj.name}")
+                if has_reprint_column:
+                    reprint_links[card_obj.pk] = (row["reprint_of"] or "").strip()
 
                 # Pack behandeln
                 pack_names = row.get("pack")
@@ -294,6 +301,47 @@ class Command(BaseCommand):
                         # Karte zu Pack hinzufügen
                         card_obj.packs.add(pack_obj)
                         self.stdout.write(f"→ Assigned to pack: {pack_name}")
+
+        # Linked after all cards exist, so an original may appear anywhere in
+        # the file.
+        if has_reprint_column:
+            self.link_reprints(reprint_links)
+
+    def link_reprints(self, reprint_links):
+        """Set Card.reprint_of from *reprint_links* (card pk -> "SET/NUMBER" or
+        ""), then move collection entries recorded on reprints to their
+        originals (see collection.merge_reprint_entries)."""
+        current = dict(
+            Card.objects.filter(pk__in=reprint_links).values_list("pk", "reprint_of_id")
+        )
+        for card_pk, target in reprint_links.items():
+            original = None
+            if target:
+                set_number, _, number = target.partition("/")
+                original = (
+                    Card.objects.filter(set__number=set_number, number=number)
+                    .select_related("reprint_of")
+                    .first()
+                )
+                if original is None:
+                    self.stderr.write(
+                        f"Reprint original {target} not found, card {card_pk} "
+                        "is not linked"
+                    )
+                elif original.reprint_of_id:
+                    # Always link to the first print, never to another reprint.
+                    original = original.reprint_of
+            original_pk = original.pk if original else None
+            if current.get(card_pk) != original_pk:
+                Card.objects.filter(pk=card_pk).update(reprint_of_id=original_pk)
+                self.stdout.write(
+                    f"→ Card {card_pk} reprint of: {target or 'nothing (unlinked)'}"
+                )
+        moved = merge_reprint_entries()
+        if moved:
+            self.stdout.write(
+                f"Moved {moved} collection entries from reprints to their originals"
+            )
 
     def import_rarities(self, filepath):
         with open(filepath, newline="", encoding="utf-8-sig") as csvfile:

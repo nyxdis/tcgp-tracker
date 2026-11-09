@@ -13,8 +13,8 @@ from django.utils import timezone
 from django.utils.translation import get_language
 from django.utils.translation import gettext as _
 
+from apps.tracker import collection
 from apps.tracker.models.cards import Card, Pack, PokemonSet
-from apps.tracker.models.users import UserCard
 from apps.tracker.utils import load_rarity_tables, prob_new_card_any_pack_type
 
 
@@ -49,32 +49,29 @@ def home(request):
     if selected_series != "all" and selected_series not in series_options:
         selected_series = _default_series(all_sets)
     sets = [s for s in all_sets if selected_series in ("all", s.series)]
-    user_cards = UserCard.objects.filter(user=request.user)
+    owned_cards = Card.objects.filter(collection.owned_q(request.user))
     if request.method == "POST":
         card_id = _parse_card_id(request)
         if card_id is None:
             return HttpResponseBadRequest("Invalid card_id")
         action = request.POST.get("action")
         if action == "collect":
-            card = get_object_or_404(Card, id=card_id)
-            UserCard.objects.get_or_create(
-                user=request.user, card=card, defaults={"quantity": 1}
-            )
+            collection.collect(request.user, get_object_or_404(Card, id=card_id))
         elif action == "uncollect":
-            UserCard.objects.filter(user=request.user, card_id=card_id).delete()
+            collection.uncollect(request.user, card_id)
         params = {"series": selected_series}
         q = request.POST.get("q", "")
         if q:
             params["q"] = q
         return redirect(f"{reverse('home')}?{urlencode(params)}")
-    progress_by_set = user_cards.values("card__set").annotate(collected=Count("card"))
-    progress_dict = {
-        entry["card__set"]: entry["collected"] for entry in progress_by_set
-    }
+    progress_by_set = (
+        owned_cards.order_by().values("set").annotate(collected=Count("id"))
+    )
+    progress_dict = {entry["set"]: entry["collected"] for entry in progress_by_set}
     card_counts = Card.objects.values("set").annotate(total=Count("id"))
     total_dict = {entry["set"]: entry["total"] for entry in card_counts}
     sets_with_progress = _get_sets_with_progress(
-        sets, user_cards, progress_dict, total_dict
+        sets, owned_cards, progress_dict, total_dict
     )
     search_query = request.GET.get("q", "").strip()
     search_results = []
@@ -96,7 +93,7 @@ def home(request):
                 .select_related("set")
                 .order_by("set__release_date", "set__name", "number")
             )
-    user_card_ids = set(user_cards.values_list("card_id", flat=True))
+    user_card_ids = set(owned_cards.values_list("id", flat=True))
     total_cards = sum(total_dict.get(s.id, 0) for s in sets)
     total_collected = sum(progress_dict.get(s.id, 0) for s in sets)
     return render(
@@ -120,8 +117,12 @@ def home(request):
     )
 
 
-def _get_sets_with_progress(sets, user_cards, progress_dict, total_dict):
-    """Helper to calculate set progress and rarity stats."""
+def _get_sets_with_progress(sets, owned_cards, progress_dict, total_dict):
+    """Helper to calculate set progress and rarity stats.
+
+    *owned_cards* is a Card queryset of the cards the user owns (see
+    collection.owned_q), so reprints of owned originals count as collected.
+    """
     sets_with_progress = []
     # order_by() clears Card's default ("set", "number") ordering, which
     # Django would otherwise fold into the SELECT and silently defeat
@@ -166,12 +167,13 @@ def _get_sets_with_progress(sets, user_cards, progress_dict, total_dict):
     rarity_progress = {}
     for group_key, rarity_names in rarity_groups.items():
         group_progress = (
-            user_cards.filter(card__rarity__in=rarity_names, card__is_foil=group_key[1])
-            .values("card__set")
-            .annotate(collected=Count("card"))
+            owned_cards.filter(rarity__in=rarity_names, is_foil=group_key[1])
+            .order_by()
+            .values("set")
+            .annotate(collected=Count("id"))
         )
         rarity_progress[group_key] = {
-            entry["card__set"]: entry["collected"] for entry in group_progress
+            entry["set"]: entry["collected"] for entry in group_progress
         }
     for s in sets:
         collected = progress_dict.get(s.id, 0)
@@ -215,20 +217,17 @@ def set_detail(request, set_number):
             return HttpResponseBadRequest("Invalid card_id")
         action = request.POST.get("action")
         if action == "collect":
-            card = get_object_or_404(Card, id=card_id)
-            UserCard.objects.get_or_create(
-                user=request.user, card=card, defaults={"quantity": 1}
-            )
+            collection.collect(request.user, get_object_or_404(Card, id=card_id))
         elif action == "uncollect":
-            UserCard.objects.filter(user=request.user, card_id=card_id).delete()
+            collection.uncollect(request.user, card_id)
         if request.headers.get("X-Requested-With") == "XMLHttpRequest":
             return JsonResponse({"status": "success", "collected": action == "collect"})
         return redirect("set_detail", set_number=set_number)
-    user_cards = UserCard.objects.filter(user=request.user, card__set=set_obj)
-    user_cards_dict = {uc.card_id: uc.quantity for uc in user_cards}
+    quantities = collection.owned_quantities(request.user, cards)
     for card in cards:
-        card.collected_quantity = user_cards_dict.get(card.id, 0)
-    sets_with_progress = _get_sets_with_progress([set_obj], user_cards, {}, {})
+        card.collected_quantity = quantities[card.id]
+    owned_cards = Card.objects.filter(collection.owned_q(request.user), set=set_obj)
+    sets_with_progress = _get_sets_with_progress([set_obj], owned_cards, {}, {})
     set_progress = sets_with_progress[0] if sets_with_progress else {}
     rarities = list(
         Card.objects.filter(set=set_obj)
@@ -268,9 +267,7 @@ def pack_list(request):
         .select_related("set", "rarity_version")
         .prefetch_related("cards__rarity")
     )
-    owned_card_ids = set(
-        UserCard.objects.filter(user=request.user).values_list("card_id", flat=True)
-    )
+    owned_card_ids = collection.owned_card_ids(request.user)
     # Pack types and rarity tables are per generation: load each once.
     generations = {pack.rarity_version_id: pack.rarity_version for pack in packs}
     pack_types_by_generation = {

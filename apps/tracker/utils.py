@@ -3,12 +3,13 @@
 import logging
 from collections import defaultdict
 
+from apps.tracker.collection import owned_q
 from apps.tracker.models.cards import (
     SLOT_FIELD_COUNT,
+    Card,
     RarityProbability,
     god_pack_slot_table,
 )
-from apps.tracker.models.users import UserCard
 
 logger = logging.getLogger("tracker.utils")
 
@@ -112,7 +113,8 @@ def prob_at_least_one_new_card(  # pylint: disable=too-many-arguments
         pack_type: PackType to evaluate. Defaults to the generation's
             ``normal`` pack type (or its first pack type).
         cards: Optional pre-fetched list of the pack's cards.
-        owned_card_ids: Optional pre-fetched set of card ids the user owns.
+        owned_card_ids: Optional pre-fetched set of card ids the user owns,
+            including reprints of owned originals (collection.owned_card_ids).
         rarity_tables: Optional result of :func:`load_rarity_tables` for the
             pack's generation, to avoid re-querying per pack.
 
@@ -131,10 +133,11 @@ def prob_at_least_one_new_card(  # pylint: disable=too-many-arguments
     if not cards:
         return 0.0
     if owned_card_ids is None:
+        # Reprints of owned originals count as owned (see collection.py).
         owned_card_ids = set(
-            UserCard.objects.filter(user=user, card__in=cards).values_list(
-                "card_id", flat=True
-            )
+            Card.objects.filter(
+                owned_q(user), id__in=[card.id for card in cards]
+            ).values_list("id", flat=True)
         )
 
     # Rarity's primary key is its name, so rarity_id needs no join.

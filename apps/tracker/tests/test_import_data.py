@@ -224,3 +224,68 @@ def test_if_changed_rejects_file_options(data_dir):
         call_command(
             "import_data", "--if-changed", "--sets", str(data_dir / "sets.csv")
         )
+
+
+@pytest.mark.django_db
+def test_import_cards_links_reprints_and_moves_collection_entries(tmp_path):
+    from django.contrib.auth import get_user_model
+
+    from apps.tracker.models.users import UserCard
+
+    g5 = Generation.objects.create(name="G5", display_name="Generation 5")
+    for number, name in (("B1", "Mega Rising"), ("B4b", "Deluxe Pack: Mega")):
+        PokemonSet.objects.create(
+            number=number, name=name, release_date=date(2026, 1, 1), generation=g5
+        )
+    Rarity.objects.create(name="common", display_name="C", order=1)
+    csv_path = tmp_path / "cards.csv"
+    # The reprint comes before its original in the file on purpose.
+    csv_path.write_text(
+        "set_number,number,card,pack,rarity,is_foil,reprint_of\n"
+        "B4b,001,Bulbasaur,Deluxe Pack Mega,common,0,B1/001\n"
+        "B4b,002,Ivysaur,Deluxe Pack Mega,common,0,B4b/001\n"
+        "B4b,003,Venusaur,Deluxe Pack Mega,common,0,B9/001\n"
+        "B1,001,Bulbasaur,Mega Gyarados,common,0,\n",
+        encoding="utf-8",
+    )
+    Command(stdout=StringIO(), stderr=StringIO()).import_cards(str(csv_path))
+    original = Card.objects.get(set__number="B1", number="001")
+    reprint = Card.objects.get(set__number="B4b", number="001")
+    assert reprint.reprint_of == original
+    # A link to a reprint goes to its original instead.
+    assert Card.objects.get(set__number="B4b", number="002").reprint_of == original
+    # A missing original leaves the card unlinked.
+    assert Card.objects.get(set__number="B4b", number="003").reprint_of is None
+
+    # Entries recorded on a reprint (before it was linked) move to the original.
+    user = get_user_model().objects.create_user(username="u", password="x")
+    reprint.reprint_of = None
+    reprint.save()
+    UserCard.objects.create(user=user, card=reprint, quantity=2)
+    stderr = StringIO()
+    Command(stdout=StringIO(), stderr=stderr).import_cards(str(csv_path))
+    assert list(UserCard.objects.values_list("card_id", "quantity")) == [
+        (original.id, 2)
+    ]
+    assert "Reprint original B9/001 not found" in stderr.getvalue()
+
+
+@pytest.mark.django_db
+def test_import_cards_without_reprint_column_keeps_links(tmp_path):
+    pset = PokemonSet.objects.create(
+        number="B1", name="Mega Rising", release_date=date(2026, 1, 1)
+    )
+    rarity = Rarity.objects.create(name="common", display_name="C", order=1)
+    original = Card.objects.create(set=pset, number="001", name="A", rarity=rarity)
+    reprint = Card.objects.create(
+        set=pset, number="002", name="A", rarity=rarity, reprint_of=original
+    )
+    legacy = tmp_path / "legacy.csv"
+    legacy.write_text(
+        "set_number,number,card,pack,rarity\nB1,002,A,,common\n", encoding="utf-8"
+    )
+
+    Command(stdout=StringIO()).import_cards(str(legacy))
+
+    reprint.refresh_from_db()
+    assert reprint.reprint_of == original

@@ -19,6 +19,12 @@ separate pull-rate codes CF/UF/RF for them. Both are mapped to this project's
 is_foil flag. A new deluxe set is only recognised as such once its generation
 in data/sets.csv has been changed by hand (new sets default to G4).
 
+From B4b on, reprints are the same card as their original in the game; the
+reprint_of column of data/cards.csv records the original ("SET/NUMBER"),
+derived from prints sharing an image (see LINKED_REPRINTS_FROM_SET). It is
+filled in for new cards and for existing rows that have none yet; existing
+values that disagree are reported, not changed.
+
 German set names (sets.json) and card names (cards.de.json) are added to
 data/set_translations.csv and data/card_translations.csv when this project
 has none yet. Existing German names are never modified; where they disagree
@@ -81,7 +87,22 @@ _FOIL_RARITY_CODES = ("C", "U", "R")
 # All sets this command can add postdate the introduction of generation G4.
 _DEFAULT_GENERATION = "G4"
 
-CARD_FIELDS = ["set_number", "number", "card", "pack", "rarity", "is_foil"]
+# From B4b on, the game treats a reprint as the same card as its original (it
+# keeps the original's id), so such prints get the original's "SET/NUMBER" in
+# the reprint_of column of data/cards.csv and share one collection entry with
+# it. Earlier reprints (A4b) are separate cards in the game. Prints are
+# matched by identical image.
+LINKED_REPRINTS_FROM_SET = "B4b"
+
+CARD_FIELDS = [
+    "set_number",
+    "number",
+    "card",
+    "pack",
+    "rarity",
+    "is_foil",
+    "reprint_of",
+]
 
 PACK_TYPE_FIELDS = [
     "generation",
@@ -174,8 +195,12 @@ class Command(BaseCommand):
         new_cards, mismatches = self._collect_cards(
             cards, existing_cards, existing_sets
         )
+        reprint_links = _reprint_links(cards, all_sets)
+        for c in new_cards:
+            c["reprint_of"] = reprint_links.get((c["set_number"], c["number"]), "")
+        linked, link_conflicts = _fill_reprint_links(existing_cards, reprint_links)
 
-        if not new_sets and not new_cards:
+        if not new_sets and not new_cards and not linked:
             self.stdout.write(
                 self.style.SUCCESS("All sets are up to date. Nothing to do.")
             )
@@ -185,7 +210,15 @@ class Command(BaseCommand):
                 ["number", "name", "release_date", "generation"],
                 new_sets,
             )
-            _append_csv(DATA_DIR / "cards.csv", CARD_FIELDS, new_cards)
+            if linked:
+                # Existing rows changed, so the whole file is rewritten.
+                _write_csv(
+                    DATA_DIR / "cards.csv",
+                    CARD_FIELDS,
+                    list(existing_cards.values()) + new_cards,
+                )
+            else:
+                _append_csv(DATA_DIR / "cards.csv", CARD_FIELDS, new_cards)
             self.stdout.write(
                 self.style.SUCCESS(
                     f"Done. Added {len(new_sets)} set(s), {len(new_cards)} card(s)."
@@ -198,6 +231,10 @@ class Command(BaseCommand):
                 )
                 for s in new_sets:
                     self.stdout.write(f"  {s['number']} - {s['name']}")
+        # The new cards are in cards.csv now; a later rewrite of the file
+        # (--interactive) must keep them.
+        existing_cards.update({(c["set_number"], c["number"]): c for c in new_cards})
+        self._report_reprint_links(linked, link_conflicts)
 
         if options["interactive"]:
             self._review_mismatches_interactively(mismatches, existing_cards)
@@ -210,8 +247,7 @@ class Command(BaseCommand):
             cards_de,
             set_names=[s["name"] for s in existing_sets.values()]
             + [s["name"] for s in new_sets],
-            card_names=[c["card"] for c in existing_cards.values()]
-            + [c["card"] for c in new_cards],
+            card_names=[c["card"] for c in existing_cards.values()],
         )
 
         self.stdout.write("\nChecking pull-rate probabilities…")
@@ -334,6 +370,28 @@ class Command(BaseCommand):
                 f"local={_rarity_label(m['local_rarity'], m['local_is_foil'])} "
                 f"flibustier={_rarity_label(m['flib_rarity'], m['flib_is_foil'])}"
             )
+
+    def _report_reprint_links(self, linked: list, conflicts: list) -> None:
+        if linked:
+            self.stdout.write(
+                f"Linked {len(linked)} existing card(s) as reprints of the "
+                "same card (reprint_of):"
+            )
+            for (set_code, number), original in linked:
+                self.stdout.write(f"  {set_code} #{number} -> {original}")
+        if conflicts:
+            self.stdout.write(
+                self.style.WARNING(
+                    f"\n{len(conflicts)} card(s) have a reprint_of in "
+                    "data/cards.csv that disagrees with flibustier's images. "
+                    "Not auto-fixed, please check:"
+                )
+            )
+            for (set_code, number), local, flib in conflicts:
+                self.stdout.write(
+                    f"  {set_code} #{number}: local={local or '-'} "
+                    f"flibustier={flib or '-'}"
+                )
 
     def _review_mismatches_interactively(
         self, mismatches: list, existing_cards: dict
@@ -967,6 +1025,56 @@ def _cluster_consensus(values: list, is_close) -> tuple:
             clusters.append([v])
     largest = max(clusters, key=len)
     return largest[0], len(largest) * 2 > len(values)
+
+
+def _reprint_links(cards: list[dict], all_sets: list[dict]) -> dict:
+    """Map (set, number) of each print the game treats as the same card as an
+    earlier print to that original's "SET/NUMBER" (see
+    LINKED_REPRINTS_FROM_SET). Prints with the same image are the same card;
+    the earliest-released one is the original."""
+    release = {s["code"]: s.get("releaseDate", "") for s in all_sets}
+    linked_from = release.get(LINKED_REPRINTS_FROM_SET)
+    if not linked_from:
+        return {}
+    prints_by_image: dict[str, list[dict]] = {}
+    for c in cards:
+        if (
+            _is_promo(c["set"])
+            or c["rarity"] in SKIPPED_RARITY_CODES
+            or c["rarity"] not in RARITY_MAP
+            or not c.get("image")
+        ):
+            continue
+        prints_by_image.setdefault(c["image"], []).append(c)
+
+    links = {}
+    for prints in prints_by_image.values():
+        if len(prints) < 2:
+            continue
+        prints.sort(key=lambda c: (release.get(c["set"], ""), c["set"], c["number"]))
+        original = prints[0]
+        target = f"{original['set']}/{str(original['number']).zfill(3)}"
+        for c in prints[1:]:
+            if c["set"] != original["set"] and release.get(c["set"], "") >= linked_from:
+                links[(c["set"], str(c["number"]).zfill(3))] = target
+    return links
+
+
+def _fill_reprint_links(existing_cards: dict, links: dict) -> tuple[list, list]:
+    """Set reprint_of on existing rows that have none yet (in place), and list
+    rows whose reprint_of disagrees with *links*."""
+    linked, conflicts = [], []
+    for key, row in existing_cards.items():
+        local = (row.get("reprint_of") or "").strip()
+        flib = links.get(key, "")
+        if local == flib:
+            continue
+        if not local:
+            row["reprint_of"] = flib
+            linked.append((key, flib))
+        else:
+            conflicts.append((key, local, flib))
+    return linked, conflicts
 
 
 def _to_local_german_style(english: str, german: str) -> str:

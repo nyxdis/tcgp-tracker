@@ -8,9 +8,11 @@ from apps.tracker.management.commands.sync_flibustier import (
     Command,
     _collect_card_translations,
     _collect_set_translations,
+    _fill_reprint_links,
     _flib_german_card_names,
     _is_foil_print,
     _pool_key,
+    _reprint_links,
     _to_local_german_style,
 )
 
@@ -237,3 +239,55 @@ def test_known_translation_overrides_are_dropped_only_for_the_recorded_value():
 
     assert cmd._drop_known_translation_overrides([known, changed]) == [changed]
     assert "known difference kept: set Dual Fusion" in cmd.stdout.getvalue()
+
+
+def _print(set_code, number, image, rarity="C"):
+    return {"set": set_code, "number": number, "rarity": rarity, "image": image}
+
+
+def test_reprint_links_only_from_b4b_on_to_the_earliest_print():
+    all_sets = [
+        {"code": "A1", "releaseDate": "2024-10-30"},
+        {"code": "A1a", "releaseDate": "2024-12-17"},
+        {"code": "A4b", "releaseDate": "2025-09-30"},
+        {"code": "B1", "releaseDate": "2026-01-01"},
+        {"code": "B4b", "releaseDate": "2026-09-30"},
+        {"code": "D9", "releaseDate": "2027-09-30"},
+    ]
+    cards = [
+        # Old Amber: an A-series card reprinted before B4b stays separate.
+        _print("A1", 218, "amber.webp"),
+        _print("A1a", 63, "amber.webp"),
+        _print("A4b", 312, "amber.webp"),
+        # Reprinted in B4b and again in a later (hypothetical) deluxe set.
+        _print("B4b", 1, "bulbasaur.webp"),
+        _print("B1", 1, "bulbasaur.webp"),
+        _print("D9", 7, "bulbasaur.webp"),
+        _print("B4b", 2, "only-once.webp"),
+        _print("PROMO-B", 1, "only-once.webp"),
+    ]
+
+    assert _reprint_links(cards, all_sets) == {
+        ("B4b", "001"): "B1/001",
+        ("D9", "007"): "B1/001",
+    }
+
+
+def test_fill_reprint_links_only_fills_empty_rows_and_reports_conflicts():
+    existing = {
+        ("B4b", "001"): {"reprint_of": ""},
+        ("B4b", "002"): {},
+        ("B4b", "003"): {"reprint_of": "B2/005"},
+        ("B4b", "004"): {"reprint_of": "B1/004"},
+    }
+    links = {
+        ("B4b", "001"): "B1/001",
+        ("B4b", "003"): "B2/009",
+        ("B4b", "004"): "B1/004",
+    }
+
+    linked, conflicts = _fill_reprint_links(existing, links)
+
+    assert linked == [(("B4b", "001"), "B1/001")]
+    assert existing[("B4b", "001")]["reprint_of"] == "B1/001"
+    assert conflicts == [(("B4b", "003"), "B2/005", "B2/009")]

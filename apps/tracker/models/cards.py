@@ -540,9 +540,27 @@ class Card(models.Model):
         ),
     )
     packs = models.ManyToManyField(Pack, related_name="cards", blank=True)
+    reprint_of = models.ForeignKey(
+        "self",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="reprints",
+        verbose_name="Reprint of",
+        help_text=(
+            "The original this card is a reprint of, when the game treats both "
+            "prints as the same card (from B4b on). Collection entries are "
+            "stored on the original and count for every print."
+        ),
+    )
 
     def __str__(self):
         return f"{self.name} ({self.set.number} {self.number})"
+
+    @property
+    def collection_card_id(self):
+        """Id of the card a collection entry for this print is stored on."""
+        return self.reprint_of_id or self.id
 
     def get_localized_name(self, language_code):
         translation = self.translations.filter(language_code=language_code).first()
